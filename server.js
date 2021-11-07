@@ -23,6 +23,7 @@ let init = function (dbManager) {
     try {
         logInfo("Check exists");
         let exists = dbManager.dbExists(config);
+        logInfo("Check exists2");
         // Init Database
         dbManager.init(config, function () {
             if (!exists) {

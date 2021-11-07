@@ -6,7 +6,7 @@ var dbManager = {
 
     create_database_script : "createDB_sqlite.sql",
                                         
-    init: function (config, func = null) {
+    init: function (config, func) {
         this.dbWrapper = config.database_wrapper;
         let dbName     = config.database_name;
         if (!this.dbWrapper.exist(dbName)) {
