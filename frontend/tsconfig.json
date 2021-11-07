@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "jsx": "react",
+    "lib": [ "es2018", "dom" ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "meta_app.tsx",
+    "classroom_app.tsx",
+    "admin_app.tsx"
+  ]
+}

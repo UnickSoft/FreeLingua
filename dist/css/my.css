@@ -1,0 +1,40 @@
+
+.correctCheck {
+}
+
+.correctCheck .p-checkbox-box {
+    border-color: green;
+}
+
+.incorrectCheck .p-checkbox-box {
+    border-color: red;
+}
+
+.correctCheck {
+    border-color: green;
+    outline-color: green;
+}
+
+.incorrectCheck {
+    border-color: red;
+    outline-color: red;
+}
+
+.wrongAnswer {
+    color: #f19ea6;
+}
+
+.rightAnswer {
+    color: #9fdaa8;    
+}
+
+#officeNav a {
+    background-color: rgb(141, 208, 255);
+    border: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}

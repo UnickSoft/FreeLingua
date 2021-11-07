@@ -1,0 +1,214 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>Learning</Name>
+    <RootNamespace>Learning</RootNamespace>
+    <EnableTypeScript>true</EnableTypeScript>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <LaunchUrl>/</LaunchUrl>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>bd73c738-e701-41d8-869b-f3b36cc9802f</ProjectGuid>
+    <ProjectHome>..</ProjectHome>
+    <StartupFile>server.js</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>..</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <NodejsPort>1337</NodejsPort>
+    <StartWebBrowser>True</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="adminroute.js" />
+    <Content Include="classroomroute.js" />
+    <Content Include="config.js" />
+    <Content Include="database\createDB_sqlite.sql" />
+    <Content Include="database\databaseManager.js" />
+    <Content Include="database\sqliteWrapper.js" />
+    <Content Include="database\links.js" />
+    <Content Include="database\tasks.js" />
+    <Content Include="database\templates.js" />
+    <Content Include="database\users.js" />
+    <Content Include="dist\admin\index.html" />
+    <Content Include="dist\classroom\index.html" />
+    <Content Include="dist\css\bootstrap.min.css" />
+    <Content Include="dist\css\flex-slider.css" />
+    <Content Include="dist\css\fontawesome.css" />
+    <Content Include="dist\css\fonts\primeicons.eot" />
+    <Content Include="dist\css\fonts\primeicons.svg" />
+    <Content Include="dist\css\fonts\primeicons.ttf" />
+    <Content Include="dist\css\fonts\primeicons.woff" />
+    <Content Include="dist\css\lightbox.css" />
+    <Content Include="dist\css\my.css" />
+    <Content Include="dist\css\owl.css" />
+    <Content Include="dist\css\primeflex.min.css" />
+    <Content Include="dist\css\primeflex.min.css.map" />
+    <Content Include="dist\css\primeicons.css" />
+    <Content Include="dist\css\primereact.min.css" />
+    <Content Include="dist\css\prime_flex_themes\arya-blue.css" />
+    <Content Include="dist\css\prime_flex_themes\arya-blue.css.map" />
+    <Content Include="dist\css\prime_flex_themes\saga-blue.css" />
+    <Content Include="dist\css\prime_flex_themes\saga-blue.css.map" />
+    <Content Include="dist\css\prime_flex_themes\vela-blue.css" />
+    <Content Include="dist\css\prime_flex_themes\vela-blue.css.map" />
+    <Content Include="dist\css\templatemo-grad-school.css" />
+    <Content Include="dist\css\theme.css" />
+    <Content Include="dist\fonts\Flaticon.woff" />
+    <Content Include="dist\fonts\flexslider-icon.eot" />
+    <Content Include="dist\fonts\flexslider-icon.svg" />
+    <Content Include="dist\fonts\flexslider-icon.ttf" />
+    <Content Include="dist\fonts\flexslider-icon.woff" />
+    <Content Include="dist\fonts\fontawesome-webfont.eot" />
+    <Content Include="dist\fonts\fontawesome-webfont.svg" />
+    <Content Include="dist\fonts\fontawesome-webfont.ttf" />
+    <Content Include="dist\fonts\fontawesome-webfont.woff" />
+    <Content Include="dist\fonts\fontawesome-webfont.woff2" />
+    <Content Include="dist\fonts\FontAwesome.otf" />
+    <Content Include="dist\fonts\slick.eot" />
+    <Content Include="dist\fonts\slick.svg" />
+    <Content Include="dist\fonts\slick.ttf" />
+    <Content Include="dist\fonts\slick.woff" />
+    <Content Include="dist\images\author-01.png" />
+    <Content Include="dist\images\author-02.png" />
+    <Content Include="dist\images\author-03.png" />
+    <Content Include="dist\images\author-04.png" />
+    <Content Include="dist\images\author-05.png" />
+    <Content Include="dist\images\choose-us-image-01.png" />
+    <Content Include="dist\images\choose-us-image-02.png" />
+    <Content Include="dist\images\choose-us-image-03.png" />
+    <Content Include="dist\images\choosing-bg.jpg" />
+    <Content Include="dist\images\close.png" />
+    <Content Include="dist\images\coming-soon-bg.jpg" />
+    <Content Include="dist\images\contact-bg.jpg" />
+    <Content Include="dist\images\courses-01.jpg" />
+    <Content Include="dist\images\courses-02.jpg" />
+    <Content Include="dist\images\courses-03.jpg" />
+    <Content Include="dist\images\courses-04.jpg" />
+    <Content Include="dist\images\courses-05.jpg" />
+    <Content Include="dist\images\courses-bg.jpg" />
+    <Content Include="dist\images\loading.gif" />
+    <Content Include="dist\images\main-slider-01.jpg" />
+    <Content Include="dist\images\main-slider-02.jpg" />
+    <Content Include="dist\images\main-slider-03.jpg" />
+    <Content Include="dist\images\main-thumb.png" />
+    <Content Include="dist\images\next.png" />
+    <Content Include="dist\images\prev.png" />
+    <Content Include="dist\images\video-bg.jpg" />
+    <Content Include="dist\images\video-thumb-01.jpg" />
+    <Content Include="dist\images\video-thumb-02.jpg" />
+    <Content Include="dist\index.html" />
+    <Content Include="dist\js\bootstrap.min.js" />
+    <Content Include="dist\js\custom.js" />
+    <Content Include="dist\js\isotope.min.js" />
+    <Content Include="dist\js\jquery.min.js" />
+    <Content Include="dist\js\jquery.min.map" />
+    <Content Include="dist\js\jquery.slim.min.js" />
+    <Content Include="dist\js\jquery.slim.min.map" />
+    <Content Include="dist\js\lightbox.js" />
+    <Content Include="dist\js\meta_app.app-bundle.js" />
+    <Content Include="dist\js\meta_app.app-bundle.js.map" />
+    <Content Include="dist\js\owl-carousel.js" />
+    <Content Include="dist\js\slick-slider.js" />
+    <Content Include="dist\js\tabs.js" />
+    <Content Include="dist\js\video.js" />
+    <Content Include="dist\office\index.html" />
+    <Content Include="frontend\tsconfig.json" />
+    <Content Include="metaroute.js" />
+    <Content Include="officeroute.js" />
+    <Content Include="package.json" />
+    <Content Include="server.js" />
+    <Content Include="webpack-config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="database\" />
+    <Folder Include="dist\" />
+    <Folder Include="dist\admin\" />
+    <Folder Include="dist\classroom\" />
+    <Folder Include="dist\css\" />
+    <Folder Include="dist\css\fonts\" />
+    <Folder Include="dist\css\prime_flex_themes\" />
+    <Folder Include="dist\fonts\" />
+    <Folder Include="dist\images\" />
+    <Folder Include="dist\js\" />
+    <Folder Include="dist\office\" />
+    <Folder Include="frontend\" />
+    <Folder Include="frontend\admin\" />
+    <Folder Include="frontend\classroom\" />
+    <Folder Include="frontend\common\" />
+    <Folder Include="frontend\office\" />
+    <Folder Include="frontend\office\questions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="frontend\admin\add_user.tsx" />
+    <TypeScriptCompile Include="frontend\admin\users_table.tsx" />
+    <TypeScriptCompile Include="frontend\admin_app.tsx" />
+    <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />
+    <TypeScriptCompile Include="frontend\classroom\task_solving.tsx" />
+    <TypeScriptCompile Include="frontend\classroom_app.tsx" />
+    <TypeScriptCompile Include="frontend\common\login_button.tsx" />
+    <TypeScriptCompile Include="frontend\common\login_form.tsx" />
+    <TypeScriptCompile Include="frontend\meta_app.tsx" />
+    <TypeScriptCompile Include="frontend\office\questionManager.tsx" />
+    <TypeScriptCompile Include="frontend\office\questions\check_answer_solving.tsx" />
+    <TypeScriptCompile Include="frontend\office\questions\check_answer_creator.tsx" />
+    <TypeScriptCompile Include="frontend\office\question_create_decorator.tsx" />
+    <TypeScriptCompile Include="frontend\office\shared_link_dialog.tsx" />
+    <TypeScriptCompile Include="frontend\office\template_edit_form.tsx" />
+    <TypeScriptCompile Include="frontend\office\shared_links_table.tsx" />
+    <TypeScriptCompile Include="frontend\office\template_table.tsx" />
+    <TypeScriptCompile Include="frontend\office_app.tsx" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
