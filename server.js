@@ -1,32 +1,44 @@
 'use strict';
 
+let logError = function (error) {
+    console.error(error);
+    const fs = require('fs');
+    const path = require('path');
+    fs.appendFileSync(path.join(__dirname, config.error_log_file), error + "\n");
+}
+
+let logInfo = function (info) {
+    console.log(info);
+    const fs = require('fs');
+    const path = require('path');
+    fs.appendFileSync(path.join(__dirname, config.info_log_file), info + "\n");
+}
+
 let init = function (dbManager) {
+    logInfo("Start init");
     if (config.admin_password == "") {
         console.error("Change admin password in config.js");
         throw new Error("Change admin password in config.js");
     }
     try {
+        logInfo("Check exists");
         let exists = dbManager.dbExists(config);
         // Init Database
         dbManager.init(config, function () {
             if (!exists) {
+                logInfo("Try reg admin");
                 dbManager.getUsers().registerUser("admin", config.admin_password, config.admin_email, "Admin", 0,
                     function () {
                         dbManager.getUsers().activateUser("admin");
                         dbManager.getUsers().makeAdmin("admin");
-                        console.log("Add Admin");
+                        logInfo("Add Admin");
                     }
                 );
             }
         });
     }
     catch (err) {
-        console.error(err.message);
-
-        const fs = require('fs');
-        const path = require('path');
-        fs.appendFileSync(path.join(__dirname, config.log_file), err.message);
-
+        logError(err);
         dbManager.removeDB();
     }
 }

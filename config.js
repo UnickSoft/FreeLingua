@@ -6,7 +6,8 @@ var Config = {
     database_wrapper : require("./database/sqliteWrapper"),
     database_name: "learning.db",
     sessin_lifetime: 1000 * 60 * 60 * 24 * 14, // 14 dayes
-    log_file: "error_log.txt",
+    error_log_file: "error_log.txt",
+    info_log_file: "info_log.txt",
 
     // Plase change it
     session_secret_key: "supersecretifdonttellyouit",
