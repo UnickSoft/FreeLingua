@@ -3,9 +3,8 @@
 let init = function (dbManager) {
     if (config.admin_password == "") {
         console.error("Change admin password in config.js");
-        throw "Change admin password in config.js";
+        throw new Error("Change admin password in config.js");
     }
-
     try {
         let exists = dbManager.dbExists(config);
         // Init Database
@@ -22,7 +21,12 @@ let init = function (dbManager) {
         });
     }
     catch (err) {
-        console.error(err.message)
+        console.error(err.message);
+
+        const fs = require('fs');
+        const path = require('path');
+        fs.appendFileSync(path.join(__dirname, config.log_file), err.message);
+
         dbManager.removeDB();
     }
 }
