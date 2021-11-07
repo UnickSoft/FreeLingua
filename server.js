@@ -1,10 +1,29 @@
 'use strict';
 
+function dumpError(err) {
+    let res = "";
+    if (typeof err === 'object') {
+        if (err.message) {
+            res += '\nMessage: ' + err.message;
+        }
+        if (err.stack) {
+            res += '\nStacktrace:';
+            res += '====================';
+            res += err.stack;
+        }
+    } else {
+        console.log('dumpError :: argument is not an object');
+        res = err;
+    }
+    return res;
+}
+
 let logError = function (error) {
-    console.error(error);
+    let formatedMessage = dumpError(error);
+    console.error(formatedMessage);
     const fs = require('fs');
     const path = require('path');
-    fs.appendFileSync(path.join(__dirname, config.error_log_file), error + "\n");
+    fs.appendFileSync(path.join(__dirname, config.error_log_file), formatedMessage + "\n");
 }
 
 let logInfo = function (info) {
@@ -21,6 +40,7 @@ let init = function (dbManager) {
         throw new Error("Change admin password in config.js");
     }
     try {
+        throw new Error("Change admin password in config.js");
         logInfo("Check exists");
         let exists = dbManager.dbExists(config);
         logInfo("Check exists2");
