@@ -40,7 +40,6 @@ let init = function (dbManager) {
         throw new Error("Change admin password in config.js");
     }
     try {
-        throw new Error("Change admin password in config.js");
         logInfo("Check exists");
         let exists = dbManager.dbExists(config);
         logInfo("Check exists2");
