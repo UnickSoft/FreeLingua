@@ -1,57 +1,21 @@
 'use strict';
 
-function dumpError(err) {
-    let res = "";
-    if (typeof err === 'object') {
-        if (err.message) {
-            res += '\nMessage: ' + err.message;
-        }
-        if (err.stack) {
-            res += '\nStacktrace:';
-            res += '====================';
-            res += err.stack;
-        }
-    } else {
-        console.log('dumpError :: argument is not an object');
-        res = err;
-    }
-    return res;
-}
-
-let logError = function (error) {
-    let formatedMessage = dumpError(error);
-    console.error(formatedMessage);
-    const fs = require('fs');
-    const path = require('path');
-    fs.appendFileSync(path.join(__dirname, config.error_log_file), formatedMessage + "\n");
-}
-
-let logInfo = function (info) {
-    console.log(info);
-    const fs = require('fs');
-    const path = require('path');
-    fs.appendFileSync(path.join(__dirname, config.info_log_file), info + "\n");
-}
-
 let init = function (dbManager) {
-    logInfo("Start init");
-    if (config.admin_password == "") {
-        console.error("Change admin password in config.js");
-        throw new Error("Change admin password in config.js");
-    }
+    log.info("Start init");
     try {
-        logInfo("Check exists");
         let exists = dbManager.dbExists(config);
-        logInfo("Check exists2");
+
         // Init Database
         dbManager.init(config, function () {
             if (!exists) {
-                logInfo("Try reg admin");
+                if (config.admin_password == "") {
+                    throw new Error("Change admin password in config.js");
+                }
                 dbManager.getUsers().registerUser("admin", config.admin_password, config.admin_email, "Admin", 0,
                     function () {
                         dbManager.getUsers().activateUser("admin");
                         dbManager.getUsers().makeAdmin("admin");
-                        logInfo("Add Admin");
+                        log.info("Add Admin");
                     }
                 );
             }
@@ -78,6 +42,7 @@ try
     // Our stuffs
     var config    = require("./config");
     var dbManager = require("./database/databaseManager");
+    var log       = require("./log");
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -117,14 +82,14 @@ try
     var server = null;
     if (typeof (PhusionPassenger) != 'undefined') {
         server = app.listen('passenger', function () {
-            console.log('listening');
+            log.info('listening');
         });
     } else {
         server = app.listen(app.get('port'), function () {
-            console.log('listening');
+            log.info('listening');
         });
     }
 
 } catch (err) {
-    console.error(err.message)
+    console.error(err)
 }

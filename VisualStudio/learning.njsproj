@@ -127,6 +127,7 @@
     <Content Include="dist\js\video.js" />
     <Content Include="dist\office\index.html" />
     <Content Include="frontend\tsconfig.json" />
+    <Content Include="log.js" />
     <Content Include="metaroute.js" />
     <Content Include="officeroute.js" />
     <Content Include="package.json" />
