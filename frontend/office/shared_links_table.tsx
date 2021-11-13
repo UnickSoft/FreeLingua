@@ -69,7 +69,7 @@ export class SharedLinksTable extends React.Component<any, any> {
     linkBody = (value) => {
         let link = window.location.origin.toString() + "/classroom/link/" + value.link;
         return (
-            <div><span>{link}</span>
+            <div><span className="d-none d-md-block">{link}</span>
                 <CopyToClipboard text={link}>
                     <Button icon="pi pi-copy" className="p-button-sm p-ml-1" />
                 </CopyToClipboard></div>);
@@ -92,11 +92,12 @@ export class SharedLinksTable extends React.Component<any, any> {
     
     render() {
         return (<div className="card">
-            <DataTable value={this.state.links}>
+            <DataTable value={this.state.links} scrollable style={{ minWidth: '400px' }}>
                 <Column field="title" header="Title" style={{ width: '20%' }}></Column>
-                <Column header="Create Date" body={this.createDateBody} ></Column>
-                <Column header="Delete Date" body={this.deleteDateBody} ></Column>
-                <Column header="Link" body={this.linkBody} style={{ width: '40%' }}></Column>
+                <Column header="Create Date" body={this.createDateBody} className="d-none d-lg-table-cell"></Column>
+                <Column header="Delete Date" body={this.deleteDateBody} className="d-none d-md-table-cell"></Column>
+                <Column header="Link" body={this.linkBody} className="d-none d-md-table-cell" style={{ width: '40%' }}></Column>
+                <Column header="Link" body={this.linkBody} className="d-table-cell d-md-none"></Column>
                 <Column header="Test" body={this.testBody} ></Column>
                 <Column header="Check" body={this.checkBody} ></Column>
                 <Column header="Delete" body={this.deleteBody} ></Column>

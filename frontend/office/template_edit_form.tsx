@@ -21,6 +21,8 @@ export class TemplateEditForm extends React.Component<any, any> {
         taskTitle: any;
     };
 
+    autoIncId = 0
+
     constructor(props) {
         super(props);
         this.state = this.getFullEmptyState();
@@ -33,7 +35,7 @@ export class TemplateEditForm extends React.Component<any, any> {
         if (this.state.taskId) {
             (async () => {
                 let taskData = await questionManager.getTaskTemplate(this.state.taskId);
-                this.setState({ questions: taskData.data, taskTitle: taskData.title });
+                this.setState({ questions: this.getQuestionsForLoad(taskData.data), taskTitle: taskData.title });
             })()
         }
     }
@@ -46,7 +48,7 @@ export class TemplateEditForm extends React.Component<any, any> {
             if ("taskId" in this.props) {
                 (async () => {
                     let taskData = await questionManager.getTaskTemplate(this.state.taskId);
-                    this.setState({ questions: taskData.data });
+                    this.setState({ questions: this.getQuestionsForLoad(taskData.data) });
                 })();
             } else {
                 this.setState(this.getEmptyState());
@@ -68,23 +70,27 @@ export class TemplateEditForm extends React.Component<any, any> {
             successMessage: "",
             errorMessage: "",
             loadedData: false,
-            taskTitle: ""
+            taskTitle: "",
+            hasError: []
         };
     }
 
     addQuestion = (type) => {
         let questions = this.state.questions;
-        questions.push({ type: type, data: {}});
+        this.autoIncId++;
+        questions.push({ type: type, data: {}, hasError: true, id: this.autoIncId });
         this.setState({ questions: questions});
     }
 
-    saveQuestionData = (index, data) => {
+    saveQuestionData = (index, data, hasError) => {
         let questions = this.state.questions;
         let newData = {};
         newData["type"]  = questions[index].type;
         newData["index"] = index;
         newData["data"]  = data;
+        newData["id"]    = questions[index].id;
         questions[index] = newData;
+        questions[index].hasError = hasError;
         // Dont call setState because no need do update
     }
 
@@ -112,7 +118,7 @@ export class TemplateEditForm extends React.Component<any, any> {
             index++;
             let locIndex = index;
             return (
-                <Button key={type.type} onClick={(e) => self.addQuestion(type.type)}>{type.title}</Button>
+                <Button key={type.type} onClick={(e) => self.addQuestion(type.type)}>{"Add question: " + type.title}</Button>
             )
         })
     }
@@ -123,10 +129,10 @@ export class TemplateEditForm extends React.Component<any, any> {
             index++;
             let locIndex = index;
             return (
-                <Panel header={"Question #" + (locIndex + 1)} toggleable key={locIndex}>
+                <Panel header={"Question #" + (locIndex + 1)} toggleable key={question.id}>
                     <QuestionCreateDecorator key={locIndex}
                         questionType={question.type}
-                        saveDataCallback={(data, hasError) => self.saveQuestionData(locIndex, data)}
+                        saveDataCallback={(data, hasError) => self.saveQuestionData(locIndex, data, hasError)}
                         questionIndex={locIndex}
                         data={question.data} />
                     <Divider />
@@ -141,27 +147,52 @@ export class TemplateEditForm extends React.Component<any, any> {
         })
     }
 
+    getQuestionsForSave = (questions) => {
+        let res = [];
+        questions.forEach((question => res.push({ type: question.type, data: question.data })));
+        return res;
+    }
+
+    getQuestionsForLoad = (questions) => {
+        let res = [];
+        questions.forEach((question => res.push({ type: question.type, data: question.data, hasError: false, id: ++this.autoIncId })));
+        return res;
+    }
+
     saveTemplate = () => {
         this.setState({
             successMessage: "",
             errorMessage: ""
         });
-
         let self = this;
-        questionManager.saveTask(this.state.taskId,
-            this.state.questions,
-            this.state.taskTitle,
-            function (successed, templateId) {
-                if (successed) {
-                    self.setState({ successMessage: "Saved" });
-                    if (templateId) {
-                        self.state.taskId = templateId;
-                        // no need to rerender.
+
+        if (this.state.taskTitle.length == 0) {
+            self.setState({ errorMessage: "Cannot save: Enter task title" });
+        }
+
+        let hasError = false;
+        this.state.questions.forEach(value => hasError = hasError || value.hasError);
+
+        if (hasError) {
+            self.setState({ errorMessage: "Cannot save: There are errors" });
+        }
+
+        if (!hasError) {
+            questionManager.saveTask(this.state.taskId,
+                this.getQuestionsForSave(this.state.questions),
+                this.state.taskTitle,
+                function (successed, templateId) {
+                    if (successed) {
+                        self.setState({ successMessage: "Saved" });
+                        if (templateId) {
+                            self.state.taskId = templateId;
+                            // no need to rerender.
+                        }
+                    } else {
+                        self.setState({ errorMessage: "Cannot save" });
                     }
-                } else {
-                    self.setState({ errorMessage: "Cannot save" });
-                }
-            });
+                });
+        }
 
         // Hide message
         setTimeout(() => {

@@ -5,7 +5,7 @@ const QuestionManager = {
 
     getQuestionTypes: function () {
         return [
-            { type: "check_answer", title: "Check right answer"}
+            { type: "check_answer", title: "Select variant"}
         ];
     },
 

@@ -93,14 +93,13 @@ export class TemplateTable extends React.Component<any, any> {
     
     render() {
         return (<div className="card">
-            <DataTable value={this.state.templates}>
+            <DataTable value={this.state.templates} scrollable style={{minWidth:'400px'}}>
                 <Column field="title" header="Title"></Column>
-                <Column header="Last Update" body={this.lastDateBody} ></Column>
-                <Column field="version" header="Version"></Column>
+                <Column header="Last Update" body={this.lastDateBody} className="d-none d-md-table-cell"></Column>
+                <Column field="version" header="Version" className="d-none d-md-table-cell"></Column>
                 <Column header="Edit" body={this.editBoby}></Column>
                 <Column header="Test" body={this.testBoby}></Column>
                 <Column header="Share by link" body={this.linkBoby}></Column>
-                <Column></Column>
                 <Column header="Delete" body={this.deleteTemplateBoby}></Column>
             </DataTable>
         </div>);

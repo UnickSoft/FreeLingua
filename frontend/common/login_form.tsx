@@ -3,6 +3,7 @@ import * as React from "react"
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
+import { Password } from 'primereact/password';
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -108,50 +109,36 @@ export class LoginForm extends React.Component<any, any> {
         }
         if (!this.state.useDialog) {
             return (
-                <div id="contact">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <fieldset>
-                                <InputText name="login" type="text" className="form-control" id="login" placeholder="Your Name"
-                                    value={this.state.login}
-                                    onChange={this.handleChangeLogin} />
-                            </fieldset>
-                        </div>
-                        <div className="col-md-12">
-                            <fieldset>
-                                <InputText name="password" type="text" className="form-control" id="password" placeholder="Your Email"
-                                    value={this.state.password}
-                                    onChange={this.handleChangePassword} />
-                            </fieldset>
-                        </div>
-                        <div className="col-md-12">
-                            <fieldset>
-                                <Button id="form-submit" className="button" onClick={this.onLogin} label="Enter" />
-                            </fieldset>
-                        </div>
+                <div className="p-fluid">
+                    <div className="p-field">
+                        <InputText name="login" type="text" id="login" placeholder="Login"
+                            value={this.state.login}
+                            onChange={this.handleChangeLogin} />
+                    </div>
+                    <div className="p-field">
+                        <Password name="password" type="text" id="password" placeholder="Password"
+                            value={this.state.password}
+                            onChange={this.handleChangePassword} feedback={false} toggleMask />
+                    </div>
+                    <div className="p-field">
+                        <Button id="form-submit" className="button" onClick={this.onLogin} label="Enter" />
                     </div>
                 </div>
             );
         } else {
-            return (<Dialog header="Header" visible={true} style={{ width: '50vw' }}
+            return (<Dialog header="Enter login and password" visible={true} style={{ width: '50vw' }}
                 footer={this.renderFooter()}
                 onHide={this.onCloseFunc}>
-                <div id="contact">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <fieldset>
-                                <InputText name="login" type="text" className="form-control" id="login" placeholder="Your Name"
-                                    value={this.state.login}
-                                    onChange={this.handleChangeLogin} />
-                            </fieldset>
-                        </div>
-                        <div className="col-md-12">
-                            <fieldset>
-                                <InputText name="password" type="text" className="form-control" id="password" placeholder="Your Email"
-                                    value={this.state.password}
-                                    onChange={this.handleChangePassword} />
-                            </fieldset>
-                        </div>
+                <div className="p-fluid">
+                    <div className="p-field">
+                            <InputText name="login" type="text" id="login" placeholder="Login"
+                                value={this.state.login}
+                                onChange={this.handleChangeLogin} />
+                    </div>
+                    <div className="p-field">
+                            <Password name="password" id="password" placeholder="Password"
+                                value={this.state.password}
+                                onChange={this.handleChangePassword} feedback={false} toggleMask />
                     </div>
                 </div>
             </Dialog>);

@@ -140,10 +140,15 @@ export class CheckAnswerCreator extends React.Component<any, any> {
                 rightAnswers++;
             }
         }
-        return this.state.answers.length >= 3 && rightAnswers > 0 && (this.state.answerType != 'single' || rightAnswers == 1);
+        return !(this.state.answers.length >= 3 && rightAnswers > 0 && (this.state.answerType != 'single' || rightAnswers == 1)
+                && this.state.question.length > 0);
     }
 
     errorsHtml() {
+        if (this.state.question.length == 0) {
+            return <Message severity="warn" text="Please enter question"></Message>;
+        }
+
         if (this.state.answers.length < 3) {
             return <Message severity="warn" text="Please add two or more answers"></Message>;
         }
