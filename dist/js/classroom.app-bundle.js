@@ -44363,7 +44363,8 @@ var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.onli
 var QuestionManager = {
     getQuestionTypes: function () {
         return [
-            { type: "check_answer", title: "Select variant" }
+            { type: "check_answer", title: "Select variant" },
+            { type: "fill_gaps", title: "Fill gaps" }
         ];
     },
     saveTask: function (taskId, questions, title, func) {

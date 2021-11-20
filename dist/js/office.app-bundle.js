@@ -8,7 +8,8 @@
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./check_answer_creator": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_creator.tsx"
+	"./check_answer_creator": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_creator.tsx",
+	"./fill_gaps_creator": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_creator.tsx"
 };
 
 
@@ -16218,6 +16219,343 @@ _defineProperty(InputTextComponent, "defaultProps", {
 
 var InputText = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(InputTextComponent, _extends({
+    forwardRef: ref
+  }, props));
+});
+
+
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtextarea\\inputtextarea.esm.js":
+/*!**********************************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\node_modules\primereact\inputtextarea\inputtextarea.esm.js ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "InputTextarea": () => (/* binding */ InputTextarea)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+/* harmony import */ var primereact_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primereact/core */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\core\\core.esm.js");
+
+
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+var InputTextareaComponent = /*#__PURE__*/function (_Component) {
+  _inherits(InputTextareaComponent, _Component);
+
+  var _super = _createSuper(InputTextareaComponent);
+
+  function InputTextareaComponent(props) {
+    var _this;
+
+    _classCallCheck(this, InputTextareaComponent);
+
+    _this = _super.call(this, props);
+    _this.onFocus = _this.onFocus.bind(_assertThisInitialized(_this));
+    _this.onBlur = _this.onBlur.bind(_assertThisInitialized(_this));
+    _this.onKeyUp = _this.onKeyUp.bind(_assertThisInitialized(_this));
+    _this.onInput = _this.onInput.bind(_assertThisInitialized(_this));
+    _this.elementRef = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createRef)(_this.props.forwardRef);
+    return _this;
+  }
+
+  _createClass(InputTextareaComponent, [{
+    key: "onFocus",
+    value: function onFocus(e) {
+      if (this.props.autoResize) {
+        this.resize();
+      }
+
+      if (this.props.onFocus) {
+        this.props.onFocus(e);
+      }
+    }
+  }, {
+    key: "onBlur",
+    value: function onBlur(e) {
+      if (this.props.autoResize) {
+        this.resize();
+      }
+
+      if (this.props.onBlur) {
+        this.props.onBlur(e);
+      }
+    }
+  }, {
+    key: "onKeyUp",
+    value: function onKeyUp(e) {
+      if (this.props.autoResize) {
+        this.resize();
+      }
+
+      if (this.props.onKeyUp) {
+        this.props.onKeyUp(e);
+      }
+    }
+  }, {
+    key: "onInput",
+    value: function onInput(e) {
+      if (this.props.autoResize) {
+        this.resize();
+      }
+
+      if (e.target.value.length > 0) primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.addClass(e.target, 'p-filled');else primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.removeClass(e.target, 'p-filled');
+
+      if (this.props.onInput) {
+        this.props.onInput(e);
+      }
+    }
+  }, {
+    key: "resize",
+    value: function resize(initial) {
+      var inputEl = this.elementRef && this.elementRef.current;
+
+      if (inputEl && primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.isVisible(inputEl)) {
+        if (!this.cachedScrollHeight) {
+          this.cachedScrollHeight = inputEl.scrollHeight;
+          inputEl.style.overflow = "hidden";
+        }
+
+        if (this.cachedScrollHeight !== inputEl.scrollHeight || initial) {
+          inputEl.style.height = '';
+          inputEl.style.height = inputEl.scrollHeight + 'px';
+
+          if (parseFloat(inputEl.style.height) >= parseFloat(inputEl.style.maxHeight)) {
+            inputEl.style.overflowY = "scroll";
+            inputEl.style.height = inputEl.style.maxHeight;
+          } else {
+            inputEl.style.overflow = "hidden";
+          }
+
+          this.cachedScrollHeight = inputEl.scrollHeight;
+        }
+      }
+    }
+  }, {
+    key: "isFilled",
+    value: function isFilled() {
+      return this.props.value != null && this.props.value.toString().length > 0 || this.props.defaultValue != null && this.props.defaultValue.toString().length > 0 || this.elementRef && this.elementRef.current && this.elementRef.current.value.toString().length > 0;
+    }
+  }, {
+    key: "updateForwardRef",
+    value: function updateForwardRef() {
+      var ref = this.props.forwardRef;
+
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(this.elementRef.current);
+        } else {
+          ref.current = this.elementRef.current;
+        }
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.updateForwardRef();
+
+      if (this.props.tooltip) {
+        this.renderTooltip();
+      }
+
+      if (this.props.autoResize) {
+        this.resize(true);
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
+        if (this.tooltip) this.tooltip.update(_objectSpread({
+          content: this.props.tooltip
+        }, this.props.tooltipOptions || {}));else this.renderTooltip();
+      }
+
+      if (this.props.autoResize) {
+        this.resize(true);
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this.tooltip) {
+        this.tooltip.destroy();
+        this.tooltip = null;
+      }
+    }
+  }, {
+    key: "renderTooltip",
+    value: function renderTooltip() {
+      this.tooltip = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.tip)({
+        target: this.elementRef.current,
+        content: this.props.tooltip,
+        options: this.props.tooltipOptions
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-inputtextarea p-inputtext p-component', {
+        'p-disabled': this.props.disabled,
+        'p-filled': this.isFilled(),
+        'p-inputtextarea-resizable': this.props.autoResize
+      }, this.props.className);
+      var textareaProps = primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.findDiffKeys(this.props, InputTextareaComponent.defaultProps);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", _extends({
+        ref: this.elementRef
+      }, textareaProps, {
+        className: className,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        onKeyUp: this.onKeyUp,
+        onInput: this.onInput
+      }));
+    }
+  }]);
+
+  return InputTextareaComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+_defineProperty(InputTextareaComponent, "defaultProps", {
+  autoResize: false,
+  tooltip: null,
+  tooltipOptions: null,
+  onInput: null,
+  forwardRef: null
+});
+
+var InputTextarea = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(InputTextareaComponent, _extends({
     forwardRef: ref
   }, props));
 });
@@ -54415,7 +54753,8 @@ var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.onli
 var QuestionManager = {
     getQuestionTypes: function () {
         return [
-            { type: "check_answer", title: "Select variant" }
+            { type: "check_answer", title: "Select variant" },
+            { type: "fill_gaps", title: "Fill gaps" }
         ];
     },
     saveTask: function (taskId, questions, title, func) {
@@ -54636,9 +54975,9 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js");
-var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
 var selectbutton_1 = __webpack_require__(/*! primereact/selectbutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\selectbutton\\selectbutton.esm.js");
 var message_1 = __webpack_require__(/*! primereact/message */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\message\\message.esm.js");
+var variants_list_1 = __webpack_require__(/*! ./variants_list */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\variants_list.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 /***
  * Json format:
@@ -54686,26 +55025,27 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
                 var variant = _a[_i];
                 answers.push({ text: variant, edited: true, isRight: data.answers.includes(variant) });
             }
-            answers.push({ text: "", edited: false, isRight: false });
             _this.state = __assign(__assign({}, _this.state), { question: data.question, answers: answers, answerType: data.answerType });
         };
-        _this.setAnswer = function (index, text) {
+        _this.onAddAnswer = function () {
             var answers = _this.state.answers;
-            answers[index].text = text;
-            if (!answers[index].edited) {
-                answers.push({ text: "", edited: false, isRight: false });
-                answers[index].edited = true;
-            }
-            _this.setState({ answers: answers });
+            answers.push({ text: "", edited: false, isRight: false });
+            _this.setState({ answers: answers }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
         };
-        _this.updateRightAnswer = function (index, value) {
+        _this.onSetRightAnswer = function (index, value) {
             var answers = _this.state.answers;
             answers[index].isRight = value;
-            _this.setState({ answers: answers });
+            _this.setState({ answers: answers }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+        };
+        _this.onEditAnswer = function (index, value) {
+            var answers = _this.state.answers;
+            answers[index].text = value;
+            answers[index].edited = true;
+            _this.setState({ answers: answers }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
         };
         _this.state = {
             question: "",
-            answers: [{ text: "", edited: false, isRight: false }],
+            answers: [],
             answerType: "single",
             questionIndex: _this.props.questionIndex
         };
@@ -54715,26 +55055,8 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
         }
         return _this;
     }
-    CheckAnswerCreator.prototype.componentDidUpdate = function () {
-        this.saveDataCallback(this.getData(), this.hasError());
-    };
     CheckAnswerCreator.prototype.answersHtml = function () {
-        var index = -1;
-        var self = this;
-        return this.state.answers.map(function (answer) {
-            index++;
-            var locIndex = index;
-            return (React.createElement("div", { className: "p-row", key: index },
-                React.createElement("div", { className: "p-field p-grid", key: index },
-                    React.createElement("label", { htmlFor: "answ_" + index + "_" + self.state.questionIndex, className: "p-col-fixed", style: { width: '32px' } },
-                        index + 1,
-                        "."),
-                    React.createElement("div", { className: "p-col-fixed", style: { width: '300px' } },
-                        React.createElement(inputtext_1.InputText, { id: "answ_" + index + "_" + self.state.questionIndex, type: "text", placeholder: "Add new answer", value: answer.text, onChange: function (e) { return self.setAnswer(locIndex, e.target.value); } })),
-                    React.createElement("div", { className: "p-field-checkbox" },
-                        React.createElement(checkbox_1.Checkbox, { inputId: "cb" + index + "_" + self.state.questionIndex, value: "Right", onChange: function (e) { return self.updateRightAnswer(locIndex, e.target.checked); }, checked: self.state.answers[locIndex].isRight }),
-                        React.createElement("label", { htmlFor: "cb1" + index + "_" + self.state.questionIndex, className: "p-checkbox-label" }, "Is right answer?")))));
-        });
+        return (React.createElement(variants_list_1.VariantsList, { onAddVariant: this.onAddAnswer, onSetRight: this.onSetRightAnswer, onEditVariant: this.onEditAnswer, globalIndex: this.state.questionIndex, variants: this.state.answers }));
     };
     CheckAnswerCreator.prototype.hasError = function () {
         var rightAnswers = 0;
@@ -54774,7 +55096,7 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
             React.createElement("div", { className: "p-fluid", key: "main" },
                 React.createElement("div", { className: "p-field", key: "questionText" },
                     React.createElement("label", { htmlFor: "firstname1" }, "Enter question:"),
-                    React.createElement(inputtext_1.InputText, { id: "firstname1", type: "text", onChange: function (e) { return _this.setState({ question: e.target.value }); }, value: this.state.question })),
+                    React.createElement(inputtext_1.InputText, { id: "firstname1", type: "text", onChange: function (e) { return _this.setState({ question: e.target.value }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); }); }, value: this.state.question })),
                 React.createElement("div", { className: "p-field", key: "answerType" },
                     React.createElement(selectbutton_1.SelectButton, { value: this.state.answerType, options: this.answerType, onChange: function (e) { return _this.setState({ answerType: e.value }); } }))),
             React.createElement("div", { key: "answers" },
@@ -54941,6 +55263,372 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
 }(React.Component));
 exports.CheckAnswerSolving = CheckAnswerSolving;
 exports.default = CheckAnswerSolving;
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_creator.tsx":
+/*!***********************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\office\questions\fill_gaps_creator.tsx ***!
+  \***********************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var message_1 = __webpack_require__(/*! primereact/message */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\message\\message.esm.js");
+var inputtextarea_1 = __webpack_require__(/*! primereact/inputtextarea */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtextarea\\inputtextarea.esm.js");
+var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
+var variants_list_1 = __webpack_require__(/*! ./variants_list */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\variants_list.tsx");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+/***
+ * Json format:
+ * {
+ *      textWithGaps: ["Select correct world: I am a student. I go to the ",
+ *      {
+ *        "variants": [ "shop", "army", "University" ]
+ *      }, "My favorite subject is ",
+        {
+          "variants": [ "shopping", "Math", "Art" ]
+        }],
+ *      answers: ["1->University", "2->Math", "2->Art"], // list of right answers.
+ * }
+ */
+var FillGapsCreator = /** @class */ (function (_super) {
+    __extends(FillGapsCreator, _super);
+    function FillGapsCreator(props) {
+        var _this = _super.call(this, props) || this;
+        _this.saveDataCallback = null;
+        _this.gapRegExp = /\[\[gap#\d+\]\]/;
+        _this.splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
+        _this.numberRegExp = /\d+/;
+        _this.getData = function () {
+            var textWithGaps = _this.state.textWithGaps;
+            var answers = [];
+            var textWithGapsOut = [];
+            var gapIndex = 0;
+            textWithGaps.forEach(function (part, index, ar) {
+                if (typeof (part) !== "string") {
+                    var variants_1 = [];
+                    part.forEach(function (answ) {
+                        if (answ.isRight) {
+                            answers.push(gapIndex + "->" + answ.text);
+                        }
+                        variants_1.push(answ.text);
+                    });
+                    textWithGapsOut.push({ variants: variants_1 });
+                    gapIndex++;
+                }
+                else {
+                    textWithGapsOut.push(part);
+                }
+            });
+            return {
+                textWithGaps: textWithGapsOut,
+                answers: answers
+            };
+        };
+        _this.loadData = function (data) {
+            if (!("textWithGaps" in data)) {
+                return;
+            }
+            var textWithGapsData = data.textWithGaps;
+            var answers = data.answers;
+            var textWithGaps = [];
+            var index = 0;
+            var _loop_1 = function (gapOrText) {
+                if (typeof (gapOrText) === "string") {
+                    textWithGaps.push(gapOrText);
+                }
+                else {
+                    var gap_1 = [];
+                    var answerHash_1 = {};
+                    var answer = answers.filter(function (answ) { return answ.startsWith(index + "->"); })
+                        .forEach(function (part, index, ar) {
+                        answerHash_1[part.replace(/\d+->/g, "")] = true;
+                    });
+                    gapOrText.variants.forEach(function (variant) { return gap_1.push({ text: variant, isRight: answerHash_1[variant] }); });
+                    textWithGaps.push(gap_1);
+                    index++;
+                }
+            };
+            for (var _i = 0, textWithGapsData_1 = textWithGapsData; _i < textWithGapsData_1.length; _i++) {
+                var gapOrText = textWithGapsData_1[_i];
+                _loop_1(gapOrText);
+            }
+            _this.state = __assign(__assign({}, _this.state), { textWithGaps: textWithGaps });
+        };
+        _this.getAsText = function () {
+            var res = "";
+            var gapIndex = 0;
+            for (var _i = 0, _a = _this.state.textWithGaps; _i < _a.length; _i++) {
+                var element = _a[_i];
+                if (typeof (element) === "string") {
+                    res += element;
+                }
+                else {
+                    res += _this.getGapAsText(gapIndex);
+                    gapIndex++;
+                }
+            }
+            return res;
+        };
+        _this.getGasOnly = function (arrayOfValues) {
+            var res = [];
+            for (var _i = 0, arrayOfValues_1 = arrayOfValues; _i < arrayOfValues_1.length; _i++) {
+                var element = arrayOfValues_1[_i];
+                if (typeof (element) !== "string") {
+                    res.push(element);
+                }
+            }
+            return res;
+        };
+        _this.splitTextToArray = function (text) {
+            var arrayOfStrs = text.split(_this.splitRegExp);
+            var index = 0;
+            var gaps = _this.getGasOnly(_this.state.textWithGaps);
+            for (var _i = 0, arrayOfStrs_1 = arrayOfStrs; _i < arrayOfStrs_1.length; _i++) {
+                var str = arrayOfStrs_1[_i];
+                if (str.match(_this.gapRegExp)) {
+                    var parsedIndex = str.match(_this.numberRegExp);
+                    arrayOfStrs[index] = gaps[parsedIndex];
+                }
+                index++;
+            }
+            return arrayOfStrs;
+        };
+        _this.loadFromText = function (text) {
+            _this.setState({ textWithGaps: _this.splitTextToArray(text) }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+        };
+        _this.addGap = function () {
+            var textArea = document.getElementById("area");
+            var cursorStart = textArea.selectionStart;
+            var cursorEnd = textArea.selectionEnd;
+            var lengthOfSelection = cursorEnd - cursorStart;
+            if (cursorStart < cursorEnd) {
+                var splittedBefore = _this.splitTextToArray(textArea.value.substring(0, cursorStart));
+                var splittedAfter = _this.splitTextToArray(textArea.value.substring(cursorEnd));
+                var gapStr = textArea.value.substring(cursorStart, cursorEnd);
+                var textWithGaps = _this.state.textWithGaps;
+                var indexBefore = splittedBefore.length - 1;
+                var indexAfter = 0;
+                var newGapObject = [{ text: gapStr, isRight: true }];
+                if (typeof splittedBefore[indexBefore] === 'string') {
+                    textWithGaps[indexBefore] = splittedBefore[indexBefore];
+                    indexBefore++;
+                    textWithGaps.splice(indexBefore, 0, newGapObject);
+                    indexBefore++;
+                }
+                else {
+                    indexBefore++;
+                    textWithGaps[indexBefore] = newGapObject;
+                    indexBefore++;
+                }
+                if (typeof splittedAfter[indexAfter] === 'string') {
+                    textWithGaps.splice(indexBefore, 0, splittedAfter[indexAfter]);
+                }
+                _this.setState({ textWithGaps: textWithGaps });
+            }
+        };
+        _this.onAddAnswer = function (gapIndex) {
+            var answers = _this.state.textWithGaps[gapIndex];
+            answers.push({ text: "", isRight: false });
+            _this.setState({ textWithGaps: _this.state.textWithGaps }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+        };
+        _this.onSetRightAnswer = function (gapIndex, index, value) {
+            var answers = _this.state.textWithGaps[gapIndex];
+            answers[index].isRight = value;
+            _this.setState({ textWithGaps: _this.state.textWithGaps });
+            _this.saveDataCallback(_this.getData(), _this.hasError(), function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+        };
+        _this.onEditAnswer = function (gapIndex, index, value) {
+            var answers = _this.state.textWithGaps[gapIndex];
+            answers[index].text = value;
+            answers[index].edited = true;
+            _this.setState({ textWithGaps: _this.state.textWithGaps });
+            _this.saveDataCallback(_this.getData(), _this.hasError(), function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+        };
+        _this.state = {
+            textWithGaps: [],
+            questionIndex: _this.props.questionIndex
+        };
+        _this.saveDataCallback = props.saveDataCallback;
+        if ("data" in props) {
+            _this.loadData(props.data);
+        }
+        return _this;
+    }
+    FillGapsCreator.prototype.hasError = function () {
+        return false;
+    };
+    FillGapsCreator.prototype.errorsHtml = function () {
+        if (this.state.textWithGaps.length == 0) {
+            return React.createElement(message_1.Message, { severity: "warn", text: "Please enter Text" });
+        }
+        var gaps = this.getGasOnly(this.state.textWithGaps);
+        if (gaps.length == 0) {
+            return React.createElement(message_1.Message, { severity: "warn", text: "Please select part of text and add gaps." });
+        }
+        var _loop_2 = function (gap) {
+            var hasRightAnsver = false;
+            gap.forEach(function (variant) { return hasRightAnsver = hasRightAnsver || variant.isRight; });
+            if (!hasRightAnsver) {
+                return { value: React.createElement(message_1.Message, { severity: "warn", text: "There is gap without right answer." }) };
+            }
+            if (gap.length <= 1) {
+                return { value: React.createElement(message_1.Message, { severity: "warn", text: "There is gap with one answer variant." }) };
+            }
+        };
+        for (var _i = 0, gaps_1 = gaps; _i < gaps_1.length; _i++) {
+            var gap = gaps_1[_i];
+            var state_1 = _loop_2(gap);
+            if (typeof state_1 === "object")
+                return state_1.value;
+        }
+        return null;
+    };
+    FillGapsCreator.prototype.getGapAsText = function (index) {
+        return "[[gap#" + index + "]]";
+    };
+    FillGapsCreator.prototype.answersHtml = function () {
+        var index = -1;
+        var self = this;
+        return this.state.textWithGaps.map(function (gap) {
+            index++;
+            if (typeof gap === 'string') {
+                return null;
+            }
+            var localIndex = index;
+            return (React.createElement("div", null,
+                React.createElement("label", null,
+                    "Gap ",
+                    localIndex),
+                React.createElement(variants_list_1.VariantsList, { onAddVariant: function () { return self.onAddAnswer(localIndex); }, onSetRight: function (index, value) { return self.onSetRightAnswer(localIndex, index, value); }, onEditVariant: function (index, value) { return self.onEditAnswer(localIndex, index, value); }, globalIndex: self.state.questionIndex, variants: gap })));
+        });
+    };
+    FillGapsCreator.prototype.render = function () {
+        var _this = this;
+        return (React.createElement("div", null,
+            React.createElement("div", { className: "p-fluid", key: "main" },
+                React.createElement("div", { className: "p-field", key: "questionText" },
+                    React.createElement("label", { htmlFor: "area" }, "Enter Text, then Select world and press add gap:"),
+                    React.createElement(inputtextarea_1.InputTextarea, { rows: 5, cols: 30, id: "area", onChange: function (e) { return _this.loadFromText(e.target.value); }, value: this.getAsText(), autoResize: true })),
+                React.createElement(button_1.Button, { label: "Add gap", id: "add_gaps", onClick: function () { return _this.addGap(); } })),
+            React.createElement("div", { key: "answers" },
+                React.createElement("label", null, "Gaps:"),
+                this.answersHtml()),
+            React.createElement("div", { key: "errors" }, this.errorsHtml())));
+    };
+    return FillGapsCreator;
+}(React.Component));
+exports.FillGapsCreator = FillGapsCreator;
+exports.default = FillGapsCreator;
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\variants_list.tsx":
+/*!*******************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\office\questions\variants_list.tsx ***!
+  \*******************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js");
+var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+var VariantsList = /** @class */ (function (_super) {
+    __extends(VariantsList, _super);
+    function VariantsList(props) {
+        var _this = _super.call(this, props) || this;
+        _this.onEditVariant = null;
+        _this.onAddVariant = null;
+        _this.onSetRight = null;
+        _this.pushLastEmpty = function (variants) {
+            variants.push({ text: "", isRight: false });
+        };
+        _this.setVariants = function (index, text) {
+            if (index == _this.props.variants.length) {
+                _this.onAddVariant();
+            }
+            _this.onEditVariant(index, text);
+        };
+        _this.updateRightAnswer = function (index, value) {
+            _this.onSetRight(index, value);
+        };
+        _this.state = {
+            globalIndex: props.globalIndex
+        };
+        _this.onAddVariant = props.onAddVariant;
+        _this.onSetRight = props.onSetRight;
+        _this.onEditVariant = props.onEditVariant;
+        return _this;
+    }
+    VariantsList.prototype.render = function () {
+        var index = -1;
+        var self = this;
+        var copy = this.props.variants.slice();
+        this.pushLastEmpty(copy);
+        return copy.map(function (answer) {
+            index++;
+            var locIndex = index;
+            return (React.createElement("div", { className: "p-row", key: index },
+                React.createElement("div", { className: "p-field p-grid", key: index },
+                    React.createElement("label", { htmlFor: "answ_" + index + "_" + self.state.globalIndex, className: "p-col-fixed", style: { width: '32px' } },
+                        index + 1,
+                        "."),
+                    React.createElement("div", { className: "p-col-fixed", style: { width: '300px' } },
+                        React.createElement(inputtext_1.InputText, { id: "answ_" + index + "_" + self.state.globalIndex, type: "text", placeholder: "Add new answer", value: answer.text, onChange: function (e) { return self.setVariants(locIndex, e.target.value); } })),
+                    React.createElement("div", { className: "p-field-checkbox" },
+                        React.createElement(checkbox_1.Checkbox, { inputId: "cb" + index + "_" + self.state.globalIndex, value: "Right", onChange: function (e) { return self.updateRightAnswer(locIndex, e.target.checked); }, checked: copy[locIndex].isRight }),
+                        React.createElement("label", { htmlFor: "cb1" + index + "_" + self.state.globalIndex, className: "p-checkbox-label" }, "Is right answer?")))));
+        });
+    };
+    return VariantsList;
+}(React.Component));
+exports.VariantsList = VariantsList;
+exports.default = VariantsList;
 
 
 /***/ }),
@@ -55294,6 +55982,7 @@ var TemplateEditForm = /** @class */ (function (_super) {
             newData["id"] = questions[index].id;
             questions[index] = newData;
             questions[index].hasError = hasError;
+            _this.setState({ questions: questions });
             // Dont call setState because no need do update
         };
         _this.removeQuestion = function (index) {

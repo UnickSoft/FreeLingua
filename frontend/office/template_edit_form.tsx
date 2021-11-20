@@ -91,6 +91,7 @@ export class TemplateEditForm extends React.Component<any, any> {
         newData["id"]    = questions[index].id;
         questions[index] = newData;
         questions[index].hasError = hasError;
+        this.setState({ questions: questions });
         // Dont call setState because no need do update
     }
 
