@@ -8,7 +8,8 @@
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./check_answer_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_solving.tsx"
+	"./check_answer_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_solving.tsx",
+	"./fill_gaps_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_solving.tsx"
 };
 
 
@@ -8499,6 +8500,1618 @@ _defineProperty(Dialog, "defaultProps", {
 
 /***/ }),
 
+/***/ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dropdown\\dropdown.esm.js":
+/*!************************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\node_modules\primereact\dropdown\dropdown.esm.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Dropdown": () => (/* binding */ Dropdown)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+/* harmony import */ var primereact_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primereact/core */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\core\\core.esm.js");
+/* harmony import */ var primereact_virtualscroller__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primereact/virtualscroller */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\virtualscroller\\virtualscroller.esm.js");
+/* harmony import */ var primereact_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! primereact/api */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\api\\api.esm.js");
+
+
+
+
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var DropdownItem = /*#__PURE__*/function (_Component) {
+  _inherits(DropdownItem, _Component);
+
+  var _super = _createSuper$2(DropdownItem);
+
+  function DropdownItem(props) {
+    var _this;
+
+    _classCallCheck(this, DropdownItem);
+
+    _this = _super.call(this, props);
+    _this.onClick = _this.onClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(DropdownItem, [{
+    key: "onClick",
+    value: function onClick(event) {
+      if (this.props.onClick) {
+        this.props.onClick({
+          originalEvent: event,
+          option: this.props.option
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-item', {
+        'p-highlight': this.props.selected,
+        'p-disabled': this.props.disabled,
+        'p-dropdown-item-empty': !this.props.label || this.props.label.length === 0
+      }, this.props.option.className);
+      var content = this.props.template ? primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(this.props.template, this.props.option) : this.props.label;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: className,
+        onClick: this.onClick,
+        "aria-label": this.props.label,
+        key: this.props.label,
+        role: "option",
+        "aria-selected": this.props.selected
+      }, content, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(primereact_core__WEBPACK_IMPORTED_MODULE_1__.Ripple, null));
+    }
+  }]);
+
+  return DropdownItem;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+_defineProperty(DropdownItem, "defaultProps", {
+  option: null,
+  label: null,
+  template: null,
+  selected: false,
+  disabled: false,
+  onClick: null
+});
+
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+var DropdownPanelComponent = /*#__PURE__*/function (_Component) {
+  _inherits(DropdownPanelComponent, _Component);
+
+  var _super = _createSuper$1(DropdownPanelComponent);
+
+  function DropdownPanelComponent(props) {
+    var _this;
+
+    _classCallCheck(this, DropdownPanelComponent);
+
+    _this = _super.call(this, props);
+    _this.onEnter = _this.onEnter.bind(_assertThisInitialized(_this));
+    _this.onEntered = _this.onEntered.bind(_assertThisInitialized(_this));
+    _this.onFilterInputChange = _this.onFilterInputChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(DropdownPanelComponent, [{
+    key: "onEnter",
+    value: function onEnter() {
+      var _this2 = this;
+
+      this.props.onEnter(function () {
+        if (_this2.virtualScrollerRef) {
+          var selectedIndex = _this2.props.getSelectedOptionIndex();
+
+          if (selectedIndex !== -1) {
+            _this2.virtualScrollerRef.scrollToIndex(selectedIndex);
+          }
+        }
+      });
+    }
+  }, {
+    key: "onEntered",
+    value: function onEntered() {
+      var _this3 = this;
+
+      this.props.onEntered(function () {
+        if (_this3.props.filter && _this3.props.filterInputAutoFocus) {
+          _this3.filterInput.focus();
+        }
+      });
+    }
+  }, {
+    key: "onFilterInputChange",
+    value: function onFilterInputChange(event) {
+      if (this.virtualScrollerRef) {
+        this.virtualScrollerRef.scrollToIndex(0);
+      }
+
+      this.props.onFilterInputChange && this.props.onFilterInputChange(event);
+    }
+  }, {
+    key: "isEmptyFilter",
+    value: function isEmptyFilter() {
+      return !(this.props.visibleOptions && this.props.visibleOptions.length) && this.props.hasFilter();
+    }
+  }, {
+    key: "renderGroupChildren",
+    value: function renderGroupChildren(optionGroup) {
+      var _this4 = this;
+
+      var groupChildren = this.props.getOptionGroupChildren(optionGroup);
+      return groupChildren.map(function (option, j) {
+        var optionLabel = _this4.props.getOptionLabel(option);
+
+        var optionKey = j + '_' + _this4.props.getOptionRenderKey(option);
+
+        var disabled = _this4.props.isOptionDisabled(option);
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(DropdownItem, {
+          key: optionKey,
+          label: optionLabel,
+          option: option,
+          template: _this4.props.itemTemplate,
+          selected: _this4.props.isSelected(option),
+          disabled: disabled,
+          onClick: _this4.props.onOptionClick
+        });
+      });
+    }
+  }, {
+    key: "renderEmptyMessage",
+    value: function renderEmptyMessage(emptyMessage) {
+      var message = primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(emptyMessage, this.props);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "p-dropdown-empty-message"
+      }, message);
+    }
+  }, {
+    key: "renderItem",
+    value: function renderItem(option, index) {
+      if (this.props.optionGroupLabel) {
+        var groupContent = this.props.optionGroupTemplate ? primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(this.props.optionGroupTemplate, option, index) : this.props.getOptionGroupLabel(option);
+        var groupChildrenContent = this.renderGroupChildren(option);
+        var key = index + '_' + this.props.getOptionGroupRenderKey(option);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+          key: key
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          className: "p-dropdown-item-group"
+        }, groupContent), groupChildrenContent);
+      } else {
+        var optionLabel = this.props.getOptionLabel(option);
+        var optionKey = index + '_' + this.props.getOptionRenderKey(option);
+        var disabled = this.props.isOptionDisabled(option);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(DropdownItem, {
+          key: optionKey,
+          label: optionLabel,
+          option: option,
+          template: this.props.itemTemplate,
+          selected: this.props.isSelected(option),
+          disabled: disabled,
+          onClick: this.props.onOptionClick
+        });
+      }
+    }
+  }, {
+    key: "renderItems",
+    value: function renderItems() {
+      var _this5 = this;
+
+      if (this.props.visibleOptions && this.props.visibleOptions.length) {
+        return this.props.visibleOptions.map(function (option, index) {
+          return _this5.renderItem(option, index);
+        });
+      } else if (this.props.hasFilter()) {
+        return this.renderEmptyMessage(this.props.emptyFilterMessage);
+      }
+
+      return this.renderEmptyMessage(this.props.emptyMessage);
+    }
+  }, {
+    key: "renderFilterClearIcon",
+    value: function renderFilterClearIcon() {
+      var _this6 = this;
+
+      if (this.props.showFilterClear && this.props.filterValue) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "p-dropdown-filter-clear-icon pi pi-times",
+          onClick: function onClick() {
+            return _this6.props.onFilterClearIconClick(function () {
+              return _this6.filterInput.focus();
+            });
+          }
+        });
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderFilter",
+    value: function renderFilter() {
+      var _this7 = this;
+
+      if (this.props.filter) {
+        var clearIcon = this.renderFilterClearIcon();
+        var containerClassName = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-filter-container', {
+          'p-dropdown-clearable-filter': !!clearIcon
+        });
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-dropdown-header"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: containerClassName
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          ref: function ref(el) {
+            return _this7.filterInput = el;
+          },
+          type: "text",
+          autoComplete: "off",
+          className: "p-dropdown-filter p-inputtext p-component",
+          placeholder: this.props.filterPlaceholder,
+          onKeyDown: this.props.onFilterInputKeyDown,
+          onChange: this.onFilterInputChange,
+          value: this.props.filterValue
+        }), clearIcon, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "p-dropdown-filter-icon pi pi-search"
+        })));
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderContent",
+    value: function renderContent() {
+      var _this8 = this;
+
+      if (this.props.virtualScrollerOptions) {
+        var virtualScrollerProps = _objectSpread$1(_objectSpread$1({}, this.props.virtualScrollerOptions), {
+          style: _objectSpread$1(_objectSpread$1({}, this.props.virtualScrollerOptions.style), {
+            height: this.props.scrollHeight
+          }),
+          className: (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-items-wrapper', this.props.virtualScrollerOptions.className),
+          items: this.props.visibleOptions,
+          onLazyLoad: function onLazyLoad(event) {
+            return _this8.props.virtualScrollerOptions.onLazyLoad(_objectSpread$1(_objectSpread$1({}, event), {
+              filter: _this8.props.filterValue
+            }));
+          },
+          itemTemplate: function itemTemplate(item, options) {
+            return item && _this8.renderItem(item, options.index);
+          },
+          contentTemplate: function contentTemplate(options) {
+            var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-items', options.className);
+            var content = _this8.isEmptyFilter() ? _this8.renderEmptyMessage() : options.children;
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+              ref: options.ref,
+              className: className,
+              role: "listbox"
+            }, content);
+          }
+        });
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(primereact_virtualscroller__WEBPACK_IMPORTED_MODULE_2__.VirtualScroller, _extends({
+          ref: function ref(el) {
+            return _this8.virtualScrollerRef = el;
+          }
+        }, virtualScrollerProps));
+      } else {
+        var items = this.renderItems();
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-dropdown-items-wrapper",
+          style: {
+            maxHeight: this.props.scrollHeight || 'auto'
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+          className: "p-dropdown-items",
+          role: "listbox"
+        }, items));
+      }
+    }
+  }, {
+    key: "renderElement",
+    value: function renderElement() {
+      var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-panel p-component', this.props.panelClassName);
+      var filter = this.renderFilter();
+      var content = this.renderContent();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(primereact_core__WEBPACK_IMPORTED_MODULE_1__.CSSTransition, {
+        nodeRef: this.props.forwardRef,
+        classNames: "p-connected-overlay",
+        in: this.props.in,
+        timeout: {
+          enter: 120,
+          exit: 100
+        },
+        options: this.props.transitionOptions,
+        unmountOnExit: true,
+        onEnter: this.onEnter,
+        onEntering: this.props.onEntering,
+        onEntered: this.onEntered,
+        onExit: this.props.onExit,
+        onExited: this.props.onExited
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        ref: this.props.forwardRef,
+        className: className,
+        style: this.props.panelStyle,
+        onClick: this.props.onClick
+      }, filter, content));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var element = this.renderElement();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(primereact_core__WEBPACK_IMPORTED_MODULE_1__.Portal, {
+        element: element,
+        appendTo: this.props.appendTo
+      });
+    }
+  }]);
+
+  return DropdownPanelComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+var DropdownPanel = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(DropdownPanelComponent, _extends({
+    forwardRef: ref
+  }, props));
+});
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var Dropdown = /*#__PURE__*/function (_Component) {
+  _inherits(Dropdown, _Component);
+
+  var _super = _createSuper(Dropdown);
+
+  function Dropdown(props) {
+    var _this;
+
+    _classCallCheck(this, Dropdown);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      filter: '',
+      focused: false,
+      overlayVisible: false
+    };
+    _this.onClick = _this.onClick.bind(_assertThisInitialized(_this));
+    _this.onInputFocus = _this.onInputFocus.bind(_assertThisInitialized(_this));
+    _this.onInputBlur = _this.onInputBlur.bind(_assertThisInitialized(_this));
+    _this.onInputKeyDown = _this.onInputKeyDown.bind(_assertThisInitialized(_this));
+    _this.onEditableInputChange = _this.onEditableInputChange.bind(_assertThisInitialized(_this));
+    _this.onEditableInputFocus = _this.onEditableInputFocus.bind(_assertThisInitialized(_this));
+    _this.onOptionClick = _this.onOptionClick.bind(_assertThisInitialized(_this));
+    _this.onFilterInputChange = _this.onFilterInputChange.bind(_assertThisInitialized(_this));
+    _this.onFilterInputKeyDown = _this.onFilterInputKeyDown.bind(_assertThisInitialized(_this));
+    _this.onFilterClearIconClick = _this.onFilterClearIconClick.bind(_assertThisInitialized(_this));
+    _this.onPanelClick = _this.onPanelClick.bind(_assertThisInitialized(_this));
+    _this.onOverlayEnter = _this.onOverlayEnter.bind(_assertThisInitialized(_this));
+    _this.onOverlayEntered = _this.onOverlayEntered.bind(_assertThisInitialized(_this));
+    _this.onOverlayExit = _this.onOverlayExit.bind(_assertThisInitialized(_this));
+    _this.onOverlayExited = _this.onOverlayExited.bind(_assertThisInitialized(_this));
+    _this.resetFilter = _this.resetFilter.bind(_assertThisInitialized(_this));
+    _this.clear = _this.clear.bind(_assertThisInitialized(_this));
+    _this.hasFilter = _this.hasFilter.bind(_assertThisInitialized(_this));
+    _this.getOptionLabel = _this.getOptionLabel.bind(_assertThisInitialized(_this));
+    _this.getOptionRenderKey = _this.getOptionRenderKey.bind(_assertThisInitialized(_this));
+    _this.isOptionDisabled = _this.isOptionDisabled.bind(_assertThisInitialized(_this));
+    _this.getOptionGroupChildren = _this.getOptionGroupChildren.bind(_assertThisInitialized(_this));
+    _this.getOptionGroupLabel = _this.getOptionGroupLabel.bind(_assertThisInitialized(_this));
+    _this.getOptionGroupRenderKey = _this.getOptionGroupRenderKey.bind(_assertThisInitialized(_this));
+    _this.getSelectedOptionIndex = _this.getSelectedOptionIndex.bind(_assertThisInitialized(_this));
+    _this.isSelected = _this.isSelected.bind(_assertThisInitialized(_this));
+    _this.overlayRef = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createRef)();
+    _this.inputRef = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createRef)(_this.props.inputRef);
+    return _this;
+  }
+
+  _createClass(Dropdown, [{
+    key: "onClick",
+    value: function onClick(event) {
+      if (this.props.disabled) {
+        return;
+      }
+
+      if (primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
+        return;
+      } else if (!this.overlayRef.current || !(this.overlayRef.current && this.overlayRef.current.contains(event.target))) {
+        this.focusInput.focus();
+
+        if (this.state.overlayVisible) {
+          this.hideOverlay();
+        } else {
+          this.showOverlay();
+        }
+      }
+    }
+  }, {
+    key: "onInputFocus",
+    value: function onInputFocus(event) {
+      var _this2 = this;
+
+      event.persist();
+
+      if (this.props.showOnFocus && !this.state.overlayVisible) {
+        this.showOverlay();
+      }
+
+      this.setState({
+        focused: true
+      }, function () {
+        if (_this2.props.onFocus) {
+          _this2.props.onFocus(event);
+        }
+      });
+    }
+  }, {
+    key: "onInputBlur",
+    value: function onInputBlur(event) {
+      var _this3 = this;
+
+      event.persist();
+      this.setState({
+        focused: false
+      }, function () {
+        if (_this3.props.onBlur) {
+          _this3.props.onBlur(event);
+        }
+      });
+    }
+  }, {
+    key: "onPanelClick",
+    value: function onPanelClick(event) {
+      primereact_core__WEBPACK_IMPORTED_MODULE_1__.OverlayService.emit('overlay-click', {
+        originalEvent: event,
+        target: this.container
+      });
+    }
+  }, {
+    key: "onInputKeyDown",
+    value: function onInputKeyDown(event) {
+      switch (event.which) {
+        //down
+        case 40:
+          this.onDownKey(event);
+          break;
+        //up
+
+        case 38:
+          this.onUpKey(event);
+          break;
+        //space
+
+        case 32:
+          if (this.state.overlayVisible) this.hideOverlay();else this.showOverlay();
+          event.preventDefault();
+          break;
+        //enter
+
+        case 13:
+          this.hideOverlay();
+          event.preventDefault();
+          break;
+        //escape and tab
+
+        case 27:
+        case 9:
+          this.hideOverlay();
+          break;
+
+        default:
+          this.search(event);
+          break;
+      }
+    }
+  }, {
+    key: "onFilterInputKeyDown",
+    value: function onFilterInputKeyDown(event) {
+      switch (event.which) {
+        //down
+        case 40:
+          this.onDownKey(event);
+          break;
+        //up
+
+        case 38:
+          this.onUpKey(event);
+          break;
+        //enter and escape
+
+        case 13:
+        case 27:
+          this.hideOverlay();
+          event.preventDefault();
+          break;
+      }
+    }
+  }, {
+    key: "onUpKey",
+    value: function onUpKey(event) {
+      var visibleOptions = this.getVisibleOptions();
+
+      if (visibleOptions) {
+        var prevOption = this.findPrevOption(this.getSelectedOptionIndex());
+
+        if (prevOption) {
+          this.selectItem({
+            originalEvent: event,
+            option: prevOption
+          });
+        }
+      }
+
+      event.preventDefault();
+    }
+  }, {
+    key: "onDownKey",
+    value: function onDownKey(event) {
+      var visibleOptions = this.getVisibleOptions();
+
+      if (visibleOptions) {
+        if (!this.state.overlayVisible && event.altKey) {
+          this.showOverlay();
+        } else {
+          var nextOption = this.findNextOption(this.getSelectedOptionIndex());
+
+          if (nextOption) {
+            this.selectItem({
+              originalEvent: event,
+              option: nextOption
+            });
+          }
+        }
+      }
+
+      event.preventDefault();
+    }
+  }, {
+    key: "findNextOption",
+    value: function findNextOption(index) {
+      var visibleOptions = this.getVisibleOptions();
+
+      if (this.props.optionGroupLabel) {
+        var groupIndex = index === -1 ? 0 : index.group;
+        var optionIndex = index === -1 ? -1 : index.option;
+        var option = this.findNextOptionInList(this.getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
+        if (option) return option;else if (groupIndex + 1 !== visibleOptions.length) return this.findNextOption({
+          group: groupIndex + 1,
+          option: -1
+        });else return null;
+      } else {
+        return this.findNextOptionInList(visibleOptions, index);
+      }
+    }
+  }, {
+    key: "findNextOptionInList",
+    value: function findNextOptionInList(list, index) {
+      var i = index + 1;
+
+      if (i === list.length) {
+        return null;
+      }
+
+      var option = list[i];
+      if (this.isOptionDisabled(option)) return this.findNextOptionInList(i);else return option;
+    }
+  }, {
+    key: "findPrevOption",
+    value: function findPrevOption(index) {
+      if (index === -1) {
+        return null;
+      }
+
+      var visibleOptions = this.getVisibleOptions();
+
+      if (this.props.optionGroupLabel) {
+        var groupIndex = index.group;
+        var optionIndex = index.option;
+        var option = this.findPrevOptionInList(this.getOptionGroupChildren(visibleOptions[groupIndex]), optionIndex);
+        if (option) return option;else if (groupIndex > 0) return this.findPrevOption({
+          group: groupIndex - 1,
+          option: this.getOptionGroupChildren(visibleOptions[groupIndex - 1]).length
+        });else return null;
+      } else {
+        return this.findPrevOptionInList(visibleOptions, index);
+      }
+    }
+  }, {
+    key: "findPrevOptionInList",
+    value: function findPrevOptionInList(list, index) {
+      var i = index - 1;
+
+      if (i < 0) {
+        return null;
+      }
+
+      var option = list[i];
+      if (this.isOptionDisabled(option)) return this.findPrevOption(i);else return option;
+    }
+  }, {
+    key: "search",
+    value: function search(event) {
+      var _this4 = this;
+
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+
+      var char = event.key;
+      this.previousSearchChar = this.currentSearchChar;
+      this.currentSearchChar = char;
+      if (this.previousSearchChar === this.currentSearchChar) this.searchValue = this.currentSearchChar;else this.searchValue = this.searchValue ? this.searchValue + char : char;
+
+      if (this.searchValue) {
+        var searchIndex = this.getSelectedOptionIndex();
+        var newOption = this.props.optionGroupLabel ? this.searchOptionInGroup(searchIndex) : this.searchOption(++searchIndex);
+
+        if (newOption) {
+          this.selectItem({
+            originalEvent: event,
+            option: newOption
+          });
+          this.selectedOptionUpdated = true;
+        }
+      }
+
+      this.searchTimeout = setTimeout(function () {
+        _this4.searchValue = null;
+      }, 250);
+    }
+  }, {
+    key: "searchOption",
+    value: function searchOption(index) {
+      var option;
+
+      if (this.searchValue) {
+        var visibleOptions = this.getVisibleOptions();
+        option = this.searchOptionInRange(index, visibleOptions.length);
+
+        if (!option) {
+          option = this.searchOptionInRange(0, index);
+        }
+      }
+
+      return option;
+    }
+  }, {
+    key: "searchOptionInRange",
+    value: function searchOptionInRange(start, end) {
+      var visibleOptions = this.getVisibleOptions();
+
+      for (var i = start; i < end; i++) {
+        var opt = visibleOptions[i];
+
+        if (this.matchesSearchValue(opt)) {
+          return opt;
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "searchOptionInGroup",
+    value: function searchOptionInGroup(index) {
+      var searchIndex = index === -1 ? {
+        group: 0,
+        option: -1
+      } : index;
+      var visibleOptions = this.getVisibleOptions();
+
+      for (var i = searchIndex.group; i < visibleOptions.length; i++) {
+        var groupOptions = this.getOptionGroupChildren(visibleOptions[i]);
+
+        for (var j = searchIndex.group === i ? searchIndex.option + 1 : 0; j < groupOptions.length; j++) {
+          if (this.matchesSearchValue(groupOptions[j])) {
+            return groupOptions[j];
+          }
+        }
+      }
+
+      for (var _i = 0; _i <= searchIndex.group; _i++) {
+        var _groupOptions = this.getOptionGroupChildren(visibleOptions[_i]);
+
+        for (var _j = 0; _j < (searchIndex.group === _i ? searchIndex.option : _groupOptions.length); _j++) {
+          if (this.matchesSearchValue(_groupOptions[_j])) {
+            return _groupOptions[_j];
+          }
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "matchesSearchValue",
+    value: function matchesSearchValue(option) {
+      var label = this.getOptionLabel(option).toLocaleLowerCase(this.props.filterLocale);
+      return label.startsWith(this.searchValue.toLocaleLowerCase(this.props.filterLocale));
+    }
+  }, {
+    key: "onEditableInputChange",
+    value: function onEditableInputChange(event) {
+      if (this.props.onChange) {
+        this.props.onChange({
+          originalEvent: event.originalEvent,
+          value: event.target.value,
+          stopPropagation: function stopPropagation() {},
+          preventDefault: function preventDefault() {},
+          target: {
+            name: this.props.name,
+            id: this.props.id,
+            value: event.target.value
+          }
+        });
+      }
+    }
+  }, {
+    key: "onEditableInputFocus",
+    value: function onEditableInputFocus(event) {
+      var _this5 = this;
+
+      event.persist();
+      this.setState({
+        focused: true
+      }, function () {
+        _this5.hideOverlay();
+
+        if (_this5.props.onFocus) {
+          _this5.props.onFocus(event);
+        }
+      });
+    }
+  }, {
+    key: "onOptionClick",
+    value: function onOptionClick(event) {
+      var option = event.option;
+
+      if (!option.disabled) {
+        this.selectItem(event);
+        this.focusInput.focus();
+      }
+
+      this.hideOverlay();
+    }
+  }, {
+    key: "onFilterInputChange",
+    value: function onFilterInputChange(event) {
+      var _this6 = this;
+
+      var filter = event.target.value;
+      this.setState({
+        filter: filter
+      }, function () {
+        if (_this6.props.onFilter) {
+          _this6.props.onFilter({
+            originalEvent: event,
+            filter: filter
+          });
+        }
+      });
+    }
+  }, {
+    key: "onFilterClearIconClick",
+    value: function onFilterClearIconClick(callback) {
+      this.resetFilter(callback);
+    }
+  }, {
+    key: "resetFilter",
+    value: function resetFilter(callback) {
+      var _this7 = this;
+
+      var filter = '';
+      this.setState({
+        filter: filter
+      }, function () {
+        _this7.props.onFilter && _this7.props.onFilter({
+          filter: filter
+        });
+        callback && callback();
+      });
+    }
+  }, {
+    key: "clear",
+    value: function clear(event) {
+      if (this.props.onChange) {
+        this.props.onChange({
+          originalEvent: event,
+          value: undefined,
+          stopPropagation: function stopPropagation() {},
+          preventDefault: function preventDefault() {},
+          target: {
+            name: this.props.name,
+            id: this.props.id,
+            value: undefined
+          }
+        });
+      }
+
+      this.updateEditableLabel();
+    }
+  }, {
+    key: "selectItem",
+    value: function selectItem(event) {
+      var currentSelectedOption = this.getSelectedOption();
+
+      if (currentSelectedOption !== event.option) {
+        this.updateEditableLabel(event.option);
+        var optionValue = this.getOptionValue(event.option);
+
+        if (this.props.onChange) {
+          this.props.onChange({
+            originalEvent: event.originalEvent,
+            value: optionValue,
+            stopPropagation: function stopPropagation() {},
+            preventDefault: function preventDefault() {},
+            target: {
+              name: this.props.name,
+              id: this.props.id,
+              value: optionValue
+            }
+          });
+        }
+      }
+    }
+  }, {
+    key: "getSelectedOption",
+    value: function getSelectedOption() {
+      var index = this.getSelectedOptionIndex();
+      return index !== -1 ? this.props.optionGroupLabel ? this.getOptionGroupChildren(this.props.options[index.group])[index.option] : this.props.options[index] : null;
+    }
+  }, {
+    key: "getSelectedOptionIndex",
+    value: function getSelectedOptionIndex() {
+      if (this.props.value != null && this.props.options) {
+        if (this.props.optionGroupLabel) {
+          for (var i = 0; i < this.props.options.length; i++) {
+            var selectedOptionIndex = this.findOptionIndexInList(this.props.value, this.getOptionGroupChildren(this.props.options[i]));
+
+            if (selectedOptionIndex !== -1) {
+              return {
+                group: i,
+                option: selectedOptionIndex
+              };
+            }
+          }
+        } else {
+          return this.findOptionIndexInList(this.props.value, this.props.options);
+        }
+      }
+
+      return -1;
+    }
+  }, {
+    key: "findOptionIndexInList",
+    value: function findOptionIndexInList(value, list) {
+      var key = this.equalityKey();
+
+      for (var i = 0; i < list.length; i++) {
+        if (primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.equals(value, this.getOptionValue(list[i]), key)) {
+          return i;
+        }
+      }
+
+      return -1;
+    }
+  }, {
+    key: "isSelected",
+    value: function isSelected(option) {
+      return primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.equals(this.props.value, this.getOptionValue(option), this.equalityKey());
+    }
+  }, {
+    key: "equalityKey",
+    value: function equalityKey() {
+      return this.props.optionValue ? null : this.props.dataKey;
+    }
+  }, {
+    key: "showOverlay",
+    value: function showOverlay() {
+      this.setState({
+        overlayVisible: true
+      });
+    }
+  }, {
+    key: "hideOverlay",
+    value: function hideOverlay() {
+      this.setState({
+        overlayVisible: false
+      });
+    }
+  }, {
+    key: "onOverlayEnter",
+    value: function onOverlayEnter(callback) {
+      primereact_core__WEBPACK_IMPORTED_MODULE_1__.ZIndexUtils.set('overlay', this.overlayRef.current);
+      this.alignOverlay();
+      this.scrollInView();
+      callback && callback();
+    }
+  }, {
+    key: "onOverlayEntered",
+    value: function onOverlayEntered(callback) {
+      this.bindDocumentClickListener();
+      this.bindScrollListener();
+      this.bindResizeListener();
+      callback && callback();
+      this.props.onShow && this.props.onShow();
+    }
+  }, {
+    key: "onOverlayExit",
+    value: function onOverlayExit() {
+      this.unbindDocumentClickListener();
+      this.unbindScrollListener();
+      this.unbindResizeListener();
+    }
+  }, {
+    key: "onOverlayExited",
+    value: function onOverlayExited() {
+      if (this.props.filter && this.props.resetFilterOnHide) {
+        this.resetFilter();
+      }
+
+      primereact_core__WEBPACK_IMPORTED_MODULE_1__.ZIndexUtils.clear(this.overlayRef.current);
+      this.props.onHide && this.props.onHide();
+    }
+  }, {
+    key: "alignOverlay",
+    value: function alignOverlay() {
+      primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.alignOverlay(this.overlayRef.current, this.input.parentElement, this.props.appendTo || primereact_api__WEBPACK_IMPORTED_MODULE_3__.default.appendTo);
+    }
+  }, {
+    key: "scrollInView",
+    value: function scrollInView() {
+      var highlightItem = primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.findSingle(this.overlayRef.current, 'li.p-highlight');
+
+      if (highlightItem) {
+        highlightItem.scrollIntoView({
+          block: 'nearest',
+          inline: 'start'
+        });
+      }
+    }
+  }, {
+    key: "bindDocumentClickListener",
+    value: function bindDocumentClickListener() {
+      var _this8 = this;
+
+      if (!this.documentClickListener) {
+        this.documentClickListener = function (event) {
+          if (_this8.state.overlayVisible && _this8.isOutsideClicked(event)) {
+            _this8.hideOverlay();
+          }
+        };
+
+        document.addEventListener('click', this.documentClickListener);
+      }
+    }
+  }, {
+    key: "unbindDocumentClickListener",
+    value: function unbindDocumentClickListener() {
+      if (this.documentClickListener) {
+        document.removeEventListener('click', this.documentClickListener);
+        this.documentClickListener = null;
+      }
+    }
+  }, {
+    key: "bindScrollListener",
+    value: function bindScrollListener() {
+      var _this9 = this;
+
+      if (!this.scrollHandler) {
+        this.scrollHandler = new primereact_core__WEBPACK_IMPORTED_MODULE_1__.ConnectedOverlayScrollHandler(this.container, function () {
+          if (_this9.state.overlayVisible) {
+            _this9.hideOverlay();
+          }
+        });
+      }
+
+      this.scrollHandler.bindScrollListener();
+    }
+  }, {
+    key: "unbindScrollListener",
+    value: function unbindScrollListener() {
+      if (this.scrollHandler) {
+        this.scrollHandler.unbindScrollListener();
+      }
+    }
+  }, {
+    key: "bindResizeListener",
+    value: function bindResizeListener() {
+      var _this10 = this;
+
+      if (!this.resizeListener) {
+        this.resizeListener = function () {
+          if (_this10.state.overlayVisible && !primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.isAndroid()) {
+            _this10.hideOverlay();
+          }
+        };
+
+        window.addEventListener('resize', this.resizeListener);
+      }
+    }
+  }, {
+    key: "unbindResizeListener",
+    value: function unbindResizeListener() {
+      if (this.resizeListener) {
+        window.removeEventListener('resize', this.resizeListener);
+        this.resizeListener = null;
+      }
+    }
+  }, {
+    key: "isOutsideClicked",
+    value: function isOutsideClicked(event) {
+      return this.container && !(this.container.isSameNode(event.target) || this.isClearClicked(event) || this.container.contains(event.target) || this.overlayRef && this.overlayRef.current.contains(event.target));
+    }
+  }, {
+    key: "isClearClicked",
+    value: function isClearClicked(event) {
+      return primereact_core__WEBPACK_IMPORTED_MODULE_1__.DomHandler.hasClass(event.target, 'p-dropdown-clear-icon');
+    }
+  }, {
+    key: "updateEditableLabel",
+    value: function updateEditableLabel(option) {
+      if (this.input) {
+        this.input.value = option ? this.getOptionLabel(option) : this.props.value || '';
+      }
+    }
+  }, {
+    key: "hasFilter",
+    value: function hasFilter() {
+      return this.state.filter && this.state.filter.trim().length > 0;
+    }
+  }, {
+    key: "getOptionLabel",
+    value: function getOptionLabel(option) {
+      return this.props.optionLabel ? primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(option, this.props.optionLabel) : option && option['label'] !== undefined ? option['label'] : option;
+    }
+  }, {
+    key: "getOptionValue",
+    value: function getOptionValue(option) {
+      return this.props.optionValue ? primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(option, this.props.optionValue) : option && option['value'] !== undefined ? option['value'] : option;
+    }
+  }, {
+    key: "getOptionRenderKey",
+    value: function getOptionRenderKey(option) {
+      return this.props.dataKey ? primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(option, this.props.dataKey) : this.getOptionLabel(option);
+    }
+  }, {
+    key: "isOptionDisabled",
+    value: function isOptionDisabled(option) {
+      if (this.props.optionDisabled) {
+        return primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.isFunction(this.props.optionDisabled) ? this.props.optionDisabled(option) : primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(option, this.props.optionDisabled);
+      }
+
+      return option && option['disabled'] !== undefined ? option['disabled'] : false;
+    }
+  }, {
+    key: "getOptionGroupRenderKey",
+    value: function getOptionGroupRenderKey(optionGroup) {
+      return primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
+  }, {
+    key: "getOptionGroupLabel",
+    value: function getOptionGroupLabel(optionGroup) {
+      return primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupLabel);
+    }
+  }, {
+    key: "getOptionGroupChildren",
+    value: function getOptionGroupChildren(optionGroup) {
+      return primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.resolveFieldData(optionGroup, this.props.optionGroupChildren);
+    }
+  }, {
+    key: "checkValidity",
+    value: function checkValidity() {
+      return this.inputRef.current.checkValidity();
+    }
+  }, {
+    key: "getVisibleOptions",
+    value: function getVisibleOptions() {
+      if (this.hasFilter()) {
+        var filterValue = this.state.filter.trim().toLocaleLowerCase(this.props.filterLocale);
+        var searchFields = this.props.filterBy ? this.props.filterBy.split(',') : [this.props.optionLabel || 'label'];
+
+        if (this.props.optionGroupLabel) {
+          var filteredGroups = [];
+
+          var _iterator = _createForOfIteratorHelper(this.props.options),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var optgroup = _step.value;
+              var filteredSubOptions = primereact_core__WEBPACK_IMPORTED_MODULE_1__.FilterUtils.filter(this.getOptionGroupChildren(optgroup), searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+
+              if (filteredSubOptions && filteredSubOptions.length) {
+                filteredGroups.push(_objectSpread(_objectSpread({}, optgroup), {
+                  items: filteredSubOptions
+                }));
+              }
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
+          return filteredGroups;
+        } else {
+          return primereact_core__WEBPACK_IMPORTED_MODULE_1__.FilterUtils.filter(this.props.options, searchFields, filterValue, this.props.filterMatchMode, this.props.filterLocale);
+        }
+      } else {
+        return this.props.options;
+      }
+    }
+  }, {
+    key: "updateInputField",
+    value: function updateInputField() {
+      if (this.props.editable && this.input) {
+        var selectedOption = this.getSelectedOption();
+        var label = selectedOption ? this.getOptionLabel(selectedOption) : null;
+        var value = label || this.props.value || '';
+        this.input.value = value;
+      }
+    }
+  }, {
+    key: "updateInputRef",
+    value: function updateInputRef() {
+      var ref = this.props.inputRef;
+
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(this.inputRef.current);
+        } else {
+          ref.current = this.inputRef.current;
+        }
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.updateInputRef();
+
+      if (this.props.autoFocus && this.focusInput) {
+        this.focusInput.focus();
+      }
+
+      if (this.props.tooltip) {
+        this.renderTooltip();
+      }
+
+      this.updateInputField();
+      this.inputRef.current.selectedIndex = 1;
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.unbindDocumentClickListener();
+      this.unbindResizeListener();
+
+      if (this.scrollHandler) {
+        this.scrollHandler.destroy();
+        this.scrollHandler = null;
+      }
+
+      if (this.tooltip) {
+        this.tooltip.destroy();
+        this.tooltip = null;
+      }
+
+      if (this.hideTimeout) {
+        clearTimeout(this.hideTimeout);
+        this.hideTimeout = null;
+      }
+
+      primereact_core__WEBPACK_IMPORTED_MODULE_1__.ZIndexUtils.clear(this.overlayRef.current);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.state.overlayVisible) {
+        if (this.props.filter) {
+          this.alignOverlay();
+        }
+
+        if (prevProps.value !== this.props.value) {
+          this.scrollInView();
+        }
+      }
+
+      if (prevProps.tooltip !== this.props.tooltip || prevProps.tooltipOptions !== this.props.tooltipOptions) {
+        if (this.tooltip) this.tooltip.update(_objectSpread({
+          content: this.props.tooltip
+        }, this.props.tooltipOptions || {}));else this.renderTooltip();
+      }
+
+      if (this.state.filter && (!this.props.options || this.props.options.length === 0)) {
+        this.setState({
+          filter: ''
+        });
+      }
+
+      this.updateInputField();
+      this.inputRef.current.selectedIndex = 1;
+    }
+  }, {
+    key: "renderHiddenSelect",
+    value: function renderHiddenSelect(selectedOption) {
+      var placeHolderOption = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: ""
+      }, this.props.placeholder);
+      var option = selectedOption ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: selectedOption.value
+      }, this.getOptionLabel(selectedOption)) : null;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "p-hidden-accessible p-dropdown-hidden-select"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        ref: this.inputRef,
+        required: this.props.required,
+        name: this.props.name,
+        tabIndex: -1,
+        "aria-hidden": "true"
+      }, placeHolderOption, option));
+    }
+  }, {
+    key: "renderTooltip",
+    value: function renderTooltip() {
+      this.tooltip = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.tip)({
+        target: this.container,
+        content: this.props.tooltip,
+        options: this.props.tooltipOptions
+      });
+    }
+  }, {
+    key: "renderKeyboardHelper",
+    value: function renderKeyboardHelper() {
+      var _this11 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "p-hidden-accessible"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        ref: function ref(el) {
+          return _this11.focusInput = el;
+        },
+        id: this.props.inputId,
+        type: "text",
+        readOnly: true,
+        "aria-haspopup": "listbox",
+        onFocus: this.onInputFocus,
+        onBlur: this.onInputBlur,
+        onKeyDown: this.onInputKeyDown,
+        disabled: this.props.disabled,
+        tabIndex: this.props.tabIndex,
+        "aria-label": this.props.ariaLabel,
+        "aria-labelledby": this.props.ariaLabelledBy
+      }));
+    }
+  }, {
+    key: "renderLabel",
+    value: function renderLabel(selectedOption) {
+      var _this12 = this;
+
+      var label = selectedOption ? this.getOptionLabel(selectedOption) : null;
+
+      if (this.props.editable) {
+        var value = label || this.props.value || '';
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          ref: function ref(el) {
+            return _this12.input = el;
+          },
+          type: "text",
+          defaultValue: value,
+          className: "p-dropdown-label p-inputtext",
+          disabled: this.props.disabled,
+          placeholder: this.props.placeholder,
+          maxLength: this.props.maxLength,
+          onInput: this.onEditableInputChange,
+          onFocus: this.onEditableInputFocus,
+          onBlur: this.onInputBlur,
+          "aria-label": this.props.ariaLabel,
+          "aria-labelledby": this.props.ariaLabelledBy,
+          "aria-haspopup": "listbox"
+        });
+      } else {
+        var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-label p-inputtext', {
+          'p-placeholder': label === null && this.props.placeholder,
+          'p-dropdown-label-empty': label === null && !this.props.placeholder
+        });
+        var content = this.props.valueTemplate ? primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(this.props.valueTemplate, selectedOption, this.props) : label || this.props.placeholder || 'empty';
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          ref: function ref(el) {
+            return _this12.input = el;
+          },
+          className: className
+        }, content);
+      }
+    }
+  }, {
+    key: "renderClearIcon",
+    value: function renderClearIcon() {
+      if (this.props.value != null && this.props.showClear && !this.props.disabled) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "p-dropdown-clear-icon pi pi-times",
+          onClick: this.clear
+        });
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderDropdownIcon",
+    value: function renderDropdownIcon() {
+      var _this13 = this;
+
+      var iconClassName = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown-trigger-icon p-clickable', this.props.dropdownIcon);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        ref: function ref(el) {
+          return _this13.trigger = el;
+        },
+        className: "p-dropdown-trigger",
+        role: "button",
+        "aria-haspopup": "listbox",
+        "aria-expanded": this.state.overlayVisible
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: iconClassName
+      }));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this14 = this;
+
+      var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-dropdown p-component p-inputwrapper', this.props.className, {
+        'p-disabled': this.props.disabled,
+        'p-focus': this.state.focused,
+        'p-dropdown-clearable': this.props.showClear && !this.props.disabled,
+        'p-inputwrapper-filled': this.props.value,
+        'p-inputwrapper-focus': this.state.focused || this.state.overlayVisible
+      });
+      var visibleOptions = this.getVisibleOptions();
+      var selectedOption = this.getSelectedOption();
+      var hiddenSelect = this.renderHiddenSelect(selectedOption);
+      var keyboardHelper = this.renderKeyboardHelper();
+      var labelElement = this.renderLabel(selectedOption);
+      var dropdownIcon = this.renderDropdownIcon();
+      var clearIcon = this.renderClearIcon();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: this.props.id,
+        ref: function ref(el) {
+          return _this14.container = el;
+        },
+        className: className,
+        style: this.props.style,
+        onClick: this.onClick,
+        onMouseDown: this.props.onMouseDown,
+        onContextMenu: this.props.onContextMenu
+      }, keyboardHelper, hiddenSelect, labelElement, clearIcon, dropdownIcon, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(DropdownPanel, _extends({
+        ref: this.overlayRef,
+        visibleOptions: visibleOptions
+      }, this.props, {
+        onClick: this.onPanelClick,
+        onOptionClick: this.onOptionClick,
+        filterValue: this.state.filter,
+        hasFilter: this.hasFilter,
+        onFilterClearIconClick: this.onFilterClearIconClick,
+        onFilterInputKeyDown: this.onFilterInputKeyDown,
+        onFilterInputChange: this.onFilterInputChange,
+        getOptionLabel: this.getOptionLabel,
+        getOptionRenderKey: this.getOptionRenderKey,
+        isOptionDisabled: this.isOptionDisabled,
+        getOptionGroupChildren: this.getOptionGroupChildren,
+        getOptionGroupLabel: this.getOptionGroupLabel,
+        getOptionGroupRenderKey: this.getOptionGroupRenderKey,
+        isSelected: this.isSelected,
+        getSelectedOptionIndex: this.getSelectedOptionIndex,
+        in: this.state.overlayVisible,
+        onEnter: this.onOverlayEnter,
+        onEntered: this.onOverlayEntered,
+        onExit: this.onOverlayExit,
+        onExited: this.onOverlayExited
+      })));
+    }
+  }]);
+
+  return Dropdown;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+_defineProperty(Dropdown, "defaultProps", {
+  id: null,
+  inputRef: null,
+  name: null,
+  value: null,
+  options: null,
+  optionLabel: null,
+  optionValue: null,
+  optionDisabled: null,
+  optionGroupLabel: null,
+  optionGroupChildren: null,
+  optionGroupTemplate: null,
+  valueTemplate: null,
+  itemTemplate: null,
+  style: null,
+  className: null,
+  virtualScrollerOptions: null,
+  scrollHeight: '200px',
+  filter: false,
+  filterBy: null,
+  filterMatchMode: 'contains',
+  filterPlaceholder: null,
+  filterLocale: undefined,
+  emptyMessage: 'No records found',
+  emptyFilterMessage: 'No results found',
+  editable: false,
+  placeholder: null,
+  required: false,
+  disabled: false,
+  appendTo: null,
+  tabIndex: null,
+  autoFocus: false,
+  filterInputAutoFocus: true,
+  resetFilterOnHide: false,
+  showFilterClear: false,
+  panelClassName: null,
+  panelStyle: null,
+  dataKey: null,
+  inputId: null,
+  showClear: false,
+  maxLength: null,
+  tooltip: null,
+  tooltipOptions: null,
+  ariaLabel: null,
+  ariaLabelledBy: null,
+  transitionOptions: null,
+  dropdownIcon: 'pi pi-chevron-down',
+  showOnFocus: false,
+  onChange: null,
+  onFocus: null,
+  onBlur: null,
+  onMouseDown: null,
+  onContextMenu: null,
+  onShow: null,
+  onHide: null,
+  onFilter: null
+});
+
+
+
+
+/***/ }),
+
 /***/ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js":
 /*!**************************************************************************************************!*\
   !*** ../../..!NewProject\learning.online\src\node_modules\primereact\inputtext\inputtext.esm.js ***!
@@ -10105,6 +11718,875 @@ _defineProperty(RadioButton, "defaultProps", {
   tooltipOptions: null,
   ariaLabelledBy: null,
   onChange: null
+});
+
+
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\virtualscroller\\virtualscroller.esm.js":
+/*!**************************************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\node_modules\primereact\virtualscroller\virtualscroller.esm.js ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VirtualScroller": () => (/* binding */ VirtualScroller)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+/* harmony import */ var primereact_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! primereact/core */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\core\\core.esm.js");
+
+
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var VirtualScroller = /*#__PURE__*/function (_Component) {
+  _inherits(VirtualScroller, _Component);
+
+  var _super = _createSuper(VirtualScroller);
+
+  function VirtualScroller(props) {
+    var _this;
+
+    _classCallCheck(this, VirtualScroller);
+
+    _this = _super.call(this, props);
+
+    var isBoth = _this.isBoth();
+
+    _this.state = {
+      first: isBoth ? {
+        rows: 0,
+        cols: 0
+      } : 0,
+      last: isBoth ? {
+        rows: 0,
+        cols: 0
+      } : 0,
+      numItemsInViewport: isBoth ? {
+        rows: 0,
+        cols: 0
+      } : 0,
+      numToleratedItems: props.numToleratedItems,
+      loading: false
+    };
+    _this.onScroll = _this.onScroll.bind(_assertThisInitialized(_this));
+    _this.lastScrollPos = isBoth ? {
+      top: 0,
+      left: 0
+    } : 0;
+    return _this;
+  }
+
+  _createClass(VirtualScroller, [{
+    key: "scrollTo",
+    value: function scrollTo(options) {
+      this.element && this.element.scrollTo(options);
+    }
+  }, {
+    key: "scrollToIndex",
+    value: function scrollToIndex(index) {
+      var _this2 = this;
+
+      var behavior = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'auto';
+      var isBoth = this.isBoth();
+      var isHorizontal = this.isHorizontal();
+      var first = this.state.first;
+      var itemSize = this.props.itemSize;
+      var contentPadding = this.getContentPadding();
+
+      var calculateFirst = function calculateFirst() {
+        var _index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+        return _index <= _this2.state.numToleratedItems ? 0 : _index;
+      };
+
+      var calculateCoord = function calculateCoord(_first, _size, _padding) {
+        return _first * _size + _padding;
+      };
+
+      var scrollTo = function scrollTo() {
+        var left = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var top = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        return _this2.scrollTo({
+          left: left,
+          top: top,
+          behavior: behavior
+        });
+      };
+
+      if (isBoth) {
+        var newFirst = {
+          rows: calculateFirst(index[0]),
+          cols: calculateFirst(index[1])
+        };
+        (newFirst.rows !== first.rows || newFirst.cols !== first.cols) && scrollTo(calculateCoord(newFirst.cols, itemSize[1], contentPadding.left), calculateCoord(newFirst.rows, itemSize[0], contentPadding.top));
+      } else {
+        var _newFirst = calculateFirst(index);
+
+        if (_newFirst !== first) {
+          isHorizontal ? scrollTo(calculateCoord(_newFirst, itemSize, contentPadding.left), 0) : scrollTo(0, calculateCoord(_newFirst, itemSize, contentPadding.top));
+        }
+      }
+    }
+  }, {
+    key: "scrollInView",
+    value: function scrollInView(index, to) {
+      var _this3 = this;
+
+      var behavior = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'auto';
+
+      if (to) {
+        var isBoth = this.isBoth();
+        var isHorizontal = this.isHorizontal();
+
+        var _this$getRenderedRang = this.getRenderedRange(),
+            first = _this$getRenderedRang.first,
+            viewport = _this$getRenderedRang.viewport;
+
+        var itemSize = this.props.itemSize;
+
+        var scrollTo = function scrollTo() {
+          var left = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+          var top = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+          return _this3.scrollTo({
+            left: left,
+            top: top,
+            behavior: behavior
+          });
+        };
+
+        var isToStart = to === 'to-start';
+        var isToEnd = to === 'to-end';
+
+        if (isToStart) {
+          if (isBoth) {
+            if (viewport.first.rows - first.rows > index[0]) {
+              scrollTo(viewport.first.cols * itemSize, (viewport.first.rows - 1) * itemSize);
+            } else if (viewport.first.cols - first.cols > index[1]) {
+              scrollTo((viewport.first.cols - 1) * itemSize, viewport.first.rows * itemSize);
+            }
+          } else {
+            if (viewport.first - first > index) {
+              var pos = (viewport.first - 1) * itemSize;
+              isHorizontal ? scrollTo(pos, 0) : scrollTo(0, pos);
+            }
+          }
+        } else if (isToEnd) {
+          if (isBoth) {
+            if (viewport.last.rows - first.rows <= index[0] + 1) {
+              scrollTo(viewport.first.cols * itemSize, (viewport.first.rows + 1) * itemSize);
+            } else if (viewport.last.cols - first.cols <= index[1] + 1) {
+              scrollTo((viewport.first.cols + 1) * itemSize, viewport.first.rows * itemSize);
+            }
+          } else {
+            if (viewport.last - first <= index + 1) {
+              var _pos2 = (viewport.first + 1) * itemSize;
+
+              isHorizontal ? scrollTo(_pos2, 0) : scrollTo(0, _pos2);
+            }
+          }
+        }
+      } else {
+        this.scrollToIndex(index, behavior);
+      }
+    }
+  }, {
+    key: "getRenderedRange",
+    value: function getRenderedRange() {
+      var isBoth = this.isBoth();
+      var isHorizontal = this.isHorizontal();
+      var _this$state = this.state,
+          first = _this$state.first,
+          last = _this$state.last,
+          numItemsInViewport = _this$state.numItemsInViewport;
+      var itemSize = this.props.itemSize;
+
+      var calculateFirstInViewport = function calculateFirstInViewport(_pos, _size) {
+        return Math.floor(_pos / (_size || _pos));
+      };
+
+      var firstInViewport = first;
+      var lastInViewport = 0;
+
+      if (this.element) {
+        var scrollTop = this.element.scrollTop;
+        var scrollLeft = this.element.scrollLeft;
+
+        if (isBoth) {
+          firstInViewport = {
+            rows: calculateFirstInViewport(scrollTop, itemSize[0]),
+            cols: calculateFirstInViewport(scrollLeft, itemSize[1])
+          };
+          lastInViewport = {
+            rows: firstInViewport.rows + numItemsInViewport.rows,
+            cols: firstInViewport.cols + numItemsInViewport.cols
+          };
+        } else {
+          var scrollPos = isHorizontal ? scrollLeft : scrollTop;
+          firstInViewport = calculateFirstInViewport(scrollPos, itemSize);
+          lastInViewport = firstInViewport + numItemsInViewport;
+        }
+      }
+
+      return {
+        first: first,
+        last: last,
+        viewport: {
+          first: firstInViewport,
+          last: lastInViewport
+        }
+      };
+    }
+  }, {
+    key: "isHorizontal",
+    value: function isHorizontal() {
+      return this.props.orientation === 'horizontal';
+    }
+  }, {
+    key: "isBoth",
+    value: function isBoth() {
+      return this.props.orientation === 'both';
+    }
+  }, {
+    key: "calculateOptions",
+    value: function calculateOptions() {
+      var _this4 = this;
+
+      var isBoth = this.isBoth();
+      var isHorizontal = this.isHorizontal();
+      var first = this.state.first;
+      var itemSize = this.props.itemSize;
+      var contentPadding = this.getContentPadding();
+      var contentWidth = this.element ? this.element.offsetWidth - contentPadding.left : 0;
+      var contentHeight = this.element ? this.element.offsetHeight - contentPadding.top : 0;
+
+      var calculateNumItemsInViewport = function calculateNumItemsInViewport(_contentSize, _itemSize) {
+        return Math.ceil(_contentSize / (_itemSize || _contentSize));
+      };
+
+      var numItemsInViewport = isBoth ? {
+        rows: calculateNumItemsInViewport(contentHeight, itemSize[0]),
+        cols: calculateNumItemsInViewport(contentWidth, itemSize[1])
+      } : calculateNumItemsInViewport(isHorizontal ? contentWidth : contentHeight, itemSize);
+      var numToleratedItems = this.state.numToleratedItems || Math.ceil((isBoth ? numItemsInViewport.rows : numItemsInViewport) / 2);
+
+      var calculateLast = function calculateLast(_first, _num, _isCols) {
+        return _this4.getLast(_first + _num + (_first < numToleratedItems ? 2 : 3) * numToleratedItems, _isCols);
+      };
+
+      var last = isBoth ? {
+        rows: calculateLast(first.rows, numItemsInViewport.rows),
+        cols: calculateLast(first.cols, numItemsInViewport.cols, true)
+      } : calculateLast(first, numItemsInViewport);
+      var state = {
+        numItemsInViewport: numItemsInViewport,
+        last: last,
+        numToleratedItems: numToleratedItems
+      };
+
+      if (this.props.showLoader) {
+        state['loaderArr'] = Array.from({
+          length: isBoth ? numItemsInViewport.rows : numItemsInViewport
+        });
+      }
+
+      this.setState(state, function () {
+        if (_this4.props.lazy) {
+          _this4.props.onLazyLoad && _this4.props.onLazyLoad({
+            first: _this4.state.first,
+            last: _this4.state.last
+          });
+        }
+      });
+    }
+  }, {
+    key: "getLast",
+    value: function getLast(last, isCols) {
+      return this.props.items ? Math.min(isCols ? this.props.items[0].length : this.props.items.length, last) : 0;
+    }
+  }, {
+    key: "getContentPadding",
+    value: function getContentPadding() {
+      if (this.content) {
+        var style = getComputedStyle(this.content);
+        var left = parseInt(style.paddingLeft, 10);
+        var right = parseInt(style.paddingRight, 10);
+        var top = parseInt(style.paddingTop, 10);
+        var bottom = parseInt(style.paddingBottom, 10);
+        return {
+          left: left,
+          right: right,
+          top: top,
+          bottom: bottom,
+          x: left + right,
+          y: top + bottom
+        };
+      }
+
+      return {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        x: 0,
+        y: 0
+      };
+    }
+  }, {
+    key: "setSize",
+    value: function setSize() {
+      var _this5 = this;
+
+      if (this.element) {
+        var isBoth = this.isBoth();
+        var isHorizontal = this.isHorizontal();
+        var parentElement = this.element.parentElement;
+        var width = this.props.scrollWidth || "".concat(this.element.offsetWidth || parentElement.offsetWidth, "px");
+        var height = this.props.scrollHeight || "".concat(this.element.offsetHeight || parentElement.offsetHeight, "px");
+
+        var setProp = function setProp(_name, _value) {
+          return _this5.element.style[_name] = _value;
+        };
+
+        if (isBoth) {
+          setProp('height', height);
+          setProp('width', width);
+        } else {
+          isHorizontal ? setProp('width', width) : setProp('height', height);
+        }
+      }
+    }
+  }, {
+    key: "setSpacerSize",
+    value: function setSpacerSize() {
+      var _this6 = this;
+
+      var items = this.props.items;
+
+      if (this.spacer && items) {
+        var isBoth = this.isBoth();
+        var isHorizontal = this.isHorizontal();
+        var itemSize = this.props.itemSize;
+        var contentPadding = this.getContentPadding();
+
+        var setProp = function setProp(_name, _value, _size) {
+          var _padding = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+          return _this6.spacer.style[_name] = (_value || []).length * _size + _padding + 'px';
+        };
+
+        if (isBoth) {
+          setProp('height', items[0], itemSize[0], contentPadding.y);
+          setProp('width', items[1], itemSize[1], contentPadding.x);
+        } else {
+          isHorizontal ? setProp('width', items, itemSize, contentPadding.x) : setProp('height', items, itemSize, contentPadding.y);
+        }
+      }
+    }
+  }, {
+    key: "setContentPosition",
+    value: function setContentPosition(pos) {
+      var _this7 = this;
+
+      if (this.content) {
+        var isBoth = this.isBoth();
+        var isHorizontal = this.isHorizontal();
+        var first = pos ? pos.first : this.state.first;
+        var itemSize = this.props.itemSize;
+
+        var calculateTranslateVal = function calculateTranslateVal(_first, _size) {
+          return _first * _size;
+        };
+
+        var setTransform = function setTransform() {
+          var _x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+          var _y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+          return _this7.content.style.transform = "translate3d(".concat(_x, "px, ").concat(_y, "px, 0)");
+        };
+
+        if (isBoth) {
+          setTransform(calculateTranslateVal(first.cols, itemSize[1]), calculateTranslateVal(first.rows, itemSize[0]));
+        } else {
+          var translateVal = calculateTranslateVal(first, itemSize);
+          isHorizontal ? setTransform(translateVal, 0) : setTransform(0, translateVal);
+        }
+      }
+    }
+  }, {
+    key: "onScrollPositionChange",
+    value: function onScrollPositionChange(event) {
+      var _this8 = this;
+
+      var target = event.target;
+      var isBoth = this.isBoth();
+      var isHorizontal = this.isHorizontal();
+      var _this$state2 = this.state,
+          first = _this$state2.first,
+          last = _this$state2.last,
+          numItemsInViewport = _this$state2.numItemsInViewport,
+          numToleratedItems = _this$state2.numToleratedItems;
+      var itemSize = this.props.itemSize;
+      var contentPadding = this.getContentPadding();
+
+      var calculateScrollPos = function calculateScrollPos(_pos, _padding) {
+        return _pos ? _pos > _padding ? _pos - _padding : _pos : 0;
+      };
+
+      var calculateCurrentIndex = function calculateCurrentIndex(_pos, _size) {
+        return Math.floor(_pos / (_size || _pos));
+      };
+
+      var calculateTriggerIndex = function calculateTriggerIndex(_currentIndex, _first, _last, _num, _isScrollDownOrRight) {
+        return _currentIndex <= numToleratedItems ? numToleratedItems : _isScrollDownOrRight ? _last - _num - numToleratedItems : _first + numToleratedItems - 1;
+      };
+
+      var calculateFirst = function calculateFirst(_currentIndex, _triggerIndex, _first, _last, _num, _isScrollDownOrRight) {
+        if (_currentIndex <= numToleratedItems) return 0;else return _isScrollDownOrRight ? _currentIndex < _triggerIndex ? _first : _currentIndex - numToleratedItems : _currentIndex > _triggerIndex ? _first : _currentIndex - 2 * numToleratedItems;
+      };
+
+      var calculateLast = function calculateLast(_currentIndex, _first, _last, _num, _isCols) {
+        var lastValue = _first + _num + 2 * numToleratedItems;
+
+        if (_currentIndex >= numToleratedItems) {
+          lastValue += numToleratedItems + 1;
+        }
+
+        return _this8.getLast(lastValue, _isCols);
+      };
+
+      var scrollTop = calculateScrollPos(target.scrollTop, contentPadding.top);
+      var scrollLeft = calculateScrollPos(target.scrollLeft, contentPadding.left);
+      var newFirst = 0;
+      var newLast = last;
+      var isRangeChanged = false;
+
+      if (isBoth) {
+        var isScrollDown = this.lastScrollPos.top <= scrollTop;
+        var isScrollRight = this.lastScrollPos.left <= scrollLeft;
+        var currentIndex = {
+          rows: calculateCurrentIndex(scrollTop, itemSize[0]),
+          cols: calculateCurrentIndex(scrollLeft, itemSize[1])
+        };
+        var triggerIndex = {
+          rows: calculateTriggerIndex(currentIndex.rows, first.rows, last.rows, numItemsInViewport.rows, isScrollDown),
+          cols: calculateTriggerIndex(currentIndex.cols, first.cols, last.cols, numItemsInViewport.cols, isScrollRight)
+        };
+        newFirst = {
+          rows: calculateFirst(currentIndex.rows, triggerIndex.rows, first.rows, last.rows, numItemsInViewport.rows, isScrollDown),
+          cols: calculateFirst(currentIndex.cols, triggerIndex.cols, first.cols, last.cols, numItemsInViewport.cols, isScrollRight)
+        };
+        newLast = {
+          rows: calculateLast(currentIndex.rows, newFirst.rows, last.rows, numItemsInViewport.rows),
+          cols: calculateLast(currentIndex.cols, newFirst.cols, last.cols, numItemsInViewport.cols, true)
+        };
+        isRangeChanged = newFirst.rows !== first.rows || newFirst.cols !== first.cols || newLast.rows !== last.rows || newLast.cols !== last.cols;
+        this.lastScrollPos = {
+          top: scrollTop,
+          left: scrollLeft
+        };
+      } else {
+        var scrollPos = isHorizontal ? scrollLeft : scrollTop;
+        var isScrollDownOrRight = this.lastScrollPos <= scrollPos;
+
+        var _currentIndex2 = calculateCurrentIndex(scrollPos, itemSize);
+
+        var _triggerIndex2 = calculateTriggerIndex(_currentIndex2, first, last, numItemsInViewport, isScrollDownOrRight);
+
+        newFirst = calculateFirst(_currentIndex2, _triggerIndex2, first, last, numItemsInViewport, isScrollDownOrRight);
+        newLast = calculateLast(_currentIndex2, newFirst, last, numItemsInViewport);
+        isRangeChanged = newFirst !== first || newLast !== last;
+        this.lastScrollPos = scrollPos;
+      }
+
+      return {
+        first: newFirst,
+        last: newLast,
+        isRangeChanged: isRangeChanged
+      };
+    }
+  }, {
+    key: "onScrollChange",
+    value: function onScrollChange(event) {
+      var _this9 = this;
+
+      var _this$onScrollPositio = this.onScrollPositionChange(event),
+          first = _this$onScrollPositio.first,
+          last = _this$onScrollPositio.last,
+          isRangeChanged = _this$onScrollPositio.isRangeChanged;
+
+      if (isRangeChanged) {
+        var newState = {
+          first: first,
+          last: last
+        };
+        this.setContentPosition(newState);
+
+        if (this.props.lazy) {
+          this.props.onLazyLoad && this.props.onLazyLoad(newState);
+        }
+
+        this.setState(newState, function () {
+          _this9.props.onScrollIndexChange && _this9.props.onScrollIndexChange(newState);
+        });
+      }
+    }
+  }, {
+    key: "onScroll",
+    value: function onScroll(event) {
+      var _this10 = this;
+
+      this.props.onScroll && this.props.onScroll(event);
+
+      if (this.props.delay) {
+        if (this.scrollTimeout) {
+          clearTimeout(this.scrollTimeout);
+        }
+
+        if (!this.state.loading && this.props.showLoader) {
+          var _this$onScrollPositio2 = this.onScrollPositionChange(event),
+              changed = _this$onScrollPositio2.isRangeChanged;
+
+          changed && this.setState({
+            loading: true
+          });
+        }
+
+        this.scrollTimeout = setTimeout(function () {
+          _this10.onScrollChange(event);
+
+          if (_this10.state.loading && _this10.props.showLoader && !_this10.props.lazy) {
+            _this10.setState({
+              loading: false
+            });
+          }
+        }, this.props.delay);
+      } else {
+        this.onScrollChange(event);
+      }
+    }
+  }, {
+    key: "getOptions",
+    value: function getOptions(index, count) {
+      return {
+        index: index,
+        count: count,
+        first: index === 0,
+        last: index === count - 1,
+        even: index % 2 === 0,
+        odd: index % 2 !== 0,
+        props: this.props
+      };
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      this.setSize();
+      this.calculateOptions();
+      this.setSpacerSize();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.init();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.itemSize !== this.props.itemSize || !prevProps.items || prevProps.items.length !== (this.props.items || []).length) {
+        this.init();
+      }
+
+      if (this.props.lazy && prevProps.loading !== this.props.loading && this.state.loading !== this.props.loading) {
+        this.setState({
+          loading: this.props.loading
+        });
+      }
+
+      if (prevProps.orientation !== this.props.orientation) {
+        this.lastScrollPos = this.isBoth() ? {
+          top: 0,
+          left: 0
+        } : 0;
+      }
+    }
+  }, {
+    key: "renderItem",
+    value: function renderItem(item, index, count, passedItem) {
+      var options = this.getOptions(index, count);
+      var content = primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(this.props.itemTemplate, passedItem || item, options);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        key: index
+      }, content);
+    }
+  }, {
+    key: "renderItems",
+    value: function renderItems() {
+      var _this11 = this;
+
+      var items = this.props.items;
+
+      if (items && !this.state.loading) {
+        var isBoth = this.isBoth();
+        var _this$state3 = this.state,
+            first = _this$state3.first,
+            last = _this$state3.last;
+        var count = items.length;
+
+        if (isBoth) {
+          return items.slice(first.rows, last.rows).map(function (item, i) {
+            var items = item.slice(first.cols, last.cols);
+            var index = first.rows + i;
+            return _this11.renderItem(item, index, count, items);
+          });
+        } else {
+          return items.slice(first, last).map(function (item, i) {
+            var index = first + i;
+            return _this11.renderItem(item, index, count);
+          });
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderLoaderItem",
+    value: function renderLoaderItem(index, count, extOptions) {
+      var options = _objectSpread(_objectSpread({}, this.getOptions(index, count)), extOptions || {});
+
+      var content = primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(this.props.loadingTemplate, options);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        key: index
+      }, content);
+    }
+  }, {
+    key: "renderLoader",
+    value: function renderLoader() {
+      var _this12 = this;
+
+      if (this.state.loading) {
+        var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-virtualscroller-loader', {
+          'p-component-overlay': !this.props.loadingTemplate
+        });
+        var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "p-virtualscroller-loading-icon pi pi-spinner pi-spin"
+        });
+
+        if (this.props.loadingTemplate) {
+          var isBoth = this.isBoth();
+          var numItemsInViewport = this.state.numItemsInViewport;
+          var length = isBoth ? numItemsInViewport.rows : numItemsInViewport;
+          content = this.state.loaderArr.map(function (_, index) {
+            return _this12.renderLoaderItem(index, length, isBoth && {
+              numCols: numItemsInViewport.cols
+            });
+          });
+        }
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: className
+        }, content);
+      }
+
+      return null;
+    }
+  }, {
+    key: "renderContent",
+    value: function renderContent() {
+      var _this13 = this;
+
+      var items = this.renderItems();
+      var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "p-virtualscroller-content",
+        ref: function ref(el) {
+          return _this13.content = el;
+        }
+      }, items);
+
+      if (this.props.contentTemplate) {
+        var _this$state4 = this.state,
+            loading = _this$state4.loading,
+            first = _this$state4.first,
+            last = _this$state4.last;
+        var defaultOptions = {
+          className: 'p-virtualscroller-content',
+          ref: function ref(el) {
+            return _this13.content = el;
+          },
+          children: items,
+          element: content,
+          props: this.props,
+          loading: loading,
+          first: first,
+          last: last
+        };
+        return primereact_core__WEBPACK_IMPORTED_MODULE_1__.ObjectUtils.getJSXElement(this.props.contentTemplate, defaultOptions);
+      }
+
+      return content;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this14 = this;
+
+      var isBoth = this.isBoth();
+      var isHorizontal = this.isHorizontal();
+      var className = (0,primereact_core__WEBPACK_IMPORTED_MODULE_1__.classNames)('p-virtualscroller', {
+        'p-both-scroll': isBoth,
+        'p-horizontal-scroll': isHorizontal
+      }, this.props.className);
+      var loader = this.renderLoader();
+      var content = this.renderContent();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        ref: function ref(el) {
+          return _this14.element = el;
+        },
+        className: className,
+        tabIndex: 0,
+        style: this.props.style,
+        onScroll: this.onScroll
+      }, content, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        ref: function ref(el) {
+          return _this14.spacer = el;
+        },
+        className: "p-virtualscroller-spacer"
+      }), loader);
+    }
+  }]);
+
+  return VirtualScroller;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+_defineProperty(VirtualScroller, "defaultProps", {
+  id: null,
+  style: null,
+  className: null,
+  items: null,
+  itemSize: 0,
+  scrollHeight: null,
+  scrollWidth: null,
+  orientation: 'vertical',
+  numToleratedItems: null,
+  delay: 0,
+  lazy: false,
+  showLoader: false,
+  loadingTemplate: null,
+  itemTemplate: null,
+  contentTemplate: null,
+  onScroll: null,
+  onScrollIndexChange: null,
+  onLazyLoad: null
 });
 
 
@@ -44009,11 +46491,8 @@ var TaskSolving = /** @class */ (function (_super) {
         return this.state.templateData.map(function (question) {
             index++;
             var locIndex = index;
-            return (
-            //<Panel header={"Question #" + (locIndex + 1)} key={locIndex}>
-            React.createElement(question_sloving_decorator_1.default, { key: locIndex, questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })
-            //</Panel>
-            );
+            return (React.createElement("div", { className: "p-mt-4 p-mb-4" },
+                React.createElement(question_sloving_decorator_1.default, { key: locIndex, questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })));
         });
     };
     TaskSolving.prototype.render = function () {
@@ -44629,7 +47108,7 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
         return (React.createElement("div", null,
             React.createElement("div", { className: "p-fluid", key: "main" },
                 React.createElement("div", { className: "p-field", key: "questionText" },
-                    React.createElement("h5", null,
+                    React.createElement("h5", { style: { whiteSpace: "pre-wrap" } },
                         (this.state.questionIndex + 1) + ". ",
                         this.state.question,
                         this.state.answers.finished ?
@@ -44641,6 +47120,192 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
 }(React.Component));
 exports.CheckAnswerSolving = CheckAnswerSolving;
 exports.default = CheckAnswerSolving;
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_solving.tsx":
+/*!***********************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\office\questions\fill_gaps_solving.tsx ***!
+  \***********************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var dropdown_1 = __webpack_require__(/*! primereact/dropdown */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dropdown\\dropdown.esm.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+/***
+ * Json format:
+ * {
+ *      textWithGaps: ["Select correct world: I am a student. I go to the ",
+ *      {
+ *        "variants": [ "shop", "army", "University" ]
+ *      }, "My favorite subject is ",
+        {
+          "variants": [ "shopping", "Math", "Art" ]
+        }],
+ *      answers: ["1->University", "2->Math", "2->Art"], // list of right answers.
+ * }
+ */
+var FillGapsSolving = /** @class */ (function (_super) {
+    __extends(FillGapsSolving, _super);
+    function FillGapsSolving(props) {
+        var _this = _super.call(this, props) || this;
+        _this.checkAnswerCallback = null;
+        _this.questionFinishCallback = null;
+        _this.clone = function (object) {
+            var cloning = {};
+            Object.keys(object).map(function (prop) {
+                if (Array.isArray(object[prop])) {
+                    cloning[prop] = [].concat(object[prop]);
+                }
+                else if (typeof object[prop] === 'object') {
+                    cloning[prop] = _this.clone(object[prop]);
+                }
+                else
+                    cloning[prop] = object[prop];
+            });
+            return cloning;
+        };
+        /*
+        isDisabled(index, answer) {
+            if (!this.state.answers) {
+                return false;
+            }
+    
+            if (this.state.answers.finished) {
+                return true;
+            }
+    
+            const found = this.state.answers.answers.find(res => res.answer == answer);
+    
+            return found;
+        }
+    
+        isChecked(index, answer) {
+            if (!this.state.answers) {
+                return null;
+            }
+    
+            const found = this.state.answers.answers.find(res => res.answer == answer);
+    
+            if (found) {
+                return found.result;
+            }
+    
+            return null;
+        }
+        */
+        _this.onSelectAnswer = function (locGapIndex, answer) {
+            var answers = _this.state.answers;
+            var isRight = _this.checkAnswerCallback(_this.state.questionIndex, locGapIndex + "->" + answer);
+            if (!(locGapIndex in answers)) {
+                answers[locGapIndex] = [];
+            }
+            answers[locGapIndex].push({
+                answer: answer,
+                result: isRight
+            });
+            var gasLeft = _this.state.gasLeft;
+            if (isRight) {
+                gasLeft--;
+                if (gasLeft == 0) {
+                    answers.finished = true;
+                    _this.questionFinishCallback(_this.state.questionIndex);
+                }
+            }
+            _this.setState({ answers: answers, gasLeft: gasLeft });
+        };
+        _this.state = {
+            textWithGaps: _this.props.data.textWithGaps,
+            questionIndex: _this.props.questionIndex,
+            answers: (_this.props.result ? _this.props.result.answers.reduce(function (map, obj) {
+                var parsed = obj.answer.split("->");
+                if (!(parsed[0] in map)) {
+                    map[parsed[0]] = [];
+                }
+                map[parsed[0]].push({ answer: parsed[1], result: obj.result });
+                return map;
+            }, {}) : {}),
+            gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length
+        };
+        _this.checkAnswerCallback = _this.props.checkAnswerCallback;
+        _this.questionFinishCallback = _this.props.questionFinishCallback;
+        return _this;
+    }
+    FillGapsSolving.prototype.htmlTextWithGaps = function () {
+        var index = -1;
+        var gapIndex = -1;
+        var self = this;
+        return this.state.textWithGaps.map(function (answer) {
+            index++;
+            var locIndex = index;
+            if (typeof (answer) === "string") {
+                return (React.createElement("span", { key: locIndex, style: { whiteSpace: "pre-wrap" } }, answer));
+            }
+            else {
+                gapIndex++;
+                var enabled_1 = true;
+                var answered = [];
+                var results_1 = {};
+                var currentValue_1 = "";
+                if (gapIndex in self.state.answers) {
+                    answered = self.state.answers[gapIndex];
+                }
+                var lastAnswer_1 = null;
+                answered.forEach(function (value) {
+                    enabled_1 = !value.result;
+                    currentValue_1 = value.answer;
+                    results_1[value.answer] = value.result;
+                    lastAnswer_1 = value.result;
+                });
+                var localGapIndex_1 = gapIndex;
+                var selectionOptions = [];
+                var maxLength = "Select".length;
+                for (var _i = 0, _a = answer.variants; _i < _a.length; _i++) {
+                    var variant = _a[_i];
+                    maxLength = Math.max(maxLength, variant.length);
+                    selectionOptions.push({ label: variant, value: variant });
+                    if (variant in results_1) {
+                        selectionOptions[selectionOptions.length - 1].disabled = true;
+                    }
+                }
+                maxLength += 7;
+                var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#ad7177' : null;
+                return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
+            }
+        });
+    };
+    FillGapsSolving.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("div", { className: "p-fluid", key: "main" },
+                React.createElement("h5", null,
+                    (this.state.questionIndex + 1) + ". ",
+                    "Fill in the gaps",
+                    this.state.answers.finished ?
+                        React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check" })
+                        : null),
+                React.createElement("div", { key: "answers" }, this.htmlTextWithGaps()))));
+    };
+    return FillGapsSolving;
+}(React.Component));
+exports.FillGapsSolving = FillGapsSolving;
+exports.default = FillGapsSolving;
 
 
 /***/ }),

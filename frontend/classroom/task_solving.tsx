@@ -176,17 +176,17 @@ export class TaskSolving extends React.Component<any, any> {
             index++;
             let locIndex = index;
             return (
-                //<Panel header={"Question #" + (locIndex + 1)} key={locIndex}>
-                <QuestionSolvingDecorator key={locIndex}
+                <div className="p-mt-4 p-mb-4">
+                    <QuestionSolvingDecorator key={locIndex}
                         questionType={question.type}
                         questionIndex={locIndex}
                         data={question.data}
                         result={!self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null}
                         checkAnswerCallback={(questionIndex, answer) => self.checkAnswer(questionIndex, answer)}
                         rightAnswers={self.state.templateData[locIndex].data.answers.length}
-                        questionFinishCallback={(questionIndex) => self.questionFinish(questionIndex)}                        
-                    />
-                //</Panel>
+                        questionFinishCallback={(questionIndex) => self.questionFinish(questionIndex)}                    
+                        />
+                </div>
             )
         })
     }

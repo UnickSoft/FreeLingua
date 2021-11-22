@@ -7,6 +7,7 @@ import { Message } from 'primereact/message';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
 import { VariantsList } from "./variants_list"
+import { BaseCreator } from "./base_creator"
 
 var axios = require('axios');
 
@@ -24,13 +25,12 @@ var axios = require('axios');
  * }
  */
 
-export class FillGapsCreator extends React.Component<any, any> {
+export class FillGapsCreator extends BaseCreator {
 
     state: {
         textWithGaps: any,
         questionIndex: any
     }
-    saveDataCallback = null;
     gapRegExp = /\[\[gap#\d+\]\]/;
     splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
     numberRegExp = /\d+/;
@@ -43,7 +43,6 @@ export class FillGapsCreator extends React.Component<any, any> {
             questionIndex: this.props.questionIndex
         };
 
-        this.saveDataCallback = props.saveDataCallback;
         if ("data" in props) {
             this.loadData(props.data);
         }
@@ -111,7 +110,28 @@ export class FillGapsCreator extends React.Component<any, any> {
         };
     }
 
-    hasError() {
+    hasError = () => {
+        if (this.state.textWithGaps.length == 0) {
+            return true;
+        }
+
+        let gaps = this.getGasOnly(this.state.textWithGaps);
+
+        if (gaps.length == 0) {
+            return true;
+        }
+
+        for (const gap of gaps) {
+            let hasRightAnsver = false;
+            gap.forEach(variant => hasRightAnsver = hasRightAnsver || variant.isRight);
+            if (!hasRightAnsver) {
+                return true;
+            }
+            if (gap.length <= 1) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -184,8 +204,7 @@ export class FillGapsCreator extends React.Component<any, any> {
     }
 
     loadFromText = (text) => {        
-        this.setState({ textWithGaps: this.splitTextToArray(text) },
-            () => this.saveDataCallback(this.getData(), this.hasError()));
+        this.setStateAndUpdate({ textWithGaps: this.splitTextToArray(text) });
     }
 
     addGap = () => {        
@@ -224,25 +243,20 @@ export class FillGapsCreator extends React.Component<any, any> {
     onAddAnswer = (gapIndex) => {
         let answers = this.state.textWithGaps[gapIndex];
         answers.push({ text: "", isRight: false });
-        this.setState({ textWithGaps: this.state.textWithGaps },
-            () => this.saveDataCallback(this.getData(), this.hasError()));        
+        this.setStateAndUpdate({ textWithGaps: this.state.textWithGaps });        
     }
 
     onSetRightAnswer = (gapIndex, index, value) => {
         let answers = this.state.textWithGaps[gapIndex];
         answers[index].isRight = value;
-        this.setState({ textWithGaps: this.state.textWithGaps });
-        this.saveDataCallback(this.getData(), this.hasError(),
-            () => this.saveDataCallback(this.getData(), this.hasError()));
+        this.setStateAndUpdate({ textWithGaps: this.state.textWithGaps });
     }
 
     onEditAnswer = (gapIndex, index, value) => {
         let answers = this.state.textWithGaps[gapIndex];
         answers[index].text = value;
         answers[index].edited = true;
-        this.setState({ textWithGaps: this.state.textWithGaps });
-        this.saveDataCallback(this.getData(), this.hasError(),
-            () => this.saveDataCallback(this.getData(), this.hasError()));
+        this.setStateAndUpdate({ textWithGaps: this.state.textWithGaps });
     }
 
     answersHtml() {

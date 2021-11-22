@@ -8,6 +8,7 @@
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./base_creator": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_creator.tsx",
 	"./check_answer_creator": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_creator.tsx",
 	"./fill_gaps_creator": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_creator.tsx"
 };
@@ -41,7 +42,8 @@ webpackContext.id = "../../..!NewProject\\learning.online\\src\\frontend\\office
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./check_answer_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_solving.tsx"
+	"./check_answer_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_solving.tsx",
+	"./fill_gaps_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_solving.tsx"
 };
 
 
@@ -54447,11 +54449,8 @@ var TaskSolving = /** @class */ (function (_super) {
         return this.state.templateData.map(function (question) {
             index++;
             var locIndex = index;
-            return (
-            //<Panel header={"Question #" + (locIndex + 1)} key={locIndex}>
-            React.createElement(question_sloving_decorator_1.default, { key: locIndex, questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })
-            //</Panel>
-            );
+            return (React.createElement("div", { className: "p-mt-4 p-mb-4" },
+                React.createElement(question_sloving_decorator_1.default, { key: locIndex, questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })));
         });
     };
     TaskSolving.prototype.render = function () {
@@ -54940,6 +54939,65 @@ exports.default = QuestionCreateDecorator;
 
 /***/ }),
 
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_creator.tsx":
+/*!******************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\office\questions\base_creator.tsx ***!
+  \******************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+var BaseCreator = /** @class */ (function (_super) {
+    __extends(BaseCreator, _super);
+    function BaseCreator(props) {
+        var _this = _super.call(this, props) || this;
+        _this.saveDataCallback = null;
+        _this.getData = function () {
+            return;
+        };
+        _this.loadData = function (data) {
+            return;
+        };
+        _this.hasError = function () {
+            return false;
+        };
+        _this.setStateAndUpdate = function (data) {
+            var self = _this;
+            _this.setState(data, function () { return self.saveDataCallback(self.getData(), self.hasError()); });
+        };
+        _this.state = {
+            questionIndex: _this.props.questionIndex
+        };
+        _this.saveDataCallback = props.saveDataCallback;
+        return _this;
+    }
+    BaseCreator.prototype.render = function () {
+        return null;
+    };
+    return BaseCreator;
+}(React.Component));
+exports.BaseCreator = BaseCreator;
+exports.default = BaseCreator;
+
+
+/***/ }),
+
 /***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_creator.tsx":
 /*!**************************************************************************************************!*\
   !*** ../../..!NewProject\learning.online\src\frontend\office\questions\check_answer_creator.tsx ***!
@@ -54974,10 +55032,11 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
-var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js");
 var selectbutton_1 = __webpack_require__(/*! primereact/selectbutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\selectbutton\\selectbutton.esm.js");
 var message_1 = __webpack_require__(/*! primereact/message */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\message\\message.esm.js");
 var variants_list_1 = __webpack_require__(/*! ./variants_list */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\variants_list.tsx");
+var base_creator_1 = __webpack_require__(/*! ./base_creator */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_creator.tsx");
+var inputtextarea_1 = __webpack_require__(/*! primereact/inputtextarea */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtextarea\\inputtextarea.esm.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 /***
  * Json format:
@@ -54996,7 +55055,6 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
             { label: 'Signle answer', value: 'single' },
             { label: 'Multiple answer', value: 'multiple' }
         ];
-        _this.saveDataCallback = null;
         _this.getData = function () {
             var variants = [];
             var rightAnswers = [];
@@ -55030,18 +55088,29 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
         _this.onAddAnswer = function () {
             var answers = _this.state.answers;
             answers.push({ text: "", edited: false, isRight: false });
-            _this.setState({ answers: answers }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ answers: answers });
         };
         _this.onSetRightAnswer = function (index, value) {
             var answers = _this.state.answers;
             answers[index].isRight = value;
-            _this.setState({ answers: answers }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ answers: answers });
         };
         _this.onEditAnswer = function (index, value) {
             var answers = _this.state.answers;
             answers[index].text = value;
             answers[index].edited = true;
-            _this.setState({ answers: answers }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ answers: answers });
+        };
+        _this.hasError = function () {
+            var rightAnswers = 0;
+            for (var _i = 0, _a = _this.state.answers; _i < _a.length; _i++) {
+                var answer = _a[_i];
+                if (answer.isRight) {
+                    rightAnswers++;
+                }
+            }
+            return !(_this.state.answers.length >= 2 && rightAnswers > 0 && (_this.state.answerType != 'single' || rightAnswers == 1)
+                && _this.state.question.length > 0);
         };
         _this.state = {
             question: "",
@@ -55049,7 +55118,6 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
             answerType: "single",
             questionIndex: _this.props.questionIndex
         };
-        _this.saveDataCallback = props.saveDataCallback;
         if ("data" in props) {
             _this.loadData(props.data);
         }
@@ -55058,22 +55126,11 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
     CheckAnswerCreator.prototype.answersHtml = function () {
         return (React.createElement(variants_list_1.VariantsList, { onAddVariant: this.onAddAnswer, onSetRight: this.onSetRightAnswer, onEditVariant: this.onEditAnswer, globalIndex: this.state.questionIndex, variants: this.state.answers }));
     };
-    CheckAnswerCreator.prototype.hasError = function () {
-        var rightAnswers = 0;
-        for (var _i = 0, _a = this.state.answers; _i < _a.length; _i++) {
-            var answer = _a[_i];
-            if (answer.isRight) {
-                rightAnswers++;
-            }
-        }
-        return !(this.state.answers.length >= 3 && rightAnswers > 0 && (this.state.answerType != 'single' || rightAnswers == 1)
-            && this.state.question.length > 0);
-    };
     CheckAnswerCreator.prototype.errorsHtml = function () {
         if (this.state.question.length == 0) {
             return React.createElement(message_1.Message, { severity: "warn", text: "Please enter question" });
         }
-        if (this.state.answers.length < 3) {
+        if (this.state.answers.length < 2) {
             return React.createElement(message_1.Message, { severity: "warn", text: "Please add two or more answers" });
         }
         var rightAnswers = 0;
@@ -55096,7 +55153,7 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
             React.createElement("div", { className: "p-fluid", key: "main" },
                 React.createElement("div", { className: "p-field", key: "questionText" },
                     React.createElement("label", { htmlFor: "firstname1" }, "Enter question:"),
-                    React.createElement(inputtext_1.InputText, { id: "firstname1", type: "text", onChange: function (e) { return _this.setState({ question: e.target.value }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); }); }, value: this.state.question })),
+                    React.createElement(inputtextarea_1.InputTextarea, { rows: 2, cols: 30, id: "firstname1", onChange: function (e) { return _this.setStateAndUpdate({ question: e.target.value }); }, value: this.state.question, autoResize: true })),
                 React.createElement("div", { className: "p-field", key: "answerType" },
                     React.createElement(selectbutton_1.SelectButton, { value: this.state.answerType, options: this.answerType, onChange: function (e) { return _this.setState({ answerType: e.value }); } }))),
             React.createElement("div", { key: "answers" },
@@ -55105,7 +55162,7 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
             React.createElement("div", { key: "errors" }, this.errorsHtml())));
     };
     return CheckAnswerCreator;
-}(React.Component));
+}(base_creator_1.BaseCreator));
 exports.CheckAnswerCreator = CheckAnswerCreator;
 exports.default = CheckAnswerCreator;
 
@@ -55251,7 +55308,7 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
         return (React.createElement("div", null,
             React.createElement("div", { className: "p-fluid", key: "main" },
                 React.createElement("div", { className: "p-field", key: "questionText" },
-                    React.createElement("h5", null,
+                    React.createElement("h5", { style: { whiteSpace: "pre-wrap" } },
                         (this.state.questionIndex + 1) + ". ",
                         this.state.question,
                         this.state.answers.finished ?
@@ -55305,6 +55362,7 @@ var message_1 = __webpack_require__(/*! primereact/message */ "../../..!NewProje
 var inputtextarea_1 = __webpack_require__(/*! primereact/inputtextarea */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtextarea\\inputtextarea.esm.js");
 var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var variants_list_1 = __webpack_require__(/*! ./variants_list */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\variants_list.tsx");
+var base_creator_1 = __webpack_require__(/*! ./base_creator */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_creator.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 /***
  * Json format:
@@ -55323,7 +55381,6 @@ var FillGapsCreator = /** @class */ (function (_super) {
     __extends(FillGapsCreator, _super);
     function FillGapsCreator(props) {
         var _this = _super.call(this, props) || this;
-        _this.saveDataCallback = null;
         _this.gapRegExp = /\[\[gap#\d+\]\]/;
         _this.splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
         _this.numberRegExp = /\d+/;
@@ -55383,6 +55440,32 @@ var FillGapsCreator = /** @class */ (function (_super) {
             }
             _this.state = __assign(__assign({}, _this.state), { textWithGaps: textWithGaps });
         };
+        _this.hasError = function () {
+            if (_this.state.textWithGaps.length == 0) {
+                return true;
+            }
+            var gaps = _this.getGasOnly(_this.state.textWithGaps);
+            if (gaps.length == 0) {
+                return true;
+            }
+            var _loop_2 = function (gap) {
+                var hasRightAnsver = false;
+                gap.forEach(function (variant) { return hasRightAnsver = hasRightAnsver || variant.isRight; });
+                if (!hasRightAnsver) {
+                    return { value: true };
+                }
+                if (gap.length <= 1) {
+                    return { value: true };
+                }
+            };
+            for (var _i = 0, gaps_1 = gaps; _i < gaps_1.length; _i++) {
+                var gap = gaps_1[_i];
+                var state_1 = _loop_2(gap);
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+            return false;
+        };
         _this.getAsText = function () {
             var res = "";
             var gapIndex = 0;
@@ -55423,7 +55506,7 @@ var FillGapsCreator = /** @class */ (function (_super) {
             return arrayOfStrs;
         };
         _this.loadFromText = function (text) {
-            _this.setState({ textWithGaps: _this.splitTextToArray(text) }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ textWithGaps: _this.splitTextToArray(text) });
         };
         _this.addGap = function () {
             var textArea = document.getElementById("area");
@@ -55458,34 +55541,28 @@ var FillGapsCreator = /** @class */ (function (_super) {
         _this.onAddAnswer = function (gapIndex) {
             var answers = _this.state.textWithGaps[gapIndex];
             answers.push({ text: "", isRight: false });
-            _this.setState({ textWithGaps: _this.state.textWithGaps }, function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
         };
         _this.onSetRightAnswer = function (gapIndex, index, value) {
             var answers = _this.state.textWithGaps[gapIndex];
             answers[index].isRight = value;
-            _this.setState({ textWithGaps: _this.state.textWithGaps });
-            _this.saveDataCallback(_this.getData(), _this.hasError(), function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
         };
         _this.onEditAnswer = function (gapIndex, index, value) {
             var answers = _this.state.textWithGaps[gapIndex];
             answers[index].text = value;
             answers[index].edited = true;
-            _this.setState({ textWithGaps: _this.state.textWithGaps });
-            _this.saveDataCallback(_this.getData(), _this.hasError(), function () { return _this.saveDataCallback(_this.getData(), _this.hasError()); });
+            _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
         };
         _this.state = {
             textWithGaps: [],
             questionIndex: _this.props.questionIndex
         };
-        _this.saveDataCallback = props.saveDataCallback;
         if ("data" in props) {
             _this.loadData(props.data);
         }
         return _this;
     }
-    FillGapsCreator.prototype.hasError = function () {
-        return false;
-    };
     FillGapsCreator.prototype.errorsHtml = function () {
         if (this.state.textWithGaps.length == 0) {
             return React.createElement(message_1.Message, { severity: "warn", text: "Please enter Text" });
@@ -55494,7 +55571,7 @@ var FillGapsCreator = /** @class */ (function (_super) {
         if (gaps.length == 0) {
             return React.createElement(message_1.Message, { severity: "warn", text: "Please select part of text and add gaps." });
         }
-        var _loop_2 = function (gap) {
+        var _loop_3 = function (gap) {
             var hasRightAnsver = false;
             gap.forEach(function (variant) { return hasRightAnsver = hasRightAnsver || variant.isRight; });
             if (!hasRightAnsver) {
@@ -55504,11 +55581,11 @@ var FillGapsCreator = /** @class */ (function (_super) {
                 return { value: React.createElement(message_1.Message, { severity: "warn", text: "There is gap with one answer variant." }) };
             }
         };
-        for (var _i = 0, gaps_1 = gaps; _i < gaps_1.length; _i++) {
-            var gap = gaps_1[_i];
-            var state_1 = _loop_2(gap);
-            if (typeof state_1 === "object")
-                return state_1.value;
+        for (var _i = 0, gaps_2 = gaps; _i < gaps_2.length; _i++) {
+            var gap = gaps_2[_i];
+            var state_2 = _loop_3(gap);
+            if (typeof state_2 === "object")
+                return state_2.value;
         }
         return null;
     };
@@ -55545,9 +55622,195 @@ var FillGapsCreator = /** @class */ (function (_super) {
             React.createElement("div", { key: "errors" }, this.errorsHtml())));
     };
     return FillGapsCreator;
-}(React.Component));
+}(base_creator_1.BaseCreator));
 exports.FillGapsCreator = FillGapsCreator;
 exports.default = FillGapsCreator;
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_solving.tsx":
+/*!***********************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\office\questions\fill_gaps_solving.tsx ***!
+  \***********************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var dropdown_1 = __webpack_require__(/*! primereact/dropdown */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dropdown\\dropdown.esm.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+/***
+ * Json format:
+ * {
+ *      textWithGaps: ["Select correct world: I am a student. I go to the ",
+ *      {
+ *        "variants": [ "shop", "army", "University" ]
+ *      }, "My favorite subject is ",
+        {
+          "variants": [ "shopping", "Math", "Art" ]
+        }],
+ *      answers: ["1->University", "2->Math", "2->Art"], // list of right answers.
+ * }
+ */
+var FillGapsSolving = /** @class */ (function (_super) {
+    __extends(FillGapsSolving, _super);
+    function FillGapsSolving(props) {
+        var _this = _super.call(this, props) || this;
+        _this.checkAnswerCallback = null;
+        _this.questionFinishCallback = null;
+        _this.clone = function (object) {
+            var cloning = {};
+            Object.keys(object).map(function (prop) {
+                if (Array.isArray(object[prop])) {
+                    cloning[prop] = [].concat(object[prop]);
+                }
+                else if (typeof object[prop] === 'object') {
+                    cloning[prop] = _this.clone(object[prop]);
+                }
+                else
+                    cloning[prop] = object[prop];
+            });
+            return cloning;
+        };
+        /*
+        isDisabled(index, answer) {
+            if (!this.state.answers) {
+                return false;
+            }
+    
+            if (this.state.answers.finished) {
+                return true;
+            }
+    
+            const found = this.state.answers.answers.find(res => res.answer == answer);
+    
+            return found;
+        }
+    
+        isChecked(index, answer) {
+            if (!this.state.answers) {
+                return null;
+            }
+    
+            const found = this.state.answers.answers.find(res => res.answer == answer);
+    
+            if (found) {
+                return found.result;
+            }
+    
+            return null;
+        }
+        */
+        _this.onSelectAnswer = function (locGapIndex, answer) {
+            var answers = _this.state.answers;
+            var isRight = _this.checkAnswerCallback(_this.state.questionIndex, locGapIndex + "->" + answer);
+            if (!(locGapIndex in answers)) {
+                answers[locGapIndex] = [];
+            }
+            answers[locGapIndex].push({
+                answer: answer,
+                result: isRight
+            });
+            var gasLeft = _this.state.gasLeft;
+            if (isRight) {
+                gasLeft--;
+                if (gasLeft == 0) {
+                    answers.finished = true;
+                    _this.questionFinishCallback(_this.state.questionIndex);
+                }
+            }
+            _this.setState({ answers: answers, gasLeft: gasLeft });
+        };
+        _this.state = {
+            textWithGaps: _this.props.data.textWithGaps,
+            questionIndex: _this.props.questionIndex,
+            answers: (_this.props.result ? _this.props.result.answers.reduce(function (map, obj) {
+                var parsed = obj.answer.split("->");
+                if (!(parsed[0] in map)) {
+                    map[parsed[0]] = [];
+                }
+                map[parsed[0]].push({ answer: parsed[1], result: obj.result });
+                return map;
+            }, {}) : {}),
+            gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length
+        };
+        _this.checkAnswerCallback = _this.props.checkAnswerCallback;
+        _this.questionFinishCallback = _this.props.questionFinishCallback;
+        return _this;
+    }
+    FillGapsSolving.prototype.htmlTextWithGaps = function () {
+        var index = -1;
+        var gapIndex = -1;
+        var self = this;
+        return this.state.textWithGaps.map(function (answer) {
+            index++;
+            var locIndex = index;
+            if (typeof (answer) === "string") {
+                return (React.createElement("span", { key: locIndex, style: { whiteSpace: "pre-wrap" } }, answer));
+            }
+            else {
+                gapIndex++;
+                var enabled_1 = true;
+                var answered = [];
+                var results_1 = {};
+                var currentValue_1 = "";
+                if (gapIndex in self.state.answers) {
+                    answered = self.state.answers[gapIndex];
+                }
+                var lastAnswer_1 = null;
+                answered.forEach(function (value) {
+                    enabled_1 = !value.result;
+                    currentValue_1 = value.answer;
+                    results_1[value.answer] = value.result;
+                    lastAnswer_1 = value.result;
+                });
+                var localGapIndex_1 = gapIndex;
+                var selectionOptions = [];
+                var maxLength = "Select".length;
+                for (var _i = 0, _a = answer.variants; _i < _a.length; _i++) {
+                    var variant = _a[_i];
+                    maxLength = Math.max(maxLength, variant.length);
+                    selectionOptions.push({ label: variant, value: variant });
+                    if (variant in results_1) {
+                        selectionOptions[selectionOptions.length - 1].disabled = true;
+                    }
+                }
+                maxLength += 7;
+                var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#ad7177' : null;
+                return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
+            }
+        });
+    };
+    FillGapsSolving.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("div", { className: "p-fluid", key: "main" },
+                React.createElement("h5", null,
+                    (this.state.questionIndex + 1) + ". ",
+                    "Fill in the gaps",
+                    this.state.answers.finished ?
+                        React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check" })
+                        : null),
+                React.createElement("div", { key: "answers" }, this.htmlTextWithGaps()))));
+    };
+    return FillGapsSolving;
+}(React.Component));
+exports.FillGapsSolving = FillGapsSolving;
+exports.default = FillGapsSolving;
 
 
 /***/ }),

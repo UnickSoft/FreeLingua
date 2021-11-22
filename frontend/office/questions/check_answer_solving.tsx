@@ -156,7 +156,7 @@ export class CheckAnswerSolving extends React.Component<any, any> {
             <div>
                 <div className="p-fluid" key="main">
                     <div className="p-field" key="questionText">
-                        <h5>
+                        <h5 style={{ whiteSpace: "pre-wrap" }}>
                             {(this.state.questionIndex + 1) + ". "} 
                             {this.state.question}
                             {

@@ -6,6 +6,8 @@ import { Checkbox } from 'primereact/checkbox';
 import { SelectButton } from 'primereact/selectbutton';
 import { Message } from 'primereact/message';
 import { VariantsList } from "./variants_list"
+import { BaseCreator } from "./base_creator"
+import { InputTextarea } from 'primereact/inputtextarea';
 
 var axios = require('axios');
 
@@ -19,7 +21,7 @@ var axios = require('axios');
  * }
  */
 
-export class CheckAnswerCreator extends React.Component<any, any> {
+export class CheckAnswerCreator extends BaseCreator {
 
     answerType = [
         { label: 'Signle answer', value: 'single' },
@@ -29,10 +31,9 @@ export class CheckAnswerCreator extends React.Component<any, any> {
     state: {
         question: any,
         answers: any,
-        answerType: any
+        answerType: any,
         questionIndex: any
     }
-    saveDataCallback = null;
 
     constructor(props) {
         super(props);
@@ -44,7 +45,6 @@ export class CheckAnswerCreator extends React.Component<any, any> {
             questionIndex: this.props.questionIndex
         };
 
-        this.saveDataCallback = props.saveDataCallback;
         if ("data" in props) {
             this.loadData(props.data);
         }
@@ -91,23 +91,20 @@ export class CheckAnswerCreator extends React.Component<any, any> {
     onAddAnswer = () => {
         let answers = this.state.answers;
         answers.push({ text: "", edited: false, isRight: false });
-        this.setState({ answers: answers },
-            () => this.saveDataCallback(this.getData(), this.hasError()));
+        this.setStateAndUpdate({ answers: answers });
     }
 
     onSetRightAnswer = (index, value) => {
         let answers = this.state.answers;
         answers[index].isRight = value;
-        this.setState({ answers: answers },
-            () => this.saveDataCallback(this.getData(), this.hasError()));
+        this.setStateAndUpdate({ answers: answers });
     }
 
     onEditAnswer = (index, value) => {
         let answers = this.state.answers;
         answers[index].text = value;
         answers[index].edited = true;
-        this.setState({ answers: answers },
-            () => this.saveDataCallback(this.getData(), this.hasError()));
+        this.setStateAndUpdate({ answers: answers });
     }
 
     answersHtml() {
@@ -118,14 +115,14 @@ export class CheckAnswerCreator extends React.Component<any, any> {
             variants={this.state.answers} />);
     }
 
-    hasError() {
+    hasError = () => {
         let rightAnswers = 0;
         for (const answer of this.state.answers) {
             if (answer.isRight) {
                 rightAnswers++;
             }
         }
-        return !(this.state.answers.length >= 3 && rightAnswers > 0 && (this.state.answerType != 'single' || rightAnswers == 1)
+        return !(this.state.answers.length >= 2 && rightAnswers > 0 && (this.state.answerType != 'single' || rightAnswers == 1)
                 && this.state.question.length > 0);
     }
 
@@ -159,10 +156,9 @@ export class CheckAnswerCreator extends React.Component<any, any> {
                 <div className="p-fluid" key="main">
                     <div className="p-field" key="questionText">
                         <label htmlFor="firstname1">Enter question:</label>
-                        <InputText id="firstname1" type="text"
-                            onChange={(e) => this.setState({ question: e.target.value },
-                                () => this.saveDataCallback(this.getData(), this.hasError()))}
-                            value={this.state.question} />
+                        <InputTextarea rows={2} cols={30} id="firstname1"
+                            onChange={(e) => this.setStateAndUpdate({ question: e.target.value })}
+                            value={this.state.question} autoResize />
                     </div>
                     <div className="p-field" key="answerType">
                         <SelectButton value={this.state.answerType} options={this.answerType}
