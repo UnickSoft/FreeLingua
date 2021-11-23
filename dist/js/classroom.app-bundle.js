@@ -8,6 +8,7 @@
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./base_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx",
 	"./check_answer_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_solving.tsx",
 	"./fill_gaps_solving": "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\fill_gaps_solving.tsx"
 };
@@ -46491,8 +46492,8 @@ var TaskSolving = /** @class */ (function (_super) {
         return this.state.templateData.map(function (question) {
             index++;
             var locIndex = index;
-            return (React.createElement("div", { className: "p-mt-4 p-mb-4" },
-                React.createElement(question_sloving_decorator_1.default, { key: locIndex, questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })));
+            return (React.createElement("div", { className: "p-mt-4 p-mb-4", key: locIndex },
+                React.createElement(question_sloving_decorator_1.default, { questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })));
         });
     };
     TaskSolving.prototype.render = function () {
@@ -46969,6 +46970,83 @@ exports.default = QuestionManager;
 
 /***/ }),
 
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx":
+/*!******************************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\office\questions\base_solving.tsx ***!
+  \******************************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+var BaseSolving = /** @class */ (function (_super) {
+    __extends(BaseSolving, _super);
+    function BaseSolving(props) {
+        var _this = _super.call(this, props) || this;
+        _this.checkAnswerCallback = null;
+        _this.questionFinishCallback = null;
+        _this.clone = function (object) {
+            var cloning = {};
+            Object.keys(object).map(function (prop) {
+                if (Array.isArray(object[prop])) {
+                    cloning[prop] = [].concat(object[prop]);
+                }
+                else if (typeof object[prop] === 'object') {
+                    cloning[prop] = _this.clone(object[prop]);
+                }
+                else
+                    cloning[prop] = object[prop];
+            });
+            return cloning;
+        };
+        _this.getHeaderText = function () {
+            return "";
+        };
+        _this.isFinishedQuestions = function () {
+            return false;
+        };
+        _this.htmlCommonPart = function () {
+            return null;
+        };
+        _this.state = { questionIndex: 0 };
+        _this.checkAnswerCallback = _this.props.checkAnswerCallback;
+        _this.questionFinishCallback = _this.props.questionFinishCallback;
+        return _this;
+    }
+    BaseSolving.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("div", { className: "p-fluid", key: "main" },
+                React.createElement("h5", { style: { whiteSpace: "pre-wrap" } },
+                    (this.state.questionIndex + 1) + ". ",
+                    this.getHeaderText(),
+                    this.isFinishedQuestions() ?
+                        React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check" })
+                        : null),
+                React.createElement("div", { key: "answers" }, this.htmlCommonPart()))));
+    };
+    return BaseSolving;
+}(React.Component));
+exports.BaseSolving = BaseSolving;
+exports.default = BaseSolving;
+
+
+/***/ }),
+
 /***/ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\check_answer_solving.tsx":
 /*!**************************************************************************************************!*\
   !*** ../../..!NewProject\learning.online\src\frontend\office\questions\check_answer_solving.tsx ***!
@@ -46994,6 +47072,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
 var radiobutton_1 = __webpack_require__(/*! primereact/radiobutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\radiobutton\\radiobutton.esm.js");
+var base_solving_1 = __webpack_require__(/*! ./base_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 /***
  * Json format:
@@ -47008,23 +47087,7 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
     __extends(CheckAnswerSolving, _super);
     function CheckAnswerSolving(props) {
         var _this = _super.call(this, props) || this;
-        _this.checkAnswerCallback = null;
-        _this.questionFinishCallback = null;
         _this.rightAnswers = 0;
-        _this.clone = function (object) {
-            var cloning = {};
-            Object.keys(object).map(function (prop) {
-                if (Array.isArray(object[prop])) {
-                    cloning[prop] = [].concat(object[prop]);
-                }
-                else if (typeof object[prop] === 'object') {
-                    cloning[prop] = _this.clone(object[prop]);
-                }
-                else
-                    cloning[prop] = object[prop];
-            });
-            return cloning;
-        };
         _this.checkAnswer = function (answerIndex, checked) {
             var answers = _this.state.answers;
             var variant = _this.state.varians[answerIndex];
@@ -47043,6 +47106,33 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
             }
             _this.setState({ answers: answers, rightAnswers: rightAnswers });
         };
+        _this.htmlCommonPart = function () {
+            var index = -1;
+            var self = _this;
+            return _this.state.varians.map(function (answer) {
+                index++;
+                var locIndex = index;
+                var enabled = true;
+                var disabled = self.isDisabled(locIndex, answer);
+                var checked_or_null = self.isChecked(locIndex, answer);
+                var checked = !!checked_or_null;
+                return (React.createElement("div", { className: "p-field-checkbox", key: locIndex },
+                    self.state.answerType == "single" ?
+                        React.createElement(radiobutton_1.RadioButton, { inputId: "sl" + index + "_" + self.state.questionIndex, value: index, onChange: function (e) { return self.checkAnswer(locIndex, e.target.checked); }, checked: checked, disabled: disabled })
+                        :
+                            React.createElement(checkbox_1.Checkbox, { inputId: "sl" + index + "_" + self.state.questionIndex, value: index, onChange: function (e) { return self.checkAnswer(locIndex, e.target.checked); }, checked: checked, disabled: disabled }),
+                    React.createElement("label", { htmlFor: "sl" + index + "_" + self.state.questionIndex, className: "p-checkbox-label " + (disabled && !checked ? "p-disabled" : "") }, answer),
+                    disabled && checked_or_null != null ?
+                        React.createElement("span", { className: "pi p-checkbox-icon p-ml-1 " + (checked ? "rightAnswer pi-check" : "wrongAnswer pi-ban") })
+                        : null));
+            });
+        };
+        _this.getHeaderText = function () {
+            return _this.state.question;
+        };
+        _this.isFinishedQuestions = function () {
+            return _this.state.answers.finished;
+        };
         var rightAnswers = 0;
         if (_this.props.result) {
             rightAnswers = _this.props.result.answers.filter(function (el) { return el.result; }).length;
@@ -47058,8 +47148,6 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
             },
             rightAnswers: rightAnswers
         };
-        _this.checkAnswerCallback = _this.props.checkAnswerCallback;
-        _this.questionFinishCallback = _this.props.questionFinishCallback;
         _this.rightAnswers = _this.props.rightAnswers;
         return _this;
     }
@@ -47083,41 +47171,8 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
         }
         return null;
     };
-    CheckAnswerSolving.prototype.addVariants = function () {
-        var index = -1;
-        var self = this;
-        return this.state.varians.map(function (answer) {
-            index++;
-            var locIndex = index;
-            var enabled = true;
-            var disabled = self.isDisabled(locIndex, answer);
-            var checked_or_null = self.isChecked(locIndex, answer);
-            var checked = !!checked_or_null;
-            return (React.createElement("div", { className: "p-field-checkbox", key: locIndex },
-                self.state.answerType == "single" ?
-                    React.createElement(radiobutton_1.RadioButton, { inputId: "sl" + index + "_" + self.state.questionIndex, value: index, onChange: function (e) { return self.checkAnswer(locIndex, e.target.checked); }, checked: checked, disabled: disabled })
-                    :
-                        React.createElement(checkbox_1.Checkbox, { inputId: "sl" + index + "_" + self.state.questionIndex, value: index, onChange: function (e) { return self.checkAnswer(locIndex, e.target.checked); }, checked: checked, disabled: disabled }),
-                React.createElement("label", { htmlFor: "sl" + index + "_" + self.state.questionIndex, className: "p-checkbox-label " + (disabled && !checked ? "p-disabled" : "") }, answer),
-                disabled && checked_or_null != null ?
-                    React.createElement("span", { className: "pi p-checkbox-icon p-ml-1 " + (checked ? "rightAnswer pi-check" : "wrongAnswer pi-ban") })
-                    : null));
-        });
-    };
-    CheckAnswerSolving.prototype.render = function () {
-        return (React.createElement("div", null,
-            React.createElement("div", { className: "p-fluid", key: "main" },
-                React.createElement("div", { className: "p-field", key: "questionText" },
-                    React.createElement("h5", { style: { whiteSpace: "pre-wrap" } },
-                        (this.state.questionIndex + 1) + ". ",
-                        this.state.question,
-                        this.state.answers.finished ?
-                            React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check" })
-                            : null)),
-                React.createElement("div", { key: "answers" }, this.addVariants()))));
-    };
     return CheckAnswerSolving;
-}(React.Component));
+}(base_solving_1.BaseSolving));
 exports.CheckAnswerSolving = CheckAnswerSolving;
 exports.default = CheckAnswerSolving;
 
@@ -47148,6 +47203,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var dropdown_1 = __webpack_require__(/*! primereact/dropdown */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dropdown\\dropdown.esm.js");
+var base_solving_1 = __webpack_require__(/*! ./base_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 /***
  * Json format:
@@ -47166,51 +47222,6 @@ var FillGapsSolving = /** @class */ (function (_super) {
     __extends(FillGapsSolving, _super);
     function FillGapsSolving(props) {
         var _this = _super.call(this, props) || this;
-        _this.checkAnswerCallback = null;
-        _this.questionFinishCallback = null;
-        _this.clone = function (object) {
-            var cloning = {};
-            Object.keys(object).map(function (prop) {
-                if (Array.isArray(object[prop])) {
-                    cloning[prop] = [].concat(object[prop]);
-                }
-                else if (typeof object[prop] === 'object') {
-                    cloning[prop] = _this.clone(object[prop]);
-                }
-                else
-                    cloning[prop] = object[prop];
-            });
-            return cloning;
-        };
-        /*
-        isDisabled(index, answer) {
-            if (!this.state.answers) {
-                return false;
-            }
-    
-            if (this.state.answers.finished) {
-                return true;
-            }
-    
-            const found = this.state.answers.answers.find(res => res.answer == answer);
-    
-            return found;
-        }
-    
-        isChecked(index, answer) {
-            if (!this.state.answers) {
-                return null;
-            }
-    
-            const found = this.state.answers.answers.find(res => res.answer == answer);
-    
-            if (found) {
-                return found.result;
-            }
-    
-            return null;
-        }
-        */
         _this.onSelectAnswer = function (locGapIndex, answer) {
             var answers = _this.state.answers;
             var isRight = _this.checkAnswerCallback(_this.state.questionIndex, locGapIndex + "->" + answer);
@@ -47231,6 +47242,55 @@ var FillGapsSolving = /** @class */ (function (_super) {
             }
             _this.setState({ answers: answers, gasLeft: gasLeft });
         };
+        _this.getHeaderText = function () {
+            return "Fill in the gaps";
+        };
+        _this.isFinishedQuestions = function () {
+            return _this.state.answers.finished;
+        };
+        _this.htmlCommonPart = function () {
+            var index = -1;
+            var gapIndex = -1;
+            var self = _this;
+            return _this.state.textWithGaps.map(function (answer) {
+                index++;
+                var locIndex = index;
+                if (typeof (answer) === "string") {
+                    return (React.createElement("span", { key: locIndex, style: { whiteSpace: "pre-wrap" } }, answer));
+                }
+                else {
+                    gapIndex++;
+                    var enabled_1 = true;
+                    var answered = [];
+                    var results_1 = {};
+                    var currentValue_1 = "";
+                    if (gapIndex in self.state.answers) {
+                        answered = self.state.answers[gapIndex];
+                    }
+                    var lastAnswer_1 = null;
+                    answered.forEach(function (value) {
+                        enabled_1 = !value.result;
+                        currentValue_1 = value.answer;
+                        results_1[value.answer] = value.result;
+                        lastAnswer_1 = value.result;
+                    });
+                    var localGapIndex_1 = gapIndex;
+                    var selectionOptions = [];
+                    var maxLength = "Select".length;
+                    for (var _i = 0, _a = answer.variants; _i < _a.length; _i++) {
+                        var variant = _a[_i];
+                        maxLength = Math.max(maxLength, variant.length);
+                        selectionOptions.push({ label: variant, value: variant });
+                        if (variant in results_1) {
+                            selectionOptions[selectionOptions.length - 1].disabled = true;
+                        }
+                    }
+                    maxLength += 7;
+                    var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#ad7177' : null;
+                    return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
+                }
+            });
+        };
         _this.state = {
             textWithGaps: _this.props.data.textWithGaps,
             questionIndex: _this.props.questionIndex,
@@ -47244,66 +47304,10 @@ var FillGapsSolving = /** @class */ (function (_super) {
             }, {}) : {}),
             gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length
         };
-        _this.checkAnswerCallback = _this.props.checkAnswerCallback;
-        _this.questionFinishCallback = _this.props.questionFinishCallback;
         return _this;
     }
-    FillGapsSolving.prototype.htmlTextWithGaps = function () {
-        var index = -1;
-        var gapIndex = -1;
-        var self = this;
-        return this.state.textWithGaps.map(function (answer) {
-            index++;
-            var locIndex = index;
-            if (typeof (answer) === "string") {
-                return (React.createElement("span", { key: locIndex, style: { whiteSpace: "pre-wrap" } }, answer));
-            }
-            else {
-                gapIndex++;
-                var enabled_1 = true;
-                var answered = [];
-                var results_1 = {};
-                var currentValue_1 = "";
-                if (gapIndex in self.state.answers) {
-                    answered = self.state.answers[gapIndex];
-                }
-                var lastAnswer_1 = null;
-                answered.forEach(function (value) {
-                    enabled_1 = !value.result;
-                    currentValue_1 = value.answer;
-                    results_1[value.answer] = value.result;
-                    lastAnswer_1 = value.result;
-                });
-                var localGapIndex_1 = gapIndex;
-                var selectionOptions = [];
-                var maxLength = "Select".length;
-                for (var _i = 0, _a = answer.variants; _i < _a.length; _i++) {
-                    var variant = _a[_i];
-                    maxLength = Math.max(maxLength, variant.length);
-                    selectionOptions.push({ label: variant, value: variant });
-                    if (variant in results_1) {
-                        selectionOptions[selectionOptions.length - 1].disabled = true;
-                    }
-                }
-                maxLength += 7;
-                var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#ad7177' : null;
-                return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
-            }
-        });
-    };
-    FillGapsSolving.prototype.render = function () {
-        return (React.createElement("div", null,
-            React.createElement("div", { className: "p-fluid", key: "main" },
-                React.createElement("h5", null,
-                    (this.state.questionIndex + 1) + ". ",
-                    "Fill in the gaps",
-                    this.state.answers.finished ?
-                        React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check" })
-                        : null),
-                React.createElement("div", { key: "answers" }, this.htmlTextWithGaps()))));
-    };
     return FillGapsSolving;
-}(React.Component));
+}(base_solving_1.BaseSolving));
 exports.FillGapsSolving = FillGapsSolving;
 exports.default = FillGapsSolving;
 

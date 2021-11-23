@@ -2,6 +2,7 @@ declare var require: any
 import * as React from "react"
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
+import { BaseSolving } from "./base_solving"
 
 var axios = require('axios');
 
@@ -14,7 +15,7 @@ var axios = require('axios');
  *   answers: ["2"], // list of right answers.
  * }
  */
-export class CheckAnswerSolving extends React.Component<any, any> {
+export class CheckAnswerSolving extends BaseSolving {
 
     state: {
         question: any,
@@ -24,21 +25,8 @@ export class CheckAnswerSolving extends React.Component<any, any> {
         answers: any
         rightAnswers: any
     }
-    checkAnswerCallback = null;
-    questionFinishCallback = null;
     rightAnswers = 0
 
-    clone = (object) => {
-        let cloning = {};
-        Object.keys(object).map(prop => {
-            if (Array.isArray(object[prop])) {
-                cloning[prop] = [].concat(object[prop])
-            } else if (typeof object[prop] === 'object') {
-                cloning[prop] = this.clone(object[prop])
-            } else cloning[prop] = object[prop]
-        })
-        return cloning
-    }
 
     constructor(props) {
         super(props);
@@ -59,8 +47,6 @@ export class CheckAnswerSolving extends React.Component<any, any> {
             rightAnswers: rightAnswers
         };
 
-        this.checkAnswerCallback = this.props.checkAnswerCallback;
-        this.questionFinishCallback = this.props.questionFinishCallback;
         this.rightAnswers        = this.props.rightAnswers;
     }
 
@@ -114,7 +100,7 @@ export class CheckAnswerSolving extends React.Component<any, any> {
         this.setState({ answers: answers, rightAnswers: rightAnswers });
     }
 
-    addVariants() {
+    htmlCommonPart = () => {
         let index = -1;
         let self = this;
 
@@ -151,27 +137,12 @@ export class CheckAnswerSolving extends React.Component<any, any> {
         });
     }
 
-    render() {
-        return (
-            <div>
-                <div className="p-fluid" key="main">
-                    <div className="p-field" key="questionText">
-                        <h5 style={{ whiteSpace: "pre-wrap" }}>
-                            {(this.state.questionIndex + 1) + ". "} 
-                            {this.state.question}
-                            {
-                                this.state.answers.finished ?
-                                    <span className="pi p-ml-1 rightAnswer pi-check" />
-                                    : null 
-                            }
-                        </h5>
-                    </div>
-                    <div key="answers">
-                        { this.addVariants() }
-                    </div>
-                </div>
-            </div>
-        );
+    getHeaderText = () => {
+        return this.state.question;
+    }
+
+    isFinishedQuestions = () => {
+        return this.state.answers.finished;
     }
 }
 

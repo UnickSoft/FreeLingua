@@ -176,8 +176,8 @@ export class TaskSolving extends React.Component<any, any> {
             index++;
             let locIndex = index;
             return (
-                <div className="p-mt-4 p-mb-4">
-                    <QuestionSolvingDecorator key={locIndex}
+                <div className="p-mt-4 p-mb-4" key={locIndex}>
+                    <QuestionSolvingDecorator
                         questionType={question.type}
                         questionIndex={locIndex}
                         data={question.data}

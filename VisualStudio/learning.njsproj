@@ -165,6 +165,7 @@
     <TypeScriptCompile Include="frontend\meta_app.tsx" />
     <TypeScriptCompile Include="frontend\office\questionManager.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\base_creator.tsx" />
+    <TypeScriptCompile Include="frontend\office\questions\base_solving.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\fill_gaps_solving.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\variants_list.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\check_answer_solving.tsx" />
