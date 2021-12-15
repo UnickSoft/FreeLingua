@@ -48,12 +48,21 @@ class AdminRoute {
             users.registerUser(req.body.login, req.body.password, req.body.email, req.body.name, req.body.role == "teacher" ? 0 : 1,
                 function () {
                     dbManager.getUsers().activateUser(req.body.login);
+                    res.send({ success: true });
                 }
             );
         });
 
         router.post('/ban_user', function (req, res, next) {
-            users.banUser(req.body.login, true);
+            users.banUser(req.body.login, true, function () {
+                res.send({ success: true });
+            });
+        });
+
+        router.post('/delete_user', function (req, res, next) {
+            users.deleteUser(req.body.login, function () {
+                res.send({ success: true });
+            });
         });
 
         return router;

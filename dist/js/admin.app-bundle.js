@@ -52189,7 +52189,7 @@ var AddUser = /** @class */ (function (_super) {
                     React.createElement("label", { htmlFor: "name" }, "Name"))),
             React.createElement("div", { className: "p-fluid" },
                 React.createElement(selectbutton_1.SelectButton, { value: this.state.role, options: this.Role, onChange: function (e) { return _this.setState({ role: e.value }); } })),
-            React.createElement(button_1.Button, { onClick: this.addUser }, "AddUser")));
+            React.createElement(button_1.Button, { onClick: this.addUser, disabled: this.state.login == "" || this.state.password == "" }, "AddUser")));
     };
     return AddUser;
 }(React.Component));
@@ -52224,6 +52224,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var datatable_1 = __webpack_require__(/*! primereact/datatable */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\datatable\\datatable.esm.js");
 var column_1 = __webpack_require__(/*! primereact/column */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\column\\column.esm.js");
+var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 var UsersTable = /** @class */ (function (_super) {
@@ -52240,6 +52241,21 @@ var UsersTable = /** @class */ (function (_super) {
                 // handle error
                 console.log(error);
             });
+        };
+        _this.deleteUser = function (login) {
+            var self = _this;
+            axios.post("/admin/delete_user", { login: login })
+                .then(function (response) {
+                self.updateUsers();
+            })
+                .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+        };
+        _this.deleteBody = function (value) {
+            var self = _this;
+            return React.createElement(button_1.Button, { onClick: function (e) { return self.deleteUser(value.login); } }, "Delete");
         };
         _this.state = {
             users: []
@@ -52260,7 +52276,8 @@ var UsersTable = /** @class */ (function (_super) {
                 React.createElement(column_1.Column, { field: "name", header: "Name" }),
                 React.createElement(column_1.Column, { field: "email", header: "Email" }),
                 React.createElement(column_1.Column, { field: "isAdmin", header: "IsAdmin", body: this.valueIsAdmin }),
-                React.createElement(column_1.Column, { field: "isActivated", header: "Activated", body: this.valueIsActivated }))));
+                React.createElement(column_1.Column, { field: "isActivated", header: "Activated", body: this.valueIsActivated }),
+                React.createElement(column_1.Column, { header: "Delete", body: this.deleteBody }))));
     };
     return UsersTable;
 }(React.Component));

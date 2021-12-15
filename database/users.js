@@ -26,18 +26,25 @@ class Users {
     registerUser(login, pass, email, name, role, func = null) {
         if (!(login.length > 0 && pass.length > 0 && email.length > 0 && name.length > 0 &&
             (role == this.Role.teacher || role == this.Role.student))) {
-            return false;
+            func(false);
         }
+        let self = this;
+        this.userExist(login, function (row) {
+            if (row != undefined) {
+                func(false);
+                return;
+            }
 
-        return this.dbWrapper.insert(this.Table, [
-            { name: "login", value: login },
-            { name: "passhash", value: this.cyrb53(login + pass) }, // todo
-            { name: "email", value: email },
-            { name: "name", value: name },
-            { name: "role", value: role },
-            { name: "registerDate", value: new Date()},
-            { name: "state", value: this.State.unactivate }],
-            func);
+            self.dbWrapper.insert(self.Table, [
+                { name: "login", value: login },
+                { name: "passhash", value: self.cyrb53(login + pass) }, // todo
+                { name: "email", value: email },
+                { name: "name", value: name },
+                { name: "role", value: role },
+                { name: "registerDate", value: new Date() },
+                { name: "state", value: self.State.unactivate }],
+                func);
+        });
     }
 
     makeAdmin(login, func = null) {
@@ -76,9 +83,29 @@ class Users {
             });
     }
 
+    userExist(login, func) {
+        var self = this;
+        this.dbWrapper.select_one(this.Table, [
+            { name: "login", value: login }],
+            function (success, row) {
+                if (row === undefined) {
+                    func(row);
+                    return;
+                }
+
+                func(self.getUserInfo(row));
+            });
+    }
+
     banUser(login, isBan, func = null) {
         return this.dbWrapper.update(this.Table,
             [{ name: "state", value: isBan ? this.State.blocked : this.State.activated }],
+            { name: "login", value: login },
+            func);
+    }
+
+    deleteUser(login, func = null) {
+        return this.dbWrapper.delete(this.Table,
             { name: "login", value: login },
             func);
     }

@@ -79,7 +79,7 @@ export class AddUser extends React.Component<any, any> {
                 <SelectButton value={this.state.role} options={this.Role} onChange={(e) => this.setState({ role: e.value })} />
             </div>
 
-            <Button onClick={this.addUser}>AddUser</Button>
+            <Button onClick={this.addUser} disabled={this.state.login == "" || this.state.password == "" }>AddUser</Button>
         </div>);
     }
 }

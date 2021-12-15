@@ -166,7 +166,9 @@ var sqlWrapper = {
             if (err) {
                 console.log(err);
             }
-            func(!err);
+            if (func != null) {
+                func(!err);
+            }
         });
     },
 
