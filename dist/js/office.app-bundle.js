@@ -55564,7 +55564,7 @@ var FillGapsCreator = /** @class */ (function (_super) {
             _this.setStateAndUpdate({ textWithGaps: _this.splitTextToArray(text) });
         };
         _this.addGap = function () {
-            var textArea = document.getElementById("area");
+            var textArea = document.getElementById("area" + _this.state.questionIndex);
             var cursorStart = textArea.selectionStart;
             var cursorEnd = textArea.selectionEnd;
             var lengthOfSelection = cursorEnd - cursorStart;
@@ -55649,17 +55649,19 @@ var FillGapsCreator = /** @class */ (function (_super) {
     };
     FillGapsCreator.prototype.answersHtml = function () {
         var index = -1;
+        var indexGaps = -1;
         var self = this;
         return this.state.textWithGaps.map(function (gap) {
             index++;
             if (typeof gap === 'string') {
                 return null;
             }
+            indexGaps++;
             var localIndex = index;
             return (React.createElement("div", null,
                 React.createElement("label", null,
                     "Gap ",
-                    localIndex),
+                    indexGaps),
                 React.createElement(variants_list_1.VariantsList, { onAddVariant: function () { return self.onAddAnswer(localIndex); }, onSetRight: function (index, value) { return self.onSetRightAnswer(localIndex, index, value); }, onEditVariant: function (index, value) { return self.onEditAnswer(localIndex, index, value); }, globalIndex: self.state.questionIndex, variants: gap })));
         });
     };
@@ -55668,9 +55670,9 @@ var FillGapsCreator = /** @class */ (function (_super) {
         return (React.createElement("div", null,
             React.createElement("div", { className: "p-fluid", key: "main" },
                 React.createElement("div", { className: "p-field", key: "questionText" },
-                    React.createElement("label", { htmlFor: "area" }, "Enter Text, then Select world and press add gap:"),
-                    React.createElement(inputtextarea_1.InputTextarea, { rows: 5, cols: 30, id: "area", onChange: function (e) { return _this.loadFromText(e.target.value); }, value: this.getAsText(), autoResize: true })),
-                React.createElement(button_1.Button, { label: "Add gap", id: "add_gaps", onClick: function () { return _this.addGap(); } })),
+                    React.createElement("label", { htmlFor: "area" + this.state.questionIndex }, "Enter Text, then Select world and press add gap:"),
+                    React.createElement(inputtextarea_1.InputTextarea, { rows: 5, cols: 30, id: "area" + this.state.questionIndex, onChange: function (e) { return _this.loadFromText(e.target.value); }, value: this.getAsText(), autoResize: true })),
+                React.createElement(button_1.Button, { label: "Add gap", id: "add_gaps" + this.state.questionIndex, onClick: function () { return _this.addGap(); } })),
             React.createElement("div", { key: "answers" },
                 React.createElement("label", null, "Gaps:"),
                 this.answersHtml()),
@@ -55791,8 +55793,8 @@ var FillGapsSolving = /** @class */ (function (_super) {
                         }
                     }
                     maxLength += 4.5;
-                    var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#ad7177' : null;
-                    return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
+                    var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#fb8182' : null;
+                    return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#fb8182' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
                 }
             });
             return (React.createElement("div", { className: "fillGapsSolving firstLineOffset" },

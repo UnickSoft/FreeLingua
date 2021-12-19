@@ -119,12 +119,12 @@ export class FillGapsSolving extends BaseSolving {
                     }
                 }
                 maxLength += 4.5;
-                let bkColor = lastAnswer != null && !lastAnswer ? '#ad7177' : null;
+                let bkColor = lastAnswer != null && !lastAnswer ? '#fb8182' : null;
                 return (<Dropdown value={currentValue} name={"gap" + localGapIndex}
                     options={selectionOptions} placeholder="Select" onChange={(e) => self.onSelectAnswer(localGapIndex, e.value)}
                     disabled={!enabled}
                     key={locIndex}
-                    style={{ width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }}
+                    style={{ width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#fb8182' }}
                     dropdownIcon={lastAnswer != null ? (lastAnswer ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down"}
                 />);
             }

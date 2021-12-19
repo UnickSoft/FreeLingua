@@ -174,7 +174,7 @@ section {
 
 .solvingTask {
     margin-top: 4px;
-    margin-bottom: 4px;
+    margin-bottom: 16px;
 }
 
 .wrongAnswer {
@@ -241,6 +241,7 @@ section {
 
 .taskHeader {
     color: #f5a425;
+    padding-bottom: 16px;
 }
 
 /* Footer */

@@ -208,7 +208,7 @@ export class FillGapsCreator extends BaseCreator {
     }
 
     addGap = () => {        
-        var textArea = document.getElementById("area") as HTMLTextAreaElement;
+        var textArea = document.getElementById("area" + this.state.questionIndex) as HTMLTextAreaElement;
 
         let cursorStart = textArea.selectionStart;
         let cursorEnd = textArea.selectionEnd;
@@ -261,16 +261,19 @@ export class FillGapsCreator extends BaseCreator {
 
     answersHtml() {
         let index = -1;
+        let indexGaps = -1;
+
         let self = this;
         return this.state.textWithGaps.map(function (gap) {
             index++;
             if (typeof gap === 'string') {
                 return null;
             }
+            indexGaps++;
             let localIndex = index;
             return (
                 <div>
-                    <label>Gap {localIndex}</label>
+                    <label>Gap {indexGaps}</label>
                     <VariantsList onAddVariant={() => self.onAddAnswer(localIndex)}
                         onSetRight={(index, value) => self.onSetRightAnswer(localIndex, index, value)}
                         onEditVariant={(index, value) => self.onEditAnswer(localIndex, index, value)}
@@ -285,13 +288,13 @@ export class FillGapsCreator extends BaseCreator {
             <div>
                 <div className="p-fluid" key="main">
                     <div className="p-field" key="questionText">
-                        <label htmlFor="area">Enter Text, then Select world and press add gap:</label>
-                        <InputTextarea rows={5} cols={30} id="area"
+                        <label htmlFor={"area" + this.state.questionIndex}>Enter Text, then Select world and press add gap:</label>
+                        <InputTextarea rows={5} cols={30} id={"area" + this.state.questionIndex}
                             onChange={(e) => this.loadFromText(e.target.value)}
                             value={this.getAsText()} autoResize
                         />
                     </div>
-                    <Button label="Add gap" id="add_gaps" onClick={() => this.addGap()} />
+                    <Button label="Add gap" id={"add_gaps"+ this.state.questionIndex} onClick={() => this.addGap()} />
                 </div>
                 <div key="answers">
                     <label>Gaps:</label>
