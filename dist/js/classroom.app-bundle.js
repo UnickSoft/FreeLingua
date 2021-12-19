@@ -46492,7 +46492,7 @@ var TaskSolving = /** @class */ (function (_super) {
         return this.state.templateData.map(function (question) {
             index++;
             var locIndex = index;
-            return (React.createElement("div", { className: "p-mt-4 p-mb-4", key: locIndex },
+            return (React.createElement("div", { className: "solvingTask", key: locIndex },
                 React.createElement(question_sloving_decorator_1.default, { questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })));
         });
     };
@@ -46502,9 +46502,9 @@ var TaskSolving = /** @class */ (function (_super) {
             this.needSave--;
         }
         return (React.createElement("div", null,
-            React.createElement("h3", null, this.state.title ? this.state.title : null),
+            React.createElement("h3", { className: "taskHeader" }, this.state.title ? this.state.title : null),
             React.createElement("div", null, this.addQuestionListHtml()),
-            React.createElement(panel_1.Panel, { header: "Results" },
+            React.createElement(panel_1.Panel, { header: "Results", className: "resultPanel p-mt-4" },
                 React.createElement("div", { style: { 'fontSize': '1.25em' } },
                     React.createElement("span", { className: "d-inline p-2" },
                         "Remaining questions: ",
@@ -47031,11 +47031,11 @@ var BaseSolving = /** @class */ (function (_super) {
     BaseSolving.prototype.render = function () {
         return (React.createElement("div", null,
             React.createElement("div", { className: "p-fluid", key: "main" },
-                React.createElement("h5", { style: { whiteSpace: "pre-wrap" } },
+                React.createElement("h5", { style: { whiteSpace: "pre-wrap" }, className: "secondLineOffset" },
                     (this.state.questionIndex + 1) + ". ",
                     this.getHeaderText(),
                     this.isFinishedQuestions() ?
-                        React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check" })
+                        React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check firstLineOffset" })
                         : null),
                 React.createElement("div", { key: "answers" }, this.htmlCommonPart()))));
     };
@@ -47116,7 +47116,7 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                 var disabled = self.isDisabled(locIndex, answer);
                 var checked_or_null = self.isChecked(locIndex, answer);
                 var checked = !!checked_or_null;
-                return (React.createElement("div", { className: "p-field-checkbox", key: locIndex },
+                return (React.createElement("div", { className: "p-field-checkbox firstLineOffset", key: locIndex },
                     self.state.answerType == "single" ?
                         React.createElement(radiobutton_1.RadioButton, { inputId: "sl" + index + "_" + self.state.questionIndex, value: index, onChange: function (e) { return self.checkAnswer(locIndex, e.target.checked); }, checked: checked, disabled: disabled })
                         :
@@ -47252,7 +47252,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
             var index = -1;
             var gapIndex = -1;
             var self = _this;
-            return _this.state.textWithGaps.map(function (answer) {
+            var text = _this.state.textWithGaps.map(function (answer) {
                 index++;
                 var locIndex = index;
                 if (typeof (answer) === "string") {
@@ -47285,11 +47285,15 @@ var FillGapsSolving = /** @class */ (function (_super) {
                             selectionOptions[selectionOptions.length - 1].disabled = true;
                         }
                     }
-                    maxLength += 7;
+                    maxLength += 4.5;
                     var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#ad7177' : null;
                     return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#ad7177' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
                 }
             });
+            return (React.createElement("div", { className: "fillGapsSolving firstLineOffset" },
+                " ",
+                text,
+                " "));
         };
         _this.state = {
             textWithGaps: _this.props.data.textWithGaps,

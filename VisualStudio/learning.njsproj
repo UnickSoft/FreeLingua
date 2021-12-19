@@ -52,15 +52,14 @@
     <Content Include="dist\css\fonts\primeicons.svg" />
     <Content Include="dist\css\fonts\primeicons.ttf" />
     <Content Include="dist\css\fonts\primeicons.woff" />
-    <Content Include="dist\css\lightbox.css" />
     <Content Include="dist\css\my.css" />
-    <Content Include="dist\css\owl.css" />
     <Content Include="dist\css\primeflex.min.css" />
     <Content Include="dist\css\primeflex.min.css.map" />
     <Content Include="dist\css\primeicons.css" />
     <Content Include="dist\css\primereact.min.css" />
     <Content Include="dist\css\prime_flex_themes\arya-blue.css" />
     <Content Include="dist\css\prime_flex_themes\arya-blue.css.map" />
+    <Content Include="dist\css\prime_flex_themes\indigo-light.css" />
     <Content Include="dist\css\prime_flex_themes\saga-blue.css" />
     <Content Include="dist\css\prime_flex_themes\saga-blue.css.map" />
     <Content Include="dist\css\prime_flex_themes\vela-blue.css" />

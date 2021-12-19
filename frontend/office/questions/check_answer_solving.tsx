@@ -113,7 +113,7 @@ export class CheckAnswerSolving extends BaseSolving {
             let checked = !!checked_or_null;
 
             return (
-                <div className="p-field-checkbox" key={locIndex}>
+                <div className="p-field-checkbox firstLineOffset" key={locIndex}>
                     { self.state.answerType == "single" ?
                         <RadioButton inputId={"sl" + index + "_" + self.state.questionIndex} value={index}
                             onChange={(e) => self.checkAnswer(locIndex, e.target.checked)}

@@ -84,7 +84,7 @@ export class FillGapsSolving extends BaseSolving {
         let gapIndex = -1;
         let self = this;
 
-        return this.state.textWithGaps.map(function (answer) {
+        let text = this.state.textWithGaps.map(function (answer) {
             index++;
             let locIndex = index;
 
@@ -118,7 +118,7 @@ export class FillGapsSolving extends BaseSolving {
                         selectionOptions[selectionOptions.length - 1].disabled = true;
                     }
                 }
-                maxLength += 7;
+                maxLength += 4.5;
                 let bkColor = lastAnswer != null && !lastAnswer ? '#ad7177' : null;
                 return (<Dropdown value={currentValue} name={"gap" + localGapIndex}
                     options={selectionOptions} placeholder="Select" onChange={(e) => self.onSelectAnswer(localGapIndex, e.value)}
@@ -129,6 +129,8 @@ export class FillGapsSolving extends BaseSolving {
                 />);
             }
         });
+
+        return (<div className="fillGapsSolving firstLineOffset"> { text} </div >);
     }
 }
 

@@ -7,13 +7,6 @@ https://templatemo.com/tm-557-grad-school
 */
 
 
-@import url(fontawesome.css);
-@import url("<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">");
-body {
-    font-family: 'Montserrat', sans-serif;
-    color: #fff;
-}
-
 /* Basic */
 
 a {
@@ -83,26 +76,6 @@ p {
 
 a.menu-link { display: none; }
 
-#login_button {
-    background-color: rgba(250,250,250,0.0);
-    color: #fff;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    padding: 12px 20px;
-    display: inline-block;
-    outline: none;	
-    line-height: 79px;
-    border: 0;
-    vertical-align: middle;
-    font-family: 'Montserrat', sans-serif;
-}
-
-#login_button:focus {
-    outline: 0 !important;
-}
-
 @media screen and (max-width: 950px) {
   a.menu-link {
     float: right;
@@ -169,156 +142,6 @@ a.menu-link { display: none; }
   }
 }
 
-/* Header */
-
-@media screen and (max-width: 1050px) {
-  .main-header .logo {
-      padding-left: 30px!important;
-  }
-
-  .main-menu {
-      padding-right: 30px!important;
-  }
-
-  .main-menu li {
-      margin-left: 5px!important;
-  }
-}
-
-.main-header {
-    background-color: rgba(22,34,57,0.95);
-    height: 80px;
-    position: fixed;
-    z-index: 12;
-    width: 100%;
-    top: 0;
-}
-
-.main-header-fix {
-    position: static;
-    z-index: 0;
-    top: 0;
-}
-
-.main-header .logo {
-    float: left;
-    line-height: 80px;
-    padding-left: 60px;
-}
-
-.main-header .logo a {
-    font-size: 36px;
-    text-transform: uppercase;
-    font-weight: 800;
-    color: #fff;
-}
-.main-header .logo a em {
-    font-style: normal;
-    color: #f5a425;
-}
-
-.main-menu {
-    float: right;
-    padding-right: 60px;
-}
-
-.main-menu li {
-    display: inline-block;
-    line-height: 79px;
-    margin-left: 15px;
-    position: relative;
-}
-
-.main-menu li:first-child {
-    margin-left: 0px;
-}
-
-.main-menu li a {
-    padding: 10px 15px;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    color: #fff;
-    border: 2px solid transparent;
-    transition: all 0.5s;
-}
-
-@media screen and (max-width: 520px) {
-    .main-header .logo a {
-        font-size: 16px;
-    }
-}
-
-
-.main-menu li.has-submenu a:after {
-    content: '\f107';
-    font-family: "FontAwesome";
-    margin-left: 5px;
-}
-
-.main-menu li.has-submenu ul li a:after {
-    display: none;
-}
-
-.main-menu li .sub-menu {
-    position: absolute;
-    width: 160px;
-    background-color: #18233a;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s;
-}
-
-.main-menu li:hover .sub-menu {
-    opacity: 1;
-    visibility: visible;
-}
-
-.main-menu li .sub-menu li {
-    display: block;
-    line-height: 20px;
-    margin-left: 0px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #121b2f;
-}
-
-.main-menu li .sub-menu li:first-child {
-    padding-top: 15px;
-}
-
-.main-menu li .sub-menu li:last-child {
-    margin-bottom: 0px;
-    border-bottom: none;
-}
-
-.main-menu li .sub-menu li a {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 0px 15px;
-    letter-spacing: 0.5px;
-    border: none;
-    transition: all 0.5s;
-}
-
-.main-menu li .sub-menu li a:hover {
-    color: #f5a425;
-    border: none;
-}
-
-.main-nav li:hover a,
-.main-nav li.active a {
-    border: 2px solid #f5a425;
-}
-
-@media (max-width: 950px) {
-  .main-nav li:hover a,
-  .main-nav li.active a {
-    border: 2px solid transparent;
-    border-bottom: 1px solid rgba(250,250,250,0.25);
-  }
-}
 
 
 /* Slider */
@@ -523,14 +346,6 @@ section.features .col-4 {
 
 /* Why Choosing Us */
 
-section.why-us {
-    background-image: url(../images/choosing-bg.jpg);
-    background-color: #172238;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: 100px;
-}
-
 #tabs {
   text-align: center;
 }
@@ -654,7 +469,7 @@ section.why-us {
 
 /* Coming Soon */
 
-section.coming-soon {
+    section .coming-soon {
     background-image: url(../images/coming-soon-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -1558,32 +1373,6 @@ section.contact form button {
     outline: none;
     box-shadow: none;
     border: none;
-}
-
-/* Footer */
-
-footer {
-    background-color: #152036;
-    text-align: center;
-}
-
-footer p {
-    margin-bottom: 0px;
-    padding: 25px 0px;
-    color: #fff;
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-footer p a,
-footer p a:hover {
-    color: #f5a425;
-}
-
-.p-fluid .fixedInput{
-    width: 100px;
 }
 
 .floatToRight {

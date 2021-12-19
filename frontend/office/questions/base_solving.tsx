@@ -48,12 +48,12 @@ export class BaseSolving extends React.Component<any, any> {
         return (
             <div>
                 <div className="p-fluid" key="main">
-                    <h5 style={{ whiteSpace: "pre-wrap" }}>
+                    <h5 style={{ whiteSpace: "pre-wrap" }} className="secondLineOffset">
                         {(this.state.questionIndex + 1) + ". "}
                         {this.getHeaderText()}
                         {
                             this.isFinishedQuestions() ?
-                                <span className="pi p-ml-1 rightAnswer pi-check" />
+                                <span className="pi p-ml-1 rightAnswer pi-check firstLineOffset" />
                                 : null
                         }
                     </h5>

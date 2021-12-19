@@ -176,7 +176,7 @@ export class TaskSolving extends React.Component<any, any> {
             index++;
             let locIndex = index;
             return (
-                <div className="p-mt-4 p-mb-4" key={locIndex}>
+                <div className="solvingTask" key={locIndex}>
                     <QuestionSolvingDecorator
                         questionType={question.type}
                         questionIndex={locIndex}
@@ -197,11 +197,11 @@ export class TaskSolving extends React.Component<any, any> {
             this.needSave--;
         }
         return (<div>
-            <h3>{this.state.title ? this.state.title : null}</h3>
+            <h3 className="taskHeader">{this.state.title ? this.state.title : null}</h3>
             <div>
                 {this.addQuestionListHtml()}
             </div>
-            <Panel header="Results">
+            <Panel header="Results" className="resultPanel p-mt-4">
                 <div style={{ 'fontSize': '1.25em' }}>
                     <span className="d-inline p-2">Remaining questions: {this.state.remainingAnswers}</span>
                     <span className="d-inline p-2">Mistakes: {this.state.mistakes}</span>
