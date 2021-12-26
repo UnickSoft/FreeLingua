@@ -105,12 +105,12 @@ var sqlWrapper = {
                     whereValue.push(w.value);
                 }
             }
-        } else {
+        } else if (where != null) {
             whereStr = where.name + '=?';
             whereValue.push(where.value);
         }
 
-        let q = 'SELECT * FROM ' + tableName + ' WHERE ' + whereStr;
+        let q = 'SELECT * FROM ' + tableName + (whereStr.length > 0 ? ' WHERE ' + whereStr : '');
         this.db.get(q, whereValue, (err, rows) => {
             if (err) {
                 console.log(err);
@@ -172,14 +172,15 @@ var sqlWrapper = {
         });
     },
 
-    runSqlFile: function (q, values, func = null) {
-        const splittedCommands = q.split(');');
+    runSqlFile: function (q, func = null) {
+        let isCreateScript = q.includes(');');
+        const splittedCommands = isCreateScript ? q.split(');') : q.split('\n');
         let self = this;
         this.db.serialize(() => {
             self.db.run("BEGIN TRANSACTION;", {}, null);
             splittedCommands.forEach((query) => {
                 if (query && query.length > 0) {
-                    query += ');';
+                    query += isCreateScript ? ');' : '';
                     //console.log(query);
                     self.db.run(query, (err) => {
                         if (err) throw err;
@@ -207,7 +208,16 @@ var sqlWrapper = {
     getFullPath: function (dbname) {
         const path = require('path');
         return path.join(path.join(__dirname, this.database_dir), dbname);
-    }
+    },
+
+    backup: function (postfix) {
+        const fs = require('fs');
+        let backup_file = this.getFullPath(this.filename + "_backup_" + postfix);
+        if (fs.existsSync(backup_file)) {
+            fs.unlinkSync(backup_file);
+        }
+        fs.copyFileSync(this.getFullPath(this.filename), backup_file);
+    },
 };
 
 module.exports = sqlWrapper

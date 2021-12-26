@@ -273,3 +273,7 @@ footer p a:hover {
 .resultPanel .p-panel-header {
     background-color: #edf5e3;
 }
+
+.scoresHeader {
+    font-size: 1rem;
+}

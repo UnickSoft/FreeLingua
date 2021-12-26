@@ -26,6 +26,9 @@ export class TaskSolving extends React.Component<any, any> {
         mistakes: any;
         templateId: any;
         templateData: any;
+        scores: any;
+        scoresWeight: any;
+        totalScoreWeight: any;
         title: any
     };
 
@@ -33,6 +36,8 @@ export class TaskSolving extends React.Component<any, any> {
     dryRun = false;
     readonly = false;
     needSave = 0;
+    scoreScale = 10;
+    scorePrecision = 1;
 
     constructor(props) {
         super(props);
@@ -92,6 +97,11 @@ export class TaskSolving extends React.Component<any, any> {
                         title: title
                     });
                 }
+
+                this.setState({
+                    scores: this.initScores(),
+                    scoresWeight: this.initScoresWeight()
+                });                
             })()
         }
     }
@@ -105,7 +115,10 @@ export class TaskSolving extends React.Component<any, any> {
             mistakes: 0,
             templateId: null,
             templateData: null,
-            title: ""
+            title: "",
+            scores: null,
+            scoresWeight: null,
+            totalScoreWeight: 0
         };
     }
 
@@ -116,6 +129,22 @@ export class TaskSolving extends React.Component<any, any> {
                 answers: [],
                 finished: false
             });
+        }
+        return res;
+    }
+
+    initScores() {
+        let res = [];
+        for (let i = 0; i < this.state.templateData.length; i++) {
+            res.push(0.0);
+        }
+        return res;
+    }
+
+    initScoresWeight() {
+        let res = [];
+        for (let i = 0; i < this.state.templateData.length; i++) {
+            res.push(0.0);
         }
         return res;
     }
@@ -166,12 +195,41 @@ export class TaskSolving extends React.Component<any, any> {
         }
     }
 
+    updateQuestionScore(index, score) {
+        if (this.state.scores) {
+            let scores = this.state.scores;
+            scores[index] = score;
+            this.setState({ scores: scores});
+        }
+    }
+
+    updateScoreWeight(index, rightAnswers, wrongAnswers) {
+        if (this.state.scoresWeight) {
+            let scoresWeight = this.state.scoresWeight;
+
+            let avgPosibility = rightAnswers / (rightAnswers + wrongAnswers);
+            let allPosibility = avgPosibility;
+            let weight = 1.0 / allPosibility * rightAnswers;
+            scoresWeight[index] = weight;
+
+            this.setState((state, props) => {
+                return { scoresWeight: scoresWeight, totalScoreWeight: state.totalScoreWeight + weight };
+            });
+
+        }
+    }
+
+    displayScores = (scores) => {
+        return Math.round(scores * Math.pow(this.scoreScale, (1 + this.scorePrecision))) / Math.pow(this.scoreScale, this.scorePrecision)
+    }
+
     addQuestionListHtml() {
         let index = -1;
         let self = this;
         if (!this.state.taskData && !self.dryRun || !this.state.templateData) {
             return null;
         }
+
         return this.state.templateData.map(function (question) {
             index++;
             let locIndex = index;
@@ -184,7 +242,12 @@ export class TaskSolving extends React.Component<any, any> {
                         result={!self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null}
                         checkAnswerCallback={(questionIndex, answer) => self.checkAnswer(questionIndex, answer)}
                         rightAnswers={self.state.templateData[locIndex].data.answers.length}
-                        questionFinishCallback={(questionIndex) => self.questionFinish(questionIndex)}                    
+                        questionFinishCallback={(questionIndex) => self.questionFinish(questionIndex)}
+                        updateScoresCallback={(questionIndex, score) => self.updateQuestionScore(questionIndex, score)}
+                        updateScoreWeight={(questionIndex, rightAnswers, wrongAnswers) => self.updateScoreWeight(questionIndex, rightAnswers, wrongAnswers)}
+                        normalizedScores={(self.state.scores && self.state.totalScoreWeight > 0) ?
+                            self.displayScores(self.state.scores[index] * self.state.scoresWeight[index] / self.state.totalScoreWeight) :
+                            0.0}
                         />
                 </div>
             )
@@ -196,6 +259,17 @@ export class TaskSolving extends React.Component<any, any> {
             this.saveResults();
             this.needSave--;
         }
+
+        let totalScores = 0.0;
+        if (this.state.scores && this.state.totalScoreWeight > 0) {
+            let index = 0;
+            this.state.scores.forEach((score) => {
+                    totalScores += score * this.state.scoresWeight[index] / this.state.totalScoreWeight;
+                    index++;
+                }
+            );
+        }
+
         return (<div>
             <h3 className="taskHeader">{this.state.title ? this.state.title : null}</h3>
             <div>
@@ -205,6 +279,7 @@ export class TaskSolving extends React.Component<any, any> {
                 <div style={{ 'fontSize': '1.25em' }}>
                     <span className="d-inline p-2">Remaining questions: {this.state.remainingAnswers}</span>
                     <span className="d-inline p-2">Mistakes: {this.state.mistakes}</span>
+                    <span className="d-inline p-2">Scores: {this.displayScores(totalScores)}</span>
                 </div>
             </Panel>
         </div>);

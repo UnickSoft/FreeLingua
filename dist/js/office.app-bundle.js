@@ -54298,6 +54298,11 @@ var TaskSolving = /** @class */ (function (_super) {
         _this.dryRun = false;
         _this.readonly = false;
         _this.needSave = 0;
+        _this.scoreScale = 10;
+        _this.scorePrecision = 1;
+        _this.displayScores = function (scores) {
+            return Math.round(scores * Math.pow(_this.scoreScale, (1 + _this.scorePrecision))) / Math.pow(_this.scoreScale, _this.scorePrecision);
+        };
         _this.state = _this.getFullEmptyState();
         _this.dryRun = "dryRun" in _this.props ? _this.props.dryRun : false;
         _this.readonly = "readonly" in _this.props ? _this.props.readonly : false;
@@ -54364,6 +54369,10 @@ var TaskSolving = /** @class */ (function (_super) {
                                     title: title
                                 });
                             }
+                            this.setState({
+                                scores: this.initScores(),
+                                scoresWeight: this.initScoresWeight()
+                            });
                             return [2 /*return*/];
                     }
                 });
@@ -54379,7 +54388,10 @@ var TaskSolving = /** @class */ (function (_super) {
             mistakes: 0,
             templateId: null,
             templateData: null,
-            title: ""
+            title: "",
+            scores: null,
+            scoresWeight: null,
+            totalScoreWeight: 0
         };
     };
     TaskSolving.prototype.initResults = function () {
@@ -54389,6 +54401,20 @@ var TaskSolving = /** @class */ (function (_super) {
                 answers: [],
                 finished: false
             });
+        }
+        return res;
+    };
+    TaskSolving.prototype.initScores = function () {
+        var res = [];
+        for (var i = 0; i < this.state.templateData.length; i++) {
+            res.push(0.0);
+        }
+        return res;
+    };
+    TaskSolving.prototype.initScoresWeight = function () {
+        var res = [];
+        for (var i = 0; i < this.state.templateData.length; i++) {
+            res.push(0.0);
         }
         return res;
     };
@@ -54441,6 +54467,25 @@ var TaskSolving = /** @class */ (function (_super) {
             });
         }
     };
+    TaskSolving.prototype.updateQuestionScore = function (index, score) {
+        if (this.state.scores) {
+            var scores = this.state.scores;
+            scores[index] = score;
+            this.setState({ scores: scores });
+        }
+    };
+    TaskSolving.prototype.updateScoreWeight = function (index, rightAnswers, wrongAnswers) {
+        if (this.state.scoresWeight) {
+            var scoresWeight_1 = this.state.scoresWeight;
+            var avgPosibility = rightAnswers / (rightAnswers + wrongAnswers);
+            var allPosibility = avgPosibility;
+            var weight_1 = 1.0 / allPosibility * rightAnswers;
+            scoresWeight_1[index] = weight_1;
+            this.setState(function (state, props) {
+                return { scoresWeight: scoresWeight_1, totalScoreWeight: state.totalScoreWeight + weight_1 };
+            });
+        }
+    };
     TaskSolving.prototype.addQuestionListHtml = function () {
         var index = -1;
         var self = this;
@@ -54451,13 +54496,24 @@ var TaskSolving = /** @class */ (function (_super) {
             index++;
             var locIndex = index;
             return (React.createElement("div", { className: "solvingTask", key: locIndex },
-                React.createElement(question_sloving_decorator_1.default, { questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); } })));
+                React.createElement(question_sloving_decorator_1.default, { questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); }, updateScoresCallback: function (questionIndex, score) { return self.updateQuestionScore(questionIndex, score); }, updateScoreWeight: function (questionIndex, rightAnswers, wrongAnswers) { return self.updateScoreWeight(questionIndex, rightAnswers, wrongAnswers); }, normalizedScores: (self.state.scores && self.state.totalScoreWeight > 0) ?
+                        self.displayScores(self.state.scores[index] * self.state.scoresWeight[index] / self.state.totalScoreWeight) :
+                        0.0 })));
         });
     };
     TaskSolving.prototype.render = function () {
+        var _this = this;
         if (this.needSave > 0) {
             this.saveResults();
             this.needSave--;
+        }
+        var totalScores = 0.0;
+        if (this.state.scores && this.state.totalScoreWeight > 0) {
+            var index_1 = 0;
+            this.state.scores.forEach(function (score) {
+                totalScores += score * _this.state.scoresWeight[index_1] / _this.state.totalScoreWeight;
+                index_1++;
+            });
         }
         return (React.createElement("div", null,
             React.createElement("h3", { className: "taskHeader" }, this.state.title ? this.state.title : null),
@@ -54469,7 +54525,10 @@ var TaskSolving = /** @class */ (function (_super) {
                         this.state.remainingAnswers),
                     React.createElement("span", { className: "d-inline p-2" },
                         "Mistakes: ",
-                        this.state.mistakes)))));
+                        this.state.mistakes),
+                    React.createElement("span", { className: "d-inline p-2" },
+                        "Scores: ",
+                        this.displayScores(totalScores))))));
     };
     return TaskSolving;
 }(React.Component));
@@ -55029,6 +55088,8 @@ var BaseSolving = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.checkAnswerCallback = null;
         _this.questionFinishCallback = null;
+        _this.updateScoresCallback = null;
+        _this.updateScoreWeight = null;
         _this.clone = function (object) {
             var cloning = {};
             Object.keys(object).map(function (prop) {
@@ -55052,9 +55113,33 @@ var BaseSolving = /** @class */ (function (_super) {
         _this.htmlCommonPart = function () {
             return null;
         };
-        _this.state = { questionIndex: 0 };
+        _this.calcScores = function (answersList, rightVariantsNum, wrongVariantsNum) {
+            var wrongCount = 0;
+            var oneQuestionCost = 1.0 / rightVariantsNum;
+            var scores = 0;
+            answersList.forEach(function (answer) {
+                if (answer.result) {
+                    scores += oneQuestionCost * (wrongVariantsNum - wrongCount) / wrongVariantsNum;
+                }
+                else {
+                    wrongCount++;
+                }
+            });
+            return scores;
+        };
+        // From 0 to 1.
+        _this.setScores = function (score) {
+            _this.setState({ scores: score });
+            _this.updateScoresCallback(_this.state.questionIndex, score);
+        };
+        _this.setScoreWeight = function (rightAnswer, wrongAnswer) {
+            _this.updateScoreWeight(_this.state.questionIndex, rightAnswer, wrongAnswer);
+        };
+        _this.state = { questionIndex: 0, scores: 0.0 };
         _this.checkAnswerCallback = _this.props.checkAnswerCallback;
         _this.questionFinishCallback = _this.props.questionFinishCallback;
+        _this.updateScoresCallback = _this.props.updateScoresCallback;
+        _this.updateScoreWeight = _this.props.updateScoreWeight;
         return _this;
     }
     BaseSolving.prototype.render = function () {
@@ -55063,6 +55148,10 @@ var BaseSolving = /** @class */ (function (_super) {
                 React.createElement("h5", { style: { whiteSpace: "pre-wrap" }, className: "secondLineOffset" },
                     (this.state.questionIndex + 1) + ". ",
                     this.getHeaderText(),
+                    React.createElement("span", { className: "rightAnswer firstLineOffset scoresHeader" },
+                        " ",
+                        this.props.normalizedScores,
+                        " "),
                     this.isFinishedQuestions() ?
                         React.createElement("span", { className: "pi p-ml-1 rightAnswer pi-check firstLineOffset" })
                         : null),
@@ -55305,6 +55394,9 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                 }
             }
             _this.setState({ answers: answers, rightAnswers: rightAnswers });
+            if (isRight) {
+                _this.updateScores();
+            }
         };
         _this.htmlCommonPart = function () {
             var index = -1;
@@ -55346,11 +55438,20 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                 answers: [],
                 finished: false
             },
-            rightAnswers: rightAnswers
+            rightAnswers: rightAnswers,
+            scores: 0.0
         };
         _this.rightAnswers = _this.props.rightAnswers;
+        _this.setScoreWeight(_this.props.rightAnswers, _this.props.data.variants.length - _this.props.rightAnswers);
         return _this;
     }
+    CheckAnswerSolving.prototype.componentDidMount = function () {
+        this.updateScores();
+    };
+    CheckAnswerSolving.prototype.updateScores = function () {
+        var wrongVariants = this.state.varians.length - this.rightAnswers;
+        this.setScores(this.calcScores(this.state.answers.answers, this.rightAnswers, wrongVariants));
+    };
     CheckAnswerSolving.prototype.isDisabled = function (index, answer) {
         if (!this.state.answers) {
             return false;
@@ -55729,6 +55830,17 @@ var FillGapsSolving = /** @class */ (function (_super) {
     __extends(FillGapsSolving, _super);
     function FillGapsSolving(props) {
         var _this = _super.call(this, props) || this;
+        _this.gapsOnly = null;
+        _this.getGasOnly = function (arrayOfValues) {
+            var res = [];
+            for (var _i = 0, arrayOfValues_1 = arrayOfValues; _i < arrayOfValues_1.length; _i++) {
+                var element = arrayOfValues_1[_i];
+                if (typeof (element) !== "string") {
+                    res.push(element);
+                }
+            }
+            return res;
+        };
         _this.onSelectAnswer = function (locGapIndex, answer) {
             var answers = _this.state.answers;
             var isRight = _this.checkAnswerCallback(_this.state.questionIndex, locGapIndex + "->" + answer);
@@ -55748,6 +55860,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
                 }
             }
             _this.setState({ answers: answers, gasLeft: gasLeft });
+            _this.updateScores();
         };
         _this.getHeaderText = function () {
             return "Fill in the gaps";
@@ -55813,10 +55926,32 @@ var FillGapsSolving = /** @class */ (function (_super) {
                 map[parsed[0]].push({ answer: parsed[1], result: obj.result });
                 return map;
             }, {}) : {}),
-            gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length
+            gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length,
+            scores: 0.0,
+            gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length
         };
+        _this.state.answers.finished = (_this.props.result ? _this.props.result.finished : false);
+        _this.gapsOnly = _this.getGasOnly(_this.state.textWithGaps);
+        var totalVariants = 0;
+        _this.gapsOnly.forEach(function (gap) {
+            totalVariants += gap.variants.length;
+        });
+        _this.setScoreWeight(_this.props.rightAnswers, totalVariants - _this.props.rightAnswers);
         return _this;
     }
+    FillGapsSolving.prototype.componentDidMount = function () {
+        this.updateScores();
+    };
+    FillGapsSolving.prototype.updateScores = function () {
+        var scores = 0;
+        for (var key in this.state.answers) {
+            if (key != 'finished') {
+                var value = this.state.answers[key];
+                scores += this.calcScores(value, 1, this.gapsOnly[key].variants.length - 1) / this.state.gapsNum;
+            }
+        }
+        this.setScores(scores);
+    };
     return FillGapsSolving;
 }(base_solving_1.BaseSolving));
 exports.FillGapsSolving = FillGapsSolving;

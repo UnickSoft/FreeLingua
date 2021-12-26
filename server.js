@@ -1,6 +1,6 @@
 'use strict';
 
-let init = function (dbManager) {
+let init = function (dbManager, func) {
     log.info("Start init");
     try {
         let exists = dbManager.dbExists(config);
@@ -19,11 +19,12 @@ let init = function (dbManager) {
                     }
                 );
             }
+
+            func();
         });
     }
     catch (err) {
-        logError(err);
-        dbManager.removeDB();
+        log.error(err);        
     }
 }
 
@@ -54,41 +55,45 @@ try
     }));
     app.use(cookieParser());
 
-    init(dbManager);
 
-    let MetaRoute = require('./metaroute');
-    let metaRoute = new MetaRoute();
-    metaRoute.setDBManager(dbManager);
 
-    let AdminRoute = require('./adminroute');
-    let adminRoute = new AdminRoute();
-    adminRoute.setDBManager(dbManager);
+    let initAfterDataBase = function () {
+        let MetaRoute = require('./metaroute');
+        let metaRoute = new MetaRoute();
+        metaRoute.setDBManager(dbManager);
 
-    let OfficeRoute = require('./officeroute');
-    let officeRoute = new OfficeRoute();
-    officeRoute.setDBManager(dbManager);
+        let AdminRoute = require('./adminroute');
+        let adminRoute = new AdminRoute();
+        adminRoute.setDBManager(dbManager);
 
-    let ClassRoomRoute = require('./classroomroute');
-    let classroomRoute = new ClassRoomRoute();
-    classroomRoute.setDBManager(dbManager);
+        let OfficeRoute = require('./officeroute');
+        let officeRoute = new OfficeRoute();
+        officeRoute.setDBManager(dbManager);
 
-    app.use("/", metaRoute.getMetaRoute(express));
-    app.use("/admin", adminRoute.getAdminRoute(express));
-    app.use("/office", officeRoute.getOfficeRoute(express));
-    app.use("/classroom", classroomRoute.getClassroomRoute(express));
+        let ClassRoomRoute = require('./classroomroute');
+        let classroomRoute = new ClassRoomRoute();
+        classroomRoute.setDBManager(dbManager);
 
-    // Allows you to set port in the project properties.
-    app.set('port', process.env.PORT || 3000);
-    var server = null;
-    if (typeof (PhusionPassenger) != 'undefined') {
-        server = app.listen('passenger', function () {
-            log.info('listening');
-        });
-    } else {
-        server = app.listen(app.get('port'), function () {
-            log.info('listening');
-        });
+        app.use("/", metaRoute.getMetaRoute(express));
+        app.use("/admin", adminRoute.getAdminRoute(express));
+        app.use("/office", officeRoute.getOfficeRoute(express));
+        app.use("/classroom", classroomRoute.getClassroomRoute(express));
+
+        // Allows you to set port in the project properties.
+        app.set('port', process.env.PORT || 3000);
+        var server = null;
+        if (typeof (PhusionPassenger) != 'undefined') {
+            server = app.listen('passenger', function () {
+                log.info('listening');
+            });
+        } else {
+            server = app.listen(app.get('port'), function () {
+                log.info('listening');
+            });
+        }
     }
+
+    init(dbManager, initAfterDataBase);
 
 } catch (err) {
     console.error(err)

@@ -7,9 +7,12 @@ export class BaseSolving extends React.Component<any, any> {
 
     checkAnswerCallback = null;
     questionFinishCallback = null;
+    updateScoresCallback = null;
+    updateScoreWeight = null;
 
     state: {
         questionIndex: any,
+        scores: any
     }
 
     clone = (object) => {
@@ -27,9 +30,11 @@ export class BaseSolving extends React.Component<any, any> {
     constructor(props) {
         super(props);
 
-        this.state = { questionIndex: 0 };
+        this.state = { questionIndex: 0, scores: 0.0};
         this.checkAnswerCallback = this.props.checkAnswerCallback;
         this.questionFinishCallback = this.props.questionFinishCallback;
+        this.updateScoresCallback = this.props.updateScoresCallback;
+        this.updateScoreWeight = this.props.updateScoreWeight;
     }
 
     getHeaderText = () => {
@@ -40,8 +45,33 @@ export class BaseSolving extends React.Component<any, any> {
         return false;
     }
 
-    htmlCommonPart = () => {
+    htmlCommonPart = () => {     
         return null;
+    }
+
+    calcScores = (answersList, rightVariantsNum, wrongVariantsNum) => {
+        let wrongCount    = 0;
+        let oneQuestionCost = 1.0 / rightVariantsNum;
+        let scores = 0;
+        answersList.forEach((answer) => {
+            if (answer.result) {
+                scores += oneQuestionCost * (wrongVariantsNum - wrongCount) / wrongVariantsNum;
+            } else {
+                wrongCount++;
+            }
+        });
+
+        return scores;
+    }
+
+    // From 0 to 1.
+    setScores = (score) => {
+        this.setState({ scores: score });
+        this.updateScoresCallback(this.state.questionIndex, score);
+    }
+
+    setScoreWeight = (rightAnswer, wrongAnswer) => {
+        this.updateScoreWeight(this.state.questionIndex, rightAnswer, wrongAnswer);
     }
 
     render() {
@@ -51,6 +81,7 @@ export class BaseSolving extends React.Component<any, any> {
                     <h5 style={{ whiteSpace: "pre-wrap" }} className="secondLineOffset">
                         {(this.state.questionIndex + 1) + ". "}
                         {this.getHeaderText()}
+                        <span className="rightAnswer firstLineOffset scoresHeader"> {this.props.normalizedScores} </span>
                         {
                             this.isFinishedQuestions() ?
                                 <span className="pi p-ml-1 rightAnswer pi-check firstLineOffset" />

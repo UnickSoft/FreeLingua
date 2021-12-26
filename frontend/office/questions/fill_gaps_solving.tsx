@@ -26,8 +26,11 @@ export class FillGapsSolving extends BaseSolving {
         textWithGaps: any,
         questionIndex: any,
         answers: any, // {isRight: true/false, value: answer}
-        gasLeft: any
+        gasLeft: any,
+        scores: any,
+        gapsNum: any
     }
+    gapsOnly = null;
 
     constructor(props) {
         super(props);
@@ -43,8 +46,49 @@ export class FillGapsSolving extends BaseSolving {
                 map[parsed[0]].push({ answer: parsed[1], result: obj.result });
                 return map;
             }, {}) : {}),
-            gasLeft: this.props.data.textWithGaps.filter(x => typeof(x) !== 'string').length
+            gasLeft: this.props.data.textWithGaps.filter(x => typeof (x) !== 'string').length,
+            scores: 0.0,
+            gapsNum: this.props.data.textWithGaps.filter(answer => typeof (answer) !== "string").length
         };
+
+        this.state.answers.finished = (this.props.result ? this.props.result.finished : false);
+
+        this.gapsOnly = this.getGasOnly(this.state.textWithGaps);
+
+        let totalVariants = 0;
+        this.gapsOnly.forEach((gap) => {
+                totalVariants += gap.variants.length;
+            });
+
+        this.setScoreWeight(this.props.rightAnswers, totalVariants - this.props.rightAnswers);
+    }
+
+    componentDidMount() {
+        this.updateScores();
+    }
+
+    updateScores() {
+        let scores = 0;
+
+        for (const key in this.state.answers) {
+            if (key != 'finished') {
+                let value = this.state.answers[key];
+                scores += this.calcScores(value, 1, this.gapsOnly[key].variants.length - 1) / this.state.gapsNum;
+            }
+        }
+
+        this.setScores(scores);
+    }
+
+    getGasOnly = (arrayOfValues) => {
+        let res = [];
+
+        for (const element of arrayOfValues) {
+            if (typeof (element) !== "string") {
+                res.push(element);
+            }
+        }
+        return res;
     }
 
     onSelectAnswer = (locGapIndex, answer) => {
@@ -69,6 +113,7 @@ export class FillGapsSolving extends BaseSolving {
         }
 
         this.setState({ answers: answers, gasLeft: gasLeft });
+        this.updateScores();
     }
 
     getHeaderText = () => {

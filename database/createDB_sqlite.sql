@@ -28,7 +28,8 @@ CREATE TABLE task (
 	templateId integer,
 	gradeValue integer,
 	gradeMax integer,
-	isFinished boolean
+	isFinished boolean,
+	isExamMode boolean
 );
 
 CREATE TABLE shareLink (

@@ -24,6 +24,7 @@ export class CheckAnswerSolving extends BaseSolving {
         questionIndex: any,
         answers: any
         rightAnswers: any
+        scores: any
     }
     rightAnswers = 0
 
@@ -44,10 +45,22 @@ export class CheckAnswerSolving extends BaseSolving {
                     answers: [],
                     finished: false
             },
-            rightAnswers: rightAnswers
+            rightAnswers: rightAnswers,
+            scores: 0.0
         };
 
-        this.rightAnswers        = this.props.rightAnswers;
+        this.rightAnswers = this.props.rightAnswers;
+
+        this.setScoreWeight(this.props.rightAnswers, this.props.data.variants.length - this.props.rightAnswers);
+    }
+
+    componentDidMount() {
+        this.updateScores();
+    }
+
+    updateScores() {
+        let wrongVariants = this.state.varians.length - this.rightAnswers;
+        this.setScores(this.calcScores(this.state.answers.answers, this.rightAnswers, wrongVariants));
     }
 
     isDisabled(index, answer) {
@@ -98,6 +111,9 @@ export class CheckAnswerSolving extends BaseSolving {
         }
 
         this.setState({ answers: answers, rightAnswers: rightAnswers });
+        if (isRight) {
+            this.updateScores();
+        }
     }
 
     htmlCommonPart = () => {
