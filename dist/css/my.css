@@ -172,6 +172,17 @@ section {
 }
 
 
+#officeNav a {
+    background-color: rgb(141, 208, 255);
+    border: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
 .solvingTask {
     margin-top: 4px;
     margin-bottom: 16px;
@@ -187,15 +198,14 @@ section {
     font-weight: bold;
 }
 
-#officeNav a {
-    background-color: rgb(141, 208, 255);
-    border: none;
-    color: black;
-    padding: 8px 12px;
-    margin: 4px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+.wrongDropDown:after {
+    content: "\274C";
+    margin-left: 6px;
+}
+
+.rightDropDown:after {
+    content: "\2705";
+    margin-left: 6px;
 }
 
 .fillGapsSolving {

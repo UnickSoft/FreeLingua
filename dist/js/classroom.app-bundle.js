@@ -47373,7 +47373,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
                 }
                 else {
                     gapIndex++;
-                    var enabled_1 = true;
+                    var finished_1 = false;
                     var answered = [];
                     var results_1 = {};
                     var currentValue_1 = "";
@@ -47382,7 +47382,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
                     }
                     var lastAnswer_1 = null;
                     answered.forEach(function (value) {
-                        enabled_1 = !value.result;
+                        finished_1 = value.result || finished_1;
                         currentValue_1 = value.answer;
                         results_1[value.answer] = value.result;
                         lastAnswer_1 = value.result;
@@ -47394,13 +47394,16 @@ var FillGapsSolving = /** @class */ (function (_super) {
                         var variant = _a[_i];
                         maxLength = Math.max(maxLength, variant.length);
                         selectionOptions.push({ label: variant, value: variant });
-                        if (variant in results_1) {
+                        if (variant in results_1 || finished_1) {
                             selectionOptions[selectionOptions.length - 1].disabled = true;
+                            if (variant in results_1) {
+                                selectionOptions[selectionOptions.length - 1].className = results_1[variant] ? "rightDropDown" : "wrongDropDown";
+                            }
                         }
                     }
                     maxLength += 4.5;
                     var bkColor = lastAnswer_1 != null && !lastAnswer_1 ? '#fb8182' : null;
-                    return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, disabled: !enabled_1, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#fb8182' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
+                    return (React.createElement(dropdown_1.Dropdown, { value: currentValue_1, name: "gap" + localGapIndex_1, options: selectionOptions, placeholder: "Select", onChange: function (e) { return self.onSelectAnswer(localGapIndex_1, e.value); }, key: locIndex, style: { width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#fb8182' }, dropdownIcon: lastAnswer_1 != null ? (lastAnswer_1 ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down" }));
                 }
             });
             return (React.createElement("div", { className: "fillGapsSolving firstLineOffset" },

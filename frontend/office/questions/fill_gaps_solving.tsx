@@ -138,7 +138,7 @@ export class FillGapsSolving extends BaseSolving {
             } else {
                 gapIndex++;
 
-                let enabled = true;
+                let finished = false;
                 let answered = [];
                 let results = {};
                 let currentValue = "";
@@ -147,7 +147,7 @@ export class FillGapsSolving extends BaseSolving {
                 }
                 let lastAnswer = null;
                 answered.forEach((value) => {
-                    enabled = !value.result;
+                    finished = value.result || finished;
                     currentValue = value.answer;
                     results[value.answer] = value.result;
                     lastAnswer = value.result;
@@ -159,15 +159,17 @@ export class FillGapsSolving extends BaseSolving {
                 for (const variant of answer.variants) {
                     maxLength = Math.max(maxLength, variant.length);
                     selectionOptions.push({ label: variant, value: variant });
-                    if (variant in results) {
+                    if (variant in results || finished) {
                         selectionOptions[selectionOptions.length - 1].disabled = true;
+                        if (variant in results) {
+                            selectionOptions[selectionOptions.length - 1].className = results[variant] ? "rightDropDown" : "wrongDropDown";
+                        }
                     }
                 }
                 maxLength += 4.5;
                 let bkColor = lastAnswer != null && !lastAnswer ? '#fb8182' : null;
                 return (<Dropdown value={currentValue} name={"gap" + localGapIndex}
                     options={selectionOptions} placeholder="Select" onChange={(e) => self.onSelectAnswer(localGapIndex, e.value)}
-                    disabled={!enabled}
                     key={locIndex}
                     style={{ width: maxLength + 'ch', display: 'inline-flex', opacity: 1.0, backgroundColor: bkColor != null && '#fb8182' }}
                     dropdownIcon={lastAnswer != null ? (lastAnswer ? "pi pi-check rightAnswer" : "pi pi-chevron-down") : "pi pi-chevron-down"}
