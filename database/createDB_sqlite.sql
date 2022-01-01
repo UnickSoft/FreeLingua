@@ -40,7 +40,8 @@ CREATE TABLE shareLink (
 	templateId integer,
 	createDate datetime,
 	deleteDate datetime,
-	taskId binary
+	taskId binary,
+	isExamMode boolean
 );
 
 CREATE TABLE templateVersion (

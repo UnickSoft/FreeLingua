@@ -8,7 +8,7 @@ class Tasks {
     Table         = "task"
     TableVersions = "templateVersion"
 
-    addTask(ownerId, templateData, userId, func) {
+    addTask(ownerId, templateData, isExamMode, userId, func) {
         let self = this;
 
         let where = [
@@ -23,7 +23,8 @@ class Tasks {
                 { name: "templateId", value: templateId },
                 { name: "gradeValue", value: 0 },
                 { name: "gradeMax", value: 0 },
-                { name: "isFinished", value: false }
+                { name: "isFinished", value: false },
+                { name: "isExamMode", value: isExamMode }
             ];
 
             self.dbWrapper.insert_or_replace(self.Table, taskData, function (success, dbSelf) {

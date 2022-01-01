@@ -25,7 +25,7 @@ class ClassroomRoute {
             let insertTaskAndReturn = function (linkData) {
                 templates.getTemplate(linkData.ownerId, linkData.templateId, function (success, templateData) {
                     if (success && templateData) {
-                        tasks.addTask(linkData.ownerId, templateData, null,  function (success, taskData) {
+                        tasks.addTask(linkData.ownerId, templateData, linkData.isExamMode, null,  function (success, taskData) {
                             if (success) {
                                 links.updateTaskId(linkData.id, taskData.id, function (success) {
                                     if (success) {

@@ -12,7 +12,8 @@ export class BaseSolving extends React.Component<any, any> {
 
     state: {
         questionIndex: any,
-        scores: any
+        scores: any,
+        isExamMode: any
     }
 
     clone = (object) => {
@@ -30,7 +31,7 @@ export class BaseSolving extends React.Component<any, any> {
     constructor(props) {
         super(props);
 
-        this.state = { questionIndex: 0, scores: 0.0};
+        this.state = { questionIndex: 0, scores: 0.0, isExamMode: this.props.isExamMode};
         this.checkAnswerCallback = this.props.checkAnswerCallback;
         this.questionFinishCallback = this.props.questionFinishCallback;
         this.updateScoresCallback = this.props.updateScoresCallback;
@@ -72,6 +73,16 @@ export class BaseSolving extends React.Component<any, any> {
 
     setScoreWeight = (rightAnswer, wrongAnswer) => {
         this.updateScoreWeight(this.state.questionIndex, rightAnswer, wrongAnswer);
+    }
+
+    shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
     }
 
     render() {

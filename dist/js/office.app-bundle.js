@@ -54315,7 +54315,7 @@ var TaskSolving = /** @class */ (function (_super) {
         var _this = this;
         if (this.state.linkId || this.state.templateId) {
             (function () { return __awaiter(_this, void 0, void 0, function () {
-                var mistakes, remainingAnswers, taskData, templateData, title;
+                var mistakes, remainingAnswers, taskData, templateData, title, isExamMode;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -54324,6 +54324,7 @@ var TaskSolving = /** @class */ (function (_super) {
                             taskData = null;
                             templateData = null;
                             title = "";
+                            isExamMode = false;
                             if (!this.state.linkId) return [3 /*break*/, 2];
                             return [4 /*yield*/, questionManager_1.default.getTaskByLink(this.state.linkId)];
                         case 1:
@@ -54331,6 +54332,7 @@ var TaskSolving = /** @class */ (function (_super) {
                             remainingAnswers = taskData.template_data.length;
                             templateData = taskData.template_data;
                             title = taskData.title;
+                            isExamMode = taskData.isExamMode == true;
                             return [3 /*break*/, 4];
                         case 2:
                             if (!this.state.templateId) return [3 /*break*/, 4];
@@ -54358,7 +54360,8 @@ var TaskSolving = /** @class */ (function (_super) {
                                     remainingAnswers: remainingAnswers,
                                     mistakes: mistakes,
                                     templateData: templateData,
-                                    title: title
+                                    title: title,
+                                    isExamMode: isExamMode
                                 });
                             }
                             else {
@@ -54391,7 +54394,8 @@ var TaskSolving = /** @class */ (function (_super) {
             title: "",
             scores: null,
             scoresWeight: null,
-            totalScoreWeight: 0
+            totalScoreWeight: 0,
+            isExamMode: false
         };
     };
     TaskSolving.prototype.initResults = function () {
@@ -54498,7 +54502,7 @@ var TaskSolving = /** @class */ (function (_super) {
             return (React.createElement("div", { className: "solvingTask", key: locIndex },
                 React.createElement(question_sloving_decorator_1.default, { questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); }, updateScoresCallback: function (questionIndex, score) { return self.updateQuestionScore(questionIndex, score); }, updateScoreWeight: function (questionIndex, rightAnswers, wrongAnswers) { return self.updateScoreWeight(questionIndex, rightAnswers, wrongAnswers); }, normalizedScores: (self.state.scores && self.state.totalScoreWeight > 0) ?
                         self.displayScores(self.state.scores[index] * self.state.scoresWeight[index] / self.state.totalScoreWeight) :
-                        0.0 })));
+                        0.0, isExamMode: self.state.isExamMode })));
         });
     };
     TaskSolving.prototype.render = function () {
@@ -54854,14 +54858,14 @@ var QuestionManager = {
             });
         });
     },
-    saveShareLink: function (templateId, shareLinkTitle, lifeTime) {
+    saveShareLink: function (templateId, shareLinkTitle, lifeTime, isExamMode) {
         return __awaiter(this, void 0, void 0, function () {
             var response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime })];
+                        return [4 /*yield*/, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode })];
                     case 1:
                         response = _a.sent();
                         return [3 /*break*/, 3];
@@ -55135,7 +55139,16 @@ var BaseSolving = /** @class */ (function (_super) {
         _this.setScoreWeight = function (rightAnswer, wrongAnswer) {
             _this.updateScoreWeight(_this.state.questionIndex, rightAnswer, wrongAnswer);
         };
-        _this.state = { questionIndex: 0, scores: 0.0 };
+        _this.shuffleArray = function (array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        };
+        _this.state = { questionIndex: 0, scores: 0.0, isExamMode: _this.props.isExamMode };
         _this.checkAnswerCallback = _this.props.checkAnswerCallback;
         _this.questionFinishCallback = _this.props.questionFinishCallback;
         _this.updateScoresCallback = _this.props.updateScoresCallback;
@@ -55393,6 +55406,10 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                     _this.questionFinishCallback(_this.state.questionIndex);
                 }
             }
+            else if (_this.state.isExamMode) {
+                answers.finished = true;
+                _this.questionFinishCallback(_this.state.questionIndex);
+            }
             _this.setState({ answers: answers, rightAnswers: rightAnswers });
             if (isRight) {
                 _this.updateScores();
@@ -55431,7 +55448,7 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
         }
         _this.state = {
             question: _this.props.data.question,
-            varians: _this.props.data.variants,
+            varians: _this.shuffleArray(_this.props.data.variants),
             answerType: _this.props.data.answerType,
             questionIndex: _this.props.questionIndex,
             answers: _this.props.result ? _this.clone(_this.props.result) : {
@@ -55439,7 +55456,8 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                 finished: false
             },
             rightAnswers: rightAnswers,
-            scores: 0.0
+            scores: 0.0,
+            isExamMode: _this.props.isExamMode
         };
         _this.rightAnswers = _this.props.rightAnswers;
         _this.setScoreWeight(_this.props.rightAnswers, _this.props.data.variants.length - _this.props.rightAnswers);
@@ -55859,6 +55877,13 @@ var FillGapsSolving = /** @class */ (function (_super) {
                     _this.questionFinishCallback(_this.state.questionIndex);
                 }
             }
+            else if (_this.state.isExamMode) {
+                gasLeft--;
+                if (gasLeft == 0) {
+                    answers.finished = true;
+                    _this.questionFinishCallback(_this.state.questionIndex);
+                }
+            }
             _this.setState({ answers: answers, gasLeft: gasLeft });
             _this.updateScores();
         };
@@ -55901,7 +55926,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
                         var variant = _a[_i];
                         maxLength = Math.max(maxLength, variant.length);
                         selectionOptions.push({ label: variant, value: variant });
-                        if (variant in results_1 || finished_1) {
+                        if ((variant in results_1 || finished_1) || (self.state.isExamMode && answered.length > 0)) {
                             selectionOptions[selectionOptions.length - 1].disabled = true;
                             if (variant in results_1) {
                                 selectionOptions[selectionOptions.length - 1].className = results_1[variant] ? "rightDropDown" : "wrongDropDown";
@@ -55931,13 +55956,17 @@ var FillGapsSolving = /** @class */ (function (_super) {
             }, {}) : {}),
             gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length,
             scores: 0.0,
-            gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length
+            gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length,
+            isExamMode: _this.props.isExamMode
         };
         _this.state.answers.finished = (_this.props.result ? _this.props.result.finished : false);
         _this.gapsOnly = _this.getGasOnly(_this.state.textWithGaps);
         var totalVariants = 0;
+        var self = _this;
         _this.gapsOnly.forEach(function (gap) {
             totalVariants += gap.variants.length;
+            // Shufle ansvers.
+            self.shuffleArray(gap.variants);
         });
         _this.setScoreWeight(_this.props.rightAnswers, totalVariants - _this.props.rightAnswers);
         return _this;
@@ -56108,6 +56137,7 @@ var questionManager_1 = __webpack_require__(/*! ./questionManager */ "../../..!N
 var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js");
 var dialog_1 = __webpack_require__(/*! primereact/dialog */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dialog\\dialog.esm.js");
 var selectbutton_1 = __webpack_require__(/*! primereact/selectbutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\selectbutton\\selectbutton.esm.js");
+var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var ShareLinkDialog = /** @class */ (function (_super) {
     __extends(ShareLinkDialog, _super);
@@ -56123,7 +56153,7 @@ var ShareLinkDialog = /** @class */ (function (_super) {
                 var linkId;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, questionManager_1.default.saveShareLink(this.state.templateId, this.state.shareLinkTitle, this.state.lifeTime)];
+                        case 0: return [4 /*yield*/, questionManager_1.default.saveShareLink(this.state.templateId, this.state.shareLinkTitle, this.state.lifeTime, this.state.isExamMode)];
                         case 1:
                             linkId = _a.sent();
                             this.setState({ shareLinkId: linkId });
@@ -56137,11 +56167,15 @@ var ShareLinkDialog = /** @class */ (function (_super) {
                 React.createElement(button_1.Button, { label: "Close", icon: "pi pi-times", onClick: function () { return _this.hideCallback(); }, className: "p-button-text" }),
                 React.createElement(button_1.Button, { label: "Save and Get Link", icon: "pi pi-check", onClick: function () { return _this.saveShareLink(); }, autoFocus: true })));
         };
+        _this.onExamModeChanged = function (e) {
+            _this.setState({ isExamMode: e.checked });
+        };
         _this.state = {
             templateId: props.templateId,
             lifeTime: _this.lifeTimes[0].value,
             shareLinkTitle: props.templateTitle + " for ",
-            shareLinkId: null
+            shareLinkId: null,
+            isExamMode: false
         };
         _this.hideCallback = props.hideCallback;
         return _this;
@@ -56157,6 +56191,9 @@ var ShareLinkDialog = /** @class */ (function (_super) {
                         React.createElement(inputtext_1.InputText, { id: "taskName", type: "text", onChange: function (e) { return _this.setState({ shareLinkTitle: e.target.value }); }, value: this.state.shareLinkTitle }),
                         React.createElement("label", { htmlFor: "taskName" }, "Link life time"),
                         React.createElement(selectbutton_1.SelectButton, { optionLabel: "name", value: this.state.lifeTime, options: this.lifeTimes }),
+                        React.createElement("div", { className: "p-field-checkbox p-mt-2" },
+                            React.createElement(checkbox_1.Checkbox, { inputId: "examMode", value: "ExamMode", onChange: this.onExamModeChanged, checked: this.state.isExamMode }),
+                            React.createElement("label", { htmlFor: "examMode", className: "p-checkbox-label" }, "Is Exam Mode (In Exam Mode student have one try to answer)")),
                         React.createElement("label", { htmlFor: "taskName" }, "Link to task (will appeares after save)"),
                         React.createElement(inputtext_1.InputText, { id: "taskName", type: "text", value: this.state.shareLinkId != null ? window.location.origin.toString() + "/classroom/link/" + this.state.shareLinkId : "" }))))));
     };

@@ -22,9 +22,10 @@ export class CheckAnswerSolving extends BaseSolving {
         varians: any,
         answerType: any,
         questionIndex: any,
-        answers: any
-        rightAnswers: any
-        scores: any
+        answers: any,
+        rightAnswers: any,
+        scores: any,
+        isExamMode: any
     }
     rightAnswers = 0
 
@@ -38,7 +39,7 @@ export class CheckAnswerSolving extends BaseSolving {
 
         this.state = {
             question: this.props.data.question,
-            varians: this.props.data.variants,
+            varians: this.shuffleArray(this.props.data.variants),
             answerType: this.props.data.answerType,
             questionIndex: this.props.questionIndex,
             answers: this.props.result ? this.clone(this.props.result) : {
@@ -46,7 +47,8 @@ export class CheckAnswerSolving extends BaseSolving {
                     finished: false
             },
             rightAnswers: rightAnswers,
-            scores: 0.0
+            scores: 0.0,
+            isExamMode: this.props.isExamMode
         };
 
         this.rightAnswers = this.props.rightAnswers;
@@ -108,6 +110,9 @@ export class CheckAnswerSolving extends BaseSolving {
                 answers.finished = true;
                 this.questionFinishCallback(this.state.questionIndex);
             }
+        } else if (this.state.isExamMode) {
+            answers.finished = true;
+            this.questionFinishCallback(this.state.questionIndex);
         }
 
         this.setState({ answers: answers, rightAnswers: rightAnswers });

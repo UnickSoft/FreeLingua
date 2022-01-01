@@ -91,7 +91,7 @@ class OfficeRoute {
         router.post('/add_sharelink', function (req, res, next) {
             var session = req.session;
 
-            links.addLink(session.userInfo.id, req.body.templateId, req.body.title, req.body.lifeTime,
+            links.addLink(session.userInfo.id, req.body.templateId, req.body.title, req.body.lifeTime, req.body.isExamMode,
                 function (success, linkId) {
                     if (success)
                         res.send({ success: success, linkId: linkId });

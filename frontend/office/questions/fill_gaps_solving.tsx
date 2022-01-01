@@ -28,7 +28,8 @@ export class FillGapsSolving extends BaseSolving {
         answers: any, // {isRight: true/false, value: answer}
         gasLeft: any,
         scores: any,
-        gapsNum: any
+        gapsNum: any,
+        isExamMode: any
     }
     gapsOnly = null;
 
@@ -48,7 +49,8 @@ export class FillGapsSolving extends BaseSolving {
             }, {}) : {}),
             gasLeft: this.props.data.textWithGaps.filter(x => typeof (x) !== 'string').length,
             scores: 0.0,
-            gapsNum: this.props.data.textWithGaps.filter(answer => typeof (answer) !== "string").length
+            gapsNum: this.props.data.textWithGaps.filter(answer => typeof (answer) !== "string").length,
+            isExamMode: this.props.isExamMode
         };
 
         this.state.answers.finished = (this.props.result ? this.props.result.finished : false);
@@ -56,8 +58,11 @@ export class FillGapsSolving extends BaseSolving {
         this.gapsOnly = this.getGasOnly(this.state.textWithGaps);
 
         let totalVariants = 0;
+        let self = this;
         this.gapsOnly.forEach((gap) => {
                 totalVariants += gap.variants.length;
+                // Shuffle variants.
+                self.shuffleArray(gap.variants);
             });
 
         this.setScoreWeight(this.props.rightAnswers, totalVariants - this.props.rightAnswers);
@@ -105,6 +110,12 @@ export class FillGapsSolving extends BaseSolving {
 
         let gasLeft = this.state.gasLeft;
         if (isRight) {
+            gasLeft--;
+            if (gasLeft == 0) {
+                answers.finished = true;
+                this.questionFinishCallback(this.state.questionIndex);
+            }
+        } else if (this.state.isExamMode) {
             gasLeft--;
             if (gasLeft == 0) {
                 answers.finished = true;
@@ -159,7 +170,7 @@ export class FillGapsSolving extends BaseSolving {
                 for (const variant of answer.variants) {
                     maxLength = Math.max(maxLength, variant.length);
                     selectionOptions.push({ label: variant, value: variant });
-                    if (variant in results || finished) {
+                    if ((variant in results || finished) || (self.state.isExamMode && answered.length > 0)) {
                         selectionOptions[selectionOptions.length - 1].disabled = true;
                         if (variant in results) {
                             selectionOptions[selectionOptions.length - 1].className = results[variant] ? "rightDropDown" : "wrongDropDown";

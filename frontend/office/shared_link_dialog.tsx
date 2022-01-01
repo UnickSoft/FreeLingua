@@ -6,6 +6,7 @@ import questionManager         from './questionManager'
 import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
 import { SelectButton } from 'primereact/selectbutton';
+import { Checkbox } from 'primereact/checkbox';
 
 var ReactDOM = require('react-dom');
 
@@ -15,6 +16,7 @@ export class ShareLinkDialog extends React.Component<any, any> {
         lifeTime: any
         shareLinkTitle: any
         shareLinkId: any
+        isExamMode: any
     };
 
     lifeTimes = [
@@ -30,7 +32,8 @@ export class ShareLinkDialog extends React.Component<any, any> {
             templateId: props.templateId,
             lifeTime: this.lifeTimes[0].value,
             shareLinkTitle: props.templateTitle + " for ",
-            shareLinkId: null
+            shareLinkId: null,
+            isExamMode: false
         };
 
         this.hideCallback = props.hideCallback;
@@ -39,7 +42,7 @@ export class ShareLinkDialog extends React.Component<any, any> {
     saveShareLink = () => {
         let self = this;
         (async () => {
-            let linkId = await questionManager.saveShareLink(this.state.templateId, this.state.shareLinkTitle, this.state.lifeTime);
+            let linkId = await questionManager.saveShareLink(this.state.templateId, this.state.shareLinkTitle, this.state.lifeTime, this.state.isExamMode);
             this.setState({ shareLinkId: linkId });
         })()
     }
@@ -51,6 +54,10 @@ export class ShareLinkDialog extends React.Component<any, any> {
                 <Button label="Save and Get Link" icon="pi pi-check" onClick={() => this.saveShareLink()} autoFocus />
             </div>
         );
+    }
+
+    onExamModeChanged = (e) => {
+        this.setState({ isExamMode: e.checked });
     }
 
     render() {
@@ -65,6 +72,10 @@ export class ShareLinkDialog extends React.Component<any, any> {
                         <InputText id="taskName" type="text" onChange={(e) => this.setState({ shareLinkTitle: e.target.value })} value={this.state.shareLinkTitle} />
                         <label htmlFor="taskName">Link life time</label>
                         <SelectButton optionLabel="name" value={this.state.lifeTime} options={this.lifeTimes}></SelectButton>
+                        <div className="p-field-checkbox p-mt-2">
+                            <Checkbox inputId="examMode" value="ExamMode" onChange={this.onExamModeChanged} checked={this.state.isExamMode}></Checkbox>
+                            <label htmlFor="examMode" className="p-checkbox-label">Is Exam Mode (In Exam Mode student have one try to answer)</label>
+                        </div>
                         <label htmlFor="taskName">Link to task (will appeares after save)</label>
                         <InputText id="taskName" type="text"
                             value={this.state.shareLinkId != null ? window.location.origin.toString() + "/classroom/link/" + this.state.shareLinkId : ""} />

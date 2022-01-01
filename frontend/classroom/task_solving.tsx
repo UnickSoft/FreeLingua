@@ -29,7 +29,8 @@ export class TaskSolving extends React.Component<any, any> {
         scores: any;
         scoresWeight: any;
         totalScoreWeight: any;
-        title: any
+        title: any,
+        isExamMode: any
     };
 
     localCheck = true;
@@ -58,12 +59,14 @@ export class TaskSolving extends React.Component<any, any> {
                 let taskData    = null;
                 let templateData = null;
                 let title = "";
+                let isExamMode = false;
 
                 if (this.state.linkId) {
                     taskData = await questionManager.getTaskByLink(this.state.linkId);
                     remainingAnswers = taskData.template_data.length;
                     templateData = taskData.template_data;
                     title = taskData.title;
+                    isExamMode = taskData.isExamMode == true;
                 } else if (this.state.templateId) {
                     templateData = await questionManager.getTaskTemplate(this.state.templateId);
                     title = templateData.title;
@@ -87,7 +90,8 @@ export class TaskSolving extends React.Component<any, any> {
                         remainingAnswers: remainingAnswers,
                         mistakes: mistakes,
                         templateData: templateData,
-                        title: title
+                        title: title,
+                        isExamMode: isExamMode
                     });
                 } else {
                     this.setState({
@@ -118,7 +122,8 @@ export class TaskSolving extends React.Component<any, any> {
             title: "",
             scores: null,
             scoresWeight: null,
-            totalScoreWeight: 0
+            totalScoreWeight: 0,
+            isExamMode: false
         };
     }
 
@@ -248,6 +253,7 @@ export class TaskSolving extends React.Component<any, any> {
                         normalizedScores={(self.state.scores && self.state.totalScoreWeight > 0) ?
                             self.displayScores(self.state.scores[index] * self.state.scoresWeight[index] / self.state.totalScoreWeight) :
                             0.0}
+                        isExamMode={self.state.isExamMode}
                         />
                 </div>
             )

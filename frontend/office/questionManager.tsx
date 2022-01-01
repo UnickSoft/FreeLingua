@@ -41,11 +41,11 @@ const QuestionManager = {
         return [];
     },
 
-    saveShareLink: async function (templateId, shareLinkTitle, lifeTime) {
+    saveShareLink: async function (templateId, shareLinkTitle, lifeTime, isExamMode) {
         let response;
         try {
             response = await axios.post("/office/add_sharelink",
-                { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime });
+                { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode });
         } catch (error) {
             // handle error
             console.log(error);

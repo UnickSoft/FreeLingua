@@ -46357,7 +46357,7 @@ var TaskSolving = /** @class */ (function (_super) {
         var _this = this;
         if (this.state.linkId || this.state.templateId) {
             (function () { return __awaiter(_this, void 0, void 0, function () {
-                var mistakes, remainingAnswers, taskData, templateData, title;
+                var mistakes, remainingAnswers, taskData, templateData, title, isExamMode;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -46366,6 +46366,7 @@ var TaskSolving = /** @class */ (function (_super) {
                             taskData = null;
                             templateData = null;
                             title = "";
+                            isExamMode = false;
                             if (!this.state.linkId) return [3 /*break*/, 2];
                             return [4 /*yield*/, questionManager_1.default.getTaskByLink(this.state.linkId)];
                         case 1:
@@ -46373,6 +46374,7 @@ var TaskSolving = /** @class */ (function (_super) {
                             remainingAnswers = taskData.template_data.length;
                             templateData = taskData.template_data;
                             title = taskData.title;
+                            isExamMode = taskData.isExamMode == true;
                             return [3 /*break*/, 4];
                         case 2:
                             if (!this.state.templateId) return [3 /*break*/, 4];
@@ -46400,7 +46402,8 @@ var TaskSolving = /** @class */ (function (_super) {
                                     remainingAnswers: remainingAnswers,
                                     mistakes: mistakes,
                                     templateData: templateData,
-                                    title: title
+                                    title: title,
+                                    isExamMode: isExamMode
                                 });
                             }
                             else {
@@ -46433,7 +46436,8 @@ var TaskSolving = /** @class */ (function (_super) {
             title: "",
             scores: null,
             scoresWeight: null,
-            totalScoreWeight: 0
+            totalScoreWeight: 0,
+            isExamMode: false
         };
     };
     TaskSolving.prototype.initResults = function () {
@@ -46540,7 +46544,7 @@ var TaskSolving = /** @class */ (function (_super) {
             return (React.createElement("div", { className: "solvingTask", key: locIndex },
                 React.createElement(question_sloving_decorator_1.default, { questionType: question.type, questionIndex: locIndex, data: question.data, result: !self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null, checkAnswerCallback: function (questionIndex, answer) { return self.checkAnswer(questionIndex, answer); }, rightAnswers: self.state.templateData[locIndex].data.answers.length, questionFinishCallback: function (questionIndex) { return self.questionFinish(questionIndex); }, updateScoresCallback: function (questionIndex, score) { return self.updateQuestionScore(questionIndex, score); }, updateScoreWeight: function (questionIndex, rightAnswers, wrongAnswers) { return self.updateScoreWeight(questionIndex, rightAnswers, wrongAnswers); }, normalizedScores: (self.state.scores && self.state.totalScoreWeight > 0) ?
                         self.displayScores(self.state.scores[index] * self.state.scoresWeight[index] / self.state.totalScoreWeight) :
-                        0.0 })));
+                        0.0, isExamMode: self.state.isExamMode })));
         });
     };
     TaskSolving.prototype.render = function () {
@@ -46944,14 +46948,14 @@ var QuestionManager = {
             });
         });
     },
-    saveShareLink: function (templateId, shareLinkTitle, lifeTime) {
+    saveShareLink: function (templateId, shareLinkTitle, lifeTime, isExamMode) {
         return __awaiter(this, void 0, void 0, function () {
             var response, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime })];
+                        return [4 /*yield*/, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode })];
                     case 1:
                         response = _a.sent();
                         return [3 /*break*/, 3];
@@ -47106,7 +47110,16 @@ var BaseSolving = /** @class */ (function (_super) {
         _this.setScoreWeight = function (rightAnswer, wrongAnswer) {
             _this.updateScoreWeight(_this.state.questionIndex, rightAnswer, wrongAnswer);
         };
-        _this.state = { questionIndex: 0, scores: 0.0 };
+        _this.shuffleArray = function (array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        };
+        _this.state = { questionIndex: 0, scores: 0.0, isExamMode: _this.props.isExamMode };
         _this.checkAnswerCallback = _this.props.checkAnswerCallback;
         _this.questionFinishCallback = _this.props.questionFinishCallback;
         _this.updateScoresCallback = _this.props.updateScoresCallback;
@@ -47193,6 +47206,10 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                     _this.questionFinishCallback(_this.state.questionIndex);
                 }
             }
+            else if (_this.state.isExamMode) {
+                answers.finished = true;
+                _this.questionFinishCallback(_this.state.questionIndex);
+            }
             _this.setState({ answers: answers, rightAnswers: rightAnswers });
             if (isRight) {
                 _this.updateScores();
@@ -47231,7 +47248,7 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
         }
         _this.state = {
             question: _this.props.data.question,
-            varians: _this.props.data.variants,
+            varians: _this.shuffleArray(_this.props.data.variants),
             answerType: _this.props.data.answerType,
             questionIndex: _this.props.questionIndex,
             answers: _this.props.result ? _this.clone(_this.props.result) : {
@@ -47239,7 +47256,8 @@ var CheckAnswerSolving = /** @class */ (function (_super) {
                 finished: false
             },
             rightAnswers: rightAnswers,
-            scores: 0.0
+            scores: 0.0,
+            isExamMode: _this.props.isExamMode
         };
         _this.rightAnswers = _this.props.rightAnswers;
         _this.setScoreWeight(_this.props.rightAnswers, _this.props.data.variants.length - _this.props.rightAnswers);
@@ -47352,6 +47370,13 @@ var FillGapsSolving = /** @class */ (function (_super) {
                     _this.questionFinishCallback(_this.state.questionIndex);
                 }
             }
+            else if (_this.state.isExamMode) {
+                gasLeft--;
+                if (gasLeft == 0) {
+                    answers.finished = true;
+                    _this.questionFinishCallback(_this.state.questionIndex);
+                }
+            }
             _this.setState({ answers: answers, gasLeft: gasLeft });
             _this.updateScores();
         };
@@ -47394,7 +47419,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
                         var variant = _a[_i];
                         maxLength = Math.max(maxLength, variant.length);
                         selectionOptions.push({ label: variant, value: variant });
-                        if (variant in results_1 || finished_1) {
+                        if ((variant in results_1 || finished_1) || (self.state.isExamMode && answered.length > 0)) {
                             selectionOptions[selectionOptions.length - 1].disabled = true;
                             if (variant in results_1) {
                                 selectionOptions[selectionOptions.length - 1].className = results_1[variant] ? "rightDropDown" : "wrongDropDown";
@@ -47424,13 +47449,17 @@ var FillGapsSolving = /** @class */ (function (_super) {
             }, {}) : {}),
             gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length,
             scores: 0.0,
-            gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length
+            gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length,
+            isExamMode: _this.props.isExamMode
         };
         _this.state.answers.finished = (_this.props.result ? _this.props.result.finished : false);
         _this.gapsOnly = _this.getGasOnly(_this.state.textWithGaps);
         var totalVariants = 0;
+        var self = _this;
         _this.gapsOnly.forEach(function (gap) {
             totalVariants += gap.variants.length;
+            // Shufle ansvers.
+            self.shuffleArray(gap.variants);
         });
         _this.setScoreWeight(_this.props.rightAnswers, totalVariants - _this.props.rightAnswers);
         return _this;

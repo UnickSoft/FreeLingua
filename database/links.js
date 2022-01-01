@@ -26,7 +26,7 @@ class Links {
         })
     }
 
-    addLink(userId, templateId, title, lifeTime, func) {
+    addLink(userId, templateId, title, lifeTime, isExamMode, func) {
         let self = this;
         this.dbWrapper.select_one(this.Table, [{ name: "ownerId", value: userId }, { name: "id", value: templateId }],
             function (success, row) {
@@ -40,7 +40,8 @@ class Links {
                         { name: "link", value: linkId },
                         { name: "templateId", value: templateId },
                         { name: "createDate", value: Date.now() },
-                        { name: "deleteDate", value: Date.now() + lifeTime}
+                        { name: "deleteDate", value: Date.now() + lifeTime },
+                        { name: "isExamMode", value: isExamMode}
                     ];
                     self.dbWrapper.insert_or_replace(self.Table,
                         values,
