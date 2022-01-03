@@ -52199,6 +52199,98 @@ exports.default = AddUser;
 
 /***/ }),
 
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\admin\\system_tools.tsx":
+/*!*******************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\admin\system_tools.tsx ***!
+  \*******************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
+var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+var SystemTools = /** @class */ (function (_super) {
+    __extends(SystemTools, _super);
+    function SystemTools(props) {
+        var _this = _super.call(this, props) || this;
+        _this.findUselessData = function (e) {
+            var self = _this;
+            axios.post("/admin/get_cleanup_rows", {})
+                .then(function (response) {
+                if (response.data.success) {
+                    self.setState({
+                        uselessData: response.data.data
+                    });
+                }
+            })
+                .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+        };
+        _this.deleteUselessData = function (e) {
+            var self = _this;
+            axios.post("/remove_cleanup_rows", {})
+                .then(function (response) {
+                if (response.data.success) {
+                    self.setState({
+                        deleteNumber: response.data.deleteNumber
+                    });
+                }
+            })
+                .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+        };
+        _this.htmlUselessData = function () {
+            return _this.state.uselessData.map(function (data) {
+                return React.createElement("div", null,
+                    React.createElement("span", null, data.name),
+                    ":",
+                    React.createElement("span", null, data.data.length));
+            });
+        };
+        _this.state = {
+            uselessData: [],
+            deleteNumber: 0
+        };
+        return _this;
+    }
+    SystemTools.prototype.render = function () {
+        return (React.createElement("div", { className: "card" },
+            React.createElement(button_1.Button, { onClick: this.findUselessData }, "Find all useless data"),
+            this.htmlUselessData(),
+            React.createElement(button_1.Button, { onClick: this.deleteUselessData }, "Delete useless data"),
+            React.createElement("div", null,
+                React.createElement("span", null, "Deleted rows"),
+                ":",
+                React.createElement("span", null, this.state.deleteNumber))));
+    };
+    return SystemTools;
+}(React.Component));
+exports.SystemTools = SystemTools;
+exports.default = SystemTools;
+
+
+/***/ }),
+
 /***/ "../../..!NewProject\\learning.online\\src\\frontend\\admin\\users_table.tsx":
 /*!******************************************************************************!*\
   !*** ../../..!NewProject\learning.online\src\frontend\admin\users_table.tsx ***!
@@ -52313,6 +52405,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var login_form_1 = __webpack_require__(/*! ./common/login_form */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_form.tsx");
 var users_table_1 = __webpack_require__(/*! ./admin/users_table */ "../../..!NewProject\\learning.online\\src\\frontend\\admin\\users_table.tsx");
 var add_user_1 = __webpack_require__(/*! ./admin/add_user */ "../../..!NewProject\\learning.online\\src\\frontend\\admin\\add_user.tsx");
+var system_tools_1 = __webpack_require__(/*! ./admin/system_tools */ "../../..!NewProject\\learning.online\\src\\frontend\\admin\\system_tools.tsx");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-router-dom\\esm\\react-router-dom.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
@@ -52346,12 +52439,15 @@ var Admin = /** @class */ (function (_super) {
             return (React.createElement(react_router_dom_1.BrowserRouter, null,
                 React.createElement("nav", null,
                     React.createElement(react_router_dom_1.Link, { to: "/admin/users" }, "[Users]"),
-                    React.createElement(react_router_dom_1.Link, { to: "/admin/add_user" }, "[Add user]")),
+                    React.createElement(react_router_dom_1.Link, { to: "/admin/add_user" }, "[Add user]"),
+                    React.createElement(react_router_dom_1.Link, { to: "/admin/system_tools" }, "[System tools]")),
                 React.createElement(react_router_dom_1.Switch, null,
                     React.createElement(react_router_dom_1.Route, { path: "/admin/users" },
                         React.createElement(users_table_1.default, null)),
                     React.createElement(react_router_dom_1.Route, { path: "/admin/add_user" },
-                        React.createElement(add_user_1.default, null)))));
+                        React.createElement(add_user_1.default, null)),
+                    React.createElement(react_router_dom_1.Route, { path: "/admin/system_tools" },
+                        React.createElement(system_tools_1.default, null)))));
         }
         else {
             return (React.createElement("div", null,

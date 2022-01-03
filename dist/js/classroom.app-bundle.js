@@ -47458,7 +47458,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
         var self = _this;
         _this.gapsOnly.forEach(function (gap) {
             totalVariants += gap.variants.length;
-            // Shufle ansvers.
+            // Shuffle variants.
             self.shuffleArray(gap.variants);
         });
         _this.setScoreWeight(_this.props.rightAnswers, totalVariants - _this.props.rightAnswers);

@@ -8,7 +8,9 @@ class MetaRoute {
         var path   = require('path');
         var router = express.Router();
         var dbManager = require("./database/databaseManager");
-        var users     = dbManager.getUsers();
+        var users = dbManager.getUsers();
+        var tasks = dbManager.getTasks();
+        var links = dbManager.getLinks();
 
         var staticPath = path.join(__dirname, '/dist/');
         router.use(express.static(staticPath));
@@ -35,6 +37,38 @@ class MetaRoute {
         router.get('/is_user_entered', function (req, res, next) {
             var session = req.session;
             res.send({ success: "userInfo" in session});
+        });
+        router.post('/remove_cleanup_rows', function (req, res, next) {
+            let deletedNumber = 0;
+            links.getExpiredLinks(function (success, rows) {
+                if (success) {
+                    links.deleteLinks(rows, function (success) {
+                        deletedNumber += success ? rows.length : 0;
+                        tasks.getTasksWithoutLinks(links, function (success, rows) {
+                            if (success) {
+                                tasks.deleteTasks(rows, function (success) {
+                                    deletedNumber += success ? rows.length : 0;
+                                    tasks.getVersionWithoutTasks(function (success, rows) {
+                                        if (success) {
+                                            tasks.deleteVersions(rows, function (success) {
+                                                deletedNumber += success ? rows.length : 0;
+                                                res.send({ success: success, deleteNumber: deletedNumber });
+                                            });
+                                        } else {
+                                            res.send({ success: success });
+                                        }
+                                    });
+                                });
+                            } else {
+                                res.send({ success: success });
+                            }
+                        });
+                    });
+
+                } else {
+                    res.send({ success: success });
+                }
+            });
         });
 
         return router;

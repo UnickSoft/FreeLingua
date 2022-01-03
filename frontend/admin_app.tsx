@@ -3,6 +3,8 @@ import * as React from "react"
 import LoginForm from './common/login_form';
 import UsersTable from './admin/users_table';
 import AddUser from './admin/add_user';
+import SystemTools from './admin/system_tools';
+
 import { Button } from 'primereact/button';
 import {
     BrowserRouter as Router,
@@ -54,6 +56,7 @@ export class Admin extends React.Component {
                     <nav>
                         <Link to="/admin/users">[Users]</Link>
                         <Link to="/admin/add_user">[Add user]</Link>
+                        <Link to="/admin/system_tools">[System tools]</Link>
                     </nav>
                     <Switch>
                         <Route path="/admin/users">
@@ -62,6 +65,9 @@ export class Admin extends React.Component {
                         <Route path="/admin/add_user">
                             <AddUser />
                         </Route>
+                        <Route path="/admin/system_tools">
+                            <SystemTools />
+                        </Route>                        
                     </Switch>
                 </Router>
              );            

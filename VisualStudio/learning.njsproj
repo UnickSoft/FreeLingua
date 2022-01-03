@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="frontend\admin\add_user.tsx" />
+    <TypeScriptCompile Include="frontend\admin\system_tools.tsx" />
     <TypeScriptCompile Include="frontend\admin\users_table.tsx" />
     <TypeScriptCompile Include="frontend\admin_app.tsx" />
     <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />

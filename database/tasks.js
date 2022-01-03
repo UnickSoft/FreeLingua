@@ -109,6 +109,44 @@ class Tasks {
             }
         );
     }
+
+    getVersionWithoutTasks(func) {
+        this.dbWrapper.select_all_raw("SELECT id FROM " + this.TableVersions +
+            " WHERE id NOT IN (SELECT templateId FROM " + this.Table + ")",
+            [], function (success, rows) {
+            if (success) {
+                func(success, rows);
+            }
+        });
+    }
+
+    getTasksWithoutLinks(links, func) {
+        this.dbWrapper.select_all_raw("SELECT id FROM " + this.Table +
+            " WHERE id NOT IN (SELECT taskId FROM " + links.Table + ")",
+            [], function (success, rows) {
+                if (success) {
+                    func(success, rows);
+                }
+            });
+    }
+
+    deleteVersions(ids, func) {
+        let arrayOfIds = [];
+        for (const row of ids) {
+            arrayOfIds.push(row.id);
+        }
+        this.dbWrapper.delete_batch(this.TableVersions,
+            { name : "id", value: arrayOfIds }, func);
+    }
+
+    deleteTasks(ids, func) {
+        let arrayOfIds = [];
+        for (const row of ids) {
+            arrayOfIds.push(row.id);
+        }
+        this.dbWrapper.delete_batch(this.Table,
+            { name: "id", value: arrayOfIds }, func);
+    }
 }
 
 

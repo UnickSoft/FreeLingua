@@ -77,10 +77,30 @@ class Links {
     }
 
     removeLink(userId, linkId, func) {
+        // All related data will be delete by timer.
         this.dbWrapper.delete(this.Table, [
             { name: "id", value: linkId },
             { name: "ownerId", value: userId }
         ], func);
+    }
+
+    getExpiredLinks(func) {
+        this.dbWrapper.select_all_raw("SELECT id FROM " + this.Table +
+            " WHERE deleteDate<?",
+            [new Date()], function (success, rows) {
+                if (success) {
+                    func(success, rows);
+                }
+            });
+    }
+
+    deleteLinks(ids, func) {
+        let arrayOfIds = [];
+        for (const row of ids) {
+            arrayOfIds.push(row.id);
+        }
+        this.dbWrapper.delete_batch(this.Table,
+            { name: "id", value: arrayOfIds }, func);
     }
 }
 

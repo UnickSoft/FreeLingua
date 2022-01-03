@@ -93,6 +93,18 @@ var sqlWrapper = {
         });
     },
 
+    select_all_raw: function (q, values, func) {
+
+        this.db.all(q, values, (err, rows) => {
+            if (err) {
+                console.log(err);
+                func(!err, []);
+                return;
+            }
+            func(!err, rows);
+        });
+    },
+
     // where -> {field name, value}
     select_one: function (tableName, where, func) {
         let whereStr = "";
@@ -162,6 +174,29 @@ var sqlWrapper = {
         }
 
         let q = 'DELETE FROM ' + tableName + ' WHERE ' + whereStr;
+        this.db.run(q, whereValue, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            if (func != null) {
+                func(!err);
+            }
+        });
+    },
+
+    // where -> {field name, array of values}
+    delete_batch: function (tableName, where, func) {
+        let whereStr = "";
+        let whereValue = []
+        whereStr += "("
+        for (const w of where.value) {
+            let first = whereStr.length == 1;
+            whereStr += (first ? "" : ",") + "?";
+            whereValue.push(w);
+        }
+        whereStr += ")";
+
+        let q = 'DELETE FROM ' + tableName + ' WHERE ' + where.name + ' in ' + whereStr;
         this.db.run(q, whereValue, (err) => {
             if (err) {
                 console.log(err);

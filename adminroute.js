@@ -36,7 +36,9 @@ class AdminRoute {
         });
 
         var dbManager = require("./database/databaseManager");
-        var users     = dbManager.getUsers();
+        var users = dbManager.getUsers();
+        var tasks = dbManager.getTasks();
+        var links = dbManager.getLinks();
 
         router.get('/get_users', function (req, res, next) {
             users.getUserList(function (list) {
@@ -62,6 +64,32 @@ class AdminRoute {
         router.post('/delete_user', function (req, res, next) {
             users.deleteUser(req.body.login, function () {
                 res.send({ success: true });
+            });
+        });
+
+        router.post('/get_cleanup_rows', function (req, res, next) {
+            let data = [];
+            tasks.getVersionWithoutTasks(function (success, rows) {
+                if (success) {
+                    data.push({ name: "no_need_versions", data: rows});
+                    tasks.getTasksWithoutLinks(links, function (success, rows) {
+                        if (success) {
+                            data.push({ name: "no_need_tasks", data: rows });
+                            links.getExpiredLinks(function (success, rows) {
+                                if (success) {
+                                    data.push({ name: "expired_links", data: rows });
+                                    res.send({ success: success, data: data });
+                                } else {
+                                    res.send({ success: success });
+                                }
+                            });
+                        } else {
+                            res.send({ success: success });
+                        }
+                    });
+                } else {
+                    res.send({ success: success});
+                }
             });
         });
 
