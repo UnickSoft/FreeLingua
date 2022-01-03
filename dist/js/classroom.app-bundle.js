@@ -47327,6 +47327,7 @@ var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.onli
 /***
  * Json format:
  * {
+ *      question: "question text",
  *      textWithGaps: ["Select correct world: I am a student. I go to the ",
  *      {
  *        "variants": [ "shop", "army", "University" ]
@@ -47381,7 +47382,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
             _this.updateScores();
         };
         _this.getHeaderText = function () {
-            return "Fill in the gaps";
+            return _this.state.question ? _this.state.question : "Fill in the gaps";
         };
         _this.isFinishedQuestions = function () {
             return _this.state.answers.finished;
@@ -47450,7 +47451,8 @@ var FillGapsSolving = /** @class */ (function (_super) {
             gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length,
             scores: 0.0,
             gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length,
-            isExamMode: _this.props.isExamMode
+            isExamMode: _this.props.isExamMode,
+            question: _this.props.data.question
         };
         _this.state.answers.finished = (_this.props.result ? _this.props.result.finished : false);
         _this.gapsOnly = _this.getGasOnly(_this.state.textWithGaps);

@@ -10,6 +10,7 @@ var axios = require('axios');
 /***
  * Json format:
  * {
+ *      question: "question text",
  *      textWithGaps: ["Select correct world: I am a student. I go to the ",
  *      {
  *        "variants": [ "shop", "army", "University" ]
@@ -29,7 +30,8 @@ export class FillGapsSolving extends BaseSolving {
         gasLeft: any,
         scores: any,
         gapsNum: any,
-        isExamMode: any
+        isExamMode: any,
+        question: any
     }
     gapsOnly = null;
 
@@ -50,7 +52,8 @@ export class FillGapsSolving extends BaseSolving {
             gasLeft: this.props.data.textWithGaps.filter(x => typeof (x) !== 'string').length,
             scores: 0.0,
             gapsNum: this.props.data.textWithGaps.filter(answer => typeof (answer) !== "string").length,
-            isExamMode: this.props.isExamMode
+            isExamMode: this.props.isExamMode,
+            question: this.props.data.question
         };
 
         this.state.answers.finished = (this.props.result ? this.props.result.finished : false);
@@ -128,7 +131,7 @@ export class FillGapsSolving extends BaseSolving {
     }
 
     getHeaderText = () => {
-        return "Fill in the gaps";
+        return this.state.question ? this.state.question : "Fill in the gaps";
     }
 
     isFinishedQuestions = () => {

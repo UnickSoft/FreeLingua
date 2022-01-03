@@ -14,6 +14,7 @@ var axios = require('axios');
 /***
  * Json format:
  * {
+ *      question: "question text",
  *      textWithGaps: ["Select correct world: I am a student. I go to the ",
  *      {
  *        "variants": [ "shop", "army", "University" ]
@@ -29,7 +30,8 @@ export class FillGapsCreator extends BaseCreator {
 
     state: {
         textWithGaps: any,
-        questionIndex: any
+        questionIndex: any,
+        question: any
     }
     gapRegExp = /\[\[gap#\d+\]\]/;
     splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
@@ -40,7 +42,8 @@ export class FillGapsCreator extends BaseCreator {
 
         this.state = {
             textWithGaps: [],
-            questionIndex: this.props.questionIndex
+            questionIndex: this.props.questionIndex,
+            question: "Fill in the gaps"
         };
 
         if ("data" in props) {
@@ -73,7 +76,8 @@ export class FillGapsCreator extends BaseCreator {
 
         return {
             textWithGaps: textWithGapsOut,
-            answers: answers
+            answers: answers,
+            question: this.state.question
         };
     }
 
@@ -84,6 +88,7 @@ export class FillGapsCreator extends BaseCreator {
 
         let textWithGapsData = data.textWithGaps;
         let answers          = data.answers;
+        let question         = data.question ? data.question : this.state.question;
         let textWithGaps     = [];
 
         let index = 0;
@@ -106,11 +111,16 @@ export class FillGapsCreator extends BaseCreator {
 
         this.state = {
             ...this.state,
-            textWithGaps: textWithGaps
+            textWithGaps: textWithGaps,
+            question: question
         };
     }
 
     hasError = () => {
+        if (this.state.question.length == 0) {
+            return true;
+        }
+
         if (this.state.textWithGaps.length == 0) {
             return true;
         }
@@ -136,6 +146,10 @@ export class FillGapsCreator extends BaseCreator {
     }
 
     errorsHtml() {
+        if (this.state.question.length == 0) {
+            return <Message severity="warn" text="Please enter question"></Message>;
+        }
+
         if (this.state.textWithGaps.length == 0) {
             return <Message severity="warn" text="Please enter Text"></Message>;
         }
@@ -287,6 +301,13 @@ export class FillGapsCreator extends BaseCreator {
         return (
             <div>
                 <div className="p-fluid" key="main">
+                    <div className="p-field" key="questionText">
+                        <label htmlFor={"quesionField" + this.state.questionIndex}>Enter question:</label>
+                        <InputTextarea rows={2} cols={30} id={"quesionField" + this.state.questionIndex}
+                            onChange={(e) => this.setStateAndUpdate({ question: e.target.value })}
+                            value={this.state.question} autoResize />
+                    </div>
+
                     <div className="p-field" key="questionText">
                         <label htmlFor={"area" + this.state.questionIndex}>Enter Text, then Select world and press add gap:</label>
                         <InputTextarea rows={5} cols={30} id={"area" + this.state.questionIndex}

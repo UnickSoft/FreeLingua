@@ -55541,6 +55541,7 @@ var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.onli
 /***
  * Json format:
  * {
+ *      question: "question text",
  *      textWithGaps: ["Select correct world: I am a student. I go to the ",
  *      {
  *        "variants": [ "shop", "army", "University" ]
@@ -55581,7 +55582,8 @@ var FillGapsCreator = /** @class */ (function (_super) {
             });
             return {
                 textWithGaps: textWithGapsOut,
-                answers: answers
+                answers: answers,
+                question: _this.state.question
             };
         };
         _this.loadData = function (data) {
@@ -55590,6 +55592,7 @@ var FillGapsCreator = /** @class */ (function (_super) {
             }
             var textWithGapsData = data.textWithGaps;
             var answers = data.answers;
+            var question = data.question ? data.question : _this.state.question;
             var textWithGaps = [];
             var index = 0;
             var _loop_1 = function (gapOrText) {
@@ -55612,9 +55615,12 @@ var FillGapsCreator = /** @class */ (function (_super) {
                 var gapOrText = textWithGapsData_1[_i];
                 _loop_1(gapOrText);
             }
-            _this.state = __assign(__assign({}, _this.state), { textWithGaps: textWithGaps });
+            _this.state = __assign(__assign({}, _this.state), { textWithGaps: textWithGaps, question: question });
         };
         _this.hasError = function () {
+            if (_this.state.question.length == 0) {
+                return true;
+            }
             if (_this.state.textWithGaps.length == 0) {
                 return true;
             }
@@ -55730,7 +55736,8 @@ var FillGapsCreator = /** @class */ (function (_super) {
         };
         _this.state = {
             textWithGaps: [],
-            questionIndex: _this.props.questionIndex
+            questionIndex: _this.props.questionIndex,
+            question: "Fill in the gaps"
         };
         if ("data" in props) {
             _this.loadData(props.data);
@@ -55738,6 +55745,9 @@ var FillGapsCreator = /** @class */ (function (_super) {
         return _this;
     }
     FillGapsCreator.prototype.errorsHtml = function () {
+        if (this.state.question.length == 0) {
+            return React.createElement(message_1.Message, { severity: "warn", text: "Please enter question" });
+        }
         if (this.state.textWithGaps.length == 0) {
             return React.createElement(message_1.Message, { severity: "warn", text: "Please enter Text" });
         }
@@ -55789,6 +55799,9 @@ var FillGapsCreator = /** @class */ (function (_super) {
         return (React.createElement("div", null,
             React.createElement("div", { className: "p-fluid", key: "main" },
                 React.createElement("div", { className: "p-field", key: "questionText" },
+                    React.createElement("label", { htmlFor: "quesionField" + this.state.questionIndex }, "Enter question:"),
+                    React.createElement(inputtextarea_1.InputTextarea, { rows: 2, cols: 30, id: "quesionField" + this.state.questionIndex, onChange: function (e) { return _this.setStateAndUpdate({ question: e.target.value }); }, value: this.state.question, autoResize: true })),
+                React.createElement("div", { className: "p-field", key: "questionText" },
                     React.createElement("label", { htmlFor: "area" + this.state.questionIndex }, "Enter Text, then Select world and press add gap:"),
                     React.createElement(inputtextarea_1.InputTextarea, { rows: 5, cols: 30, id: "area" + this.state.questionIndex, onChange: function (e) { return _this.loadFromText(e.target.value); }, value: this.getAsText(), autoResize: true })),
                 React.createElement(button_1.Button, { label: "Add gap", id: "add_gaps" + this.state.questionIndex, onClick: function () { return _this.addGap(); } })),
@@ -55834,6 +55847,7 @@ var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.onli
 /***
  * Json format:
  * {
+ *      question: "question text",
  *      textWithGaps: ["Select correct world: I am a student. I go to the ",
  *      {
  *        "variants": [ "shop", "army", "University" ]
@@ -55888,7 +55902,7 @@ var FillGapsSolving = /** @class */ (function (_super) {
             _this.updateScores();
         };
         _this.getHeaderText = function () {
-            return "Fill in the gaps";
+            return _this.state.question ? _this.state.question : "Fill in the gaps";
         };
         _this.isFinishedQuestions = function () {
             return _this.state.answers.finished;
@@ -55957,7 +55971,8 @@ var FillGapsSolving = /** @class */ (function (_super) {
             gasLeft: _this.props.data.textWithGaps.filter(function (x) { return typeof (x) !== 'string'; }).length,
             scores: 0.0,
             gapsNum: _this.props.data.textWithGaps.filter(function (answer) { return typeof (answer) !== "string"; }).length,
-            isExamMode: _this.props.isExamMode
+            isExamMode: _this.props.isExamMode,
+            question: _this.props.data.question
         };
         _this.state.answers.finished = (_this.props.result ? _this.props.result.finished : false);
         _this.gapsOnly = _this.getGasOnly(_this.state.textWithGaps);
