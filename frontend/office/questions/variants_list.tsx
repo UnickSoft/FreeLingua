@@ -2,6 +2,7 @@ declare var require: any
 import * as React from "react"
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
+import { Button } from 'primereact/button';
 
 var axios = require('axios');
 
@@ -13,7 +14,8 @@ export class VariantsList extends React.Component<any, any> {
 
     onEditVariant = null;
     onAddVariant = null;
-    onSetRight   = null;
+    onSetRight = null;
+    onRemoveVariant = null;
 
     constructor(props) {
         super(props);
@@ -25,6 +27,7 @@ export class VariantsList extends React.Component<any, any> {
         this.onAddVariant  = props.onAddVariant;
         this.onSetRight    = props.onSetRight;
         this.onEditVariant = props.onEditVariant;
+        this.onRemoveVariant = props.onRemoveVariant;
     }
 
     pushLastEmpty = (variants) => {
@@ -40,6 +43,10 @@ export class VariantsList extends React.Component<any, any> {
 
     updateRightAnswer = (index, value) => {
         this.onSetRight(index, value);
+    }
+
+    removeAnswer = (index) => {
+        this.onRemoveVariant(index);
     }
 
     render() {
@@ -63,6 +70,9 @@ export class VariantsList extends React.Component<any, any> {
                             <Checkbox inputId={"cb" + index + "_" + self.state.globalIndex} value="Right" onChange={(e) => self.updateRightAnswer(locIndex, e.target.checked)}
                                 checked={copy[locIndex].isRight} />
                             <label htmlFor={"cb1" + index + "_" + self.state.globalIndex} className="p-checkbox-label">Is right answer?</label>
+                        </div>
+                        <div>
+                            <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-text p-ml-4" onClick={(e) => self.removeAnswer(locIndex)}/>
                         </div>
                     </div>
                 </div>

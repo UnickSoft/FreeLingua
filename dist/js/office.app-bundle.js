@@ -55281,6 +55281,11 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
             answers[index].edited = true;
             _this.setStateAndUpdate({ answers: answers });
         };
+        _this.onRemoveVariant = function (index) {
+            var answers = _this.state.answers;
+            answers.splice(index, 1);
+            _this.setStateAndUpdate({ answers: answers });
+        };
         _this.hasError = function () {
             var rightAnswers = 0;
             for (var _i = 0, _a = _this.state.answers; _i < _a.length; _i++) {
@@ -55304,7 +55309,7 @@ var CheckAnswerCreator = /** @class */ (function (_super) {
         return _this;
     }
     CheckAnswerCreator.prototype.answersHtml = function () {
-        return (React.createElement(variants_list_1.VariantsList, { onAddVariant: this.onAddAnswer, onSetRight: this.onSetRightAnswer, onEditVariant: this.onEditAnswer, globalIndex: this.state.questionIndex, variants: this.state.answers }));
+        return (React.createElement(variants_list_1.VariantsList, { onAddVariant: this.onAddAnswer, onSetRight: this.onSetRightAnswer, onEditVariant: this.onEditAnswer, onRemoveVariant: this.onRemoveVariant, globalIndex: this.state.questionIndex, variants: this.state.answers }));
     };
     CheckAnswerCreator.prototype.errorsHtml = function () {
         if (this.state.question.length == 0) {
@@ -55734,6 +55739,11 @@ var FillGapsCreator = /** @class */ (function (_super) {
             answers[index].edited = true;
             _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
         };
+        _this.onRemoveVariant = function (gapIndex, index) {
+            var answers = _this.state.textWithGaps[gapIndex];
+            answers.splice(index, 1);
+            _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
+        };
         _this.state = {
             textWithGaps: [],
             questionIndex: _this.props.questionIndex,
@@ -55791,7 +55801,7 @@ var FillGapsCreator = /** @class */ (function (_super) {
                 React.createElement("label", null,
                     "Gap ",
                     indexGaps),
-                React.createElement(variants_list_1.VariantsList, { onAddVariant: function () { return self.onAddAnswer(localIndex); }, onSetRight: function (index, value) { return self.onSetRightAnswer(localIndex, index, value); }, onEditVariant: function (index, value) { return self.onEditAnswer(localIndex, index, value); }, globalIndex: self.state.questionIndex, variants: gap })));
+                React.createElement(variants_list_1.VariantsList, { onAddVariant: function () { return self.onAddAnswer(localIndex); }, onSetRight: function (index, value) { return self.onSetRightAnswer(localIndex, index, value); }, onEditVariant: function (index, value) { return self.onEditAnswer(localIndex, index, value); }, onRemoveVariant: function (index) { return self.onRemoveVariant(localIndex, index); }, globalIndex: self.state.questionIndex, variants: gap })));
         });
     };
     FillGapsCreator.prototype.render = function () {
@@ -56032,6 +56042,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js");
 var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
+var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 var VariantsList = /** @class */ (function (_super) {
     __extends(VariantsList, _super);
@@ -56040,6 +56051,7 @@ var VariantsList = /** @class */ (function (_super) {
         _this.onEditVariant = null;
         _this.onAddVariant = null;
         _this.onSetRight = null;
+        _this.onRemoveVariant = null;
         _this.pushLastEmpty = function (variants) {
             variants.push({ text: "", isRight: false });
         };
@@ -56052,12 +56064,16 @@ var VariantsList = /** @class */ (function (_super) {
         _this.updateRightAnswer = function (index, value) {
             _this.onSetRight(index, value);
         };
+        _this.removeAnswer = function (index) {
+            _this.onRemoveVariant(index);
+        };
         _this.state = {
             globalIndex: props.globalIndex
         };
         _this.onAddVariant = props.onAddVariant;
         _this.onSetRight = props.onSetRight;
         _this.onEditVariant = props.onEditVariant;
+        _this.onRemoveVariant = props.onRemoveVariant;
         return _this;
     }
     VariantsList.prototype.render = function () {
@@ -56077,7 +56093,9 @@ var VariantsList = /** @class */ (function (_super) {
                         React.createElement(inputtext_1.InputText, { id: "answ_" + index + "_" + self.state.globalIndex, type: "text", placeholder: "Add new answer", value: answer.text, onChange: function (e) { return self.setVariants(locIndex, e.target.value); } })),
                     React.createElement("div", { className: "p-field-checkbox" },
                         React.createElement(checkbox_1.Checkbox, { inputId: "cb" + index + "_" + self.state.globalIndex, value: "Right", onChange: function (e) { return self.updateRightAnswer(locIndex, e.target.checked); }, checked: copy[locIndex].isRight }),
-                        React.createElement("label", { htmlFor: "cb1" + index + "_" + self.state.globalIndex, className: "p-checkbox-label" }, "Is right answer?")))));
+                        React.createElement("label", { htmlFor: "cb1" + index + "_" + self.state.globalIndex, className: "p-checkbox-label" }, "Is right answer?")),
+                    React.createElement("div", null,
+                        React.createElement(button_1.Button, { icon: "pi pi-times", className: "p-button-rounded p-button-danger p-button-text p-ml-4", onClick: function (e) { return self.removeAnswer(locIndex); } })))));
         });
     };
     return VariantsList;

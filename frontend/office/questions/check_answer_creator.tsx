@@ -107,10 +107,17 @@ export class CheckAnswerCreator extends BaseCreator {
         this.setStateAndUpdate({ answers: answers });
     }
 
+    onRemoveVariant = (index) => {
+        let answers = this.state.answers;
+        answers.splice(index, 1);
+        this.setStateAndUpdate({ answers: answers });
+    }
+
     answersHtml() {
         return (<VariantsList onAddVariant={this.onAddAnswer}
             onSetRight={this.onSetRightAnswer}
             onEditVariant={this.onEditAnswer}
+            onRemoveVariant={this.onRemoveVariant}
             globalIndex={this.state.questionIndex}
             variants={this.state.answers} />);
     }

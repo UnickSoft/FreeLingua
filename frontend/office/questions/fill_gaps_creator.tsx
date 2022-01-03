@@ -273,6 +273,12 @@ export class FillGapsCreator extends BaseCreator {
         this.setStateAndUpdate({ textWithGaps: this.state.textWithGaps });
     }
 
+    onRemoveVariant = (gapIndex, index) => {
+        let answers = this.state.textWithGaps[gapIndex];
+        answers.splice(index, 1);
+        this.setStateAndUpdate({ textWithGaps: this.state.textWithGaps });
+    }
+
     answersHtml() {
         let index = -1;
         let indexGaps = -1;
@@ -291,6 +297,7 @@ export class FillGapsCreator extends BaseCreator {
                     <VariantsList onAddVariant={() => self.onAddAnswer(localIndex)}
                         onSetRight={(index, value) => self.onSetRightAnswer(localIndex, index, value)}
                         onEditVariant={(index, value) => self.onEditAnswer(localIndex, index, value)}
+                        onRemoveVariant={(index,) => self.onRemoveVariant(localIndex, index)}
                         globalIndex={self.state.questionIndex}
                         variants={gap} />
                 </div>);
