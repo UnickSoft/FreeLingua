@@ -55744,6 +55744,19 @@ var FillGapsCreator = /** @class */ (function (_super) {
             answers.splice(index, 1);
             _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
         };
+        _this.removeGap = function (index) {
+            var answers = _this.state.textWithGaps[index];
+            var replaceTex = "";
+            for (var _i = 0, answers_1 = answers; _i < answers_1.length; _i++) {
+                var answer = answers_1[_i];
+                if (answer.isRight) {
+                    replaceTex = answer.text;
+                    break;
+                }
+            }
+            _this.state.textWithGaps[index] = replaceTex;
+            _this.setStateAndUpdate({ textWithGaps: _this.state.textWithGaps });
+        };
         _this.state = {
             textWithGaps: [],
             questionIndex: _this.props.questionIndex,
@@ -55798,9 +55811,11 @@ var FillGapsCreator = /** @class */ (function (_super) {
             indexGaps++;
             var localIndex = index;
             return (React.createElement("div", null,
-                React.createElement("label", null,
-                    "Gap ",
-                    indexGaps),
+                React.createElement("div", null,
+                    React.createElement("label", null,
+                        "Gap ",
+                        indexGaps),
+                    React.createElement(button_1.Button, { className: "p-button-sm p-button-danger p-button-text p-ml-4", onClick: function (e) { return self.removeGap(localIndex); }, label: "remove gap" })),
                 React.createElement(variants_list_1.VariantsList, { onAddVariant: function () { return self.onAddAnswer(localIndex); }, onSetRight: function (index, value) { return self.onSetRightAnswer(localIndex, index, value); }, onEditVariant: function (index, value) { return self.onEditAnswer(localIndex, index, value); }, onRemoveVariant: function (index) { return self.onRemoveVariant(localIndex, index); }, globalIndex: self.state.questionIndex, variants: gap })));
         });
     };
