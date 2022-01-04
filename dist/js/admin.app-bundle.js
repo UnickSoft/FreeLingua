@@ -52135,7 +52135,7 @@ var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject
 var selectbutton_1 = __webpack_require__(/*! primereact/selectbutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\selectbutton\\selectbutton.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var AddUser = /** @class */ (function (_super) {
+var AddUser = (function (_super) {
     __extends(AddUser, _super);
     function AddUser(props) {
         var _this = _super.call(this, props) || this;
@@ -52155,7 +52155,6 @@ var AddUser = /** @class */ (function (_super) {
                 }
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52225,7 +52224,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var SystemTools = /** @class */ (function (_super) {
+var SystemTools = (function (_super) {
     __extends(SystemTools, _super);
     function SystemTools(props) {
         var _this = _super.call(this, props) || this;
@@ -52240,7 +52239,6 @@ var SystemTools = /** @class */ (function (_super) {
                 }
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52255,7 +52253,6 @@ var SystemTools = /** @class */ (function (_super) {
                 }
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52319,7 +52316,7 @@ var column_1 = __webpack_require__(/*! primereact/column */ "../../..!NewProject
 var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var UsersTable = /** @class */ (function (_super) {
+var UsersTable = (function (_super) {
     __extends(UsersTable, _super);
     function UsersTable(props) {
         var _this = _super.call(this, props) || this;
@@ -52330,7 +52327,6 @@ var UsersTable = /** @class */ (function (_super) {
                 self.setState({ users: response.data.users });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52341,7 +52337,6 @@ var UsersTable = /** @class */ (function (_super) {
                 self.updateUsers();
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52409,7 +52404,7 @@ var system_tools_1 = __webpack_require__(/*! ./admin/system_tools */ "../../..!N
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-router-dom\\esm\\react-router-dom.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var Admin = /** @class */ (function (_super) {
+var Admin = (function (_super) {
     __extends(Admin, _super);
     function Admin(props) {
         var _this = _super.call(this, props) || this;
@@ -52421,7 +52416,6 @@ var Admin = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52491,7 +52485,7 @@ var dialog_1 = __webpack_require__(/*! primereact/dialog */ "../../..!NewProject
 var password_1 = __webpack_require__(/*! primereact/password */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\password\\password.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginForm = /** @class */ (function (_super) {
+var LoginForm = (function (_super) {
     __extends(LoginForm, _super);
     function LoginForm(props) {
         var _this = _super.call(this, props) || this;
@@ -52507,7 +52501,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52519,7 +52512,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -52547,7 +52539,6 @@ var LoginForm = /** @class */ (function (_super) {
             console.log(response.data);
         })
             .catch(function (error) {
-            // handle error
             console.log(error);
         });
         return _this;

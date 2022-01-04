@@ -34,7 +34,9 @@ export class FillGapsCreator extends BaseCreator {
         question: any
     }
     gapRegExp = /\[\[gap#\d+\]\]/;
-    splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
+    // Does not work under Safari iPhone.
+    //splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
+
     numberRegExp = /\d+/;
 
     constructor(props) {
@@ -204,7 +206,33 @@ export class FillGapsCreator extends BaseCreator {
     }
 
     splitTextToArray = (text) => {
-        let arrayOfStrs = text.split(this.splitRegExp);
+        let arrayOfStrs = [];
+        let startSearch = 0;
+        let pushRest = function () {
+            if (startSearch < text.length)
+                arrayOfStrs.push(text.substring(startSearch));
+        }
+        while (true) {
+            let startGap = text.indexOf("[[gap#", startSearch);
+            if (startGap == -1) {
+                pushRest();
+                break;
+            }
+            let endGap = text.indexOf("]]", startGap);
+            if (endGap == -1) {
+                pushRest();
+                break;
+            }
+            endGap += 2;
+
+            if (startSearch < startGap)
+                arrayOfStrs.push(text.substring(startSearch, startGap));
+
+            arrayOfStrs.push(text.substring(startGap, endGap));
+            startSearch = endGap;
+        }
+        // Regexp does not work under Safari iPhone.
+        // let arrayOfStrs = text.split(this.splitRegExp);
         let index = 0;
         let gaps = this.getGasOnly(this.state.textWithGaps);
         for (const str of arrayOfStrs) {

@@ -46234,7 +46234,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var react_1 = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var QuestionSolvingDecorator = /** @class */ (function (_super) {
+var QuestionSolvingDecorator = (function (_super) {
     __extends(QuestionSolvingDecorator, _super);
     function QuestionSolvingDecorator(props) {
         var _this = _super.call(this, props) || this;
@@ -46320,19 +46320,7 @@ var question_sloving_decorator_1 = __webpack_require__(/*! ./question_sloving_de
 var questionManager_1 = __webpack_require__(/*! ../office/questionManager */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questionManager.tsx");
 var panel_1 = __webpack_require__(/*! primereact/panel */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\panel\\panel.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
-/*
-Result format is:
-[
-    {
-        answers: [
-                {answer: "variant",  result: false},
-                {answer: "variant2", result: true},
-            ],
-        finished: true
-    }  // question
-]
-*/
-var TaskSolving = /** @class */ (function (_super) {
+var TaskSolving = (function (_super) {
     __extends(TaskSolving, _super);
     function TaskSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -46367,18 +46355,18 @@ var TaskSolving = /** @class */ (function (_super) {
                             templateData = null;
                             title = "";
                             isExamMode = false;
-                            if (!this.state.linkId) return [3 /*break*/, 2];
-                            return [4 /*yield*/, questionManager_1.default.getTaskByLink(this.state.linkId)];
+                            if (!this.state.linkId) return [3, 2];
+                            return [4, questionManager_1.default.getTaskByLink(this.state.linkId)];
                         case 1:
                             taskData = _a.sent();
                             remainingAnswers = taskData.template_data.length;
                             templateData = taskData.template_data;
                             title = taskData.title;
                             isExamMode = taskData.isExamMode == true;
-                            return [3 /*break*/, 4];
+                            return [3, 4];
                         case 2:
-                            if (!this.state.templateId) return [3 /*break*/, 4];
-                            return [4 /*yield*/, questionManager_1.default.getTaskTemplate(this.state.templateId)];
+                            if (!this.state.templateId) return [3, 4];
+                            return [4, questionManager_1.default.getTaskTemplate(this.state.templateId)];
                         case 3:
                             templateData = _a.sent();
                             title = templateData.title;
@@ -46418,7 +46406,7 @@ var TaskSolving = /** @class */ (function (_super) {
                                 scores: this.initScores(),
                                 scoresWeight: this.initScoresWeight()
                             });
-                            return [2 /*return*/];
+                            return [2];
                     }
                 });
             }); })();
@@ -46464,17 +46452,16 @@ var TaskSolving = /** @class */ (function (_super) {
         }
         return res;
     };
-    // Save on server.
     TaskSolving.prototype.saveResults = function () {
         var _this = this;
         if (!this.dryRun && !this.readonly) {
             (function () { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, questionManager_1.default.saveTaskResultByLink(this.state.linkId, this.state.taskData.result)];
+                        case 0: return [4, questionManager_1.default.saveTaskResultByLink(this.state.linkId, this.state.taskData.result)];
                         case 1:
                             _a.sent();
-                            return [2 /*return*/];
+                            return [2];
                     }
                 });
             }); })();
@@ -46611,7 +46598,7 @@ var login_button_1 = __webpack_require__(/*! ./common/login_button */ "../../..!
 var task_solving_1 = __webpack_require__(/*! ./classroom/task_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\classroom\\task_solving.tsx");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-router-dom\\esm\\react-router-dom.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
-var ClassRoom = /** @class */ (function (_super) {
+var ClassRoom = (function (_super) {
     __extends(ClassRoom, _super);
     function ClassRoom() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -46659,7 +46646,7 @@ var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject
 var login_form_1 = __webpack_require__(/*! ./login_form */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_form.tsx");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginButton = /** @class */ (function (_super) {
+var LoginButton = (function (_super) {
     __extends(LoginButton, _super);
     function LoginButton(props) {
         var _this = _super.call(this, props) || this;
@@ -46671,7 +46658,6 @@ var LoginButton = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46683,7 +46669,6 @@ var LoginButton = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46750,7 +46735,7 @@ var dialog_1 = __webpack_require__(/*! primereact/dialog */ "../../..!NewProject
 var password_1 = __webpack_require__(/*! primereact/password */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\password\\password.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginForm = /** @class */ (function (_super) {
+var LoginForm = (function (_super) {
     __extends(LoginForm, _super);
     function LoginForm(props) {
         var _this = _super.call(this, props) || this;
@@ -46766,7 +46751,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46778,7 +46762,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46806,7 +46789,6 @@ var LoginForm = /** @class */ (function (_super) {
             console.log(response.data);
         })
             .catch(function (error) {
-            // handle error
             console.log(error);
         });
         return _this;
@@ -46916,7 +46898,6 @@ var QuestionManager = {
             func(response.data.success, response.data.templateId);
         })
             .catch(function (error) {
-            // handle error
             console.log(error);
             func(false);
         });
@@ -46928,22 +46909,21 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.get("/office/get_template", { params: { templateId: taskId } })];
+                        return [4, axios.get("/office/get_template", { params: { templateId: taskId } })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_1 = _a.sent();
-                        // handle error
                         console.log(error_1);
-                        return [2 /*return*/, []];
+                        return [2, []];
                     case 3:
                         if (response.data.success) {
                             data = response.data.data;
                             data.data = JSON.parse(data.data);
-                            return [2 /*return*/, data];
+                            return [2, data];
                         }
-                        return [2 /*return*/, []];
+                        return [2, []];
                 }
             });
         });
@@ -46955,20 +46935,19 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode })];
+                        return [4, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_2 = _a.sent();
-                        // handle error
                         console.log(error_2);
-                        return [2 /*return*/, null];
+                        return [2, null];
                     case 3:
                         if (response.data.success) {
-                            return [2 /*return*/, response.data.linkId];
+                            return [2, response.data.linkId];
                         }
-                        return [2 /*return*/, null];
+                        return [2, null];
                 }
             });
         });
@@ -46980,15 +46959,14 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.get("/classroom/get_task_by_link", { params: { linkId: linkId } })];
+                        return [4, axios.get("/classroom/get_task_by_link", { params: { linkId: linkId } })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_3 = _a.sent();
-                        // handle error
                         console.log(error_3);
-                        return [2 /*return*/, []];
+                        return [2, []];
                     case 3:
                         if (response.data.success) {
                             taskData = response.data.data;
@@ -46999,9 +46977,9 @@ var QuestionManager = {
                             else {
                                 taskData.result = null;
                             }
-                            return [2 /*return*/, taskData];
+                            return [2, taskData];
                         }
-                        return [2 /*return*/, []];
+                        return [2, []];
                 }
             });
         });
@@ -47013,16 +46991,15 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post("/classroom/save_task_result_by_link", { linkId: linkId, result: JSON.stringify(result) })];
+                        return [4, axios.post("/classroom/save_task_result_by_link", { linkId: linkId, result: JSON.stringify(result) })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_4 = _a.sent();
-                        // handle error
                         console.log(error_4);
-                        return [2 /*return*/, false];
-                    case 3: return [2 /*return*/, response.data.success];
+                        return [2, false];
+                    case 3: return [2, response.data.success];
                 }
             });
         });
@@ -47057,7 +47034,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var BaseSolving = /** @class */ (function (_super) {
+var BaseSolving = (function (_super) {
     __extends(BaseSolving, _super);
     function BaseSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -47102,7 +47079,6 @@ var BaseSolving = /** @class */ (function (_super) {
             });
             return scores;
         };
-        // From 0 to 1.
         _this.setScores = function (score) {
             _this.setState({ scores: score });
             _this.updateScoresCallback(_this.state.questionIndex, score);
@@ -47176,16 +47152,7 @@ var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewPro
 var radiobutton_1 = __webpack_require__(/*! primereact/radiobutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\radiobutton\\radiobutton.esm.js");
 var base_solving_1 = __webpack_require__(/*! ./base_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-/***
- * Json format:
- * {
- *   question: "question text",
- *   answerType: "single", // single or multiple,
- *   variants: ["1", "2", "3", "4"],
- *   answers: ["2"], // list of right answers.
- * }
- */
-var CheckAnswerSolving = /** @class */ (function (_super) {
+var CheckAnswerSolving = (function (_super) {
     __extends(CheckAnswerSolving, _super);
     function CheckAnswerSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -47324,21 +47291,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var dropdown_1 = __webpack_require__(/*! primereact/dropdown */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dropdown\\dropdown.esm.js");
 var base_solving_1 = __webpack_require__(/*! ./base_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-/***
- * Json format:
- * {
- *      question: "question text",
- *      textWithGaps: ["Select correct world: I am a student. I go to the ",
- *      {
- *        "variants": [ "shop", "army", "University" ]
- *      }, "My favorite subject is ",
-        {
-          "variants": [ "shopping", "Math", "Art" ]
-        }],
- *      answers: ["1->University", "2->Math", "2->Art"], // list of right answers.
- * }
- */
-var FillGapsSolving = /** @class */ (function (_super) {
+var FillGapsSolving = (function (_super) {
     __extends(FillGapsSolving, _super);
     function FillGapsSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -47460,7 +47413,6 @@ var FillGapsSolving = /** @class */ (function (_super) {
         var self = _this;
         _this.gapsOnly.forEach(function (gap) {
             totalVariants += gap.variants.length;
-            // Shuffle variants.
             self.shuffleArray(gap.variants);
         });
         _this.setScoreWeight(_this.props.rightAnswers, totalVariants - _this.props.rightAnswers);

@@ -54192,7 +54192,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var react_1 = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var QuestionSolvingDecorator = /** @class */ (function (_super) {
+var QuestionSolvingDecorator = (function (_super) {
     __extends(QuestionSolvingDecorator, _super);
     function QuestionSolvingDecorator(props) {
         var _this = _super.call(this, props) || this;
@@ -54278,19 +54278,7 @@ var question_sloving_decorator_1 = __webpack_require__(/*! ./question_sloving_de
 var questionManager_1 = __webpack_require__(/*! ../office/questionManager */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questionManager.tsx");
 var panel_1 = __webpack_require__(/*! primereact/panel */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\panel\\panel.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
-/*
-Result format is:
-[
-    {
-        answers: [
-                {answer: "variant",  result: false},
-                {answer: "variant2", result: true},
-            ],
-        finished: true
-    }  // question
-]
-*/
-var TaskSolving = /** @class */ (function (_super) {
+var TaskSolving = (function (_super) {
     __extends(TaskSolving, _super);
     function TaskSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -54325,18 +54313,18 @@ var TaskSolving = /** @class */ (function (_super) {
                             templateData = null;
                             title = "";
                             isExamMode = false;
-                            if (!this.state.linkId) return [3 /*break*/, 2];
-                            return [4 /*yield*/, questionManager_1.default.getTaskByLink(this.state.linkId)];
+                            if (!this.state.linkId) return [3, 2];
+                            return [4, questionManager_1.default.getTaskByLink(this.state.linkId)];
                         case 1:
                             taskData = _a.sent();
                             remainingAnswers = taskData.template_data.length;
                             templateData = taskData.template_data;
                             title = taskData.title;
                             isExamMode = taskData.isExamMode == true;
-                            return [3 /*break*/, 4];
+                            return [3, 4];
                         case 2:
-                            if (!this.state.templateId) return [3 /*break*/, 4];
-                            return [4 /*yield*/, questionManager_1.default.getTaskTemplate(this.state.templateId)];
+                            if (!this.state.templateId) return [3, 4];
+                            return [4, questionManager_1.default.getTaskTemplate(this.state.templateId)];
                         case 3:
                             templateData = _a.sent();
                             title = templateData.title;
@@ -54376,7 +54364,7 @@ var TaskSolving = /** @class */ (function (_super) {
                                 scores: this.initScores(),
                                 scoresWeight: this.initScoresWeight()
                             });
-                            return [2 /*return*/];
+                            return [2];
                     }
                 });
             }); })();
@@ -54422,17 +54410,16 @@ var TaskSolving = /** @class */ (function (_super) {
         }
         return res;
     };
-    // Save on server.
     TaskSolving.prototype.saveResults = function () {
         var _this = this;
         if (!this.dryRun && !this.readonly) {
             (function () { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, questionManager_1.default.saveTaskResultByLink(this.state.linkId, this.state.taskData.result)];
+                        case 0: return [4, questionManager_1.default.saveTaskResultByLink(this.state.linkId, this.state.taskData.result)];
                         case 1:
                             _a.sent();
-                            return [2 /*return*/];
+                            return [2];
                     }
                 });
             }); })();
@@ -54569,7 +54556,7 @@ var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject
 var login_form_1 = __webpack_require__(/*! ./login_form */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_form.tsx");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginButton = /** @class */ (function (_super) {
+var LoginButton = (function (_super) {
     __extends(LoginButton, _super);
     function LoginButton(props) {
         var _this = _super.call(this, props) || this;
@@ -54581,7 +54568,6 @@ var LoginButton = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -54593,7 +54579,6 @@ var LoginButton = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -54660,7 +54645,7 @@ var dialog_1 = __webpack_require__(/*! primereact/dialog */ "../../..!NewProject
 var password_1 = __webpack_require__(/*! primereact/password */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\password\\password.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginForm = /** @class */ (function (_super) {
+var LoginForm = (function (_super) {
     __extends(LoginForm, _super);
     function LoginForm(props) {
         var _this = _super.call(this, props) || this;
@@ -54676,7 +54661,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -54688,7 +54672,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -54716,7 +54699,6 @@ var LoginForm = /** @class */ (function (_super) {
             console.log(response.data);
         })
             .catch(function (error) {
-            // handle error
             console.log(error);
         });
         return _this;
@@ -54826,7 +54808,6 @@ var QuestionManager = {
             func(response.data.success, response.data.templateId);
         })
             .catch(function (error) {
-            // handle error
             console.log(error);
             func(false);
         });
@@ -54838,22 +54819,21 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.get("/office/get_template", { params: { templateId: taskId } })];
+                        return [4, axios.get("/office/get_template", { params: { templateId: taskId } })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_1 = _a.sent();
-                        // handle error
                         console.log(error_1);
-                        return [2 /*return*/, []];
+                        return [2, []];
                     case 3:
                         if (response.data.success) {
                             data = response.data.data;
                             data.data = JSON.parse(data.data);
-                            return [2 /*return*/, data];
+                            return [2, data];
                         }
-                        return [2 /*return*/, []];
+                        return [2, []];
                 }
             });
         });
@@ -54865,20 +54845,19 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode })];
+                        return [4, axios.post("/office/add_sharelink", { templateId: templateId, title: shareLinkTitle, lifeTime: lifeTime, isExamMode: isExamMode })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_2 = _a.sent();
-                        // handle error
                         console.log(error_2);
-                        return [2 /*return*/, null];
+                        return [2, null];
                     case 3:
                         if (response.data.success) {
-                            return [2 /*return*/, response.data.linkId];
+                            return [2, response.data.linkId];
                         }
-                        return [2 /*return*/, null];
+                        return [2, null];
                 }
             });
         });
@@ -54890,15 +54869,14 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.get("/classroom/get_task_by_link", { params: { linkId: linkId } })];
+                        return [4, axios.get("/classroom/get_task_by_link", { params: { linkId: linkId } })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_3 = _a.sent();
-                        // handle error
                         console.log(error_3);
-                        return [2 /*return*/, []];
+                        return [2, []];
                     case 3:
                         if (response.data.success) {
                             taskData = response.data.data;
@@ -54909,9 +54887,9 @@ var QuestionManager = {
                             else {
                                 taskData.result = null;
                             }
-                            return [2 /*return*/, taskData];
+                            return [2, taskData];
                         }
-                        return [2 /*return*/, []];
+                        return [2, []];
                 }
             });
         });
@@ -54923,16 +54901,15 @@ var QuestionManager = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios.post("/classroom/save_task_result_by_link", { linkId: linkId, result: JSON.stringify(result) })];
+                        return [4, axios.post("/classroom/save_task_result_by_link", { linkId: linkId, result: JSON.stringify(result) })];
                     case 1:
                         response = _a.sent();
-                        return [3 /*break*/, 3];
+                        return [3, 3];
                     case 2:
                         error_4 = _a.sent();
-                        // handle error
                         console.log(error_4);
-                        return [2 /*return*/, false];
-                    case 3: return [2 /*return*/, response.data.success];
+                        return [2, false];
+                    case 3: return [2, response.data.success];
                 }
             });
         });
@@ -54980,7 +54957,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var react_1 = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var QuestionCreateDecorator = /** @class */ (function (_super) {
+var QuestionCreateDecorator = (function (_super) {
     __extends(QuestionCreateDecorator, _super);
     function QuestionCreateDecorator(props) {
         var _this = _super.call(this, props) || this;
@@ -55027,7 +55004,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var BaseCreator = /** @class */ (function (_super) {
+var BaseCreator = (function (_super) {
     __extends(BaseCreator, _super);
     function BaseCreator(props) {
         var _this = _super.call(this, props) || this;
@@ -55086,7 +55063,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var BaseSolving = /** @class */ (function (_super) {
+var BaseSolving = (function (_super) {
     __extends(BaseSolving, _super);
     function BaseSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -55131,7 +55108,6 @@ var BaseSolving = /** @class */ (function (_super) {
             });
             return scores;
         };
-        // From 0 to 1.
         _this.setScores = function (score) {
             _this.setState({ scores: score });
             _this.updateScoresCallback(_this.state.questionIndex, score);
@@ -55218,16 +55194,7 @@ var variants_list_1 = __webpack_require__(/*! ./variants_list */ "../../..!NewPr
 var base_creator_1 = __webpack_require__(/*! ./base_creator */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_creator.tsx");
 var inputtextarea_1 = __webpack_require__(/*! primereact/inputtextarea */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtextarea\\inputtextarea.esm.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-/***
- * Json format:
- * {
- *   question: "question text",
- *   answerType: "single", // single or multiple,
- *   variants: ["1", "2", "3", "4"],
- *   answers: ["2"], // list of right answers.
- * }
- */
-var CheckAnswerCreator = /** @class */ (function (_super) {
+var CheckAnswerCreator = (function (_super) {
     __extends(CheckAnswerCreator, _super);
     function CheckAnswerCreator(props) {
         var _this = _super.call(this, props) || this;
@@ -55381,16 +55348,7 @@ var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewPro
 var radiobutton_1 = __webpack_require__(/*! primereact/radiobutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\radiobutton\\radiobutton.esm.js");
 var base_solving_1 = __webpack_require__(/*! ./base_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-/***
- * Json format:
- * {
- *   question: "question text",
- *   answerType: "single", // single or multiple,
- *   variants: ["1", "2", "3", "4"],
- *   answers: ["2"], // list of right answers.
- * }
- */
-var CheckAnswerSolving = /** @class */ (function (_super) {
+var CheckAnswerSolving = (function (_super) {
     __extends(CheckAnswerSolving, _super);
     function CheckAnswerSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -55543,26 +55501,11 @@ var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject
 var variants_list_1 = __webpack_require__(/*! ./variants_list */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\variants_list.tsx");
 var base_creator_1 = __webpack_require__(/*! ./base_creator */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_creator.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-/***
- * Json format:
- * {
- *      question: "question text",
- *      textWithGaps: ["Select correct world: I am a student. I go to the ",
- *      {
- *        "variants": [ "shop", "army", "University" ]
- *      }, "My favorite subject is ",
-        {
-          "variants": [ "shopping", "Math", "Art" ]
-        }],
- *      answers: ["1->University", "2->Math", "2->Art"], // list of right answers.
- * }
- */
-var FillGapsCreator = /** @class */ (function (_super) {
+var FillGapsCreator = (function (_super) {
     __extends(FillGapsCreator, _super);
     function FillGapsCreator(props) {
         var _this = _super.call(this, props) || this;
         _this.gapRegExp = /\[\[gap#\d+\]\]/;
-        _this.splitRegExp = /(?=\[\[gap\#\d+\]\])|(?<=\[\[gap\#\d+\]\])/;
         _this.numberRegExp = /\d+/;
         _this.getData = function () {
             var textWithGaps = _this.state.textWithGaps;
@@ -55677,7 +55620,29 @@ var FillGapsCreator = /** @class */ (function (_super) {
             return res;
         };
         _this.splitTextToArray = function (text) {
-            var arrayOfStrs = text.split(_this.splitRegExp);
+            var arrayOfStrs = [];
+            var startSearch = 0;
+            var pushRest = function () {
+                if (startSearch < text.length)
+                    arrayOfStrs.push(text.substring(startSearch));
+            };
+            while (true) {
+                var startGap = text.indexOf("[[gap#", startSearch);
+                if (startGap == -1) {
+                    pushRest();
+                    break;
+                }
+                var endGap = text.indexOf("]]", startGap);
+                if (endGap == -1) {
+                    pushRest();
+                    break;
+                }
+                endGap += 2;
+                if (startSearch < startGap)
+                    arrayOfStrs.push(text.substring(startSearch, startGap));
+                arrayOfStrs.push(text.substring(startGap, endGap));
+                startSearch = endGap;
+            }
             var index = 0;
             var gaps = _this.getGasOnly(_this.state.textWithGaps);
             for (var _i = 0, arrayOfStrs_1 = arrayOfStrs; _i < arrayOfStrs_1.length; _i++) {
@@ -55869,21 +55834,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var dropdown_1 = __webpack_require__(/*! primereact/dropdown */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\dropdown\\dropdown.esm.js");
 var base_solving_1 = __webpack_require__(/*! ./base_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questions\\base_solving.tsx");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-/***
- * Json format:
- * {
- *      question: "question text",
- *      textWithGaps: ["Select correct world: I am a student. I go to the ",
- *      {
- *        "variants": [ "shop", "army", "University" ]
- *      }, "My favorite subject is ",
-        {
-          "variants": [ "shopping", "Math", "Art" ]
-        }],
- *      answers: ["1->University", "2->Math", "2->Art"], // list of right answers.
- * }
- */
-var FillGapsSolving = /** @class */ (function (_super) {
+var FillGapsSolving = (function (_super) {
     __extends(FillGapsSolving, _super);
     function FillGapsSolving(props) {
         var _this = _super.call(this, props) || this;
@@ -56005,7 +55956,6 @@ var FillGapsSolving = /** @class */ (function (_super) {
         var self = _this;
         _this.gapsOnly.forEach(function (gap) {
             totalVariants += gap.variants.length;
-            // Shuffle variants.
             self.shuffleArray(gap.variants);
         });
         _this.setScoreWeight(_this.props.rightAnswers, totalVariants - _this.props.rightAnswers);
@@ -56059,7 +56009,7 @@ var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewP
 var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
 var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var VariantsList = /** @class */ (function (_super) {
+var VariantsList = (function (_super) {
     __extends(VariantsList, _super);
     function VariantsList(props) {
         var _this = _super.call(this, props) || this;
@@ -56187,7 +56137,7 @@ var dialog_1 = __webpack_require__(/*! primereact/dialog */ "../../..!NewProject
 var selectbutton_1 = __webpack_require__(/*! primereact/selectbutton */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\selectbutton\\selectbutton.esm.js");
 var checkbox_1 = __webpack_require__(/*! primereact/checkbox */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\checkbox\\checkbox.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
-var ShareLinkDialog = /** @class */ (function (_super) {
+var ShareLinkDialog = (function (_super) {
     __extends(ShareLinkDialog, _super);
     function ShareLinkDialog(props) {
         var _this = _super.call(this, props) || this;
@@ -56201,11 +56151,11 @@ var ShareLinkDialog = /** @class */ (function (_super) {
                 var linkId;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, questionManager_1.default.saveShareLink(this.state.templateId, this.state.shareLinkTitle, this.state.lifeTime, this.state.isExamMode)];
+                        case 0: return [4, questionManager_1.default.saveShareLink(this.state.templateId, this.state.shareLinkTitle, this.state.lifeTime, this.state.isExamMode)];
                         case 1:
                             linkId = _a.sent();
                             this.setState({ shareLinkId: linkId });
-                            return [2 /*return*/];
+                            return [2];
                     }
                 });
             }); })();
@@ -56282,7 +56232,7 @@ var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject
 var react_copy_to_clipboard_1 = __webpack_require__(/*! react-copy-to-clipboard */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-copy-to-clipboard\\lib\\index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var SharedLinksTable = /** @class */ (function (_super) {
+var SharedLinksTable = (function (_super) {
     __extends(SharedLinksTable, _super);
     function SharedLinksTable(props) {
         var _this = _super.call(this, props) || this;
@@ -56295,7 +56245,6 @@ var SharedLinksTable = /** @class */ (function (_super) {
                 self.setState({ links: response.data.links });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -56306,7 +56255,6 @@ var SharedLinksTable = /** @class */ (function (_super) {
                 self.updateLinks();
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -56444,7 +56392,7 @@ var message_1 = __webpack_require__(/*! primereact/message */ "../../..!NewProje
 var inputtext_1 = __webpack_require__(/*! primereact/inputtext */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\inputtext\\inputtext.esm.js");
 var divider_1 = __webpack_require__(/*! primereact/divider */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\divider\\divider.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
-var TemplateEditForm = /** @class */ (function (_super) {
+var TemplateEditForm = (function (_super) {
     __extends(TemplateEditForm, _super);
     function TemplateEditForm(props) {
         var _this = _super.call(this, props) || this;
@@ -56479,7 +56427,6 @@ var TemplateEditForm = /** @class */ (function (_super) {
             questions[index] = newData;
             questions[index].hasError = hasError;
             _this.setState({ questions: questions });
-            // Dont call setState because no need do update
         };
         _this.removeQuestion = function (index) {
             var questions = _this.state.questions;
@@ -56526,7 +56473,6 @@ var TemplateEditForm = /** @class */ (function (_super) {
                         self.setState({ successMessage: "Saved" });
                         if (templateId) {
                             self.state.taskId = templateId;
-                            // no need to rerender.
                         }
                     }
                     else {
@@ -56534,7 +56480,6 @@ var TemplateEditForm = /** @class */ (function (_super) {
                     }
                 });
             }
-            // Hide message
             setTimeout(function () {
                 self.setState({
                     successMessage: "",
@@ -56554,11 +56499,11 @@ var TemplateEditForm = /** @class */ (function (_super) {
                 var taskData;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, questionManager_1.default.getTaskTemplate(this.state.taskId)];
+                        case 0: return [4, questionManager_1.default.getTaskTemplate(this.state.taskId)];
                         case 1:
                             taskData = _a.sent();
                             this.setState({ questions: this.getQuestionsForLoad(taskData.data), taskTitle: taskData.title });
-                            return [2 /*return*/];
+                            return [2];
                     }
                 });
             }); })();
@@ -56566,7 +56511,6 @@ var TemplateEditForm = /** @class */ (function (_super) {
     };
     TemplateEditForm.prototype.componentDidUpdate = function (prevProps) {
         var _this = this;
-        // Typical usage (don't forget to compare props):
         if (("taskId" in this.props && !("taskId" in prevProps)) ||
             (!("taskId" in this.props) && ("taskId" in prevProps)) ||
             this.props.taskId !== prevProps.taskId) {
@@ -56575,11 +56519,11 @@ var TemplateEditForm = /** @class */ (function (_super) {
                     var taskData;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4 /*yield*/, questionManager_1.default.getTaskTemplate(this.state.taskId)];
+                            case 0: return [4, questionManager_1.default.getTaskTemplate(this.state.taskId)];
                             case 1:
                                 taskData = _a.sent();
                                 this.setState({ questions: this.getQuestionsForLoad(taskData.data) });
-                                return [2 /*return*/];
+                                return [2];
                         }
                     });
                 }); })();
@@ -56671,7 +56615,7 @@ var column_1 = __webpack_require__(/*! primereact/column */ "../../..!NewProject
 var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\button\\button.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var TemplateTable = /** @class */ (function (_super) {
+var TemplateTable = (function (_super) {
     __extends(TemplateTable, _super);
     function TemplateTable(props) {
         var _this = _super.call(this, props) || this;
@@ -56685,7 +56629,6 @@ var TemplateTable = /** @class */ (function (_super) {
                 self.setState({ templates: response.data.templates });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -56702,7 +56645,6 @@ var TemplateTable = /** @class */ (function (_super) {
                 self.updateTemplates();
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -56791,7 +56733,7 @@ var login_button_1 = __webpack_require__(/*! ./common/login_button */ "../../..!
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-router-dom\\esm\\react-router-dom.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var Office = /** @class */ (function (_super) {
+var Office = (function (_super) {
     __extends(Office, _super);
     function Office(props) {
         var _this = _super.call(this, props) || this;
@@ -56803,7 +56745,6 @@ var Office = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };

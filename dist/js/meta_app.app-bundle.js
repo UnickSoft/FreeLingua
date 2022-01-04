@@ -46205,7 +46205,7 @@ var button_1 = __webpack_require__(/*! primereact/button */ "../../..!NewProject
 var login_form_1 = __webpack_require__(/*! ./login_form */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_form.tsx");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginButton = /** @class */ (function (_super) {
+var LoginButton = (function (_super) {
     __extends(LoginButton, _super);
     function LoginButton(props) {
         var _this = _super.call(this, props) || this;
@@ -46217,7 +46217,6 @@ var LoginButton = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46229,7 +46228,6 @@ var LoginButton = /** @class */ (function (_super) {
                 });
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46296,7 +46294,7 @@ var dialog_1 = __webpack_require__(/*! primereact/dialog */ "../../..!NewProject
 var password_1 = __webpack_require__(/*! primereact/password */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\password\\password.esm.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
-var LoginForm = /** @class */ (function (_super) {
+var LoginForm = (function (_super) {
     __extends(LoginForm, _super);
     function LoginForm(props) {
         var _this = _super.call(this, props) || this;
@@ -46312,7 +46310,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46324,7 +46321,6 @@ var LoginForm = /** @class */ (function (_super) {
                 console.log(response.data);
             })
                 .catch(function (error) {
-                // handle error
                 console.log(error);
             });
         };
@@ -46352,7 +46348,6 @@ var LoginForm = /** @class */ (function (_super) {
             console.log(response.data);
         })
             .catch(function (error) {
-            // handle error
             console.log(error);
         });
         return _this;
@@ -46428,33 +46423,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
 var login_button_1 = __webpack_require__(/*! ./common/login_button */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_button.tsx");
-/*
-setTranslations({
-    en: {
-        "main": {
-            "task1": "The task 1"
-        }
-    }
-});
-
-setLocale('de');
-
-var axios = require('axios');
-axios.get("/translation/de", { params: { } })
-    .then(function (response) {
-        var trans = getTranslations();
-        trans["de"] = response.data;
-        setTranslations(trans);
-        //setLocale('de');
-        console.log(response.data);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    });
-*/
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
-var MetaApp = /** @class */ (function (_super) {
+var MetaApp = (function (_super) {
     __extends(MetaApp, _super);
     function MetaApp() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -46474,7 +46444,6 @@ var MetaApp = /** @class */ (function (_super) {
 }(React.Component));
 exports.MetaApp = MetaApp;
 ReactDOM.render(React.createElement(MetaApp, null), document.getElementById('root'));
-//ReactDOM.render(<LoginForm />, document.getElementById('login_form_place'));
 ReactDOM.render(React.createElement(login_button_1.default, null), document.getElementById('EnterButton'));
 
 
