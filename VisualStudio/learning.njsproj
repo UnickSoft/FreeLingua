@@ -46,6 +46,7 @@
     <Content Include="dist\admin\index.html" />
     <Content Include="dist\classroom\index.html" />
     <Content Include="dist\css\bootstrap.min.css" />
+    <Content Include="dist\css\common.css" />
     <Content Include="dist\css\flex-slider.css" />
     <Content Include="dist\css\fontawesome.css" />
     <Content Include="dist\css\fonts\primeicons.eot" />
@@ -125,6 +126,8 @@
     <Content Include="dist\js\tabs.js" />
     <Content Include="dist\js\video.js" />
     <Content Include="dist\office\index.html" />
+    <Content Include="dist\translations\en\common.json" />
+    <Content Include="dist\translations\ru\common.json" />
     <Content Include="frontend\tsconfig.json" />
     <Content Include="log.js" />
     <Content Include="metaroute.js" />
@@ -145,6 +148,9 @@
     <Folder Include="dist\images\" />
     <Folder Include="dist\js\" />
     <Folder Include="dist\office\" />
+    <Folder Include="dist\translations\" />
+    <Folder Include="dist\translations\en\" />
+    <Folder Include="dist\translations\ru\" />
     <Folder Include="frontend\" />
     <Folder Include="frontend\admin\" />
     <Folder Include="frontend\classroom\" />
