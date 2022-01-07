@@ -127,7 +127,9 @@
     <Content Include="dist\js\video.js" />
     <Content Include="dist\office\index.html" />
     <Content Include="dist\translations\en\common.json" />
+    <Content Include="dist\translations\en\meta.json" />
     <Content Include="dist\translations\ru\common.json" />
+    <Content Include="dist\translations\ru\meta.json" />
     <Content Include="frontend\tsconfig.json" />
     <Content Include="log.js" />
     <Content Include="metaroute.js" />
@@ -166,8 +168,10 @@
     <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />
     <TypeScriptCompile Include="frontend\classroom\task_solving.tsx" />
     <TypeScriptCompile Include="frontend\classroom_app.tsx" />
+    <TypeScriptCompile Include="frontend\common\main_menu.tsx" />
     <TypeScriptCompile Include="frontend\common\login_button.tsx" />
     <TypeScriptCompile Include="frontend\common\login_form.tsx" />
+    <TypeScriptCompile Include="frontend\base_app.tsx" />
     <TypeScriptCompile Include="frontend\meta_app.tsx" />
     <TypeScriptCompile Include="frontend\office\questionManager.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\base_creator.tsx" />

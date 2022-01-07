@@ -1,0 +1,13 @@
+{
+"en": {
+  "menu": {
+       "home_button": "Home",
+       "office_button": "Office"
+    },
+   "login": {
+     "logout_button": "Logout",
+     "login_button":  "Login",
+     "login_form_header": "Please enter login and password"
+    }
+  }
+}

@@ -75,6 +75,7 @@ try
         classroomRoute.setDBManager(dbManager);
 
         app.use("/", metaRoute.getMetaRoute(express));
+        app.use("/en", metaRoute.getMetaRoute(express));
         app.use("/admin", adminRoute.getAdminRoute(express));
         app.use("/office", officeRoute.getOfficeRoute(express));
         app.use("/classroom", classroomRoute.getClassroomRoute(express));

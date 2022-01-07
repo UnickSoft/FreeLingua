@@ -4,6 +4,7 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
 import { Password } from 'primereact/password';
+import { Translate, translate } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -98,14 +99,14 @@ export class LoginForm extends React.Component<any, any> {
     renderFooter() {
         return (
             <div>
-                <Button label="Login" icon="pi pi-check" onClick={this.onLogin} autoFocus />
+                <Button label={translate("login.login_button")} icon="pi pi-check" onClick={this.onLogin} autoFocus />
             </div>
         );
     }
 
     render() {
         if (this.state.isLoggined && !this.state.useDialog) {
-            return (<div className="row"><Button className="button" onClick={this.onLogout} label="Logout" /></div>);
+            return (<div className="row"><Button className="button" onClick={this.onLogout} label={translate("login.logout_button")} /></div>);
         }
         if (!this.state.useDialog) {
             return (
@@ -121,12 +122,12 @@ export class LoginForm extends React.Component<any, any> {
                             onChange={this.handleChangePassword} feedback={false} toggleMask />
                     </div>
                     <div className="p-field">
-                        <Button id="form-submit" className="button" onClick={this.onLogin} label="Enter" />
+                        <Button id="form-submit" className="button" onClick={this.onLogin} label={translate("login.login_button")} />
                     </div>
                 </div>
             );
         } else {
-            return (<Dialog header="Enter login and password" visible={true} style={{ width: '50vw' }}
+            return (<Dialog header={translate("login.login_form_header")} visible={true} style={{ width: '50vw' }}
                 footer={this.renderFooter()}
                 onHide={this.onCloseFunc}>
                 <div className="p-fluid">

@@ -95,6 +95,10 @@ section {
     transition: all 0.5s;
 }
 
+.main-menu .sub-menu li a {
+    color: #fff;
+}
+
 @media screen and (max-width: 520px) {
     .main-header .logo a {
         font-size: 16px;

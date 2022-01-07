@@ -1,0 +1,16 @@
+{
+"ru": {
+  "menu": {
+       "home_button": "Главная",
+       "office_button": "Учительская",
+       "language" : "Language",
+       "russian"  : "Русский",
+       "english"  : "English"
+    },
+   "login": {
+     "logout_button": "Выйти",
+     "login_button":  "Войти",
+     "login_form_header": "Введите ваш логин и пароль, чтобы войти"
+    }
+  }
+}
