@@ -3,6 +3,7 @@ import * as React from "react"
 import QuestionSolvingDecorator from './question_sloving_decorator';
 import questionManager         from '../office/questionManager'
 import { Panel } from 'primereact/panel';
+import { Translate, translate } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
 /*
@@ -281,11 +282,11 @@ export class TaskSolving extends React.Component<any, any> {
             <div>
                 {this.addQuestionListHtml()}
             </div>
-            <Panel header="Results" className="resultPanel p-mt-4">
+            <Panel header={translate("result.header")} className="resultPanel p-mt-4">
                 <div style={{ 'fontSize': '1.25em' }}>
-                    <span className="d-inline p-2">Remaining questions: {this.state.remainingAnswers}</span>
-                    <span className="d-inline p-2">Mistakes: {this.state.mistakes}</span>
-                    <span className="d-inline p-2">Scores: {this.displayScores(totalScores)}</span>
+                    <span className="d-inline p-2"><Translate value="result.remaining_answer" />: {this.state.remainingAnswers}</span>
+                    <span className="d-inline p-2"><Translate value="result.mistakes" />: {this.state.mistakes}</span>
+                    <span className="d-inline p-2"><Translate value="result.scores" />: {this.displayScores(totalScores)}</span>
                 </div>
             </Panel>
         </div>);

@@ -112,12 +112,12 @@ export class LoginForm extends React.Component<any, any> {
             return (
                 <div className="p-fluid">
                     <div className="p-field">
-                        <InputText name="login" type="text" id="login" placeholder="Login"
+                        <InputText name="login" type="text" id="login" placeholder={translate("login.login")}
                             value={this.state.login}
                             onChange={this.handleChangeLogin} />
                     </div>
                     <div className="p-field">
-                        <Password name="password" type="text" id="password" placeholder="Password"
+                        <Password name="password" type="text" id="password" placeholder={translate("login.password")}
                             value={this.state.password}
                             onChange={this.handleChangePassword} feedback={false} toggleMask />
                     </div>
@@ -132,12 +132,12 @@ export class LoginForm extends React.Component<any, any> {
                 onHide={this.onCloseFunc}>
                 <div className="p-fluid">
                     <div className="p-field">
-                            <InputText name="login" type="text" id="login" placeholder="Login"
+                        <InputText name="login" type="text" id="login" placeholder={translate("login.login")}
                                 value={this.state.login}
                                 onChange={this.handleChangeLogin} />
                     </div>
                     <div className="p-field">
-                            <Password name="password" id="password" placeholder="Password"
+                        <Password name="password" id="password" placeholder={translate("login.password")}
                                 value={this.state.password}
                                 onChange={this.handleChangePassword} feedback={false} toggleMask />
                     </div>

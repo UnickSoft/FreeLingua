@@ -7,7 +7,6 @@ import SharedLinksTable from './office/shared_links_table';
 import ShareLinkDialog from './office/shared_link_dialog';
 import TaskSolving from './classroom/task_solving'
 import LoginButton from './common/login_button';
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,11 +15,16 @@ import {
     withRouter,
     Redirect
 } from "react-router-dom";
+import { BaseApp, applyTranslation } from './base_app';
+import MainMenu from './common/main_menu';
+import { Translate, getTranslations } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
 var axios = require('axios');
 
-export class Office extends React.Component {
+applyTranslation(["office.json", "common.json", "classroom.json"]);
+
+export class Office extends BaseApp {
     state: {
         isLoggined: any
         editTemplate: any
@@ -94,9 +98,9 @@ export class Office extends React.Component {
             let res = (
                 <Router>
                     <nav id="officeNav">
-                        <Link to="/office/new_task">AddTask</Link>
-                        <Link to="/office">Tasks</Link>
-                        <Link to="/office/links">Shared links</Link>
+                        <Link to="/office/new_task"><Translate value='navigation.new_task' /></Link>
+                        <Link to="/office"><Translate value='navigation.task_list' /></Link>
+                        <Link to="/office/links"><Translate value='navigation.shared_links' /></Link>
                     </nav>
                     <Switch>
                         <Route path="/office/task/:taskId" render={(props) => (
@@ -166,4 +170,4 @@ export class Office extends React.Component {
 }      
 
 ReactDOM.render(<Office />, document.getElementById('root'));
-ReactDOM.render(<LoginButton />, document.getElementById('EnterButton'));
+ReactDOM.render(<MainMenu />, document.getElementById('menu'));

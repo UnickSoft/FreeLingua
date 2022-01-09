@@ -3,6 +3,7 @@ import * as React from "react"
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
+import { Translate, translate } from 'react-i18nify';
 
 var axios = require('axios');
 
@@ -63,13 +64,13 @@ export class VariantsList extends React.Component<any, any> {
                     <div className="p-field p-grid" key={index}>
                         <label htmlFor={"answ_" + index + "_" + self.state.globalIndex} className="p-col-fixed" style={{ width: '32px' }}>{index + 1}.</label>
                         <div className="p-col-fixed" style={{ width: '300px' }}>
-                            <InputText id={"answ_" + index + "_" + self.state.globalIndex} type="text" placeholder="Add new answer"
+                            <InputText id={"answ_" + index + "_" + self.state.globalIndex} type="text" placeholder={translate("variants_list.add_new_answer")}
                                 value={answer.text} onChange={(e) => self.setVariants(locIndex, e.target.value)} />
                         </div>
                         <div className="p-field-checkbox">
                             <Checkbox inputId={"cb" + index + "_" + self.state.globalIndex} value="Right" onChange={(e) => self.updateRightAnswer(locIndex, e.target.checked)}
                                 checked={copy[locIndex].isRight} />
-                            <label htmlFor={"cb1" + index + "_" + self.state.globalIndex} className="p-checkbox-label">Is right answer?</label>
+                            <label htmlFor={"cb1" + index + "_" + self.state.globalIndex} className="p-checkbox-label"><Translate value="variants_list.is_right" /></label>
                         </div>
                         <div>
                             <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-text p-ml-4" onClick={(e) => self.removeAnswer(locIndex)}/>

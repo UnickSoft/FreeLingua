@@ -4,6 +4,8 @@ import LoginForm from './common/login_form';
 import UsersTable from './admin/users_table';
 import AddUser from './admin/add_user';
 import SystemTools from './admin/system_tools';
+import { BaseApp, applyTranslation } from './base_app';
+import MainMenu from './common/main_menu';
 
 import { Button } from 'primereact/button';
 import {
@@ -14,9 +16,11 @@ import {
 } from "react-router-dom";
 
 var ReactDOM = require('react-dom');
-var axios    = require('axios');
+var axios = require('axios');
 
-export class Admin extends React.Component {
+applyTranslation(["admin.json", "common.json"]);
+
+export class Admin extends BaseApp {
     state: {
         isLoggined: any
     };
@@ -82,3 +86,4 @@ export class Admin extends React.Component {
 }      
 
 ReactDOM.render(<Admin />, document.getElementById('root'));
+ReactDOM.render(<MainMenu />, document.getElementById('menu'));

@@ -11,10 +11,15 @@ import {
     withRouter,
     Redirect
 } from "react-router-dom";
+import { BaseApp, applyTranslation } from './base_app';
+import MainMenu from './common/main_menu';
+import { Translate, getTranslations } from 'react-i18nify';
+
+applyTranslation(["classroom.json", "common.json"]);
 
 var ReactDOM = require('react-dom');
 
-export class ClassRoom extends React.Component {
+export class ClassRoom extends BaseApp {
 
     render() {
         return (
@@ -25,7 +30,7 @@ export class ClassRoom extends React.Component {
                     )}>
                     </Route>
                     <Route path="/classroom">
-                        <div>Ещё рано</div>
+                        <div><Translate value='messages.no_task' /></div>
                     </Route>
                 </Switch>
             </Router>
@@ -34,4 +39,4 @@ export class ClassRoom extends React.Component {
 }      
 
 ReactDOM.render(<ClassRoom />, document.getElementById('root'));
-ReactDOM.render(<LoginButton />, document.getElementById('EnterButton'));
+ReactDOM.render(<MainMenu />, document.getElementById('menu'));

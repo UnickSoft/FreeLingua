@@ -46448,9 +46448,9 @@ var LoginForm = (function (_super) {
         if (!this.state.useDialog) {
             return (React.createElement("div", { className: "p-fluid" },
                 React.createElement("div", { className: "p-field" },
-                    React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: "Login", value: this.state.login, onChange: this.handleChangeLogin })),
+                    React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: react_i18nify_1.translate("login.login"), value: this.state.login, onChange: this.handleChangeLogin })),
                 React.createElement("div", { className: "p-field" },
-                    React.createElement(password_1.Password, { name: "password", type: "text", id: "password", placeholder: "Password", value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })),
+                    React.createElement(password_1.Password, { name: "password", type: "text", id: "password", placeholder: react_i18nify_1.translate("login.password"), value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })),
                 React.createElement("div", { className: "p-field" },
                     React.createElement(button_1.Button, { id: "form-submit", className: "button", onClick: this.onLogin, label: react_i18nify_1.translate("login.login_button") }))));
         }
@@ -46458,9 +46458,9 @@ var LoginForm = (function (_super) {
             return (React.createElement(dialog_1.Dialog, { header: react_i18nify_1.translate("login.login_form_header"), visible: true, style: { width: '50vw' }, footer: this.renderFooter(), onHide: this.onCloseFunc },
                 React.createElement("div", { className: "p-fluid" },
                     React.createElement("div", { className: "p-field" },
-                        React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: "Login", value: this.state.login, onChange: this.handleChangeLogin })),
+                        React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: react_i18nify_1.translate("login.login"), value: this.state.login, onChange: this.handleChangeLogin })),
                     React.createElement("div", { className: "p-field" },
-                        React.createElement(password_1.Password, { name: "password", id: "password", placeholder: "Password", value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })))));
+                        React.createElement(password_1.Password, { name: "password", id: "password", placeholder: react_i18nify_1.translate("login.password"), value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })))));
         }
     };
     return LoginForm;
@@ -46496,10 +46496,27 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
 var login_button_1 = __webpack_require__(/*! ./login_button */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_button.tsx");
 var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 var MainMenu = (function (_super) {
     __extends(MainMenu, _super);
-    function MainMenu() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function MainMenu(props) {
+        var _this = _super.call(this, props) || this;
+        _this.checkAdmin = function () {
+            var self = _this;
+            axios.get("/admin/is_admin", {}).then(function (response) {
+                self.setState({
+                    isAdmin: response.data.success
+                });
+            })
+                .catch(function (error) {
+                console.log(error);
+            });
+        };
+        _this.state = {
+            isAdmin: false
+        };
+        _this.checkAdmin();
+        return _this;
     }
     MainMenu.prototype.render = function () {
         return (React.createElement("ul", { className: "main-menu" },
@@ -46511,6 +46528,8 @@ var MainMenu = (function (_super) {
                     React.createElement(react_i18nify_1.Translate, { value: 'menu.office_button' }))),
             React.createElement("li", { id: "EnterButton" },
                 React.createElement(login_button_1.default, null)),
+            this.state.isAdmin ? React.createElement("li", null,
+                React.createElement("a", { href: "/admin" }, "Admin")) : null,
             React.createElement("li", { className: "has-submenu" },
                 React.createElement("a", { href: "#section2" },
                     React.createElement(react_i18nify_1.Translate, { value: 'menu.language' })),

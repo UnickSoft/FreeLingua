@@ -8,6 +8,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
 import { VariantsList } from "./variants_list"
 import { BaseCreator } from "./base_creator"
+import { Translate, translate } from 'react-i18nify';
 
 var axios = require('axios');
 
@@ -149,27 +150,27 @@ export class FillGapsCreator extends BaseCreator {
 
     errorsHtml() {
         if (this.state.question.length == 0) {
-            return <Message severity="warn" text="Please enter question"></Message>;
+            return <Message severity="warn" text={translate("questions.common.errors_enter_question")}></Message>;
         }
 
         if (this.state.textWithGaps.length == 0) {
-            return <Message severity="warn" text="Please enter Text"></Message>;
+            return <Message severity="warn" text={translate("questions.common.errors_enter_text")}></Message>;
         }
 
         let gaps = this.getGasOnly(this.state.textWithGaps);
 
         if (gaps.length == 0) {
-            return <Message severity="warn" text="Please select part of text and add gaps."></Message>;
+            return <Message severity="warn" text={translate("questions.fill_gaps.errors_add_gaps")}></Message>;
         }
 
         for (const gap of gaps) {
             let hasRightAnsver = false;
             gap.forEach(variant => hasRightAnsver = hasRightAnsver || variant.isRight);
             if (!hasRightAnsver) {
-                return <Message severity="warn" text="There is gap without right answer."></Message>;
+                return <Message severity="warn" text={translate("questions.fill_gaps.errors_gap_without_right_answer")}></Message>;
             }
             if (gap.length <= 1) {
-                return <Message severity="warn" text="There is gap with one answer variant."></Message>;
+                return <Message severity="warn" text={translate("questions.fill_gaps.errors_gap_without_answer")}></Message>;
             }
         }
 
@@ -337,9 +338,9 @@ export class FillGapsCreator extends BaseCreator {
             return (
                 <div>
                     <div>
-                        <label>Gap {indexGaps}</label>
+                        <label><Translate value="questions.fill_gaps.gap" />: {indexGaps}</label>
                         <Button className="p-button-sm p-button-danger p-button-text p-ml-4"
-                            onClick={(e) => self.removeGap(localIndex)} label="remove gap" />
+                            onClick={(e) => self.removeGap(localIndex)} label={translate("questions.fill_gaps.remove_gap")} />
                     </div>
                     <VariantsList onAddVariant={() => self.onAddAnswer(localIndex)}
                         onSetRight={(index, value) => self.onSetRightAnswer(localIndex, index, value)}
@@ -356,20 +357,20 @@ export class FillGapsCreator extends BaseCreator {
             <div>
                 <div className="p-fluid" key="main">
                     <div className="p-field" key="questionText">
-                        <label htmlFor={"quesionField" + this.state.questionIndex}>Enter question:</label>
+                        <label htmlFor={"quesionField" + this.state.questionIndex}><Translate value="questions.common.enter_question" />:</label>
                         <InputTextarea rows={2} cols={30} id={"quesionField" + this.state.questionIndex}
                             onChange={(e) => this.setStateAndUpdate({ question: e.target.value })}
                             value={this.state.question} autoResize />
                     </div>
 
                     <div className="p-field" key="questionText">
-                        <label htmlFor={"area" + this.state.questionIndex}>Enter Text, then Select world and press add gap:</label>
+                        <label htmlFor={"area" + this.state.questionIndex}><Translate value="questions.fill_gaps.description" />:</label>
                         <InputTextarea rows={5} cols={30} id={"area" + this.state.questionIndex}
                             onChange={(e) => this.loadFromText(e.target.value)}
                             value={this.getAsText()} autoResize
                         />
                     </div>
-                    <Button label="Add gap" id={"add_gaps"+ this.state.questionIndex} onClick={() => this.addGap()} />
+                    <Button label={translate("questions.fill_gaps.add_gaps")} id={"add_gaps"+ this.state.questionIndex} onClick={() => this.addGap()} />
                 </div>
                 <div key="answers">
                     <label>Gaps:</label>

@@ -7,6 +7,7 @@ import questionManager         from './questionManager'
 import { Message } from 'primereact/message';
 import { InputText } from 'primereact/inputtext';
 import { Divider } from 'primereact/divider';
+import { Translate, translate } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
 
@@ -119,7 +120,7 @@ export class TemplateEditForm extends React.Component<any, any> {
             index++;
             let locIndex = index;
             return (
-                <Button key={type.type} onClick={(e) => self.addQuestion(type.type)}>{"Add question: " + type.title}</Button>
+                <Button key={type.type} onClick={(e) => self.addQuestion(type.type)}>{translate("edit_form.add_question_text") + translate("edit_form.questions." + type.title)}</Button>
             )
         })
     }
@@ -138,10 +139,10 @@ export class TemplateEditForm extends React.Component<any, any> {
                         data={question.data} />
                     <Divider />
                     <div>
-                        <label className="p-mr-2">Question control:</label>
-                        <Button className="p-button-sm p-mr-2 p-mb-2" onClick={(e) => self.removeQuestion(locIndex)}>Remove</Button>
-                        <Button className="p-button-sm p-mr-2 p-mb-2" onClick={(e) => self.moveQuestion(locIndex, -1)}>Move Up</Button>
-                        <Button className="p-button-sm p-mr-2 p-mb-2" onClick={(e) => self.moveQuestion(locIndex, 1)}>Move Down</Button>
+                        <label className="p-mr-2"><Translate value='edit_form.question_controls' />:</label>
+                        <Button className="p-button-sm p-mr-2 p-mb-2" onClick={(e) => self.removeQuestion(locIndex)}><Translate value='button_common.remove' /></Button>
+                        <Button className="p-button-sm p-mr-2 p-mb-2" onClick={(e) => self.moveQuestion(locIndex, -1)}><Translate value='edit_form.move_up' /></Button>
+                        <Button className="p-button-sm p-mr-2 p-mb-2" onClick={(e) => self.moveQuestion(locIndex, 1)}><Translate value='edit_form.move_down' /></Button>
                     </div>
                 </Panel>
             )
@@ -168,14 +169,14 @@ export class TemplateEditForm extends React.Component<any, any> {
         let self = this;
 
         if (this.state.taskTitle.length == 0) {
-            self.setState({ errorMessage: "Cannot save: Enter task title" });
+            self.setState({ errorMessage: translate("edit_form.save_errors.enter_task_title") });
         }
 
         let hasError = false;
         this.state.questions.forEach(value => hasError = hasError || value.hasError);
 
         if (hasError) {
-            self.setState({ errorMessage: "Cannot save: There are errors" });
+            self.setState({ errorMessage: translate("edit_form.save_errors.there_are_errors") });
         }
 
         if (!hasError) {
@@ -184,13 +185,13 @@ export class TemplateEditForm extends React.Component<any, any> {
                 this.state.taskTitle,
                 function (successed, templateId) {
                     if (successed) {
-                        self.setState({ successMessage: "Saved" });
+                        self.setState({ successMessage: translate("edit_form.saved") });
                         if (templateId) {
                             self.state.taskId = templateId;
                             // no need to rerender.
                         }
                     } else {
-                        self.setState({ errorMessage: "Cannot save" });
+                        self.setState({ errorMessage: translate("edit_form.cannot_saved") });
                     }
                 });
         }
@@ -214,11 +215,12 @@ export class TemplateEditForm extends React.Component<any, any> {
     
     render() {
         return (<div>
-            <h3>Use buttons to add new question by type</h3>
+            <h3><Translate value='edit_form.title' /></h3>
             <div className="p-fluid" key="main">
                 <div className="p-field" key="questionText">
-                    <label htmlFor="taskName">Enter task name</label>
-                    <InputText id="taskName" type="text" onChange={(e) => this.setState({ taskTitle: e.target.value })} value={this.state.taskTitle} />
+                    <label htmlFor="taskName"><Translate value='edit_form.enter_task_name' /></label>
+                    <InputText id="taskName" type="text" onChange={(e) => this.setState({ taskTitle: e.target.value })}
+                        value={this.state.taskTitle} />
                 </div>
             </div>
             <div>
@@ -228,7 +230,7 @@ export class TemplateEditForm extends React.Component<any, any> {
                 {this.addQuestionButtonHtml()}
             </div>
             <div>
-                <Button onClick={this.saveTemplate} className="p-button-success">Save</Button>
+                <Button onClick={this.saveTemplate} className="p-button-success"><Translate value='button_common.save' /></Button>
                 {this.messageHtml()}
             </div>
         </div>);

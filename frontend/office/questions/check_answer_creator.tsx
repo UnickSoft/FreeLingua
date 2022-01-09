@@ -8,6 +8,7 @@ import { Message } from 'primereact/message';
 import { VariantsList } from "./variants_list"
 import { BaseCreator } from "./base_creator"
 import { InputTextarea } from 'primereact/inputtextarea';
+import { Translate, translate } from 'react-i18nify';
 
 var axios = require('axios');
 
@@ -24,8 +25,8 @@ var axios = require('axios');
 export class CheckAnswerCreator extends BaseCreator {
 
     answerType = [
-        { label: 'Signle answer', value: 'single' },
-        { label: 'Multiple answer', value: 'multiple' }
+        { label: translate("questions.check_answer.single_answer"), value: 'single' },
+        { label: translate("questions.check_answer.multiple_answer"), value: 'multiple' }
     ];
 
     state: {
@@ -135,11 +136,11 @@ export class CheckAnswerCreator extends BaseCreator {
 
     errorsHtml() {
         if (this.state.question.length == 0) {
-            return <Message severity="warn" text="Please enter question"></Message>;
+            return <Message severity="warn" text={translate("questions.common.errors_enter_question")}></Message>;
         }
 
         if (this.state.answers.length < 2) {
-            return <Message severity="warn" text="Please add two or more answers"></Message>;
+            return <Message severity="warn" text={translate("questions.check_answer.errors_add_2_or_more_answers")}></Message>;
         }
         let rightAnswers = 0;
         for (const answer of this.state.answers) {
@@ -149,11 +150,11 @@ export class CheckAnswerCreator extends BaseCreator {
         }
 
         if (rightAnswers == 0) {
-            return <Message severity="warn" text="Please mark at least one answer as Right answer"></Message>;
+            return <Message severity="warn" text={translate("questions.check_answer.errors_mark_answer")}></Message>;
         }
 
         if (this.state.answerType == 'single' && rightAnswers > 1) {
-            return <Message severity="warn" text="Single answer quetsion should has one right answer"></Message>;
+            return <Message severity="warn" text={translate("questions.check_answer.errors_single_answer_only")}></Message>;
         }
     }
 
@@ -162,7 +163,7 @@ export class CheckAnswerCreator extends BaseCreator {
             <div>
                 <div className="p-fluid" key="main">
                     <div className="p-field" key="questionText">
-                        <label htmlFor="firstname1">Enter question:</label>
+                        <label htmlFor="firstname1"><Translate value="questions.common.enter_question" />:</label>
                         <InputTextarea rows={2} cols={30} id="firstname1"
                             onChange={(e) => this.setStateAndUpdate({ question: e.target.value })}
                             value={this.state.question} autoResize />
@@ -173,7 +174,7 @@ export class CheckAnswerCreator extends BaseCreator {
                     </div>
                 </div>
                 <div key="answers">
-                    <label>Add answers:</label>
+                    <label><Translate value="questions.check_answer.answer_variants" /></label>
                     { this.answersHtml() }
                 </div>
                 <div key="errors">

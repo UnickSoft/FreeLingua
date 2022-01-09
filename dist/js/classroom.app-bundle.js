@@ -52694,6 +52694,77 @@ function warning(condition, message) {
 
 /***/ }),
 
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\base_app.tsx":
+/*!*********************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\base_app.tsx ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
+function applyTranslation(translationList) {
+    var currentLanguage = window.location.pathname.startsWith("/en") ? "en" : "ru";
+    var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+    var getTranslationRoot = function (langId) {
+        return '/translations/' + langId + "/";
+    };
+    translationList.forEach(function (fileName) {
+        axios.get(getTranslationRoot(currentLanguage) + fileName, { params: {} })
+            .then(function (response) {
+            var trans = react_i18nify_1.getTranslations();
+            trans[currentLanguage] = __assign(__assign({}, trans[currentLanguage]), response.data[currentLanguage]);
+            react_i18nify_1.setTranslations(trans);
+            react_i18nify_1.setLocale(currentLanguage);
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    });
+}
+exports.applyTranslation = applyTranslation;
+var BaseApp = (function (_super) {
+    __extends(BaseApp, _super);
+    function BaseApp() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    BaseApp.prototype.render = function () {
+        return null;
+    };
+    return BaseApp;
+}(React.Component));
+exports.BaseApp = BaseApp;
+exports.default = BaseApp;
+
+
+/***/ }),
+
 /***/ "../../..!NewProject\\learning.online\\src\\frontend\\classroom\\question_sloving_decorator.tsx":
 /*!*************************************************************************************************!*\
   !*** ../../..!NewProject\learning.online\src\frontend\classroom\question_sloving_decorator.tsx ***!
@@ -52816,6 +52887,7 @@ var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.onli
 var question_sloving_decorator_1 = __webpack_require__(/*! ./question_sloving_decorator */ "../../..!NewProject\\learning.online\\src\\frontend\\classroom\\question_sloving_decorator.tsx");
 var questionManager_1 = __webpack_require__(/*! ../office/questionManager */ "../../..!NewProject\\learning.online\\src\\frontend\\office\\questionManager.tsx");
 var panel_1 = __webpack_require__(/*! primereact/panel */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\panel\\panel.esm.js");
+var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var TaskSolving = (function (_super) {
     __extends(TaskSolving, _super);
@@ -53048,16 +53120,19 @@ var TaskSolving = (function (_super) {
         return (React.createElement("div", null,
             React.createElement("h3", { className: "taskHeader" }, this.state.title ? this.state.title : null),
             React.createElement("div", null, this.addQuestionListHtml()),
-            React.createElement(panel_1.Panel, { header: "Results", className: "resultPanel p-mt-4" },
+            React.createElement(panel_1.Panel, { header: react_i18nify_1.translate("result.header"), className: "resultPanel p-mt-4" },
                 React.createElement("div", { style: { 'fontSize': '1.25em' } },
                     React.createElement("span", { className: "d-inline p-2" },
-                        "Remaining questions: ",
+                        React.createElement(react_i18nify_1.Translate, { value: "result.remaining_answer" }),
+                        ": ",
                         this.state.remainingAnswers),
                     React.createElement("span", { className: "d-inline p-2" },
-                        "Mistakes: ",
+                        React.createElement(react_i18nify_1.Translate, { value: "result.mistakes" }),
+                        ": ",
                         this.state.mistakes),
                     React.createElement("span", { className: "d-inline p-2" },
-                        "Scores: ",
+                        React.createElement(react_i18nify_1.Translate, { value: "result.scores" }),
+                        ": ",
                         this.displayScores(totalScores))))));
     };
     return TaskSolving;
@@ -53091,9 +53166,12 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
-var login_button_1 = __webpack_require__(/*! ./common/login_button */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_button.tsx");
 var task_solving_1 = __webpack_require__(/*! ./classroom/task_solving */ "../../..!NewProject\\learning.online\\src\\frontend\\classroom\\task_solving.tsx");
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-router-dom\\esm\\react-router-dom.js");
+var base_app_1 = __webpack_require__(/*! ./base_app */ "../../..!NewProject\\learning.online\\src\\frontend\\base_app.tsx");
+var main_menu_1 = __webpack_require__(/*! ./common/main_menu */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\main_menu.tsx");
+var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
+base_app_1.applyTranslation(["classroom.json", "common.json"]);
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
 var ClassRoom = (function (_super) {
     __extends(ClassRoom, _super);
@@ -53105,13 +53183,14 @@ var ClassRoom = (function (_super) {
             React.createElement(react_router_dom_1.Switch, null,
                 React.createElement(react_router_dom_1.Route, { path: "/classroom/link/:linkId", render: function (props) { return (React.createElement(task_solving_1.default, { linkId: props.match.params.linkId })); } }),
                 React.createElement(react_router_dom_1.Route, { path: "/classroom" },
-                    React.createElement("div", null, "\u0415\u0449\u0451 \u0440\u0430\u043D\u043E")))));
+                    React.createElement("div", null,
+                        React.createElement(react_i18nify_1.Translate, { value: 'messages.no_task' }))))));
     };
     return ClassRoom;
-}(React.Component));
+}(base_app_1.BaseApp));
 exports.ClassRoom = ClassRoom;
 ReactDOM.render(React.createElement(ClassRoom, null), document.getElementById('root'));
-ReactDOM.render(React.createElement(login_button_1.default, null), document.getElementById('EnterButton'));
+ReactDOM.render(React.createElement(main_menu_1.default, null), document.getElementById('menu'));
 
 
 /***/ }),
@@ -53315,9 +53394,9 @@ var LoginForm = (function (_super) {
         if (!this.state.useDialog) {
             return (React.createElement("div", { className: "p-fluid" },
                 React.createElement("div", { className: "p-field" },
-                    React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: "Login", value: this.state.login, onChange: this.handleChangeLogin })),
+                    React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: react_i18nify_1.translate("login.login"), value: this.state.login, onChange: this.handleChangeLogin })),
                 React.createElement("div", { className: "p-field" },
-                    React.createElement(password_1.Password, { name: "password", type: "text", id: "password", placeholder: "Password", value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })),
+                    React.createElement(password_1.Password, { name: "password", type: "text", id: "password", placeholder: react_i18nify_1.translate("login.password"), value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })),
                 React.createElement("div", { className: "p-field" },
                     React.createElement(button_1.Button, { id: "form-submit", className: "button", onClick: this.onLogin, label: react_i18nify_1.translate("login.login_button") }))));
         }
@@ -53325,15 +53404,93 @@ var LoginForm = (function (_super) {
             return (React.createElement(dialog_1.Dialog, { header: react_i18nify_1.translate("login.login_form_header"), visible: true, style: { width: '50vw' }, footer: this.renderFooter(), onHide: this.onCloseFunc },
                 React.createElement("div", { className: "p-fluid" },
                     React.createElement("div", { className: "p-field" },
-                        React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: "Login", value: this.state.login, onChange: this.handleChangeLogin })),
+                        React.createElement(inputtext_1.InputText, { name: "login", type: "text", id: "login", placeholder: react_i18nify_1.translate("login.login"), value: this.state.login, onChange: this.handleChangeLogin })),
                     React.createElement("div", { className: "p-field" },
-                        React.createElement(password_1.Password, { name: "password", id: "password", placeholder: "Password", value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })))));
+                        React.createElement(password_1.Password, { name: "password", id: "password", placeholder: react_i18nify_1.translate("login.password"), value: this.state.password, onChange: this.handleChangePassword, feedback: false, toggleMask: true })))));
         }
     };
     return LoginForm;
 }(React.Component));
 exports.LoginForm = LoginForm;
 exports.default = LoginForm;
+
+
+/***/ }),
+
+/***/ "../../..!NewProject\\learning.online\\src\\frontend\\common\\main_menu.tsx":
+/*!*****************************************************************************!*\
+  !*** ../../..!NewProject\learning.online\src\frontend\common\main_menu.tsx ***!
+  \*****************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __webpack_require__(/*! react */ "../../..!NewProject\\learning.online\\src\\node_modules\\react\\index.js");
+var login_button_1 = __webpack_require__(/*! ./login_button */ "../../..!NewProject\\learning.online\\src\\frontend\\common\\login_button.tsx");
+var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
+var MainMenu = (function (_super) {
+    __extends(MainMenu, _super);
+    function MainMenu(props) {
+        var _this = _super.call(this, props) || this;
+        _this.checkAdmin = function () {
+            var self = _this;
+            axios.get("/admin/is_admin", {}).then(function (response) {
+                self.setState({
+                    isAdmin: response.data.success
+                });
+            })
+                .catch(function (error) {
+                console.log(error);
+            });
+        };
+        _this.state = {
+            isAdmin: false
+        };
+        _this.checkAdmin();
+        return _this;
+    }
+    MainMenu.prototype.render = function () {
+        return (React.createElement("ul", { className: "main-menu" },
+            React.createElement("li", null,
+                React.createElement("a", { href: "/" },
+                    React.createElement(react_i18nify_1.Translate, { value: 'menu.home_button' }))),
+            React.createElement("li", null,
+                React.createElement("a", { href: "/office" },
+                    React.createElement(react_i18nify_1.Translate, { value: 'menu.office_button' }))),
+            React.createElement("li", { id: "EnterButton" },
+                React.createElement(login_button_1.default, null)),
+            this.state.isAdmin ? React.createElement("li", null,
+                React.createElement("a", { href: "/admin" }, "Admin")) : null,
+            React.createElement("li", { className: "has-submenu" },
+                React.createElement("a", { href: "#section2" },
+                    React.createElement(react_i18nify_1.Translate, { value: 'menu.language' })),
+                React.createElement("ul", { className: "sub-menu" },
+                    React.createElement("li", null,
+                        React.createElement("a", { href: "/" },
+                            React.createElement(react_i18nify_1.Translate, { value: 'meta.russian' }))),
+                    React.createElement("li", null,
+                        React.createElement("a", { href: "/en/" },
+                            React.createElement(react_i18nify_1.Translate, { value: 'meta.english' })))))));
+    };
+    return MainMenu;
+}(React.Component));
+exports.MainMenu = MainMenu;
+exports.default = MainMenu;
 
 
 /***/ }),

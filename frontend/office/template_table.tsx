@@ -3,6 +3,7 @@ import * as React from "react"
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { Translate, translate } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -63,12 +64,12 @@ export class TemplateTable extends React.Component<any, any> {
 
     editBoby = (value) => {
         let self = this;
-        return <Button onClick={(e) => self.editTemplate(value.id)}>Edit</Button>
+        return <Button onClick={(e) => self.editTemplate(value.id)}>{translate("task_table.edit")}</Button>
     }
 
     deleteTemplateBoby = (value) => {
         let self = this;
-        return <Button onClick={(e) => self.deleteTemplate(value.id)}>Delete</Button>
+        return <Button onClick={(e) => self.deleteTemplate(value.id)} className="p-button-danger">{translate("task_table.delete")}</Button>
     }
 
     toJSONLocal = (date) => {
@@ -83,24 +84,24 @@ export class TemplateTable extends React.Component<any, any> {
 
     linkBoby = (value) => {
         let self = this;
-        return <Button onClick={(e) => self.shareByLink(value.id, value.title)}>Share</Button>
+        return <Button onClick={(e) => self.shareByLink(value.id, value.title)}>{translate("task_table.share")}</Button>
     }
 
     testBoby = (value) => {
         let self = this;
-        return <Button onClick={(e) => self.testTemplateCallback(value.id)}>Test</Button>
+        return <Button onClick={(e) => self.testTemplateCallback(value.id)}>{translate("task_table.test")}</Button>
     }
     
     render() {
         return (<div className="card">
             <DataTable value={this.state.templates} scrollable style={{minWidth:'400px'}}>
-                <Column field="title" header="Title"></Column>
-                <Column header="Last Update" body={this.lastDateBody} className="d-none d-md-table-cell"></Column>
-                <Column field="version" header="Version" className="d-none d-md-table-cell"></Column>
-                <Column header="Edit" body={this.editBoby}></Column>
-                <Column header="Test" body={this.testBoby}></Column>
-                <Column header="Share by link" body={this.linkBoby}></Column>
-                <Column header="Delete" body={this.deleteTemplateBoby}></Column>
+                <Column field="title" header={translate("task_table.title")}></Column>
+                <Column header={translate("task_table.last_update")} body={this.lastDateBody} className="d-none d-md-table-cell"></Column>
+                <Column field="version" header={translate("task_table.version")} className="d-none d-md-table-cell"></Column>
+                <Column header={translate("task_table.edit")} body={this.editBoby}></Column>
+                <Column header={translate("task_table.test")} body={this.testBoby}></Column>
+                <Column header={translate("task_table.share_by_link")} body={this.linkBoby}></Column>
+                <Column header={translate("task_table.delete")}  body={this.deleteTemplateBoby}></Column>
             </DataTable>
         </div>);
     }
