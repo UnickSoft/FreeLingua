@@ -9,10 +9,11 @@ class ClassroomRoute {
         var router = express.Router();
         var staticPath = path.join(__dirname, '/dist/');
 
-        var dbManager = require("./database/databaseManager");
-        var templates = dbManager.getTemplates();
-        var links     = dbManager.getLinks();
-        var tasks = dbManager.getTasks();
+        var dbManager  = require("./database/databaseManager");
+        var templates  = dbManager.getTemplates();
+        var links      = dbManager.getLinks();
+        var tasks      = dbManager.getTasks();
+        var categories = dbManager.getCategories();
 
         // Redirects
         router.get('/link/:linkId', function (req, res, next) {
@@ -80,6 +81,13 @@ class ClassroomRoute {
                     } else {
                         res.send({ success: success });
                     }
+                });
+        });
+
+        router.get('/get_public_category_templates', function (req, res, next) {
+            categories.getTemplatesInPublicCategory(req.query.id, templates,
+                function (success, templates) {
+                    res.send({ success: success, templates : templates });
                 });
         });        
 

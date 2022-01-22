@@ -6,7 +6,7 @@ var dbManager = {
 
     create_database_script : "createDB_sqlite.sql",
 
-    meta_version: 1,
+    meta_version: 2,
                                         
     meta_table: "meta",
 
@@ -24,6 +24,9 @@ var dbManager = {
             self.links = new Links(self.dbWrapper);
             var Tasks = require("./tasks");
             self.tasks = new Tasks(self.dbWrapper);
+            var Category = require("./category");
+            self.category = new Category(self.dbWrapper);
+            self.category.init();
 
             if (func) {
                 func();
@@ -88,6 +91,10 @@ var dbManager = {
 
     getTasks() {
         return this.tasks;
+    },
+
+    getCategories() {
+        return this.category;
     },
 
     removeDB() {

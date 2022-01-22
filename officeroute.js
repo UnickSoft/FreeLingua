@@ -32,7 +32,8 @@ class OfficeRoute {
 
         var dbManager = require("./database/databaseManager");
         var templates = dbManager.getTemplates();
-        var links     = dbManager.getLinks();
+        var links      = dbManager.getLinks();
+        var categories = dbManager.getCategories();
 
         router.get('/get_templates', function (req, res, next) {
             var session = req.session;
@@ -108,6 +109,32 @@ class OfficeRoute {
                 function (success) {
                     res.send({ success: success });
                 });
+        });
+
+        router.post('/set_template_public_category', function (req, res, next) {
+            var session = req.session;
+
+            templates.getTemplate(session.userInfo.id, req.body.id, function (success, templateData) {
+                if (success) {
+                    categories.setTemplateCategories(req.body.id, req.body.categories, function (success) {
+                        templates.setTemplateShared(session.userInfo.id, req.body.id, req.body.categories.length > 0, function (success) {
+                            res.send({ success: success });
+                        });
+                    });
+                }
+            });
+        });
+
+        router.get('/get_template_public_categories', function (req, res, next) {
+            var session = req.session;
+
+            templates.getTemplate(session.userInfo.id, req.query.id, function (success, templateData) {
+                if (success) {
+                    categories.getTemplateCategories(req.query.id, function (success, categories) {
+                        res.send({ success: success, categories: categories });
+                    });
+                }
+            });
         });        
 
         return router;

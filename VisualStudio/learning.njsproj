@@ -41,6 +41,7 @@
     <Content Include="database\sqliteWrapper.js" />
     <Content Include="database\links.js" />
     <Content Include="database\tasks.js" />
+    <Content Include="database\category.js" />
     <Content Include="database\templates.js" />
     <Content Include="database\users.js" />
     <Content Include="dist\admin\index.html" />
@@ -128,8 +129,11 @@
     <Content Include="dist\office\index.html" />
     <Content Include="dist\translations\en\common.json" />
     <Content Include="dist\translations\en\meta.json" />
+    <Content Include="dist\translations\ru\admin.json" />
+    <Content Include="dist\translations\ru\classroom.json" />
     <Content Include="dist\translations\ru\common.json" />
     <Content Include="dist\translations\ru\meta.json" />
+    <Content Include="dist\translations\ru\office.json" />
     <Content Include="frontend\tsconfig.json" />
     <Content Include="log.js" />
     <Content Include="metaroute.js" />
@@ -163,16 +167,20 @@
   <ItemGroup>
     <TypeScriptCompile Include="frontend\admin\add_user.tsx" />
     <TypeScriptCompile Include="frontend\admin\system_tools.tsx" />
+    <TypeScriptCompile Include="frontend\admin\public_category_table.tsx" />
     <TypeScriptCompile Include="frontend\admin\users_table.tsx" />
     <TypeScriptCompile Include="frontend\admin_app.tsx" />
     <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />
     <TypeScriptCompile Include="frontend\classroom\task_solving.tsx" />
     <TypeScriptCompile Include="frontend\classroom_app.tsx" />
+    <TypeScriptCompile Include="frontend\common\sort_dialog.tsx" />
+    <TypeScriptCompile Include="frontend\common\category_form.tsx" />
     <TypeScriptCompile Include="frontend\common\main_menu.tsx" />
     <TypeScriptCompile Include="frontend\common\login_button.tsx" />
     <TypeScriptCompile Include="frontend\common\login_form.tsx" />
     <TypeScriptCompile Include="frontend\base_app.tsx" />
     <TypeScriptCompile Include="frontend\meta_app.tsx" />
+    <TypeScriptCompile Include="frontend\office\categories_selection.tsx" />
     <TypeScriptCompile Include="frontend\office\questionManager.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\base_creator.tsx" />
     <TypeScriptCompile Include="frontend\office\questions\base_solving.tsx" />

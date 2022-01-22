@@ -69,6 +69,20 @@ class Templates {
             { name: "ownerId", value: userId }
         ], func);
     }
+
+    setTemplateShared(userId, templateId, shared, func) {
+        let self = this;
+        self.dbWrapper.update(self.Table,
+            [{ name: "shared", value: shared}],
+            [
+                { name: "id", value: templateId },
+                { name: "ownerId", value: userId }
+            ],
+            function (success) {
+                func(success);
+            }
+        );
+    }
 }
 
 

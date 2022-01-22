@@ -39,6 +39,7 @@ class AdminRoute {
         var users = dbManager.getUsers();
         var tasks = dbManager.getTasks();
         var links = dbManager.getLinks();
+        var categories = dbManager.getCategories();
 
         router.get('/get_users', function (req, res, next) {
             users.getUserList(function (list) {
@@ -92,6 +93,49 @@ class AdminRoute {
                 }
             });
         });
+
+        router.get('/get_public_categories', function (req, res, next) {
+            categories.getPublicCategories(function (list) {
+                res.send({ categories: list });
+            });
+        });
+
+        router.post('/add_public_category', function (req, res, next) {
+            categories.addPublicCategory(req.body.title, req.body.description, req.body.parent,
+                function (success) {
+                    res.send({ success: success });
+                }
+            );
+        });
+
+        router.post('/edit_public_category', function (req, res, next) {
+            categories.editPublicCategory(req.body.id, req.body.title, req.body.description, req.body.parent,
+                function (success) {
+                    res.send({ success: success });
+                }
+            );
+        });
+
+        router.post('/update_public_category_sort', function (req, res, next) {
+            categories.updatePublicCategorySort(req.body.id, req.body.sort, function (success) {
+                    res.send({ success: success });
+                }
+            );
+        });
+
+        router.post('/delete_public_category', function (req, res, next) {
+            categories.deletePublicCategory(req.body.id, function (success) {
+                    res.send({ success: success });
+                }
+            );
+        });
+
+        router.post('/update_template_public_category_sort', function (req, res, next) {
+            categories.setTemplatePublicCategorySort(req.body.template, req.body.category, req.body.sort, function (success) {
+                res.send({ success: success });
+            }
+            );
+        });        
 
         return router;
     }

@@ -16,7 +16,8 @@ CREATE TABLE template (
 	ownerId integer,
 	data text,
 	lastDate datetime,
-	version integer
+	version integer,
+	shared boolean
 );
 
 CREATE TABLE task (
@@ -53,4 +54,21 @@ CREATE TABLE templateVersion (
 
 CREATE TABLE meta (
 	version integer
+);
+
+CREATE TABLE category (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	title string,
+	parent integer,
+	desc string,
+	user integer,
+	sort integer,
+	isPublic boolean
+);
+
+CREATE TABLE templateCategory (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	template integer,
+	category integer,
+	sort integer
 );

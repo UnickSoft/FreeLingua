@@ -1,11 +1,11 @@
 {
-"ru": {
-   "navigation": {
-      "new_task" :    "Добавить задание", 
-      "task_list" :   "Список заданий",
+  "ru": {
+    "navigation": {
+      "new_task": "Добавить задание",
+      "task_list": "Список заданий",
       "shared_links": "Задания доступные по ссылке"
-     },
-    "task_table" : {
+    },
+    "task_table": {
       "title": "Заголовок",
       "last_update": "Дата обновления",
       "version": "Версия",
@@ -13,67 +13,75 @@
       "test": "Проверить",
       "share_by_link": "Доступ по ссылке",
       "share": "Доступ",
-      "delete": "Удалить" 
-     },
-    "share_table" : {
-       "create_date" : "Создан",
-       "delete_date" : "Удалится",
-       "link": "Ссылка",
-       "test": "Проверка",
-       "check" : "Результаты",
-       "test_button": "Тест",
-       "check_button": "Рез",
-       "delete_button": "Удл"
-     },
-     "edit_form" : {
-        "add_question_text" : "Добавить вопрос: ",
-        "question_controls" : "Настройки вопроса",
-        "move_up": "Вверх",
-        "move_down" : "Вниз",
-        "saved" : "Сохранено",
-        "cannot_saved" : "Не сохранено",
-        "title" : "Введите заголовок задание и добавьте вопросы",
-        "enter_task_name" : "Введите заголовок задания",
+      "delete": "Удалить",
+      "public_on_site": "Опубликовать на сайте",
+      "is_public": "Опубликовано",
+      "make_public": "Публиковать"
+    },
+    "share_table": {
+      "create_date": "Создан",
+      "delete_date": "Удалится",
+      "link": "Ссылка",
+      "test": "Проверка",
+      "check": "Результаты",
+      "test_button": "Тест",
+      "check_button": "Рез",
+      "delete_button": "Удл"
+    },
+    "edit_form": {
+      "add_question_text": "Добавить вопрос: ",
+      "question_controls": "Настройки вопроса",
+      "move_up": "Вверх",
+      "move_down": "Вниз",
+      "saved": "Сохранено",
+      "cannot_saved": "Не сохранено",
+      "title": "Введите заголовок задание и добавьте вопросы",
+      "enter_task_name": "Введите заголовок задания",
 
-        "save_errors" : {
-          "enter_task_title" : "Ошибка сохранения: введите заголовок задания",
-          "there_are_errors" : "Ошибка сохранения: присутствуют ошибки"
+      "save_errors": {
+        "enter_task_title": "Ошибка сохранения: введите заголовок задания",
+        "there_are_errors": "Ошибка сохранения: присутствуют ошибки"
+      },
+
+      "questions": {
+        "Select variant": "Выбор варианта",
+        "Fill gaps": "Заполнить пропуски"
+      }
+    },
+    "variants_list": {
+      "add_new_answer": "Добавить ответ",
+      "is_right": "Это правильный ответ?"
+    },
+
+    "select_categories": {
+      "title": "Выберите категории для публикации",
+      "selection_number": "Выбрано категорий: ",
+      "select_to_make_public":  "- для публикации выберете одну или более категорий"
+    },
+
+      "questions": {
+        "common": {
+          "enter_question": "Введите вопрос/задание",
+          "errors_enter_question": "Пожалуйста, введите вопрос/задание",
+          "errors_enter_text": "Пожалуйста, введите текст"
         },
-
-        "questions" : {
-          "Select variant" : "Выбор варианта",
-          "Fill gaps" : "Заполнить пропуски"
+        "check_answer": {
+          "errors_add_2_or_more_answers": "Добавьте два или более вариантов ответа",
+          "errors_mark_answer": "Отметьте правильный ответ",
+          "errors_single_answer_only": "Вы можете отметить только один правильный ответ",
+          "answer_variants": "Варианты ответа:",
+          "single_answer": "Один правильный ответ",
+          "multiple_answer": "Несколько правильных ответов"
+        },
+        "fill_gaps": {
+          "description": "Выделите часть текста или слово, затем нажмите добавить пропуск",
+          "add_gaps": "Добавить пропуск",
+          "gap": "Пропуск",
+          "remove_gap": "удалить пропуск",
+          "errors_add_gaps": "Выделите часть текста и нажмите добавить пропуск",
+          "errors_gap_without_right_answer": "Присутствуют пропуски без правильного ответа",
+          "errors_gap_without_answer": "Присутствуют пропуски без вариантов ответа"
         }
-     },
-     "variants_list" : {
-        "add_new_answer": "Добавить ответ",
-        "is_right": "Это правильный ответ?"
-     },                       
-
-
-     "questions" : { 
-         "common" : {
-           "enter_question" : "Введите вопрос/задание",
-           "errors_enter_question": "Пожалуйста, введите вопрос/задание",
-           "errors_enter_text": "Пожалуйста, введите текст"
-         },
-         "check_answer" : {
-           "errors_add_2_or_more_answers" : "Добавьте два или более вариантов ответа",
-           "errors_mark_answer" : "Отметьте правильный ответ",
-           "errors_single_answer_only": "Вы можете отметить только один правильный ответ",
-           "answer_variants": "Варианты ответа:",
-           "single_answer": "Один правильный ответ",
-           "multiple_answer": "Несколько правильных ответов"
-         },
-         "fill_gaps" : {
-           "description" : "Выделите часть текста или слово, затем нажмите добавить пропуск",
-           "add_gaps": "Добавить пропуск",
-           "gap" : "Пропуск", 
-           "remove_gap": "удалить пропуск",
-           "errors_add_gaps": "Выделите часть текста и нажмите добавить пропуск",
-           "errors_gap_without_right_answer" : "Присутствуют пропуски без правильного ответа",
-           "errors_gap_without_answer" : "Присутствуют пропуски без вариантов ответа"
-         }
-     }
-  }
+      }
+    }
 }

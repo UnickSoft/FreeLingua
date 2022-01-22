@@ -4,6 +4,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Translate, translate } from 'react-i18nify';
+import CategoriesSelection from './categories_selection';
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -11,6 +12,7 @@ var axios    = require('axios');
 export class TemplateTable extends React.Component<any, any> {
     state: {
         templates: any
+        template_id: any
     };
 
     editTemplateCallback = null;
@@ -24,7 +26,8 @@ export class TemplateTable extends React.Component<any, any> {
         this.testTemplateCallback = props.testTemplateCallback;
 
         this.state = {
-            templates: []
+            templates: [],
+            template_id: null
         };
 
         this.updateTemplates();
@@ -72,6 +75,10 @@ export class TemplateTable extends React.Component<any, any> {
         return <Button onClick={(e) => self.deleteTemplate(value.id)} className="p-button-danger">{translate("task_table.delete")}</Button>
     }
 
+    publicOnSite = (id) => {
+        this.setState({ template_id: id});
+    }
+
     toJSONLocal = (date) => {
         var local = new Date(date);
         local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
@@ -91,6 +98,22 @@ export class TemplateTable extends React.Component<any, any> {
         let self = this;
         return <Button onClick={(e) => self.testTemplateCallback(value.id)}>{translate("task_table.test")}</Button>
     }
+
+    publicBoby = (value) => {
+        let self = this;
+        return <Button onClick={(e) => self.publicOnSite(value.id)} className={value.shared ? "p-button-success" : ""}>
+            {value.shared ? translate("task_table.is_public") : translate("task_table.make_public")}
+        </Button>
+    }
+
+    successCloseDialog = () => {
+        this.updateTemplates();
+        this.closeDialog();
+    }
+
+    closeDialog = () => {
+        this.setState({ template_id : null});
+    }
     
     render() {
         return (<div className="card">
@@ -101,8 +124,13 @@ export class TemplateTable extends React.Component<any, any> {
                 <Column header={translate("task_table.edit")} body={this.editBoby}></Column>
                 <Column header={translate("task_table.test")} body={this.testBoby}></Column>
                 <Column header={translate("task_table.share_by_link")} body={this.linkBoby}></Column>
+                <Column header={translate("task_table.public_on_site")} body={this.publicBoby}></Column>
                 <Column header={translate("task_table.delete")}  body={this.deleteTemplateBoby}></Column>
             </DataTable>
+            {this.state.template_id != null ? <CategoriesSelection id={this.state.template_id}
+                onSuccess={this.successCloseDialog}
+                onClose={this.closeDialog}
+            /> : null}
         </div>);
     }
 }

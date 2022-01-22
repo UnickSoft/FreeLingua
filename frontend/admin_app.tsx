@@ -6,6 +6,7 @@ import AddUser from './admin/add_user';
 import SystemTools from './admin/system_tools';
 import { BaseApp, applyTranslation } from './base_app';
 import MainMenu from './common/main_menu';
+import PublicCategoryTable from './admin/public_category_table';
 
 import { Button } from 'primereact/button';
 import {
@@ -61,6 +62,7 @@ export class Admin extends BaseApp {
                         <Link to="/admin/users">[Users]</Link>
                         <Link to="/admin/add_user">[Add user]</Link>
                         <Link to="/admin/system_tools">[System tools]</Link>
+                        <Link to="/admin/public_categories">[Public categories]</Link>
                     </nav>
                     <Switch>
                         <Route path="/admin/users">
@@ -71,6 +73,9 @@ export class Admin extends BaseApp {
                         </Route>
                         <Route path="/admin/system_tools">
                             <SystemTools />
+                        </Route>
+                        <Route path="/admin/public_categories">
+                            <PublicCategoryTable />
                         </Route>                        
                     </Switch>
                 </Router>
