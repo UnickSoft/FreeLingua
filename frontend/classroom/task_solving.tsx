@@ -1,4 +1,4 @@
-declare var require: any
+﻿declare var require: any
 import * as React from "react"
 import QuestionSolvingDecorator from './question_sloving_decorator';
 import questionManager         from '../office/questionManager'
@@ -6,6 +6,8 @@ import { Panel } from 'primereact/panel';
 import { Translate, translate } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
+var axios = require('axios');
+
 /*
 Result format is:
 [
@@ -69,7 +71,7 @@ export class TaskSolving extends React.Component<any, any> {
                     title = taskData.title;
                     isExamMode = taskData.isExamMode == true;
                 } else if (this.state.templateId) {
-                    templateData = await questionManager.getTaskTemplate(this.state.templateId);
+                    templateData = await questionManager.getTaskTemplate(this.state.templateId, this.props.usePublic);
                     title = templateData.title;
                     templateData = templateData.data;
                     remainingAnswers = templateData.length;
@@ -278,7 +280,7 @@ export class TaskSolving extends React.Component<any, any> {
         }
 
         return (<div>
-            <h3 className="taskHeader">{this.state.title ? this.state.title : null}</h3>
+            <h1 className="taskHeader">{this.state.title ? this.state.title : null}</h1>
             <div>
                 {this.addQuestionListHtml()}
             </div>
@@ -290,6 +292,56 @@ export class TaskSolving extends React.Component<any, any> {
                 </div>
             </Panel>
         </div>);
+    }
+}
+
+export class TaskSolvingPublicWrapper extends React.Component<any, any> {
+    state: {
+        catalogInfo: any
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            catalogInfo: { title: "", desc: "", id: 0 }
+        };
+
+        this.updateCurrentCatalogInfo();
+    }
+
+    updateCurrentCatalogInfo = () => {
+        let self = this;
+        axios.get("/get_public_category_info", { params: { id: this.props.categoryId } })
+            .then(function (response) {
+                self.setState({
+                    catalogInfo: response.data.info
+                });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="row">
+                    <div className="col">
+                        <p><a href={"/catalog/" + this.state.catalogInfo.parent}>{this.state.catalogInfo.parentTitle}</a></p>
+                    </div>
+                </div>
+
+                <TaskSolving templateId={this.props.taskId} usePublic={true} />
+
+                <div className="row catalogFooter">
+                    <div className="col">
+                        <p><a href={"/catalog/" + this.state.catalogInfo.parent}>← {translate("button_common.back_to_catalog")} {this.state.catalogInfo.parentTitle}</a></p>
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 

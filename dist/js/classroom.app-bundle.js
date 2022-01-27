@@ -52889,6 +52889,7 @@ var questionManager_1 = __webpack_require__(/*! ../office/questionManager */ "..
 var panel_1 = __webpack_require__(/*! primereact/panel */ "../../..!NewProject\\learning.online\\src\\node_modules\\primereact\\panel\\panel.esm.js");
 var react_i18nify_1 = __webpack_require__(/*! react-i18nify */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-i18nify\\build\\index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "../../..!NewProject\\learning.online\\src\\node_modules\\react-dom\\index.js");
+var axios = __webpack_require__(/*! axios */ "../../..!NewProject\\learning.online\\src\\node_modules\\axios\\index.js");
 var TaskSolving = (function (_super) {
     __extends(TaskSolving, _super);
     function TaskSolving(props) {
@@ -52935,7 +52936,7 @@ var TaskSolving = (function (_super) {
                             return [3, 4];
                         case 2:
                             if (!this.state.templateId) return [3, 4];
-                            return [4, questionManager_1.default.getTaskTemplate(this.state.templateId)];
+                            return [4, questionManager_1.default.getTaskTemplate(this.state.templateId, this.props.usePublic)];
                         case 3:
                             templateData = _a.sent();
                             title = templateData.title;
@@ -53118,7 +53119,7 @@ var TaskSolving = (function (_super) {
             });
         }
         return (React.createElement("div", null,
-            React.createElement("h3", { className: "taskHeader" }, this.state.title ? this.state.title : null),
+            React.createElement("h1", { className: "taskHeader" }, this.state.title ? this.state.title : null),
             React.createElement("div", null, this.addQuestionListHtml()),
             React.createElement(panel_1.Panel, { header: react_i18nify_1.translate("result.header"), className: "resultPanel p-mt-4" },
                 React.createElement("div", { style: { 'fontSize': '1.25em' } },
@@ -53138,6 +53139,47 @@ var TaskSolving = (function (_super) {
     return TaskSolving;
 }(React.Component));
 exports.TaskSolving = TaskSolving;
+var TaskSolvingPublicWrapper = (function (_super) {
+    __extends(TaskSolvingPublicWrapper, _super);
+    function TaskSolvingPublicWrapper(props) {
+        var _this = _super.call(this, props) || this;
+        _this.updateCurrentCatalogInfo = function () {
+            var self = _this;
+            axios.get("/get_public_category_info", { params: { id: _this.props.categoryId } })
+                .then(function (response) {
+                self.setState({
+                    catalogInfo: response.data.info
+                });
+            })
+                .catch(function (error) {
+                console.log(error);
+            });
+        };
+        _this.state = {
+            catalogInfo: { title: "", desc: "", id: 0 }
+        };
+        _this.updateCurrentCatalogInfo();
+        return _this;
+    }
+    TaskSolvingPublicWrapper.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("div", { className: "row" },
+                React.createElement("div", { className: "col" },
+                    React.createElement("p", null,
+                        React.createElement("a", { href: "/catalog/" + this.state.catalogInfo.parent }, this.state.catalogInfo.parentTitle)))),
+            React.createElement(TaskSolving, { templateId: this.props.taskId, usePublic: true }),
+            React.createElement("div", { className: "row catalogFooter" },
+                React.createElement("div", { className: "col" },
+                    React.createElement("p", null,
+                        React.createElement("a", { href: "/catalog/" + this.state.catalogInfo.parent },
+                            "\u2190 ",
+                            react_i18nify_1.translate("button_common.back_to_catalog"),
+                            " ",
+                            this.state.catalogInfo.parentTitle))))));
+    };
+    return TaskSolvingPublicWrapper;
+}(React.Component));
+exports.TaskSolvingPublicWrapper = TaskSolvingPublicWrapper;
 exports.default = TaskSolving;
 
 
@@ -53181,7 +53223,8 @@ var ClassRoom = (function (_super) {
     ClassRoom.prototype.render = function () {
         return (React.createElement(react_router_dom_1.BrowserRouter, null,
             React.createElement(react_router_dom_1.Switch, null,
-                React.createElement(react_router_dom_1.Route, { path: "/classroom/link/:linkId", render: function (props) { return (React.createElement(task_solving_1.default, { linkId: props.match.params.linkId })); } }),
+                React.createElement(react_router_dom_1.Route, { path: "/classroom/catalog/:catalogId/task/:taskId", render: function (props) { return (React.createElement(task_solving_1.TaskSolvingPublicWrapper, { taskId: props.match.params.taskId, categoryId: props.match.params.catalogId })); } }),
+                React.createElement(react_router_dom_1.Route, { path: "/classroom/link/:linkId", render: function (props) { return (React.createElement(task_solving_1.TaskSolving, { linkId: props.match.params.linkId })); } }),
                 React.createElement(react_router_dom_1.Route, { path: "/classroom" },
                     React.createElement("div", null,
                         React.createElement(react_i18nify_1.Translate, { value: 'messages.no_task' }))))));
@@ -53558,14 +53601,15 @@ var QuestionManager = {
             func(false);
         });
     },
-    getTaskTemplate: function (taskId) {
+    getTaskTemplate: function (taskId, usePublic) {
+        if (usePublic === void 0) { usePublic = false; }
         return __awaiter(this, void 0, void 0, function () {
             var response, error_1, data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4, axios.get("/office/get_template", { params: { templateId: taskId } })];
+                        return [4, axios.get(usePublic ? "/classroom/get_public_template" : "/office/get_template", { params: { templateId: taskId } })];
                     case 1:
                         response = _a.sent();
                         return [3, 3];

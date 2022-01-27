@@ -80,10 +80,11 @@ var sqlWrapper = {
 
     // where -> {field name, value}
     select_all: function (tableName, where, func) {
-        // SELECT * FROM Book;
+        let whereRes = this.parseWhere(where);
+        let whereStr = whereRes.str;
 
-        let q = 'SELECT * FROM ' + tableName + (where != null ? ' WHERE ' + where.name + '=?' : '');
-        this.db.all(q, where != null ? [where.value] : [], (err, rows) => {
+        let q = 'SELECT * FROM ' + tableName + (whereStr != "" ? ' WHERE ' + whereStr : '');
+        this.db.all(q, whereStr != "" ? whereRes.value : [], (err, rows) => {
             if (err) {
                 console.log(err);
                 func(!err, []);

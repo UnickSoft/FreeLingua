@@ -66,7 +66,6 @@
     <Content Include="dist\css\prime_flex_themes\saga-blue.css.map" />
     <Content Include="dist\css\prime_flex_themes\vela-blue.css" />
     <Content Include="dist\css\prime_flex_themes\vela-blue.css.map" />
-    <Content Include="dist\css\templatemo-grad-school.css" />
     <Content Include="dist\css\theme.css" />
     <Content Include="dist\fonts\Flaticon.woff" />
     <Content Include="dist\fonts\flexslider-icon.eot" />
@@ -161,6 +160,7 @@
     <Folder Include="frontend\admin\" />
     <Folder Include="frontend\classroom\" />
     <Folder Include="frontend\common\" />
+    <Folder Include="frontend\meta\" />
     <Folder Include="frontend\office\" />
     <Folder Include="frontend\office\questions\" />
   </ItemGroup>
@@ -170,6 +170,7 @@
     <TypeScriptCompile Include="frontend\admin\public_category_table.tsx" />
     <TypeScriptCompile Include="frontend\admin\users_table.tsx" />
     <TypeScriptCompile Include="frontend\admin_app.tsx" />
+    <TypeScriptCompile Include="frontend\meta\catalog.tsx" />
     <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />
     <TypeScriptCompile Include="frontend\classroom\task_solving.tsx" />
     <TypeScriptCompile Include="frontend\classroom_app.tsx" />

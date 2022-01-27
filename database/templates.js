@@ -63,6 +63,15 @@ class Templates {
             ], func);
     }
 
+    getPublicTemplate(templateId, func) {
+        var self = this;
+
+        this.dbWrapper.select_one(this.Table, [
+            { name: "id", value: templateId },
+            { name: "shared", value: true }
+        ], func);
+    }
+
     removeTemplate(userId, templateId, func) {
         this.dbWrapper.delete(this.Table, [
             { name: "id",      value: templateId },

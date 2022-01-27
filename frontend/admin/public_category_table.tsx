@@ -113,7 +113,7 @@ export class PublicCategoryTable extends React.Component<any, any> {
 
     sortTasksDialog = (categoryId) => {
         let self = this;
-        axios.get("/classroom/get_public_category_templates", { params: { id: categoryId}})
+        axios.get("/get_public_category_templates", { params: { id: categoryId}})
             .then(function (response) {
                 let templates = response.data.templates.sort((a, b) => a.sort > b.sort ? 1 : -1);;
                 self.setState({ showSortTaskDialog: true,  categoryData: templates });

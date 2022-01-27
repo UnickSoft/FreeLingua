@@ -23,10 +23,11 @@ const QuestionManager = {
             });
     },
 
-    getTaskTemplate: async function (taskId) {
+    getTaskTemplate: async function (taskId, usePublic = false) {
         let response;
         try {
-            response = await axios.get("/office/get_template", { params: { templateId: taskId } });
+            response = await axios.get(usePublic ? "/classroom/get_public_template" : "/office/get_template",
+                { params: { templateId: taskId } });
         } catch (error) {
             // handle error
             console.log(error);

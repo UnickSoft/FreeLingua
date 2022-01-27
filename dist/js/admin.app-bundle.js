@@ -59508,7 +59508,7 @@ var PublicCategoryTable = (function (_super) {
         };
         _this.sortTasksDialog = function (categoryId) {
             var self = _this;
-            axios.get("/classroom/get_public_category_templates", { params: { id: categoryId } })
+            axios.get("/get_public_category_templates", { params: { id: categoryId } })
                 .then(function (response) {
                 var templates = response.data.templates.sort(function (a, b) { return a.sort > b.sort ? 1 : -1; });
                 ;

@@ -184,6 +184,28 @@ class Category {
         });
     }
 
+    getTemplatePublicCategory(id, func) {
+        let self = this;
+        self.dbWrapper.select_one(self.Table,
+            [{ name: "id", value: id }, { name: "isPublic", value: true }],
+            function (success, row) {
+                if (success) {
+                    self.dbWrapper.select_one(self.Table,
+                        [{ name: "id", value: row.parent }, { name: "isPublic", value: true }],
+                        function (success, rowParent) {
+                            if (success) {
+                                row.parentTitle = rowParent ? rowParent.title : "";
+                                func(success, row);
+                            } else {
+                                func(success, null)
+                            }
+                        });
+            } else {
+                func(success, null)
+            }
+        });
+    }
+
     getTemplatesInPublicCategory(id, templatesTable, func) {
         let self = this;
         this.isCategoryPublic(id, function (success, isPublic) {
@@ -212,6 +234,14 @@ class Category {
             function (success, dbSelf) {
                 func(success);
             });
+    }
+
+    getChildrenPublicCategories(categoryId, func) {
+        let self = this;
+        self.dbWrapper.select_all(self.Table, [{ name: "isPublic", value: true }, { name: "parent", value: categoryId }],
+            function (success, rows) {
+                func(success, rows);
+        });
     }
 }
 

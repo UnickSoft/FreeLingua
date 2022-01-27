@@ -18,6 +18,12 @@ section {
     font-size: 18px;
 }
 
+.containerMainCatalog {
+    background-color: #fff;
+    padding: 20px 20px 20px;
+    font-size: 18px;
+}
+
 /* Header */
 
 @media screen and (max-width: 1050px) {
@@ -254,8 +260,8 @@ section {
 }
 
 .taskHeader {
-    color: #f5a425;
     padding-bottom: 16px;
+    font-size: 1.5em;
 }
 
 /* Footer */
@@ -290,4 +296,49 @@ footer p a:hover {
 
 .scoresHeader {
     font-size: 1rem;
+}
+
+.categoryPanel {
+    text-decoration: none;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 2px solid transparent;
+}
+
+a.noDecorLink:hover, a.noDecorLink:visited, a.noDecorLink:link, a.noDecorLink:active {
+    text-decoration: none;
+    color: black;
+}
+
+.categoryPanel:hover {
+    border: 2px solid #8dd0ff;
+}
+
+.taskList {
+    font-size: 1.5rem;
+}
+
+.taskList .pi {
+    font-size: inherit;
+}
+
+.categoryPanel .pi {
+    font-size: inherit;
+}
+
+.taskList li {
+    margin: 10px 0;
+}
+
+.catalogFooter {
+    margin-top: 2rem;
+}
+
+h1 {
+    color: #f5a425;
+}
+
+h2 {
+    color: #38acff;
 }

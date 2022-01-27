@@ -14,9 +14,10 @@
      "login": "Логин",
      "password": "Пароль"
     },
-   "button_common" : {
-      "save" : "Сохранить",
-      "remove": "Удалить"
-    }
+  "button_common": {
+    "save": "Сохранить",
+    "remove": "Удалить",
+    "back_to_catalog": "Назад в раздел"
+  }
   }
 }

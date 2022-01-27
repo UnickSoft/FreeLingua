@@ -11,9 +11,17 @@ class MetaRoute {
         var users = dbManager.getUsers();
         var tasks = dbManager.getTasks();
         var links = dbManager.getLinks();
+        var templates = dbManager.getTemplates();
+        var categories = dbManager.getCategories();
 
         var staticPath = path.join(__dirname, '/dist/');
         router.use(express.static(staticPath));
+
+
+        // Simple return html
+        router.get('/catalog/:catalogId', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "index.html"));
+        });
 
         // Process user
         router.post('/user_enter', function (req, res, next) {
@@ -70,6 +78,27 @@ class MetaRoute {
                 }
             });
         });
+
+        router.get('/get_public_category_templates', function (req, res, next) {
+            categories.getTemplatesInPublicCategory(req.query.id, templates,
+                function (success, templates) {
+                    res.send({ success: success, templates: templates });
+                });
+        });
+
+        router.get('/get_children_public_categories', function (req, res, next) {
+            categories.getChildrenPublicCategories(req.query.id,
+                function (success, categories) {
+                    res.send({ success: success, categories: categories });
+                });
+        });
+
+        router.get('/get_public_category_info', function (req, res, next) {
+            categories.getTemplatePublicCategory(req.query.id,
+                function (success, category) {
+                    res.send({ success: success, info: category });
+                });
+        });        
 
         return router;
     }

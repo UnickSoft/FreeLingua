@@ -19,6 +19,9 @@ class ClassroomRoute {
         router.get('/link/:linkId', function (req, res, next) {
             res.sendFile(path.join(staticPath, "classroom/index.html"));
         });
+        router.get('/catalog/:catalogId/task/:taskId', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "classroom/index.html"));
+        });
 
         router.get('/get_task_by_link', function (req, res, next) {
             var session = req.session;
@@ -84,12 +87,17 @@ class ClassroomRoute {
                 });
         });
 
-        router.get('/get_public_category_templates', function (req, res, next) {
-            categories.getTemplatesInPublicCategory(req.query.id, templates,
-                function (success, templates) {
-                    res.send({ success: success, templates : templates });
-                });
-        });        
+        router.get('/get_public_template', function (req, res, next) {
+            templates.getPublicTemplate(req.query.templateId, function (success, templateData) {
+                if (success && templateData) {
+                    // TODO: encode answers.
+                    res.send({ success: success, data: templateData });
+                } else {
+                    res.send({ success: false });
+                }
+            });
+        });
+ 
 
         return router;
     }
