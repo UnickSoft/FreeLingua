@@ -49779,7 +49779,7 @@ var MetaApp = (function (_super) {
         return _super.call(this, props) || this;
     }
     MetaApp.prototype.render = function () {
-        return (React.createElement(catalog_1.default, { categoryId: "1", rootCategoryId: "1", rootTitle: "index.title", rootDesc: "index.desc" }));
+        return (React.createElement(catalog_1.default, { categoryId: "3", rootCategoryId: "3", rootTitle: "index.title", rootDesc: "index.desc" }));
     };
     return MetaApp;
 }(base_app_1.BaseApp));

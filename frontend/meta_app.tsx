@@ -17,7 +17,7 @@ export class MetaApp extends BaseApp {
 
     render() {
         return (
-            <CatalogWrapper categoryId="1" rootCategoryId="1" rootTitle={"index.title"}
+            <CatalogWrapper categoryId="3" rootCategoryId="3" rootTitle={"index.title"}
                 rootDesc={"index.desc"} />
         );
     }
