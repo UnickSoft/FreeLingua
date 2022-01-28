@@ -55,8 +55,6 @@ try
     }));
     app.use(cookieParser());
 
-
-
     let initAfterDataBase = function () {
         let MetaRoute = require('./metaroute');
         let metaRoute = new MetaRoute();

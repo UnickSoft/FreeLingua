@@ -135,7 +135,13 @@ class OfficeRoute {
                     });
                 }
             });
-        });        
+        });
+
+        router.get('/get_public_categories', function (req, res, next) {
+            categories.getPublicCategories(function (list) {
+                res.send({ categories: list });
+            });
+        });
 
         return router;
     }

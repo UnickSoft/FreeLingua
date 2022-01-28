@@ -6,7 +6,7 @@ var dbManager = {
 
     create_database_script : "createDB_sqlite.sql",
 
-    meta_version: 2,
+    meta_version: 3,
                                         
     meta_table: "meta",
 

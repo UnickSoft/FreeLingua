@@ -9,17 +9,42 @@ var ReactDOM = require('react-dom');
 
 applyTranslation(["meta.json", "common.json"]);
 
+var axios = require('axios');
+
 export class MetaApp extends BaseApp {
+
+    state: {
+        rootInfo: any
+    };
 
     constructor(props) {
         super(props);
+
+        this.state = { rootInfo: null };
+
+        this.updateCurrentCatalogInfo();
+    }
+
+    updateCurrentCatalogInfo = () => {
+        let self = this;
+        axios.get("/get_public_category_by_tag", { params: { tag: this.currentLanguage + "_root" } })
+            .then(function (response) {
+                self.setState({
+                    rootInfo: response.data.info
+                });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
     }
 
     render() {
-        return (
-            <CatalogWrapper categoryId="3" rootCategoryId="3" rootTitle={"index.title"}
-                rootDesc={"index.desc"} />
-        );
+        if (this.state.rootInfo != null)
+            return (<CatalogWrapper categoryId={this.state.rootInfo.id} rootCategoryId={this.state.rootInfo.id}
+                rootTitle={"index.title"} rootDesc={"index.desc"} />);
+        else
+            return null;
     }
 }
 

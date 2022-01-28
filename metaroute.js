@@ -98,6 +98,13 @@ class MetaRoute {
                 function (success, category) {
                     res.send({ success: success, info: category });
                 });
+        });
+
+        router.get('/get_public_category_by_tag', function (req, res, next) {
+            categories.getPublicCategoryByTag(req.query.tag,
+                function (success, category) {
+                    res.send({ success: success, info: category });
+                });
         });        
 
         return router;

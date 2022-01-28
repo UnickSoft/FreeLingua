@@ -15,6 +15,7 @@
   "files": [
     "meta_app.tsx",
     "classroom_app.tsx",
-    "admin_app.tsx"
+    "admin_app.tsx",
+    "office_app.tsx"
   ]
 }

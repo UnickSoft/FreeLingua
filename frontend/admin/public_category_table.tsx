@@ -33,7 +33,7 @@ export class PublicCategoryTable extends React.Component<any, any> {
 
     updatePublicCategories = () => {
         let self = this;
-        axios.get("/admin/get_public_categories", {})
+        axios.get("/office/get_public_categories", {})
             .then(function (response) {
                 self.setState({ categories: self.processCategories(response.data.categories)});
         })
@@ -182,6 +182,7 @@ export class PublicCategoryTable extends React.Component<any, any> {
             <DataTable value={this.state.categories}>
                 <Column field="title" header="Title"></Column>
                 <Column field="parentTitle" header="Parent"></Column>
+                <Column field="tag" header="Tag"></Column>
                 <Column header="Settings" body={this.openSettingsBody}></Column>
                 <Column header="Sort categories" body={this.sortBody}></Column>
                 <Column header="Sort tasks"      body={this.sortTasksBody}></Column>

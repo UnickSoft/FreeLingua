@@ -54,13 +54,14 @@ class Category {
         });
     }
 
-    addPublicCategory(title, description, parent, func) {
+    addPublicCategory(title, description, parent, tag, func) {
         let self = this;
 
         if (parent == 0) {
             self.dbWrapper.insert(self.Table, [
                 { name: "title", value: title },
                 { name: "desc", value: description },
+                { name: "tag", value: tag },
                 { name: "parent", value: self.publicCategoryId },
                 { name: "isPublic", value: true }],
                 function (success, dbSelf) {
@@ -72,6 +73,7 @@ class Category {
                     self.dbWrapper.insert(self.Table, [
                         { name: "title", value: title },
                         { name: "desc", value: description },
+                        { name: "tag", value: tag },
                         { name: "parent", value: parent },
                         { name: "isPublic", value: true }],
                         function (success, dbSelf) {
@@ -84,7 +86,7 @@ class Category {
         }
     }
 
-    editPublicCategory(id, title, description, parent, func) {
+    editPublicCategory(id, title, description, parent, tag, func) {
         let self = this;
 
         if (parent == 0) {
@@ -92,6 +94,7 @@ class Category {
                 [{ name: "title", value: title },
                 { name: "desc", value: description },
                 { name: "parent", value: self.publicCategoryId },
+                { name: "tag", value: tag },
                 { name: "isPublic", value: true }],
                 { name: "id", value: id },
                 function (success, dbSelf) {
@@ -104,6 +107,7 @@ class Category {
                         [{ name: "title", value: title },
                         { name: "desc", value: description },
                         { name: "parent", value: parent },
+                        { name: "tag", value: tag },
                         { name: "isPublic", value: true }],
                         { name: "id", value: id },
                         function (success, dbSelf) {
@@ -189,7 +193,7 @@ class Category {
         self.dbWrapper.select_one(self.Table,
             [{ name: "id", value: id }, { name: "isPublic", value: true }],
             function (success, row) {
-                if (success) {
+                if (success && row) {
                     self.dbWrapper.select_one(self.Table,
                         [{ name: "id", value: row.parent }, { name: "isPublic", value: true }],
                         function (success, rowParent) {
@@ -201,9 +205,31 @@ class Category {
                             }
                         });
             } else {
-                func(success, null)
+                func(false, null)
             }
         });
+    }
+
+    getPublicCategoryByTag(tag, func) {
+        let self = this;
+        self.dbWrapper.select_one(self.Table,
+            [{ name: "tag", value: tag }, { name: "isPublic", value: true }],
+            function (success, row) {
+                if (success && row) {
+                    self.dbWrapper.select_one(self.Table,
+                        [{ name: "id", value: row.parent }, { name: "isPublic", value: true }],
+                        function (success, rowParent) {
+                            if (success) {
+                                row.parentTitle = rowParent ? rowParent.title : "";
+                                func(success, row);
+                            } else {
+                                func(success, null)
+                            }
+                        });
+                } else {
+                    func(false, null)
+                }
+            });
     }
 
     getTemplatesInPublicCategory(id, templatesTable, func) {
