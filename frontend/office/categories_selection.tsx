@@ -38,7 +38,7 @@ export class CategoriesSelection extends React.Component<any, any> {
 
     updatePublicCategories = () => {
         let self = this;
-        axios.get("/admin/get_public_categories", {})
+        axios.get("/office/get_public_categories", {})
             .then(function (response) {
                 self.setState({
                     categories: response.data.categories.map((el) => {

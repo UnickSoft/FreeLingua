@@ -3,8 +3,12 @@ import * as React from "react"
 import { setTranslations, setLocale, Translate, getTranslations } from 'react-i18nify';
 
 
+function getCurrentLanguage() {
+    return window.location.pathname.startsWith("/en") ? "en" : "ru";
+}
+
 export function applyTranslation(translationList) {
-    let currentLanguage = window.location.pathname.startsWith("/en") ? "en" : "ru";
+    let currentLanguage = getCurrentLanguage();
 
     var axios = require('axios');
 
@@ -31,6 +35,14 @@ export function applyTranslation(translationList) {
 }
 
 export class BaseApp extends React.Component {
+
+    currentLanguage = "ru";
+
+    constructor(props) {
+        super(props);
+        this.currentLanguage = getCurrentLanguage();
+    }
+
     render() {
         return null;
     }

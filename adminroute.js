@@ -94,14 +94,8 @@ class AdminRoute {
             });
         });
 
-        router.get('/get_public_categories', function (req, res, next) {
-            categories.getPublicCategories(function (list) {
-                res.send({ categories: list });
-            });
-        });
-
         router.post('/add_public_category', function (req, res, next) {
-            categories.addPublicCategory(req.body.title, req.body.description, req.body.parent,
+            categories.addPublicCategory(req.body.title, req.body.description, req.body.parent, req.body.tag,
                 function (success) {
                     res.send({ success: success });
                 }
@@ -109,7 +103,7 @@ class AdminRoute {
         });
 
         router.post('/edit_public_category', function (req, res, next) {
-            categories.editPublicCategory(req.body.id, req.body.title, req.body.description, req.body.parent,
+            categories.editPublicCategory(req.body.id, req.body.title, req.body.description, req.body.parent, req.body.tag,
                 function (success) {
                     res.send({ success: success });
                 }

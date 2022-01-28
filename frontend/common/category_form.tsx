@@ -15,6 +15,7 @@ export class CategoryFrom extends React.Component<any, any> {
         categories: any
         parent: any
         title: any
+        tag: any
         description: any
         isPublic: any
         isEditMode: any
@@ -31,6 +32,7 @@ export class CategoryFrom extends React.Component<any, any> {
             parent: props.categoryData != null && !props.categoryData.isParentRoot ? props.categoryData.parent : "no_parent",
             title: props.categoryData != null ? props.categoryData.title : "",
             description: props.categoryData != null ? props.categoryData.desc : "",
+            tag: props.categoryData != null ? props.categoryData.tag : "",
             isPublic: true,
             isEditMode: props.categoryData != null
         };
@@ -55,21 +57,24 @@ export class CategoryFrom extends React.Component<any, any> {
                     id: this.state.categoryId,
                     title: this.state.title,
                     description: this.state.description,
-                    parent: this.state.parent == "no_parent" ? 0 : this.state.parent
+                    parent: this.state.parent == "no_parent" ? 0 : this.state.parent,
+                    tag: this.state.tag
                 })
             :
             axios.post("/admin/add_public_category",
                 {
                     title: this.state.title,
                     description: this.state.description,
-                    parent: this.state.parent == "no_parent" ? 0 : this.state.parent
+                    parent: this.state.parent == "no_parent" ? 0 : this.state.parent,
+                    tag: this.state.tag
                 })
             ).then(function (response) {
                     if (response.data.success) {
                         self.setState({
                             title: "",
                             description: "",
-                            parent: "no_parent"
+                            parent: "no_parent",
+                            tag: ""
                         });
                         self.onSuccessFunc();
                     }
@@ -109,7 +114,12 @@ export class CategoryFrom extends React.Component<any, any> {
                         placeholder="Select parent category"
                         onChange={(e) => { self.setState({ parent: e.value }) }}
                     />
-                </div>                
+                </div>
+                <div className="p-field">
+                    <InputText name="tag" id="tag" placeholder={"Please enter tag"}
+                        value={this.state.tag}
+                        onChange={(e) => { self.setState({ tag: e.target.value }) }} />
+                </div>
             </div>
         </Dialog>);
     }
