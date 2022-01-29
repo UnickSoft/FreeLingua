@@ -45,7 +45,7 @@ export class Catalog extends React.Component<any, any> {
         axios.get("/get_children_public_categories", { params: { id: this.props.categoryId}})
             .then(function (response) {
                 self.setState({
-                    childrenCategory: response.data.categories
+                    childrenCategory: response.data.categories.sort((a, b) => a.sort > b.sort ? 1 : -1)
                 });
             })
             .catch(function (error) {
@@ -59,7 +59,7 @@ export class Catalog extends React.Component<any, any> {
         axios.get("/get_public_category_templates", { params: { id: this.props.categoryId } })
             .then(function (response) {
                 self.setState({
-                    childrenTasks: response.data.templates
+                    childrenTasks: response.data.templates.sort((a, b) => a.sort > b.sort ? 1 : -1)
                 });
             })
             .catch(function (error) {
@@ -72,6 +72,9 @@ export class Catalog extends React.Component<any, any> {
         let self = this;
         axios.get("/get_public_category_info", { params: { id: this.props.categoryId } })
             .then(function (response) {
+                if (self.props.navigateCallback) {
+                    self.props.navigateCallback(response.data.info);
+                }
                 self.setState({
                     catalogInfo: response.data.info
                 });
@@ -162,7 +165,7 @@ export class CatalogWrapper extends React.Component<any, any> {
             <Switch>
                 <Route path="/catalog/:categoryId" render={(props) => (
                     <Catalog categoryId={props.match.params.categoryId} rootCategoryId={this.props.rootCategoryId}
-                        rootTitle={this.props.rootTitle} rootDesc={this.props.rootDesc} />
+                        rootTitle={this.props.rootTitle} rootDesc={this.props.rootDesc} navigateCallback={this.props.navigateCallback}/>
                 )} />
                 <Route path="*" render={(props) => (
                     <Catalog categoryId={this.props.categoryId} rootCategoryId={this.props.rootCategoryId}

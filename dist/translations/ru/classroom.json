@@ -1,13 +1,16 @@
 {
-"ru": {
-   "messages": {
-     "no_task" : "404 Задание не найдено"
-   },
-  "result": {
-       "header": "Результат",
-       "remaining_answer": "Осталось вопросов",
-       "mistakes": "Ошибок",
-       "scores": "Баллов"
+  "ru": {
+    "messages": {
+      "no_task": "404 Задание не найдено"
+    },
+    "result": {
+      "header": "Результат",
+      "remaining_answer": "Осталось вопросов",
+      "mistakes": "Ошибок",
+      "scores": "Баллов"
+    },
+    "classroom": {
+      "default_keywords": "тесты по иностранным языкам, задание по английскому online, изучаем английский онлайн"
     }
   }
 }

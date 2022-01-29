@@ -33,6 +33,7 @@ export class Office extends BaseApp {
         testLink: any
         checkLink: any;
         testTemplate: any;
+        translationLoaded: any
     };
 
     constructor(props) {
@@ -45,7 +46,8 @@ export class Office extends BaseApp {
             shareLinkTitle: null,
             testLink: null,
             checkLink: null,
-            testTemplate: null
+            testTemplate: null,
+            ...this.state
         };
 
         this.checkUser();
@@ -162,7 +164,10 @@ export class Office extends BaseApp {
         } else {
             return (
                 <div>
+                    <h1><Translate value="login.login_form_header" /></h1>
                     <LoginForm onSuccess={this.onLoggin} />
+                    <p><Translate value="office.betta_text_1" /></p>
+                    <p><Translate value="office.betta_text_2" /></p>
                 </div>
             );
         }

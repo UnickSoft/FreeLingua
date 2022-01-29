@@ -23,14 +23,16 @@ applyTranslation(["admin.json", "common.json"]);
 
 export class Admin extends BaseApp {
     state: {
-        isLoggined: any
+        isLoggined: any,
+        translationLoaded: any
     };
 
     constructor(props) {
         super(props);
 
         this.state = {
-            isLoggined: false
+            isLoggined: false,
+            ...this.state
         };
 
         this.checkAdmin();
