@@ -183,13 +183,15 @@ export class TemplateEditForm extends React.Component<any, any> {
             questionManager.saveTask(this.state.taskId,
                 this.getQuestionsForSave(this.state.questions),
                 this.state.taskTitle,
-                function (successed, templateId) {
+                function (successed, templateId, needLogin) {
                     if (successed) {
                         self.setState({ successMessage: translate("edit_form.saved") });
                         if (templateId) {
                             self.state.taskId = templateId;
                             // no need to rerender.
                         }
+                    } else if (needLogin) {
+                        self.setState({ errorMessage: translate("login.need_login") });
                     } else {
                         self.setState({ errorMessage: translate("edit_form.cannot_saved") });
                     }

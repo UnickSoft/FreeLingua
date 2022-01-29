@@ -12,12 +12,14 @@
      "login_button":  "Войти",
      "login_form_header": "Введите ваш логин и пароль, чтобы войти",
      "login": "Логин",
-     "password": "Пароль"
+     "password": "Пароль",
+     "need_login": "Время сессии истекло, необходимо залогиниться"
     },
   "button_common": {
     "save": "Сохранить",
     "remove": "Удалить",
-    "back_to_catalog": "Назад в раздел"
+    "back_to_catalog": "Назад в раздел",
+    "close": "Закрыть"
   }
   }
 }

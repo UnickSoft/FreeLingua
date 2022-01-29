@@ -7,6 +7,7 @@ import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
 import { SelectButton } from 'primereact/selectbutton';
 import { Checkbox } from 'primereact/checkbox';
+import { Translate, translate } from 'react-i18nify';
 
 var ReactDOM = require('react-dom');
 
@@ -31,7 +32,7 @@ export class ShareLinkDialog extends React.Component<any, any> {
         this.state = {
             templateId: props.templateId,
             lifeTime: this.lifeTimes[0].value,
-            shareLinkTitle: props.templateTitle + " for ",
+            shareLinkTitle: props.templateTitle + " " + translate("share_by_link_dialog.for") + " ",
             shareLinkId: null,
             isExamMode: false
         };
@@ -50,8 +51,8 @@ export class ShareLinkDialog extends React.Component<any, any> {
     shareLinkDialogButtons = () => {
         return (
             <div>
-                <Button label="Close" icon="pi pi-times" onClick={() => this.hideCallback()} className="p-button-text" />
-                <Button label="Save and Get Link" icon="pi pi-check" onClick={() => this.saveShareLink()} autoFocus />
+                <Button label={translate("common_button.close")} icon="pi pi-times" onClick={() => this.hideCallback()} className="p-button-text" />
+                <Button label={translate("share_by_link_dialog.save_and_get_link")} icon="pi pi-check" onClick={() => this.saveShareLink()} autoFocus />
             </div>
         );
     }
@@ -61,22 +62,22 @@ export class ShareLinkDialog extends React.Component<any, any> {
     }
 
     render() {
-        return (<Dialog header="Header" visible={true} style={{ width: '50vw' }}
+        return (<Dialog header={translate("share_by_link_dialog.header")} visible={true} style={{ width: '50vw' }}
             footer={this.shareLinkDialogButtons}
             onHide={() => this.hideCallback() }>
             <div>
-                <h3>Share task by link</h3>
+                <h3><Translate value="share_by_link_dialog.title" /></h3>
                 <div className="p-fluid" key="main">
                     <div className="p-field" key="questionText">
-                        <label htmlFor="taskName">Enter private title (only will see it)</label>
+                        <label htmlFor="taskName"><Translate value="share_by_link_dialog.private_title" /></label>
                         <InputText id="taskName" type="text" onChange={(e) => this.setState({ shareLinkTitle: e.target.value })} value={this.state.shareLinkTitle} />
-                        <label htmlFor="taskName">Link life time</label>
+                        <label htmlFor="taskName"><Translate value="share_by_link_dialog.link_life_time" /></label>
                         <SelectButton optionLabel="name" value={this.state.lifeTime} options={this.lifeTimes}></SelectButton>
                         <div className="p-field-checkbox p-mt-2">
                             <Checkbox inputId="examMode" value="ExamMode" onChange={this.onExamModeChanged} checked={this.state.isExamMode}></Checkbox>
-                            <label htmlFor="examMode" className="p-checkbox-label">Is Exam Mode (In Exam Mode student have one try to answer)</label>
+                            <label htmlFor="examMode" className="p-checkbox-label"><Translate value="share_by_link_dialog.is_exam_mode" /></label>
                         </div>
-                        <label htmlFor="taskName">Link to task (will appeares after save)</label>
+                        <label htmlFor="taskName"><Translate value="share_by_link_dialog.link_to_task" /></label>
                         <InputText id="taskName" type="text"
                             value={this.state.shareLinkId != null ? window.location.origin.toString() + "/classroom/link/" + this.state.shareLinkId : ""} />
                     </div>

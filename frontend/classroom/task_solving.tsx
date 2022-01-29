@@ -4,6 +4,7 @@ import QuestionSolvingDecorator from './question_sloving_decorator';
 import questionManager         from '../office/questionManager'
 import { Panel } from 'primereact/panel';
 import { Translate, translate } from 'react-i18nify';
+import { Skeleton } from 'primereact/skeleton';
 
 var ReactDOM = require('react-dom');
 var axios = require('axios');
@@ -103,6 +104,10 @@ export class TaskSolving extends React.Component<any, any> {
                         templateData: templateData,
                         title: title
                     });
+                }
+
+                if (this.props.taskCallback) {
+                    this.props.taskCallback({title: title});
                 }
 
                 this.setState({
@@ -269,6 +274,16 @@ export class TaskSolving extends React.Component<any, any> {
             this.needSave--;
         }
 
+        // Loading skeleton
+        if (this.state.templateData == null) {
+            return (<div>
+                <h1 className="taskHeader"><Skeleton width="64px" height="2rem" /></h1>
+                <div>
+                    <Skeleton width="100%" height="150px"></Skeleton>
+                </div>
+            </div>);
+        }
+
         let totalScores = 0.0;
         if (this.state.scores && this.state.totalScoreWeight > 0) {
             let index = 0;
@@ -307,7 +322,9 @@ export class TaskSolvingPublicWrapper extends React.Component<any, any> {
             catalogInfo: { title: "", desc: "", id: 0 }
         };
 
-        this.updateCurrentCatalogInfo();
+        if (this.props.categoryId) {
+            this.updateCurrentCatalogInfo();
+        }
     }
 
     updateCurrentCatalogInfo = () => {
@@ -317,6 +334,10 @@ export class TaskSolvingPublicWrapper extends React.Component<any, any> {
                 self.setState({
                     catalogInfo: response.data.info
                 });
+
+                if (self.props.taskCallback) {
+                    self.props.taskCallback({ catalogTitle: response.data.info.title });
+                }
             })
             .catch(function (error) {
                 // handle error
@@ -329,15 +350,15 @@ export class TaskSolvingPublicWrapper extends React.Component<any, any> {
             <div>
                 <div className="row">
                     <div className="col">
-                        <p><a href={"/catalog/" + this.state.catalogInfo.parent}>{this.state.catalogInfo.parentTitle}</a></p>
+                        <p><a href={"/catalog/" + this.state.catalogInfo.id}>{this.state.catalogInfo.title}</a></p>
                     </div>
                 </div>
 
-                <TaskSolving templateId={this.props.taskId} usePublic={true} />
+                <TaskSolving templateId={this.props.taskId} usePublic={true} taskCallback={this.props.taskCallback} />
 
                 <div className="row catalogFooter">
                     <div className="col">
-                        <p><a href={"/catalog/" + this.state.catalogInfo.parent}>← {translate("button_common.back_to_catalog")} {this.state.catalogInfo.parentTitle}</a></p>
+                        <p><a href={"/catalog/" + this.state.catalogInfo.id}>← {translate("button_common.back_to_catalog")} {this.state.catalogInfo.title}</a></p>
                     </div>
                 </div>
             </div>

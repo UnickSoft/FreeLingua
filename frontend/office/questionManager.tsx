@@ -14,7 +14,7 @@ const QuestionManager = {
         axios.post("/office/save_template",
             { template: JSON.stringify(questions), templateId: taskId, title: title })
             .then(function (response) {
-                func(response.data.success, response.data.templateId);
+                func(response.data.success, response.data.templateId, response.data.needLogin);
             })
             .catch(function (error) {
                 // handle error

@@ -25,7 +25,8 @@
     "react-i18nify": "4.2.1",
     "express-session": "1.17.2",
     "cookie-parser": "1.4.5",
-    "react-copy-to-clipboard": "5.0.4"
+    "react-copy-to-clipboard": "5.0.4",
+    "react-helmet": "6.1.0"
   },
   "scripts": {
     "build": "webpack-cli --config webpack-config.js"

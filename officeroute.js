@@ -19,6 +19,15 @@ class OfficeRoute {
         router.get('/link/:linkId', function (req, res, next) {
             res.sendFile(path.join(staticPath, "office/index.html"));
         });
+        router.get('/links', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "office/index.html"));
+        });
+        router.get('/new_task', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "office/index.html"));
+        });
+        router.get('/test_template/:templateId', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "office/index.html"));
+        });
 
         // Disable all invalid users.
         router.use(function (req, res, next) {
@@ -26,7 +35,7 @@ class OfficeRoute {
             if (session.userInfo && session.userInfo.isActivated) {
                 next()
             } else {
-                res.send({ error: "You are not valid user" });
+                res.send({ error: "You are not valid user", needLogin: true });
             }
         });
 
