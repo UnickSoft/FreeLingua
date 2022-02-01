@@ -63,12 +63,13 @@ CREATE TABLE category (
 	desc string,
 	user integer,
 	sort integer,
-	isPublic boolean
+	isPublic boolean,
+	tag string
 );
 
 CREATE TABLE templateCategory (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	template integer,
 	category integer,
-	sort integer
+	soft integer
 );

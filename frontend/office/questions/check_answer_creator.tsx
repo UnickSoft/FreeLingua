@@ -170,7 +170,7 @@ export class CheckAnswerCreator extends BaseCreator {
                     </div>
                     <div className="p-field" key="answerType">
                         <SelectButton value={this.state.answerType} options={this.answerType}
-                            onChange={(e) => this.setState({ answerType: e.value })} />
+                            onChange={(e) => this.setStateAndUpdate({ answerType: e.value })} />
                     </div>
                 </div>
                 <div key="answers">

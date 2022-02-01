@@ -27,14 +27,23 @@ class Templates {
                 { name: "data", value: template }
             ];
             if (templateId) {
-                values.push({ name: "id", value: templateId });
+                let where = [];
+                where.push({ name: "id", value: templateId });
+                self.dbWrapper.update(self.Table,
+                    values,
+                    where,
+                    function (success) {
+                        func(success, templateId);
+                    }
+                );
+            } else {
+                self.dbWrapper.insert(self.Table,
+                    values,
+                    function (success, dbSelf) {
+                        func(success, templateId == null ? dbSelf.lastID : templateId);
+                    }
+                );
             }
-            self.dbWrapper.insert_or_replace(self.Table,
-                values,
-                function (success, dbSelf) {
-                    func(success, templateId == null ? dbSelf.lastID : templateId);
-                }
-            );
         }
 
         if (templateId) {
