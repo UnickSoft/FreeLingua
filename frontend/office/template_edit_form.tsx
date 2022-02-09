@@ -126,12 +126,20 @@ export class TemplateEditForm extends React.Component<any, any> {
     }
     addQuestionListHtml() {
         let index = -1;
+        let questionIndex = -1;
         let self = this;
         return this.state.questions.map(function (question) {
+            let isQuestion = !question.data.isInfo;
+
             index++;
+            if (isQuestion) {
+                questionIndex++;
+            }
             let locIndex = index;
+            let locQuetionIndex = questionIndex;
+
             return (
-                <Panel header={"Question #" + (locIndex + 1)} toggleable key={question.id}>
+                <Panel header={isQuestion ? "Question #" + (locQuetionIndex + 1) : "Information"} toggleable key={question.id}>
                     <QuestionCreateDecorator key={locIndex}
                         questionType={question.type}
                         saveDataCallback={(data, hasError) => self.saveQuestionData(locIndex, data, hasError)}

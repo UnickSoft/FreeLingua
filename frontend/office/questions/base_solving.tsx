@@ -50,6 +50,10 @@ export class BaseSolving extends React.Component<any, any> {
         return null;
     }
 
+    isInformationBlock = () => {
+        return false;
+    }
+
     calcScores = (answersList, rightVariantsNum, wrongVariantsNum) => {
         let wrongCount    = 0;
         let oneQuestionCost = 1.0 / rightVariantsNum;
@@ -86,19 +90,22 @@ export class BaseSolving extends React.Component<any, any> {
     }
 
     render() {
+        let header = this.getHeaderText();
         return (
             <div>
                 <div className="p-fluid" key="main">
-                    <h5 style={{ whiteSpace: "pre-wrap" }} className="secondLineOffset">
-                        {(this.state.questionIndex + 1) + ". "}
-                        {this.getHeaderText()}
-                        <span className="rightAnswer firstLineOffset scoresHeader"> {this.props.normalizedScores} </span>
-                        {
-                            this.isFinishedQuestions() ?
-                                <span className="pi p-ml-1 rightAnswer pi-check firstLineOffset" />
-                                : null
-                        }
-                    </h5>
+                    {header.length > 0 ?
+                        (<h5 style={{ whiteSpace: "pre-wrap" }} className="secondLineOffset">
+                            {(this.props.printIndex + 1) + ". "}
+                            {this.getHeaderText()}
+                            <span className="rightAnswer firstLineOffset scoresHeader"> {this.props.normalizedScores} </span>
+                            {
+                                this.isFinishedQuestions() ?
+                                    <span className="pi p-ml-1 rightAnswer pi-check firstLineOffset" />
+                                    : null
+                            }
+                        </h5>)
+                        : null}
                     <div key="answers">
                         {this.htmlCommonPart() }
                     </div>

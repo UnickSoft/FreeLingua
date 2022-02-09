@@ -6,7 +6,8 @@ const QuestionManager = {
     getQuestionTypes: function () {
         return [
             { type: "check_answer", title: "Select variant" },
-            { type: "fill_gaps", title: "Fill gaps" }
+            { type: "fill_gaps", title: "Fill gaps" },
+            { type: "plane_text", title: "Text block" }
         ];
     },
 

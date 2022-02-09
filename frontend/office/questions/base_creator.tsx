@@ -38,6 +38,10 @@ export class BaseCreator extends React.Component<any, any> {
         return false;
     }
 
+    isInformationBlock = () => {
+        return false;
+    }
+
     setStateAndUpdate = (data) => {
         let self = this;
         this.setState(data,

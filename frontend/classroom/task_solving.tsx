@@ -78,9 +78,16 @@ export class TaskSolving extends React.Component<any, any> {
                     remainingAnswers = templateData.length;
                 }
 
+                // Remove info blocks.
+                templateData.forEach((question) => {
+                    if (question.data.isInfo) {
+                        remainingAnswers--;
+                    }
+                });
+
                 if (taskData && taskData.result && !this.dryRun) {
                     taskData.result.forEach((question) => {
-                        if (question.finished) {
+                        if (question.finished && !question.isInfo) {
                             remainingAnswers--;
                         }
                         question.answers.forEach((answer) => {
@@ -217,7 +224,8 @@ export class TaskSolving extends React.Component<any, any> {
     }
 
     updateScoreWeight(index, rightAnswers, wrongAnswers) {
-        if (this.state.scoresWeight) {
+        let isInfo = rightAnswers + wrongAnswers == 0;
+        if (this.state.scoresWeight && !isInfo) {
             let scoresWeight = this.state.scoresWeight;
 
             let avgPosibility = rightAnswers / (rightAnswers + wrongAnswers);
@@ -228,7 +236,12 @@ export class TaskSolving extends React.Component<any, any> {
             this.setState((state, props) => {
                 return { scoresWeight: scoresWeight, totalScoreWeight: state.totalScoreWeight + weight };
             });
-
+        } else if (this.state.scoresWeight && isInfo) {
+            let scoresWeight = this.state.scoresWeight;
+            scoresWeight[index] = 0;
+            this.setState((state, props) => {
+                return { scoresWeight: scoresWeight, totalScoreWeight: state.totalScoreWeight};
+            });
         }
     }
 
@@ -238,19 +251,27 @@ export class TaskSolving extends React.Component<any, any> {
 
     addQuestionListHtml() {
         let index = -1;
+        let printIndex = -1;
+
         let self = this;
         if (!this.state.taskData && !self.dryRun || !this.state.templateData) {
             return null;
         }
 
         return this.state.templateData.map(function (question) {
+            let isQuestion = !question.data.isInfo;
+            if (isQuestion) {
+                printIndex++;
+            }
             index++;
-            let locIndex = index;
+            let locIndex      = index;
+            let locPrintIndex = printIndex;
             return (
                 <div className="solvingTask" key={locIndex}>
                     <QuestionSolvingDecorator
                         questionType={question.type}
                         questionIndex={locIndex}
+                        printIndex={locPrintIndex}
                         data={question.data}
                         result={!self.dryRun && self.state.taskData.result ? self.state.taskData.result[locIndex] : null}
                         checkAnswerCallback={(questionIndex, answer) => self.checkAnswer(questionIndex, answer)}
