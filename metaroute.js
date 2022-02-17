@@ -13,6 +13,7 @@ class MetaRoute {
         var links = dbManager.getLinks();
         var templates = dbManager.getTemplates();
         var categories = dbManager.getCategories();
+        var sitemap = null;
 
         var staticPath = path.join(__dirname, '/dist/');
         router.use(express.static(staticPath));
@@ -105,7 +106,57 @@ class MetaRoute {
                 function (success, category) {
                     res.send({ success: success, info: category });
                 });
-        });        
+        });
+
+        router.get('/sitemap.xml', function (req, res, next) {
+            const { SitemapStream, streamToPromise } = require('sitemap')
+            const { Readable } = require('stream')
+
+            res.header('Content-Type', 'application/xml');
+            res.header('Content-Encoding', 'xml');
+            // if we have a cached entry send it
+            if (sitemap) {
+                res.send(sitemap)
+                return
+            }
+
+            try {
+                const smStream = new SitemapStream({ hostname: req.protocol + "://" + req.headers.host});
+                const pipeline = smStream; //smStream.pipe()
+
+                // Push categories && tasks
+                categories.getPublicCategories(categoriesList => {
+                    categoriesList.forEach(category => {
+                        smStream.write({ url: '/catalog/' + category.id, changefreq: 'monthly' });
+                        categories.getTemplatesInPublicCategory(category.id, templates, (success, tasks) => {
+                            // Push tasks
+                            tasks.forEach(task => {
+                                smStream.write({
+                                    url: '/classroom/catalog/' + category.id + "/task/" + task.id, changefreq: 'monthly'
+                                });
+                            });
+                        });
+                    });
+                });
+
+                // Push metapages
+                smStream.write({ url: '/', changefreq: 'monthly' });
+                smStream.write({ url: '/office', changefreq: 'monthly' });
+
+                // Fix it: For now wait database requests and then return sitemap.
+                setTimeout(function () {
+                    // cache the response
+                    streamToPromise(pipeline).then(sm => sitemap = sm);
+                    // make sure to attach a write stream such as streamToPromise before ending
+                    smStream.end();
+                    // stream write the response
+                    pipeline.pipe(res).on('error', (e) => { throw e });
+                }, 100);
+            } catch (e) {
+                console.error(e);
+                res.status(500).end();
+            }
+        });
 
         return router;
     }
