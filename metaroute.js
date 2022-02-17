@@ -121,7 +121,7 @@ class MetaRoute {
             }
 
             try {
-                const smStream = new SitemapStream({ hostname: req.protocol + "://" + req.headers.host});
+                const smStream = new SitemapStream({ hostname: "https://" + req.headers.host });
                 const pipeline = smStream; //smStream.pipe()
 
                 // Push categories && tasks
