@@ -13,7 +13,10 @@ class MetaRoute {
         var links = dbManager.getLinks();
         var templates = dbManager.getTemplates();
         var categories = dbManager.getCategories();
+
         var sitemap = null;
+        var sitemapSaveTime = 0; // in seconds
+        var updateSiteMapPeriod = 24 * 3600 * 30; // One month
 
         var staticPath = path.join(__dirname, '/dist/');
         router.use(express.static(staticPath));
@@ -115,9 +118,9 @@ class MetaRoute {
             res.header('Content-Type', 'application/xml');
             res.header('Content-Encoding', 'xml');
             // if we have a cached entry send it
-            if (sitemap) {
-                res.send(sitemap)
-                return
+            if (sitemap && Math.floor(Date.now() / 1000) - sitemapSaveTime < updateSiteMapPeriod) {
+                res.send(sitemap);
+                return;
             }
 
             try {
@@ -152,6 +155,7 @@ class MetaRoute {
                     // stream write the response
                     pipeline.pipe(res).on('error', (e) => { throw e });
                 }, 100);
+                sitemapSaveTime = Math.floor(Date.now() / 1000);
             } catch (e) {
                 console.error(e);
                 res.status(500).end();
