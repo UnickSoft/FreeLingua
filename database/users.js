@@ -134,6 +134,21 @@ class Users {
         h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
         return 4294967296 * (2097151 & h2) + (h1 >>> 0);
     };
+
+    _admin_only_checkValidUser(login, func) {
+        var self = this;
+        this.dbWrapper.select_one(this.Table, [
+            { name: "login", value: login },
+            { name: "type", value: this.Type.user }],
+            function (success, row) {
+                if (row === undefined) {
+                    func(row);
+                    return;
+                }
+
+                func(self.getUserInfo(row));
+            });
+    }
 }
 
 

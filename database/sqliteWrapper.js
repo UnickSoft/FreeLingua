@@ -18,7 +18,7 @@ var sqlWrapper = {
                     whereValue.push(w.value);
                 }
             }
-        } else {
+        } else if (where != null) {
             whereStr = where.name + '=?';
             whereValue.push(where.value);
         }

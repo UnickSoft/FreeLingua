@@ -5,6 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import { Dialog } from 'primereact/dialog';
 import { Password } from 'primereact/password';
 import { Translate, translate } from 'react-i18nify';
+import GlobalDisapcher from "./global_event_dispatcher"
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -54,6 +55,7 @@ export class LoginForm extends React.Component<any, any> {
             password: this.state.password
         }).then(function (response) {
             self.setLoggined(response.data.success);
+            GlobalDisapcher().dispatchEvent('change_user');
             console.log(response.data);
         })
         .catch(function (error) {
@@ -67,6 +69,7 @@ export class LoginForm extends React.Component<any, any> {
         axios.get("/user_exit", {})
             .then(function (response) {
                 self.setLoggined(false);
+                GlobalDisapcher().dispatchEvent('change_user');
                 console.log(response.data);
             })
             .catch(function (error) {

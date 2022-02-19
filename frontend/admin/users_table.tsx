@@ -3,6 +3,7 @@ import * as React from "react"
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import GlobalDisapcher from "../common/global_event_dispatcher"
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -57,6 +58,54 @@ export class UsersTable extends React.Component<any, any> {
         let self = this;
         return <Button onClick={(e) => self.deleteUser(value.login)}>Delete</Button>
     }
+
+    banUser = (login) => {
+        let self = this;
+        axios.post("/admin/ban_user", { login: login })
+            .then(function (response) {
+                self.updateUsers();
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    }
+
+    activateUser = (login) => {
+        let self = this;
+        axios.post("/admin/activate_user", { login: login })
+            .then(function (response) {
+                self.updateUsers();
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    }
+
+    enterAs = (login) => {
+        let self = this;
+        axios.post("/admin/enter_as", { login: login })
+            .then(function (response) {
+                self.updateUsers();
+                GlobalDisapcher().dispatchEvent('change_user');
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    }
+
+    activateBody = (value) => {
+        let self = this;
+        return value.isActivated ? <Button onClick={(e) => self.banUser(value.login)} className="p-button-warning">Ban</Button>
+            : <Button onClick={(e) => self.activateUser(value.login)} className="p-button-success">Activate</Button>;
+    }
+
+    enterAsBody = (value) => {
+        let self = this;
+        return <Button onClick={(e) => self.enterAs(value.login)} className="p-button-warning">Enter as</Button>;
+    }
     
     render() {
         return (<div className="card">
@@ -65,8 +114,9 @@ export class UsersTable extends React.Component<any, any> {
                 <Column field="name" header="Name"></Column>
                 <Column field="email" header="Email"></Column>
                 <Column field="isAdmin" header="IsAdmin" body={this.valueIsAdmin}></Column>
-                <Column field="isActivated" header="Activated" body={this.valueIsActivated}></Column>
+                <Column header="Activated" body={this.activateBody}></Column>
                 <Column header="Delete" body={this.deleteBody} ></Column>
+                <Column header="Enter as" body={this.enterAsBody} ></Column>
             </DataTable>
         </div>);
     }

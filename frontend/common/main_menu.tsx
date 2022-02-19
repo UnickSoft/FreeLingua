@@ -2,6 +2,7 @@
 import * as React from "react"
 import LoginButton from './login_button';
 import { Translate } from 'react-i18nify';
+import GlobalDisapcher from "./global_event_dispatcher"
 
 var axios = require('axios');
 export class MainMenu extends React.Component<any, any> {
@@ -18,6 +19,11 @@ export class MainMenu extends React.Component<any, any> {
         };
 
         this.checkAdmin();
+
+        let self = this;
+        GlobalDisapcher().addEventListener('change_user', function (event) {
+            self.checkAdmin();
+        });
     }
 
     checkAdmin = () => {

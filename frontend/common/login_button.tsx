@@ -3,6 +3,7 @@ import * as React from "react"
 import { Button } from 'primereact/button';
 import LoginForm from './login_form';
 import { Translate, translate } from 'react-i18nify';
+import GlobalDisapcher from "./global_event_dispatcher"
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -21,6 +22,11 @@ export class LoginButton extends React.Component<any, any> {
         }
 
         this.checkIsUser();
+
+        let self = this;
+        GlobalDisapcher().addEventListener('change_user', function (event) {
+            self.checkIsUser();
+        });
     }
 
     checkIsUser = () => {
@@ -44,6 +50,7 @@ export class LoginButton extends React.Component<any, any> {
                 self.setState({
                     isLoggined: !response.data.success
                 });
+                GlobalDisapcher().dispatchEvent('change_user');
             })
             .catch(function (error) {
                 // handle error

@@ -133,6 +133,7 @@
     <Content Include="dist\translations\ru\common.json" />
     <Content Include="dist\translations\ru\meta.json" />
     <Content Include="dist\translations\ru\office.json" />
+    <Content Include="frontend\common\global_event_dispatcher.tsx" />
     <Content Include="frontend\tsconfig.json" />
     <Content Include="log.js" />
     <Content Include="metaroute.js" />

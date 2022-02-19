@@ -62,6 +62,12 @@ class AdminRoute {
             });
         });
 
+        router.post('/activate_user', function (req, res, next) {
+            users.activateUser(req.body.login, function () {
+                res.send({ success: true });
+            });
+        });
+
         router.post('/delete_user', function (req, res, next) {
             users.deleteUser(req.body.login, function () {
                 res.send({ success: true });
@@ -129,6 +135,19 @@ class AdminRoute {
                 res.send({ success: success });
             }
             );
+        });
+
+        router.post('/enter_as', function (req, res, next) {
+            var session = req.session;
+            users._admin_only_checkValidUser(req.body.login, function (userInfo) {
+                if (userInfo !== undefined) {
+                    session.userInfo = userInfo;
+                    console.log("Login as: " + session.userInfo.login + (session.userInfo.isAdmin ? " Admin" : ""));
+                    res.send({ success: true });
+                } else {
+                    res.send({ success: false });
+                }
+            });
         });        
 
         return router;
