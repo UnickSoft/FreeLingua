@@ -27,7 +27,8 @@
     "cookie-parser": "1.4.5",
     "react-copy-to-clipboard": "5.0.4",
     "react-helmet": "6.1.0",
-    "sitemap": "7.1.1"
+    "sitemap": "7.1.1",
+    "prerender-node": "3.4.1"
   },
   "scripts": {
     "build": "webpack-cli --config webpack-config.js"

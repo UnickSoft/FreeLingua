@@ -54,6 +54,8 @@ try
         resave: false
     }));
     app.use(cookieParser());
+    app.use(require('prerender-node').set('prerenderToken', config.prerenderToken));
+    app.use(require('prerender-node').whitelisted(['/', '/catalog/.*', '/classroom/catalog/.*/task/.*']));
 
     let initAfterDataBase = function () {
         let MetaRoute = require('./metaroute');

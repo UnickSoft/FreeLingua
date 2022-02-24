@@ -13,6 +13,7 @@ var Config = {
     session_secret_key: "supersecretifdonttellyouit",
     admin_password: "",
     admin_email: "",
+    prerenderToken: "YOUR_TOCKEN"
 }
 
 module.exports = Config
