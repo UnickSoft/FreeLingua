@@ -74,7 +74,11 @@ try
         let classroomRoute = new ClassRoomRoute();
         classroomRoute.setDBManager(dbManager);
 
-        app.use("/", metaRoute.getMetaRoute(express));
+        let metaRountRaw = metaRoute.getMetaRoute(express);
+        metaRountRaw.use(require('prerender-node').set('prerenderToken', config.prerenderToken));
+        metaRountRaw.use(require('prerender-node').whitelisted(['/', '/catalog/.*', '/classroom/catalog/.*/task/.*']));
+
+        app.use("/", metaRountRaw);
         app.use("/en", metaRoute.getMetaRoute(express));
         app.use("/admin", adminRoute.getAdminRoute(express));
         app.use("/office", officeRoute.getOfficeRoute(express));
