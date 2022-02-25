@@ -56,6 +56,7 @@ try
     app.use(cookieParser());
     app.use(require('prerender-node').set('prerenderToken', config.prerenderToken));
     app.use(require('prerender-node').whitelisted(['/', '/catalog/.*', '/classroom/catalog/.*/task/.*']));
+    app.use(require('prerender-node').set('protocol', 'https'));
 
     let initAfterDataBase = function () {
         let MetaRoute = require('./metaroute');
@@ -77,6 +78,7 @@ try
         let metaRountRaw = metaRoute.getMetaRoute(express);
         metaRountRaw.use(require('prerender-node').set('prerenderToken', config.prerenderToken));
         metaRountRaw.use(require('prerender-node').whitelisted(['/', '/catalog/.*', '/classroom/catalog/.*/task/.*']));
+        metaRountRaw.use(require('prerender-node').set('protocol', 'https'));
 
         app.use("/", metaRountRaw);
         app.use("/en", metaRoute.getMetaRoute(express));
