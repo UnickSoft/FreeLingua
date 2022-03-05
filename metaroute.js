@@ -14,6 +14,7 @@ class MetaRoute {
         var templates = dbManager.getTemplates();
         var categories = dbManager.getCategories();
         var utils = require("./utils");
+        var log = require("./log");
 
         var sitemap = null;
         var sitemapSaveTime = 0; // in seconds
@@ -24,6 +25,7 @@ class MetaRoute {
 
         // Simple return html
         router.use('/', function (req, res, next) {
+            log.info("req" + req.path);
             if (req.path == "/" || req.path == "" || req.path == "index.html" || req.path == "/index.html" ) {
                 res.sendFile(utils.sendFileName(req, staticPath));
                 return;
