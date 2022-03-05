@@ -24,7 +24,7 @@ class MetaRoute {
 
         // Simple return html
         router.use('/', function (req, res, next) {
-            if (req.path == "/" || req.path == "") {
+            if (req.path == "/" || req.path == "" || req.path == "index.html" || req.path == "/index.html" ) {
                 res.sendFile(utils.sendFileName(req, staticPath));
                 return;
             }
