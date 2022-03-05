@@ -9,6 +9,7 @@ class AdminRoute {
     getAdminRoute(express) {
         var path = require('path');
         var router = express.Router();
+        var staticPath = path.join(__dirname, '/dist/');
 
         router.get('/is_admin', function (req, res, next) {
             var session = req.session;
@@ -20,11 +21,14 @@ class AdminRoute {
         });
 
         // Simple return html
+        router.get('/', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "admin/_index.html"));
+        });
         router.get('/users', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "admin/index.html"));
+            res.sendFile(path.join(staticPath, "admin/_index.html"));
         });
         router.get('/add_user', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "admin/index.html"));
+            res.sendFile(path.join(staticPath, "admin/_index.html"));
         });
 
         // Disable all other function for non admin

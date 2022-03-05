@@ -24,17 +24,12 @@ class MetaRoute {
         var prerenderPath = path.join(__dirname, '/static/');
 
         // Simple return html
-        router.use(function (req, res, next) {
-            if (req.path == "/" || req.path == "" || req.path == "index.html" || req.path == "/index.html" ) {
-                res.sendFile(utils.sendFileName(req, staticPath));
-                return;
-            }
-            next();
+        router.get('/', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
         });
         router.get('/catalog/:catalogId', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, staticPath));
         });
-
         router.use(express.static(staticPath));
 
         // Process user

@@ -13,7 +13,7 @@ var Utils = {
         if (isbot(req.get('user-agent')) && fs.existsSync(prerenderIndex)) {
             return prerenderIndex;
         } else {
-            return path.join(staticPath, "index.html");
+            return path.join(staticPath, "_index.html");
         }
     }
 }

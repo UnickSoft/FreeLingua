@@ -10,23 +10,26 @@ class OfficeRoute {
         var staticPath = path.join(__dirname, '/dist/');
 
         // Simple return html
+        router.get('/', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "office/_index.html"));
+        });
         router.get('/task', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "office/index.html"));
+            res.sendFile(path.join(staticPath, "office/_index.html"));
         });
         router.get('/task/:templateId', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "office/index.html"));
+            res.sendFile(path.join(staticPath, "office/_index.html"));
         });
         router.get('/link/:linkId', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "office/index.html"));
+            res.sendFile(path.join(staticPath, "office/_index.html"));
         });
         router.get('/links', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "office/index.html"));
+            res.sendFile(path.join(staticPath, "office/_index.html"));
         });
         router.get('/new_task', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "office/index.html"));
+            res.sendFile(path.join(staticPath, "office/_index.html"));
         });
         router.get('/test_template/:templateId', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "office/index.html"));
+            res.sendFile(path.join(staticPath, "office/_index.html"));
         });
 
         // Disable all invalid users.

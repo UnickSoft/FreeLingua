@@ -17,12 +17,14 @@ class ClassroomRoute {
         var utils = require("./utils");
 
         // Redirects
+        router.get('/', function (req, res, next) {
+            res.sendFile(path.join(staticPath, "classroom/_index.html"));
+        });
         router.get('/link/:linkId', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "classroom/index.html"));
+            res.sendFile(path.join(staticPath, "classroom/_index.html"));
         });
         router.get('/catalog/:catalogId/task/:taskId', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, path.join(staticPath, "classroom/")));
-            //res.sendFile(path.join(staticPath, "classroom/index.html"));
         });
 
         router.get('/get_task_by_link', function (req, res, next) {
