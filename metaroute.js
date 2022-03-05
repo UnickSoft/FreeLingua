@@ -24,8 +24,7 @@ class MetaRoute {
         var prerenderPath = path.join(__dirname, '/static/');
 
         // Simple return html
-        router.use('', function (req, res, next) {
-            log.info("req" + req.path);
+        router.use(function (req, res, next) {
             if (req.path == "/" || req.path == "" || req.path == "index.html" || req.path == "/index.html" ) {
                 res.sendFile(utils.sendFileName(req, staticPath));
                 return;
