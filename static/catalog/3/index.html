@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/common.css">
+
+    <link rel="stylesheet" href="/css/primeicons.css">
+    <link rel="stylesheet" href="/css/primereact.min.css">
+    <link rel="stylesheet" href="/css/primeflex.min.css">
+    <link rel="stylesheet" href="/css/prime_flex_themes/indigo-light.css">
+
+    <link rel="stylesheet" href="/css/my.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com"><title>Добро пожаловать</title><meta name="description" content="Уроки и задания для изучения иностранных языков. Создвание собственных заданий. Тесты ЕГЭ, ОГЕ." data-react-helmet="true"><meta name="keywords" content="английский, немецкий, шведский, изучение языков, тесты, задания по иносртарнному языку" data-react-helmet="true"><link rel="preconnect" href="https://mc.yandex.ru"><link rel="preconnect" href="https://freelingua.unick-soft.ru"></head>
+
+<body class="js">
+    <!--header-->
+    <header class="main-header main-header-fix clearfix" role="header">
+        <div class="logo">
+            <a href="/"><em>Lingua</em> Online</a>
+        </div>
+        <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+        <nav id="menu" class="main-nav" role="navigation"><ul class="main-menu"><li><a href="/">Главная</a></li><li><a href="/office">Учительская</a></li><li id="EnterButton"><span><button id="login_button" class="p-button p-component"><span class="p-button-label p-c">Войти</span></button></span></li><li class="has-submenu"><a href="#section2">Language</a><ul class="sub-menu"><li><a href="/">russian</a></li><li><a href="/en/">english</a></li></ul></li></ul></nav>
+    </header>
+
+    <!--
+            <section class="section why-us" data-section="section2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-heading">
+                                <h2>Чем наш сервис будет полезен вам</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div id='tabs'>
+                                <ul>
+                                    <li><a href='#tabs-1'>Для изучения</a></li>
+                                    <li><a href='#tabs-2'>Для обучения</a></li>
+                                </ul>
+                                <section class='tabs-content'>
+                                    <article id='tabs-1'>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="images/choose-us-image-01.png" alt="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h4>Для изучения</h4>
+                                                <p>Наш сервис поможет вам изучать английсий язык. Среди материалов вы найдёте уроки, курсы и тесты для разного уровня. Вы можете учится бесплатно и следить за своим прогрессом. </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article id='tabs-2'>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="images/choose-us-image-02.png" alt="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h4>Для учителей и репититоров</h4>
+                                                <p>Используя наш сервис вы можете создавать тесты и задания для своих учеников. Вы можете использовать публичные задания с сайта или создавать свои. В своём личном кабинете вы будете видеть результат работы учеников.</p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    -->
+    <section class="section why-us">
+        <div class="container containerMainCatalog p-panel p-component">
+            <div class="row">
+                <div class="col"><div id="root"><div><div><div class="row"><div class="col"><h1>Добро пожаловать</h1><p>На нашем сайты вы найдёте бесплатные тесты и задания для изучения иностранных языков. Кроме того преподаватели могут составить собственные задания для своих учеников.</p></div></div><div class="row"><div class="col-md-6 p-card-body categoryPanel"><a class="noDecorLink" href="/catalog/4"><h2><i class="pi pi-book"></i> Английский язык</h2><p>Раздел содержит задания и тесты для изучающих английский язык</p></a></div><div class="col-md-6 p-card-body categoryPanel"><a class="noDecorLink" href="/catalog/5"><h2><i class="pi pi-book"></i> Немецкий язык</h2><p>Раздел содержит задания и тесты для изучения немецкого языка.</p></a></div></div><div class="row"><div class="col-md-6 p-card-body categoryPanel"><a class="noDecorLink" href="/catalog/6"><h2><i class="pi pi-book"></i> Шведский язык</h2><p>Раздел содержит задания и тесты для изучения шведского языка.</p></a></div></div><div class="row"><div class="col"><ul class="taskList"></ul></div></div></div></div></div></div>
+            </div>
+        </div>
+</section>
+    <!--
+            <section class="section courses" data-section="section4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-heading">
+                                <h2>Выберете один из курсов</h2>
+                            </div>
+                        </div>
+                        <div class="owl-carousel owl-theme">
+                            <div class="item">
+                                <img src="images/courses-01.jpg" alt="Course #1">
+                                <div class="down-content">
+                                    <h4>Английский A1</h4>
+                                    <p>Курс базовых знаний Английского языка. Начиная с алфавита и заканчивая простыми словами.</p>
+                                    <div class="author-image">
+                                        <img src="images/author-01.png" alt="Author 1">
+                                    </div>
+                                    <div class="text-button-pay">
+                                        <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="images/courses-02.jpg" alt="Course #2">
+                                <div class="down-content">
+                                    <h4>Шведский язык</h4>
+                                    <p>Самый бесполезный язык в мире</p>
+                                    <div class="author-image">
+                                        <img src="images/author-02.png" alt="Author 2">
+                                    </div>
+                                    <div class="text-button-free">
+                                        <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img src="images/courses-03.jpg" alt="Course #3">
+                                <div class="down-content">
+                                    <h4>Анлийский C1</h4>
+                                    <p>Pellentesque ultricies diam magna, auctor cursus lectus pretium nec. Maecenas finibus lobortis enim.</p>
+                                    <div class="author-image">
+                                        <img src="images/author-03.png" alt="Author 3">
+                                    </div>
+                                    <div class="text-button-pay">
+                                        <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section coming-soon" data-section="section3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-xs-12">
+                            <div class="continer centerIt">
+                                <div>
+                                    <h4>Зарегестируйтесь чтобы следить за своим прогрессом</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="right-content">
+                                <div class="top-content">
+                                    <h6>Регистрация не займёт много времени</h6>
+                                    <div id="login_form_place">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <i class="fa fa-copyright"></i> Copyright 2021 by unick-soft
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/js/custom.js"></script>
+    <script src="/js/meta_app.app-bundle.js"></script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(87328352, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/87328352" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body></html>
