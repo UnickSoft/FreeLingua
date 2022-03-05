@@ -26,6 +26,9 @@ class MetaRoute {
         router.get('/', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, staticPath));
         });
+        router.get('', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
+        });
         router.get('/catalog/:catalogId', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, staticPath));
         });
