@@ -1,4 +1,7 @@
 declare var require: any
+
+import RequestUrl from "../common/utils";
+
 var axios = require('axios');
 
 const QuestionManager = {
@@ -27,12 +30,12 @@ const QuestionManager = {
     getTaskTemplate: async function (taskId, usePublic = false) {
         let response;
         try {
-            response = await axios.get(usePublic ? "/classroom/get_public_template" : "/office/get_template",
+            response = await axios.get(usePublic ? RequestUrl("/classroom/get_public_template") : "/office/get_template",
                 { params: { templateId: taskId } });
         } catch (error) {
             // handle error
             console.log(error);
-            return [];
+            return null;
         }
 
         if (response.data.success) {
@@ -40,7 +43,7 @@ const QuestionManager = {
             data.data = JSON.parse(data.data);
             return data;
         }
-        return [];
+        return null;
     },
 
     saveShareLink: async function (templateId, shareLinkTitle, lifeTime, isExamMode) {
@@ -63,7 +66,7 @@ const QuestionManager = {
     getTaskByLink: async function(linkId) {
         let response;
         try {
-            response = await axios.get("/classroom/get_task_by_link", { params: { linkId: linkId } });
+            response = await axios.get(RequestUrl("/classroom/get_task_by_link"), { params: { linkId: linkId } });
         } catch (error) {
             // handle error
             console.log(error);

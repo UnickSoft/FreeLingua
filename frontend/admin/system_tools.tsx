@@ -1,8 +1,7 @@
 declare var require: any
 import * as React from "react"
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { ToggleButton } from 'primereact/togglebutton';
 
 var ReactDOM = require('react-dom');
 var axios    = require('axios');
@@ -11,6 +10,7 @@ export class SystemTools extends React.Component<any, any> {
     state: {
         uselessData: any
         deleteNumber: any
+        allowCros: any
     };
 
     constructor(props) {
@@ -18,8 +18,11 @@ export class SystemTools extends React.Component<any, any> {
 
         this.state = {
             uselessData: [],
-            deleteNumber: 0
+            deleteNumber: 0,
+            allowCros: false
         };
+
+        this.updateAllowCros();
     }
 
     findUselessData = (e) => {
@@ -62,12 +65,46 @@ export class SystemTools extends React.Component<any, any> {
         });
     }
 
+    setAllowCros = (value) => {
+        let self = this;
+        axios.get("/admin/set_allow_cros",
+            { params: { value: value } })
+            .then(function (response) {
+                if (response.data.success) {
+                    self.updateAllowCros();
+                }
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    }
+
+    updateAllowCros = () => {
+        let self = this;
+        axios.get("/admin/is_allow_cros", {})
+            .then(function (response) {
+                if (response.data.success) {
+                    self.setState({ allowCros: response.data.value});
+                }
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    }
+
     render() {
         return (<div className="card">
+            <h3>Clean data base</h3>
             <Button onClick={this.findUselessData}>Find all useless data</Button>
             {this.htmlUselessData()}
             <Button onClick={this.deleteUselessData}>Delete useless data</Button>
             <div><span>Deleted rows</span>:<span>{this.state.deleteNumber}</span></div>
+            <h3>Allow cross request</h3>
+            <ToggleButton checked={this.state.allowCros}
+                onChange={(e) => this.setAllowCros(e.value)}
+                onLabel="Allow" offLabel="Denied" />
         </div>);
     }
 }

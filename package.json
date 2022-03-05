@@ -28,13 +28,24 @@
     "react-copy-to-clipboard": "5.0.4",
     "react-helmet": "6.1.0",
     "sitemap": "7.1.1",
-    "prerender-node": "3.4.1"
+    "cors": "2.8.5",
+    "isbot": "3.4.3"
   },
   "scripts": {
-    "build": "webpack-cli --config webpack-config.js"
+    "build": "webpack-cli --config webpack-config.js",
+    "build_static": "react-snap"
+  },
+  "reactSnap": {
+    "source": "static",
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "waitFor": 10000
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8",
-    "@types/react": "^17.0.1"
+    "@types/react": "^17.0.1",
+    "react-snap": "1.23.0"
   }
 }

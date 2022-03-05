@@ -135,6 +135,7 @@
     <Content Include="dist\translations\ru\office.json" />
     <Content Include="frontend\common\global_event_dispatcher.tsx" />
     <Content Include="frontend\tsconfig.json" />
+    <Content Include="utils.js" />
     <Content Include="log.js" />
     <Content Include="metaroute.js" />
     <Content Include="officeroute.js" />
@@ -171,6 +172,7 @@
     <TypeScriptCompile Include="frontend\admin\public_category_table.tsx" />
     <TypeScriptCompile Include="frontend\admin\users_table.tsx" />
     <TypeScriptCompile Include="frontend\admin_app.tsx" />
+    <TypeScriptCompile Include="frontend\common\utils.tsx" />
     <TypeScriptCompile Include="frontend\meta\catalog.tsx" />
     <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />
     <TypeScriptCompile Include="frontend\classroom\task_solving.tsx" />

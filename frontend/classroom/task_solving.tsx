@@ -5,6 +5,7 @@ import questionManager         from '../office/questionManager'
 import { Panel } from 'primereact/panel';
 import { Translate, translate } from 'react-i18nify';
 import { Skeleton } from 'primereact/skeleton';
+import RequestUrl from "../common/utils";
 
 var ReactDOM = require('react-dom');
 var axios = require('axios');
@@ -61,7 +62,7 @@ export class TaskSolving extends React.Component<any, any> {
                 let mistakes = 0;
                 let remainingAnswers = 0;
                 let taskData    = null;
-                let templateData = null;
+                let templateData = [];
                 let title = "";
                 let isExamMode = false;
 
@@ -72,10 +73,12 @@ export class TaskSolving extends React.Component<any, any> {
                     title = taskData.title;
                     isExamMode = taskData.isExamMode == true;
                 } else if (this.state.templateId) {
-                    templateData = await questionManager.getTaskTemplate(this.state.templateId, this.props.usePublic);
-                    title = templateData.title;
-                    templateData = templateData.data;
-                    remainingAnswers = templateData.length;
+                    let templateFullData = await questionManager.getTaskTemplate(this.state.templateId, this.props.usePublic);
+                    if (templateFullData != null) {
+                        title = templateFullData.title + "";
+                        templateData = templateFullData.data;
+                        remainingAnswers = templateData.length;
+                    }
                 }
 
                 // Remove info blocks.
@@ -350,7 +353,7 @@ export class TaskSolvingPublicWrapper extends React.Component<any, any> {
 
     updateCurrentCatalogInfo = () => {
         let self = this;
-        axios.get("/get_public_category_info", { params: { id: this.props.categoryId } })
+        axios.get(RequestUrl("/get_public_category_info"), { params: { id: this.props.categoryId } })
             .then(function (response) {
                 self.setState({
                     catalogInfo: response.data.info

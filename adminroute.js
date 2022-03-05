@@ -4,6 +4,8 @@ class AdminRoute {
     constructor() {
     }
 
+    allowCros = false;
+
     getAdminRoute(express) {
         var path = require('path');
         var router = express.Router();
@@ -40,6 +42,7 @@ class AdminRoute {
         var tasks = dbManager.getTasks();
         var links = dbManager.getLinks();
         var categories = dbManager.getCategories();
+        let self = this;
 
         router.get('/get_users', function (req, res, next) {
             users.getUserList(function (list) {
@@ -148,13 +151,26 @@ class AdminRoute {
                     res.send({ success: false });
                 }
             });
-        });        
+        });
+
+        router.get('/set_allow_cros', function (req, res, next) {
+            self.allowCros = (req.query.value == "true");
+            res.send({ success: true });
+        });
+
+        router.get('/is_allow_cros', function (req, res, next) {
+            res.send({ success: true, value: self.allowCros});
+        });
 
         return router;
     }
 
     setDBManager(dbManager) {
         this.dbManager = dbManager;
+    }
+
+    isAllowCros() {
+        return this.allowCros;
     }
 }
 

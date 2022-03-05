@@ -6,7 +6,7 @@ module.exports = {
         office: "./frontend/office_app.tsx",
         admin: "./frontend/admin_app.tsx"
         },
-    mode: "production", // "development",
+    mode: "production", // "development", // 
     output: {
         filename: "./js/[name].app-bundle.js"
     },

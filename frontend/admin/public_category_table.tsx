@@ -33,7 +33,7 @@ export class PublicCategoryTable extends React.Component<any, any> {
 
     updatePublicCategories = () => {
         let self = this;
-        axios.get("/office/get_public_categories", {})
+        axios.get("/get_public_categories", {})
             .then(function (response) {
                 self.setState({ categories: self.processCategories(response.data.categories)});
         })

@@ -1,0 +1,26 @@
+{
+  "name": "learning",
+  "version": "0.0.1",
+  "description": "Appilcation for online learning and teaching",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+  },
+  "scripts": {
+    "build": "webpack-cli --config webpack-config.js",
+    "build_static": "react-snap"
+  },
+  "reactSnap": {
+    "source": "static\\classroom",
+
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "waitFor": 10000
+  },
+  "devDependencies": {
+  }
+}

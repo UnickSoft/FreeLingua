@@ -5,6 +5,8 @@ import MainMenu from './common/main_menu';
 import { BaseApp, applyTranslation } from './base_app';
 import CatalogWrapper from './meta/catalog';
 import { Helmet } from "react-helmet";
+import { hydrate, render } from "react-dom";
+import RequestUrl from "./common/utils"
 
 var ReactDOM = require('react-dom');
 
@@ -40,7 +42,7 @@ export class MetaApp extends BaseApp {
 
     updateCurrentCatalogInfo = () => {
         let self = this;
-        axios.get("/get_public_category_by_tag", { params: { tag: this.currentLanguage + "_root" } })
+        axios.get(RequestUrl("/get_public_category_by_tag"), { params: { tag: this.currentLanguage + "_root" } })
             .then(function (response) {
                 self.setState({
                     rootInfo: response.data.info

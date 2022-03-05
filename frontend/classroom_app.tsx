@@ -14,16 +14,20 @@ import { BaseApp, applyTranslation } from './base_app';
 import MainMenu from './common/main_menu';
 import { translate, Translate, getTranslations } from 'react-i18nify';
 import { Helmet } from "react-helmet";
+import RequestUrl from "./common/utils"
 
 applyTranslation(["classroom.json", "common.json"]);
 
 var ReactDOM = require('react-dom');
+
+var axios = require('axios');
 
 export class ClassRoom extends BaseApp {
 
     state: {
         translationLoaded: any
         taskInfo: any
+        categories: any
     };
 
     constructor(props) {
@@ -31,8 +35,41 @@ export class ClassRoom extends BaseApp {
 
         this.state = {
             taskInfo: {},
+            categories: null,
             ...this.state
         };
+
+        if (navigator.userAgent == "ReactSnap") {
+            this.getAllPublicTasks();
+        }
+    }
+
+    getAllPublicTasks = () => {
+        let self = this;
+        axios.get(RequestUrl("/get_public_categories"), {})
+            .then(function (response) {
+                self.setState({
+                    categories: response.data.categories
+                });
+
+                response.data.categories.forEach((cat) => {
+                    axios.get(RequestUrl("/get_public_category_templates"), { params: { id: cat.id } })
+                        .then(function (response) {
+                            cat["templates"] = response.data.templates;
+                            self.setState({
+                                categories: self.state.categories
+                            });
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        });                    
+                });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
     }
 
     htmlHeader = () => {
@@ -62,7 +99,23 @@ export class ClassRoom extends BaseApp {
         }
     }
 
+    htmlAllTasks = () => {
+        if (navigator.userAgent == "ReactSnap") {
+            if (this.state.categories != null) {
+                return this.state.categories.map(function (cat) {
+                    if ("templates" in cat) {
+                        return cat.templates.map(function (task) {
+                            return <p><a href={"/classroom/catalog/" + cat.id + "/task/" + task.id}>{task.title}</a></p>;
+                        });
+                    }
+                });
+            }
+        }
+        return null;
+    }
+
     render() {
+
         if (!this.state.translationLoaded) {
             return <p></p>;
         }
@@ -78,7 +131,15 @@ export class ClassRoom extends BaseApp {
                         <TaskSolving linkId={props.match.params.linkId} taskCallback={this.taskCallback}/>
                     )} />
                     <Route path="/classroom">
-                        <div><Translate value='messages.no_task' /></div>
+                        <div>
+                            <Translate value='messages.no_task' />
+                            {this.htmlAllTasks()}
+                        </div>
+                    </Route>
+                    <Route path="/">
+                        <div>
+                            {this.htmlAllTasks()}
+                        </div>
                     </Route>
                 </Switch>
                 {this.htmlHeader()}

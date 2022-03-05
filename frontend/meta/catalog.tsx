@@ -7,6 +7,7 @@ import {
     Link
 } from "react-router-dom";
 import { translate, Translate } from 'react-i18nify';
+import RequestUrl from "../common/utils"
 
 var axios    = require('axios');
 
@@ -42,7 +43,7 @@ export class Catalog extends React.Component<any, any> {
 
     updateCategories = () => {
         let self = this;
-        axios.get("/get_children_public_categories", { params: { id: this.props.categoryId}})
+        axios.get( RequestUrl("/get_children_public_categories"), { params: { id: this.props.categoryId } })
             .then(function (response) {
                 self.setState({
                     childrenCategory: response.data.categories.sort((a, b) => a.sort > b.sort ? 1 : -1)
@@ -56,7 +57,7 @@ export class Catalog extends React.Component<any, any> {
 
     updateTasks = () => {
         let self = this;
-        axios.get("/get_public_category_templates", { params: { id: this.props.categoryId } })
+        axios.get(RequestUrl("/get_public_category_templates"), { params: { id: this.props.categoryId } })
             .then(function (response) {
                 self.setState({
                     childrenTasks: response.data.templates.sort((a, b) => a.sort > b.sort ? 1 : -1)
@@ -70,7 +71,7 @@ export class Catalog extends React.Component<any, any> {
 
     updateCurrentCatalogInfo = () => {
         let self = this;
-        axios.get("/get_public_category_info", { params: { id: this.props.categoryId } })
+        axios.get(RequestUrl("/get_public_category_info"), { params: { id: this.props.categoryId } })
             .then(function (response) {
                 if (self.props.navigateCallback) {
                     self.props.navigateCallback(response.data.info);

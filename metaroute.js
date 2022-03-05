@@ -13,19 +13,24 @@ class MetaRoute {
         var links = dbManager.getLinks();
         var templates = dbManager.getTemplates();
         var categories = dbManager.getCategories();
+        var utils = require("./utils");
 
         var sitemap = null;
         var sitemapSaveTime = 0; // in seconds
         var updateSiteMapPeriod = 24 * 3600 * 30; // One month
 
         var staticPath = path.join(__dirname, '/dist/');
-        router.use(express.static(staticPath));
-
+        var prerenderPath = path.join(__dirname, '/static/');
 
         // Simple return html
-        router.get('/catalog/:catalogId', function (req, res, next) {
-            res.sendFile(path.join(staticPath, "index.html"));
+        router.get('/', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
         });
+        router.get('/catalog/:catalogId', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
+        });
+
+        router.use(express.static(staticPath));
 
         // Process user
         router.post('/user_enter', function (req, res, next) {
@@ -160,6 +165,12 @@ class MetaRoute {
                 console.error(e);
                 res.status(500).end();
             }
+        });
+
+        router.get('/get_public_categories', function (req, res, next) {
+            categories.getPublicCategories(function (list) {
+                res.send({ categories: list });
+            });
         });
 
         return router;
