@@ -23,11 +23,12 @@ class MetaRoute {
         var prerenderPath = path.join(__dirname, '/static/');
 
         // Simple return html
-        router.get('/', function (req, res, next) {
-            res.sendFile(utils.sendFileName(req, staticPath));
-        });
-        router.get('', function (req, res, next) {
-            res.sendFile(utils.sendFileName(req, staticPath));
+        router.use('/', function (req, res, next) {
+            if (req.path == "/" || req.path == "") {
+                res.sendFile(utils.sendFileName(req, staticPath));
+                return;
+            }
+            next();
         });
         router.get('/catalog/:catalogId', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, staticPath));
