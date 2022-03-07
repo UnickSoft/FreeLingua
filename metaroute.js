@@ -159,6 +159,7 @@ class MetaRoute {
                     smStream.end();
                     // stream write the response
                     pipeline.pipe(res).on('error', (e) => { throw e });
+                    res.removeHeader('Content-Encoding');
                 }, 100);
                 sitemapSaveTime = Math.floor(Date.now() / 1000);
             } catch (e) {
