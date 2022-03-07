@@ -124,6 +124,7 @@ class MetaRoute {
             res.header('Content-Encoding', 'xml');
             // if we have a cached entry send it
             if (sitemap && Math.floor(Date.now() / 1000) - sitemapSaveTime < updateSiteMapPeriod) {
+                res.removeHeader('Content-Encoding');
                 res.send(sitemap);
                 return;
             }
