@@ -8,7 +8,7 @@ let prerenderPath = path.join(__dirname, '/static/');
 
 var Utils = {
     sendFileName: function (req, staticPath) {
-        let prerenderIndex = path.join(prerenderPath, req.path, "/index.html");
+        let prerenderIndex = path.join(prerenderPath, req.originalUrl, "/index.html");
         prerenderIndex = prerenderIndex.replace(/\.\./g, '');
         if (isbot(req.get('user-agent')) && fs.existsSync(prerenderIndex)) {
             return prerenderIndex;
