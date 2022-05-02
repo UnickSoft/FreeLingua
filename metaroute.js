@@ -188,11 +188,11 @@ class MetaRoute {
                 // Push categories && tasks
                 categories.getPublicCategories(categoriesList => {
                     categoriesList.forEach(category => {
-                        sitemapTxt += '/catalog/' + category.id + "\n";
+                        sitemapTxt += "https://" + req.headers.host + '/catalog/' + category.id + "\n";
                         categories.getTemplatesInPublicCategory(category.id, templates, (success, tasks) => {
                             // Push tasks
                             tasks.forEach(task => {
-                                sitemapTxt += '/classroom/catalog/' + category.id + "/task/" + task.id + "\n";
+                                sitemapTxt += "https://" + req.headers.host + '/classroom/catalog/' + category.id + "/task/" + task.id + "\n";
                             });
                         });
                     });
