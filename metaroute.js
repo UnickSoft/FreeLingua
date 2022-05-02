@@ -18,6 +18,9 @@ class MetaRoute {
 
         var sitemap = null;
         var sitemapSaveTime = 0; // in seconds
+        var sitemapTxt = null;
+        var sitemapTxtSaveTime = 0; // in seconds
+
         var updateSiteMapPeriod = 24 * 3600 * 30; // One month
 
         var staticPath = path.join(__dirname, '/dist/');
@@ -121,10 +124,8 @@ class MetaRoute {
             const { Readable } = require('stream')
 
             res.header('Content-Type', 'application/xml');
-            res.header('Content-Encoding', 'xml');
             // if we have a cached entry send it
             if (sitemap && Math.floor(Date.now() / 1000) - sitemapSaveTime < updateSiteMapPeriod) {
-                res.removeHeader('Content-Encoding');
                 res.send(sitemap);
                 return;
             }
@@ -154,15 +155,58 @@ class MetaRoute {
 
                 // Fix it: For now wait database requests and then return sitemap.
                 setTimeout(function () {
-                    // cache the response
-                    streamToPromise(pipeline).then(sm => sitemap = sm);
-                    // make sure to attach a write stream such as streamToPromise before ending
-                    smStream.end();
-                    // stream write the response
-                    pipeline.pipe(res).on('error', (e) => { throw e });
-                    res.removeHeader('Content-Encoding');
+                    try {
+                        // cache the response
+                        streamToPromise(pipeline).then(sm => sitemap = sm);
+                        // make sure to attach a write stream such as streamToPromise before ending
+                        smStream.end();
+                        // stream write the response
+                        pipeline.pipe(res).on('error', (e) => { throw e });
+                    } catch (e) {
+                        console.error(e);
+                        res.status(500).end();
+                    }
                 }, 100);
                 sitemapSaveTime = Math.floor(Date.now() / 1000);
+            } catch (e) {
+                console.error(e);
+                res.status(500).end();
+            }
+        });
+
+
+        router.get('/sitemap.txt', function (req, res, next) {
+            res.header('Content-Type', 'text/plain');
+            // if we have a cached entry send it
+            if (sitemapTxt && Math.floor(Date.now() / 1000) - sitemapTxtSaveTime < updateSiteMapPeriod) {
+                res.send(sitemapTxt);
+                return;
+            }
+
+            try {
+                sitemapTxt = "";
+                // Push categories && tasks
+                categories.getPublicCategories(categoriesList => {
+                    categoriesList.forEach(category => {
+                        sitemapTxt += '/catalog/' + category.id + "\n";
+                        categories.getTemplatesInPublicCategory(category.id, templates, (success, tasks) => {
+                            // Push tasks
+                            tasks.forEach(task => {
+                                sitemapTxt += '/classroom/catalog/' + category.id + "/task/" + task.id + "\n";
+                            });
+                        });
+                    });
+                });
+
+                setTimeout(function () {
+                    try {
+                        res.send(sitemapTxt);
+                    } catch (e) {
+                        console.error(e);
+                        res.status(500).end();
+                    }
+                }, 100);
+                sitemapTxtSaveTime = Math.floor(Date.now() / 1000);
             } catch (e) {
                 console.error(e);
                 res.status(500).end();
