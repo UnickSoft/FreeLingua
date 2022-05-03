@@ -10,7 +10,9 @@ var Utils = {
     sendFileName: function (req, staticPath) {
         let prerenderIndex = path.join(prerenderPath, req.originalUrl, "/index.html");
         prerenderIndex = prerenderIndex.replace(/\.\./g, '');
-        if (isbot(req.get('user-agent')) && fs.existsSync(prerenderIndex)) {
+        prerenderIndex = prerenderIndex.replace("?_escaped_fragment_=", '');
+
+        if (req.query._escaped_fragment_ != null && fs.existsSync(prerenderIndex)) {
             return prerenderIndex;
         } else {
             return path.join(staticPath, "_index.html");

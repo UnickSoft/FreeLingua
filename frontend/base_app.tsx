@@ -59,10 +59,18 @@ export class BaseApp extends React.Component {
             this.onTranslationLoaded()
         }
         updateComponents.push(this);
+        this.removeHelmet();
     }
 
     onTranslationLoaded() {
         this.setState({ translationLoaded: true });
+    }
+
+    removeHelmet() {
+        const elem = document.querySelector('meta[name=fragment]');
+        if (elem) {
+            elem.remove();
+        }
     }
 
     render() {
