@@ -250,10 +250,15 @@ class MetaRoute {
                     }
 
                     var sender = require("./common/mailsender");
-                    let link = `${req.protocol}://${req.get('host')}` + activationUrl + linkId;
-                    sender.sendActivationLetter(link, req.body.email, function (success) {
-                        res.send({ success: success, error: "cannot_send_activation_email"  });
-                    });
+                    try {
+                        let link = `${req.protocol}://${req.get('host')}` + activationUrl + linkId;
+                        sender.sendActivationLetter(link, req.body.email, function (success) {
+                            res.send({ success: success, error: "cannot_send_activation_email"  });
+                        });
+                    } catch (e) {
+                        log.error(e);
+                        res.send({ success: false });
+                    }
                 });
             // send email.
         });
@@ -278,11 +283,8 @@ class MetaRoute {
                 }
 
                 var sender = require("./common/mailsender");
-                log.info("Start link");
                 try {
                     let link = `${req.protocol}://${req.get('host')}` + newPasswordUrl + linkId;
-                    log.info("link " + link);
-
                     sender.sendResetPasswordLetter(link, req.body.email, function (success) {
                         res.send({ success: success });
                     });
