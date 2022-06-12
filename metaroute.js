@@ -272,16 +272,24 @@ class MetaRoute {
 
         router.post('/reset_password', function (req, res, next) {
             users.resetPassword(req.body.email, function (success, linkId) {
-                    if (!success) {
-                        res.send({ success: success });
-                        return;
-                    }
+                if (!success) {
+                    res.send({ success: success });
+                    return;
+                }
 
-                    var sender = require("./common/mailsender");
+                var sender = require("./common/mailsender");
+                log.info("Start link");
+                try {
                     let link = `${req.protocol}://${req.get('host')}` + newPasswordUrl + linkId;
+                    log.info("link " + link);
+
                     sender.sendResetPasswordLetter(link, req.body.email, function (success) {
                         res.send({ success: success });
                     });
+                } catch (e) {
+                    log.error(e);
+                    res.send({ success: false });
+                }
             });
         });
 
