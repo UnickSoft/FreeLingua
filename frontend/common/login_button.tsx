@@ -75,7 +75,6 @@ export class LoginButton extends React.Component<any, any> {
                     onClose={() => this.setState({ dialogVisible: false })}
                     visible={this.state.dialogVisible} />
             </span>);
-
         }
     }
 }

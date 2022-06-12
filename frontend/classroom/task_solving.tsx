@@ -5,7 +5,7 @@ import questionManager         from '../office/questionManager'
 import { Panel } from 'primereact/panel';
 import { Translate, translate } from 'react-i18nify';
 import { Skeleton } from 'primereact/skeleton';
-import RequestUrl from "../common/utils";
+import { RequestUrl } from "../common/utils";
 
 var ReactDOM = require('react-dom');
 var axios = require('axios');

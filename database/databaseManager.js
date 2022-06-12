@@ -6,7 +6,7 @@ var dbManager = {
 
     create_database_script : "createDB_sqlite.sql",
 
-    meta_version: 3,
+    meta_version: 4,
                                         
     meta_table: "meta",
 
@@ -17,15 +17,15 @@ var dbManager = {
 
         let initTables = function () {
             var Users = require("./users");
-            self.users = new Users(self.dbWrapper);
+            self.users = new Users(self.dbWrapper, config);
             var Templates = require("./templates");
-            self.templates = new Templates(self.dbWrapper);
+            self.templates = new Templates(self.dbWrapper, config);
             var Links = require("./links");
-            self.links = new Links(self.dbWrapper);
+            self.links = new Links(self.dbWrapper, config);
             var Tasks = require("./tasks");
-            self.tasks = new Tasks(self.dbWrapper);
+            self.tasks = new Tasks(self.dbWrapper, config);
             var Category = require("./category");
-            self.category = new Category(self.dbWrapper);
+            self.category = new Category(self.dbWrapper, config);
             self.category.init();
 
             if (func) {

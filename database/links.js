@@ -9,16 +9,6 @@ class Links {
 
     LinkIdLength = 32
 
-    getRandomId(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-
     getLinks(userId, func) {
         var self = this;
         this.dbWrapper.select_all(this.Table, { name: "ownerId", value: userId }, function (success, rows) {
@@ -32,7 +22,8 @@ class Links {
             function (success, row) {
                 if (success) {
                     // TODO: Check link dublications.
-                    let linkId = self.getRandomId(self.LinkIdLength);
+                    var util = require("../common/util");
+                    let linkId = util.getRandomId(self.LinkIdLength);
                     let values = [
                         { name: "title", value: title },
                         { name: "ownerId", value: userId },

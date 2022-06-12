@@ -56,9 +56,11 @@ class AdminRoute {
 
         router.post('/add_user', function (req, res, next) {
             users.registerUser(req.body.login, req.body.password, req.body.email, req.body.name, req.body.role == "teacher" ? 0 : 1,
-                function () {
-                    dbManager.getUsers().activateUser(req.body.login);
-                    res.send({ success: true });
+                function (success) {
+                    if (success) {
+                        dbManager.getUsers().activateUser(req.body.login);
+                    }
+                    res.send({ success: success });
                 }
             );
         });

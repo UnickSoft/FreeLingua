@@ -15,7 +15,8 @@ export class LoginForm extends React.Component<any, any> {
         isLoggined: any;
         login: any,
         password: any,
-        useDialog: false
+        useDialog: false,
+        error: any
     };
 
     onSuccessFunc = null;
@@ -27,7 +28,8 @@ export class LoginForm extends React.Component<any, any> {
             isLoggined: false,
             login: "",
             password: "",
-            useDialog: ("onSuccess" in props) && (props.useDialog)
+            useDialog: ("onSuccess" in props) && (props.useDialog),
+            error: null
         };
         if ("onSuccess" in props) {
             this.onSuccessFunc = props.onSuccess;
@@ -50,12 +52,17 @@ export class LoginForm extends React.Component<any, any> {
 
     onLogin = (e) => {
         let self = this;
+        self.setState({ error: null });
         axios.post("/user_enter", {
             login: this.state.login,
             password: this.state.password
         }).then(function (response) {
             self.setLoggined(response.data.success);
-            GlobalDisapcher().dispatchEvent('change_user');
+            if (response.data.success) {
+                GlobalDisapcher().dispatchEvent('change_user');
+            } else if (response.data.hasOwnProperty("error")) {
+                self.setState({ error: response.data.error});
+            }
             console.log(response.data);
         })
         .catch(function (error) {
@@ -125,6 +132,16 @@ export class LoginForm extends React.Component<any, any> {
                             onChange={this.handleChangePassword} feedback={false} toggleMask />
                     </div>
                     <div className="p-field">
+                        <a href="/teacher_registration"><Translate value="login.teacher_registration" /></a>&nbsp;&nbsp;&nbsp;
+                        <a href="/forgot_password"><Translate value="login.forgot_password" /></a>
+                    </div>
+                    {this.state.error != null ?
+                        <div className="p-field">
+                            <span className="p-error block">
+                                {translate("server_errors." + this.state.error)}
+                            </span>
+                        </div> : null}
+                    <div className="p-field">
                         <Button id="form-submit" className="button" onClick={this.onLogin} label={translate("login.login_button")} />
                     </div>
                 </div>
@@ -144,6 +161,16 @@ export class LoginForm extends React.Component<any, any> {
                                 value={this.state.password}
                                 onChange={this.handleChangePassword} feedback={false} toggleMask />
                     </div>
+                    <div className="p-field">
+                        <a href="/teacher_registration"><Translate value="login.teacher_registration" /></a>&nbsp;&nbsp;&nbsp;
+                        <a href="/forgot_password"><Translate value="login.forgot_password" /></a>
+                    </div>
+                    {this.state.error != null ?
+                        <div className="p-field">
+                            <span className="p-error block">
+                                {translate("server_errors." + this.state.error)}
+                            </span>
+                        </div> : null}
                 </div>
             </Dialog>);
         }

@@ -13,7 +13,12 @@ var Config = {
     session_secret_key: "supersecretifdonttellyouit",
     admin_password: "",
     admin_email: "",
-    prerenderToken: "YOUR_TOCKEN"
+    passhash_secret_key: "ENTER_YOU_SECRET_KEY_HERE",
+    sendMailSerger: "smtp server name",
+    sendMailPort: 465,
+    sendSecure: true,
+    sendMailLogin: "ENTER email here",
+    sendMailPassword: "PASSWORD here"
 }
 
 module.exports = Config

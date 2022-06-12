@@ -7,7 +7,9 @@ CREATE TABLE user (
 	type integer,
 	role integer,
 	state integer,
-	registerDate datetime
+	registerDate datetime,
+	activateLink string,
+	resetPasswordLink string
 );
 
 CREATE TABLE template (

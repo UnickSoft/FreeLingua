@@ -6,13 +6,11 @@ import TemplateEditForm from './office/template_edit_form';
 import SharedLinksTable from './office/shared_links_table';
 import ShareLinkDialog from './office/shared_link_dialog';
 import TaskSolving from './classroom/task_solving'
-import LoginButton from './common/login_button';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link,
-    withRouter,
     Redirect
 } from "react-router-dom";
 import { BaseApp, applyTranslation } from './base_app';

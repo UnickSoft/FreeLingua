@@ -1,6 +1,6 @@
 declare var require: any
 
-import RequestUrl from "../common/utils";
+import { RequestUrl } from "../common/utils";
 
 var axios = require('axios');
 

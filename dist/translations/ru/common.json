@@ -1,25 +1,35 @@
 {
-"ru": {
-  "menu": {
-       "home_button": "Главная",
-       "office_button": "Учительская",
-       "language" : "Language",
-       "russian"  : "Русский",
-       "english"  : "English"
+  "ru": {
+    "menu": {
+      "home_button": "Главная",
+      "office_button": "Учительская",
+      "language": "Language",
+      "russian": "Русский",
+      "english": "English"
     },
-   "login": {
-     "logout_button": "Выйти",
-     "login_button":  "Войти",
-     "login_form_header": "Введите ваш логин и пароль, чтобы войти",
-     "login": "Логин",
-     "password": "Пароль",
-     "need_login": "Время сессии истекло, необходимо залогиниться"
+    "login": {
+      "logout_button": "Выйти",
+      "login_button": "Войти",
+      "login_form_header": "Введите ваш логин и пароль, чтобы войти",
+      "login": "Логин",
+      "password": "Пароль",
+      "need_login": "Время сессии истекло, необходимо залогиниться",
+      "teacher_registration": "Регистрация учителя",
+      "forgot_password": "Восстановить пароль"
     },
-  "button_common": {
-    "save": "Сохранить",
-    "remove": "Удалить",
-    "back_to_catalog": "Назад в раздел",
-    "close": "Закрыть"
-  }
+    "button_common": {
+      "save": "Сохранить",
+      "remove": "Удалить",
+      "back_to_catalog": "Назад в раздел",
+      "close": "Закрыть"
+    },
+    "server_errors": {
+      "user_with_login_or_email_exist": "Пользователь с таким логином или email адресом уже существует.",
+      "cannot_send_activation_email": "Ошибка отправки письма для активации. Повторите попытку регистрации позже.",
+      "unknown": "Неизвестаня ошибка. Повторите попытку позже.",
+      "wrong_login_or_password": "Не правильный логин или пароль.",
+      "user_is_not_activated": "Пользователь не активирован.",
+      "cannot_set_new_password": "Ошибка установки нового пароля."
+    }
   }
 }

@@ -7,7 +7,7 @@ import {
     Link
 } from "react-router-dom";
 import { translate, Translate } from 'react-i18nify';
-import RequestUrl from "../common/utils"
+import { RequestUrl } from "../common/utils"
 
 var axios    = require('axios');
 

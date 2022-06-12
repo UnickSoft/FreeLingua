@@ -35,6 +35,8 @@
   <ItemGroup>
     <Content Include="adminroute.js" />
     <Content Include="classroomroute.js" />
+    <Content Include="common\mailsender.js" />
+    <Content Include="common\util.js" />
     <Content Include="config.js" />
     <Content Include="database\createDB_sqlite.sql" />
     <Content Include="database\databaseManager.js" />
@@ -144,6 +146,7 @@
     <Content Include="webpack-config.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="common\" />
     <Folder Include="database\" />
     <Folder Include="dist\" />
     <Folder Include="dist\admin\" />
@@ -173,6 +176,10 @@
     <TypeScriptCompile Include="frontend\admin\users_table.tsx" />
     <TypeScriptCompile Include="frontend\admin_app.tsx" />
     <TypeScriptCompile Include="frontend\common\utils.tsx" />
+    <TypeScriptCompile Include="frontend\common\registration_form.tsx" />
+    <TypeScriptCompile Include="frontend\meta\acivate_user.tsx" />
+    <TypeScriptCompile Include="frontend\meta\set_new_password.tsx" />
+    <TypeScriptCompile Include="frontend\meta\reset_password.tsx" />
     <TypeScriptCompile Include="frontend\meta\catalog.tsx" />
     <TypeScriptCompile Include="frontend\classroom\question_sloving_decorator.tsx" />
     <TypeScriptCompile Include="frontend\classroom\task_solving.tsx" />

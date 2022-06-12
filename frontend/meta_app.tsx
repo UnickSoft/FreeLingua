@@ -6,7 +6,18 @@ import { BaseApp, applyTranslation } from './base_app';
 import CatalogWrapper from './meta/catalog';
 import { Helmet } from "react-helmet";
 import { hydrate, render } from "react-dom";
-import RequestUrl from "./common/utils"
+import { RequestUrl } from "./common/utils"
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect
+} from "react-router-dom";
+import RegistrationForm from './common/registration_form';
+import ActivateUser from './meta/acivate_user';
+import ResetPassword from './meta/reset_password';
+import SetNewPassword from './meta/set_new_password';
 
 var ReactDOM = require('react-dom');
 
@@ -85,17 +96,44 @@ export class MetaApp extends BaseApp {
         if (!this.state.translationLoaded) {
             return super.render();
         }
-
+        let self = this;
         return (
-                <div>
-                    {
-                        this.state.rootInfo != null ?
-                            <CatalogWrapper categoryId={this.state.rootInfo.id} rootCategoryId={this.state.rootInfo.id}
-                                rootTitle={"index.title"} rootDesc={"index.desc"} navigateCallback={this.navigateCallback}/> : null
-                    }
+            <div>
+                <Router>
+                    <Switch>
+                        <Route path="/category/:categoryId" render={(props) => (
+                        self.state.rootInfo != null ?
+                                <CatalogWrapper categoryId={props.match.params.categoryId} rootCategoryId={this.state.rootInfo.id}
+                                    rootTitle={"index.title"} rootDesc={"index.desc"} navigateCallback={this.navigateCallback} />
+                                : null
+                        )} />
+                        <Route path="/teacher_registration" render={(props) => (
+                            <RegistrationForm />
+                        )} />
+                        <Route path="/activate/:activateId" render={(props) => (
+                            self.state.rootInfo != null ?
+                                <ActivateUser activateId={props.match.params.activateId} />
+                                : null
+                        )} />
+                        <Route path="/forgot_password" render={(props) => (
+                            <ResetPassword />
+                        )} />
+                        <Route path="/set_new_password/:linkId" render={(props) => (
+                            self.state.rootInfo != null ?
+                                <SetNewPassword linkId={props.match.params.linkId} />
+                                : null
+                        )} />
+                        <Route path="/" render={(props) => (
+                                self.state.rootInfo != null ?
+                                    <CatalogWrapper categoryId={this.state.rootInfo.id} rootCategoryId={this.state.rootInfo.id}
+                                        rootTitle={"index.title"} rootDesc={"index.desc"} navigateCallback={this.navigateCallback} />
+                                    : null
+                        )} />
+                    </Switch>
+                </Router>
 
-                    {this.htmlHeader()}                    
-                </div>);
+                {this.htmlHeader()}                    
+            </div>);
     }
 }
 

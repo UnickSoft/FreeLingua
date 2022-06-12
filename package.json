@@ -29,7 +29,10 @@
     "react-helmet": "6.1.0",
     "sitemap": "7.1.1",
     "cors": "2.8.5",
-    "isbot": "3.4.3"
+    "isbot": "3.4.3",
+    "validator": "13.7.0",
+    "nodemailer": "6.7.3",
+    "react-google-recaptcha": "2.1.0"
   },
   "scripts": {
     "build": "webpack-cli --config webpack-config.js",

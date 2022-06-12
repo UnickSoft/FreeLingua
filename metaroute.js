@@ -26,6 +26,9 @@ class MetaRoute {
         var staticPath = path.join(__dirname, '/dist/');
         var prerenderPath = path.join(__dirname, '/static/');
 
+        let activationUrl  = "/activate/";
+        let newPasswordUrl = "/set_new_password/";
+
         // Simple return html
         router.get('/', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, staticPath));
@@ -33,6 +36,19 @@ class MetaRoute {
         router.get('/catalog/:catalogId', function (req, res, next) {
             res.sendFile(utils.sendFileName(req, staticPath));
         });
+        router.get('/teacher_registration', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
+        });
+        router.get(activationUrl + ':activateId', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
+        });
+        router.get('/forgot_password', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
+        });
+        router.get('/set_new_password/:linkId', function (req, res, next) {
+            res.sendFile(utils.sendFileName(req, staticPath));
+        });
+
         router.use(express.static(staticPath));
 
         // Process user
@@ -45,7 +61,11 @@ class MetaRoute {
                     console.log("Login: " + session.userInfo.login + (session.userInfo.isAdmin ? " Admin" : ""));
                     res.send({ success: true });
                 } else {
-                    res.send({ success: false });
+                    if (userInfo === undefined) {
+                        res.send({ success: false, error: "wrong_login_or_password" });
+                    } else if ("isActivated" in userInfo && !userInfo.isActivated) {
+                        res.send({ success: false, error: "user_is_not_activated" });
+                    }
                 }
             });
         });
@@ -174,7 +194,6 @@ class MetaRoute {
             }
         });
 
-
         router.get('/sitemap.txt', function (req, res, next) {
             res.header('Content-Type', 'text/plain');
             // if we have a cached entry send it
@@ -213,11 +232,64 @@ class MetaRoute {
             }
         });
 
+
         router.get('/get_public_categories', function (req, res, next) {
             categories.getPublicCategories(function (list) {
                 res.send({ categories: list });
             });
         });
+
+        router.post('/register_user', function (req, res, next) {
+            var session = req.session;
+
+            users.registerUser(req.body.login, req.body.password, req.body.email, req.body.name, req.body.role == "teacher" ? 0 : 1,
+                function (success, linkId) {
+                    if (!success) {
+                        res.send({ success: success, error: "user_with_login_or_email_exist" });
+                        return;
+                    }
+
+                    var sender = require("./common/mailsender");
+                    let link = `${req.protocol}://${req.get('host')}` + activationUrl + linkId;
+                    sender.sendActivationLetter(link, req.body.email, function (success) {
+                        res.send({ success: success, error: "cannot_send_activation_email"  });
+                    });
+                });
+            // send email.
+        });
+
+        router.get('/activate_user', function (req, res, next) {
+            users.activateUser(req.query.id, function (success) {
+                    res.send({ success: success });
+                });
+        });
+
+        router.get('/activate_by_link', function (req, res, next) {
+            users.activateUserByLink(req.query.link, function (success) {
+                res.send({ success: success });
+            });
+        });
+
+        router.post('/reset_password', function (req, res, next) {
+            users.resetPassword(req.body.email, function (success, linkId) {
+                    if (!success) {
+                        res.send({ success: success });
+                        return;
+                    }
+
+                    var sender = require("./common/mailsender");
+                    let link = `${req.protocol}://${req.get('host')}` + newPasswordUrl + linkId;
+                    sender.sendResetPasswordLetter(link, req.body.email, function (success) {
+                        res.send({ success: success });
+                    });
+            });
+        });
+
+        router.post('/save_new_password', function (req, res, next) {
+            users.setNewPassword(req.body.link, req.body.password, function (success) {
+                res.send({ success: success, error: "cannot_set_new_password" });
+            });
+        });        
 
         return router;
     }

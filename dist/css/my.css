@@ -342,3 +342,8 @@ h1 {
 h2 {
     color: #38acff;
 }
+
+.formMaxWidth {
+    max-width: 32rem;
+    margin: auto;
+}

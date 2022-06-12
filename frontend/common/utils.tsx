@@ -6,4 +6,8 @@ function RequestUrl(page) {
         "https://freelingua.unick-soft.ru" + page
 }
 
-export default RequestUrl;
+function IsLocalhost() {
+    return location.hostname === "localhost" || location.hostname === "127.0.0.1";
+}
+
+export { RequestUrl, IsLocalhost };

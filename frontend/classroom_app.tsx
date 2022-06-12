@@ -14,7 +14,7 @@ import { BaseApp, applyTranslation } from './base_app';
 import MainMenu from './common/main_menu';
 import { translate, Translate, getTranslations } from 'react-i18nify';
 import { Helmet } from "react-helmet";
-import RequestUrl from "./common/utils"
+import { RequestUrl } from "./common/utils"
 
 applyTranslation(["classroom.json", "common.json"]);
 
